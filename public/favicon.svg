@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <style>
+    .k-shape { 
+      stroke: #07090e; 
+      stroke-width: 20; 
+      stroke-linecap: square; 
+      stroke-linejoin: miter; 
+      fill: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      .k-shape { stroke: #f8fafc; }
+    }
+    .accent { fill: #f59e0b; }
+  </style>
+  <!-- The K lines -->
+  <polyline points="30,20 30,100" class="k-shape" />
+  <polyline points="94,20 40,60 94,100" class="k-shape" />
+  <!-- The amber dot embedded at the intersection -->
+  <circle cx="37" cy="60" r="14" class="accent" stroke="none" />
+</svg>

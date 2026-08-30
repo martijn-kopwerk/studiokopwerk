@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Syne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-kopwerk-dark: #07090e;
+  
+  --tracking-wide-sm: 0.04em;
+  --tracking-wide-md: 0.1em;
+  --tracking-wide-lg: 0.15em;
+  --tracking-wide-xl: 0.2em;
+  --tracking-super-wide: 0.4em;
+  --tracking-ultra-wide: 0.5em;
+}
+
+html {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background-color: rgba(217, 119, 6, 0.25);
+  color: inherit;
+}
+
