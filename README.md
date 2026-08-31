@@ -1,20 +1,79 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Studio Kopwerk
 
-# Run and deploy your AI Studio app
+> Premium, high-end digital agency web application. Minimalist design, high-contrast layouts, and bespoke micro-interactions.
 
-This contains everything you need to run your app locally.
+Studio Kopwerk is a high-performance, minimalist digital agency landing experience designed with an anti-slop aesthetic, extreme white space, and refined micro-interactions.
 
-View your app in AI Studio: https://ai.studio/apps/8d1c8366-e9b9-4b17-8ca2-2445bb6e0fdf
+---
 
-## Run Locally
+## 🚀 Tech Stack
 
-**Prerequisites:**  Node.js
+- **Framework:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite 6](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + Custom Design System (`Syne` & `Plus Jakarta Sans` typography)
+- **Animations:** [Motion](https://motion.dev/) (`motion/react`)
+- **UI Primitives & Icons:** [Base UI](https://base-ui.com/) (`@base-ui/react`) + [Lucide Icons](https://lucide.dev/)
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## ✨ Key Features & UX Highlights
+
+- **High-Contrast & Dark Mode Support:** Seamless theme toggling with support for system preferences and persistent user state (`useTheme` hook).
+- **Interactive Micro-Interactions:** Custom magnetic button wrappers, rolling text hover animations, and smooth physics-based transitions.
+- **Interactive Contact Modal:** Accessible dialog overlay (`ContactCard`) with dynamic email copy functionality and direct mailto actions.
+- **Keyboard Navigation & Accessibility:** Keyboard shortcuts (`C` to toggle contact modal, `T` to toggle theme, `Esc` to close modal).
+- **Performance Optimized:** Lazy-loaded modal dialogs and lightweight canvas-rendered abstract background animation.
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- `npm` or `bun`
+
+### Local Development
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+4. **Lint & Typecheck:**
+   ```bash
+   npm run lint
+   ```
+
+---
+
+## 📁 Project Structure
+
+```
+studio-kopwerk/
+├── src/
+│   ├── components/
+│   │   ├── layout/       # Header, Footer
+│   │   ├── ui/           # Typography, Button, Dialog, MagneticWrapper
+│   │   ├── AbstractBackground.tsx
+│   │   ├── ContactCard.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── hooks/            # Custom hooks (e.g. useTheme)
+│   ├── lib/              # Utility functions (cn)
+│   ├── App.tsx           # Main application entry component
+│   ├── index.css         # Design system CSS variables & Tailwind imports
+│   ├── main.tsx          # React application root
+│   └── types.ts          # TypeScript type definitions
+├── AGENTS.md             # Design system & brand guidelines
+└── README.md             # Project documentation
+```
