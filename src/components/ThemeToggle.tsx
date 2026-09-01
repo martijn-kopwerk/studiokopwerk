@@ -37,6 +37,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             id={`theme-btn-${opt.mode}`}
             type="button"
             onClick={() => onThemeChange(opt.mode)}
+            aria-label={opt.label}
             aria-pressed={isActive}
             title={`${opt.label} ${opt.mode === 'system' ? `(${resolvedTheme === 'dark' ? 'Donker' : 'Licht'})` : ''}`}
             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium transition-colors duration-200 outline-hidden focus-visible:ring-2 focus-visible:ring-amber-500/60 ${
