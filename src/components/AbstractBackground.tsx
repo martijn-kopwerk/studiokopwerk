@@ -106,6 +106,13 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
     document.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('touchend', handleTouchEnd);
 
+    // Reusable point buffer to eliminate per-frame object allocations and GC pressure
+    const linePointsBuffer: { x: number; y: number }[] = [];
+    const maxDist = 240;
+    const maxDistSq = maxDist * maxDist;
+    const connectDist = 130;
+    const connectDistSq = connectDist * connectDist;
+
     // Render loop
     const render = () => {
       time += 0.008;
@@ -175,8 +182,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
         ctx.strokeStyle = strokeStyle;
         ctx.lineWidth = i % 2 === 0 ? 1.2 : 0.8;
 
-        // Calculate points for smooth rendering
-        const linePoints: {x: number, y: number}[] = [];
+        // Calculate points into reusable buffer array (0 allocations per frame after warmup)
+        let ptCount = 0;
 
         for (let x = 0; x <= width + stepX; x += stepX) {
           // Multi-frequency wave calculation
@@ -185,33 +192,39 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
           const wave2 = Math.cos(normX * 2.5 - time * 0.8 + lineOffset * 0.5) * (height * 0.05);
           const wave3 = Math.sin(normX * 6 + time * 1.7) * (height * 0.02);
 
-          let baseY = height * 0.52 + (i - linesCount / 2) * (height * 0.045);
+          const baseY = height * 0.52 + (i - linesCount / 2) * (height * 0.045);
           let y = baseY + wave1 + wave2 + wave3;
 
-          // Mouse subtle deflection
+          // Mouse subtle deflection - optimized with squared distance check before Math.sqrt
           const dx = x - mouseRef.current.x;
           const dy = y - mouseRef.current.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 240;
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < maxDist) {
+          if (distSq < maxDistSq) {
+            const dist = Math.sqrt(distSq);
             const force = (1 - dist / maxDist) * 32;
             y += Math.sin((dist / maxDist) * Math.PI) * force * (dy < 0 ? -1 : 1);
           }
 
-          linePoints.push({ x, y });
+          if (ptCount < linePointsBuffer.length) {
+            linePointsBuffer[ptCount].x = x;
+            linePointsBuffer[ptCount].y = y;
+          } else {
+            linePointsBuffer.push({ x, y });
+          }
+          ptCount++;
         }
 
         // Render smoothly using quadratic curves
-        if (linePoints.length > 0) {
-          ctx.moveTo(linePoints[0].x, linePoints[0].y);
-          for (let p = 1; p < linePoints.length - 1; p++) {
-            const xc = (linePoints[p].x + linePoints[p + 1].x) / 2;
-            const yc = (linePoints[p].y + linePoints[p + 1].y) / 2;
-            ctx.quadraticCurveTo(linePoints[p].x, linePoints[p].y, xc, yc);
+        if (ptCount > 0) {
+          ctx.moveTo(linePointsBuffer[0].x, linePointsBuffer[0].y);
+          for (let p = 1; p < ptCount - 1; p++) {
+            const xc = (linePointsBuffer[p].x + linePointsBuffer[p + 1].x) / 2;
+            const yc = (linePointsBuffer[p].y + linePointsBuffer[p + 1].y) / 2;
+            ctx.quadraticCurveTo(linePointsBuffer[p].x, linePointsBuffer[p].y, xc, yc);
           }
           // Connect to the final point
-          ctx.lineTo(linePoints[linePoints.length - 1].x, linePoints[linePoints.length - 1].y);
+          ctx.lineTo(linePointsBuffer[ptCount - 1].x, linePointsBuffer[ptCount - 1].y);
         }
 
         ctx.stroke();
@@ -231,14 +244,15 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
         if (pt.y > height + 20) pt.y = -20;
 
         // Distance to other nodes for subtle connective hair-lines
+        // Performance optimization: check squared distance before costly Math.sqrt calculation
         for (let j = i + 1; j < points.length; j++) {
           const pt2 = points[j];
           const dx = pt.x - pt2.x;
           const dy = pt.y - pt2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const connectDist = 130;
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < connectDist) {
+          if (distSq < connectDistSq) {
+            const dist = Math.sqrt(distSq);
             const alpha = (1 - dist / connectDist) * (isDark ? 0.18 : 0.06);
             ctx.strokeStyle = isDark ? `rgba(226, 232, 240, ${alpha})` : `rgba(71, 85, 105, ${alpha})`;
             ctx.lineWidth = 0.6;
