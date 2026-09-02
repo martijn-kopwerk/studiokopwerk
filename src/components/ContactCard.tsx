@@ -23,13 +23,26 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   const mailtoHref = `mailto:Studio Kopwerk <${email}>?subject=${encodeURIComponent('Kennismaking Studio Kopwerk')}`;
 
   const handleCopyEmail = async () => {
-    if (!navigator.clipboard) return;
     try {
-      await navigator.clipboard.writeText(email);
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch (err) {
       console.error('Failed to copy email', err);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
     }
   };
 
@@ -56,10 +69,17 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           {/* Giant Interactive Email */}
           <button 
             onClick={handleCopyEmail}
+            aria-label={copied ? `E-mailadres ${email} gekopieerd` : `Kopieer e-mailadres ${email}`}
             className="group relative text-left flex flex-col outline-none w-full rounded-xl focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-8 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
           >
-            <span className="text-xs font-semibold tracking-wide-xl uppercase text-slate-400 dark:text-slate-500 mb-2 transition-colors group-hover:text-amber-500">
-              E-mailadres kopiëren
+            <span
+              className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors ${
+                copied
+                  ? 'text-emerald-600 dark:text-emerald-400 font-bold'
+                  : 'text-slate-400 dark:text-slate-500 group-hover:text-amber-500'
+              }`}
+            >
+              {copied ? 'Gekopieerd naar klembord!' : 'E-mailadres kopiëren'}
             </span>
             <div className="flex items-center justify-between w-full border-b border-slate-200 dark:border-slate-800 pb-4 transition-colors group-hover:border-amber-500/50 gap-4">
               <span className="text-xl sm:text-2xl md:text-3xl font-light tracking-wide text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors break-all">
@@ -74,6 +94,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({
               </div>
             </div>
           </button>
+          <span className="sr-only" aria-live="polite" aria-atomic="true">
+            {copied ? 'E-mailadres gekopieerd naar klembord' : ''}
+          </span>
 
           {/* Mailto link */}
           <div className="w-full pt-4">
