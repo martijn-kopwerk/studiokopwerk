@@ -1,0 +1,3 @@
+## 2026-09-03 - Localized Screen Reader Announcers & Copy Feedback
+**Learning:** In non-English (e.g. Dutch) web applications, generic close button labels (like "Close") and silent clipboard copy actions create disjointed screen reader experiences. Combining `aria-live="polite"` status regions with localized labels ("Sluit venster", "Gekopieerd naar klembord!") ensures seamless accessibility and feedback across both visual and auditory modalities.
+**Action:** Always verify screen reader announcements (`aria-label`, `aria-live`, `role="status"`) match the application's UI language and reflect state transitions immediately.

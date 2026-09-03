@@ -56,16 +56,23 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           {/* Giant Interactive Email */}
           <button 
             onClick={handleCopyEmail}
+            aria-label={copied ? 'E-mailadres gekopieerd naar klembord' : 'Kopieer e-mailadres'}
             className="group relative text-left flex flex-col outline-none w-full rounded-xl focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-8 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
           >
-            <span className="text-xs font-semibold tracking-wide-xl uppercase text-slate-400 dark:text-slate-500 mb-2 transition-colors group-hover:text-amber-500">
-              E-mailadres kopiëren
+            <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors ${
+              copied ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500 group-hover:text-amber-500'
+            }`}>
+              {copied ? 'Gekopieerd naar klembord!' : 'E-mailadres kopiëren'}
             </span>
             <div className="flex items-center justify-between w-full border-b border-slate-200 dark:border-slate-800 pb-4 transition-colors group-hover:border-amber-500/50 gap-4">
               <span className="text-xl sm:text-2xl md:text-3xl font-light tracking-wide text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors break-all">
                 {email}
               </span>
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-50 dark:bg-slate-900 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10 transition-colors shrink-0">
+              <div className={`flex items-center justify-center w-12 h-12 rounded-full transition-colors shrink-0 ${
+                copied
+                  ? 'bg-emerald-50 dark:bg-emerald-500/10'
+                  : 'bg-slate-50 dark:bg-slate-900 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10'
+              }`}>
                 {copied ? (
                   <Check className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 ) : (
@@ -73,6 +80,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 )}
               </div>
             </div>
+            <span role="status" aria-live="polite" className="sr-only">
+              {copied ? 'E-mailadres gekopieerd naar klembord' : ''}
+            </span>
           </button>
 
           {/* Mailto link */}
