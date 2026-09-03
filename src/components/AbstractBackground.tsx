@@ -15,7 +15,8 @@ interface Point {
   phase: number;
 }
 
-export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme }) => {
+// Memoized to prevent parent re-renders (e.g. contact dialog toggle) from triggering React re-evaluations
+export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef<{ x: number; y: number; targetX: number; targetY: number; isHovering: boolean }>({
     x: -1000,
@@ -110,6 +111,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
     const linePointsBuffer: { x: number; y: number }[] = [];
     const maxDist = 240;
     const maxDistSq = maxDist * maxDist;
+    const invMaxDist = 1 / maxDist;
+    const invMaxDistPi = Math.PI * invMaxDist;
     const connectDist = 130;
     const connectDistSq = connectDist * connectDist;
 
@@ -157,6 +160,18 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
       const linesCount = 7;
       const stepX = 20;
 
+      // Performance optimizations for 60 FPS animation loop:
+      // Pre-calculate frame-invariant time terms and height scales outside loops
+      const time11 = time * 1.1;
+      const time08 = time * 0.8;
+      const time17 = time * 1.7;
+      const h008 = height * 0.08;
+      const h005 = height * 0.05;
+      const h002 = height * 0.02;
+      const height052 = height * 0.52;
+      const height0045 = height * 0.045;
+      const invWidth = width > 0 ? 1 / width : 1;
+
       for (let i = 0; i < linesCount; i++) {
         ctx.beginPath();
         const lineOffset = (i / linesCount) * Math.PI * 2;
@@ -185,14 +200,17 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
         // Calculate points into reusable buffer array (0 allocations per frame after warmup)
         let ptCount = 0;
 
-        for (let x = 0; x <= width + stepX; x += stepX) {
-          // Multi-frequency wave calculation
-          const normX = x / width;
-          const wave1 = Math.sin(normX * 4 + time * 1.1 + lineOffset) * (height * 0.08);
-          const wave2 = Math.cos(normX * 2.5 - time * 0.8 + lineOffset * 0.5) * (height * 0.05);
-          const wave3 = Math.sin(normX * 6 + time * 1.7) * (height * 0.02);
+        // Performance optimization: Hoist loop-invariant baseY calculation out of inner x sampling loop
+        // Avoids recomputing baseY ~100 times per line (~700 times per frame at 60 FPS)
+        const baseY = height052 + (i - linesCount / 2) * height0045;
 
-          const baseY = height * 0.52 + (i - linesCount / 2) * (height * 0.045);
+        for (let x = 0; x <= width + stepX; x += stepX) {
+          // Multi-frequency wave calculation using pre-computed multipliers
+          const normX = x * invWidth;
+          const wave1 = Math.sin(normX * 4 + time11 + lineOffset) * h008;
+          const wave2 = Math.cos(normX * 2.5 - time08 + lineOffset * 0.5) * h005;
+          const wave3 = Math.sin(normX * 6 + time17) * h002;
+
           let y = baseY + wave1 + wave2 + wave3;
 
           // Mouse subtle deflection - optimized with squared distance check before Math.sqrt
@@ -202,8 +220,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
 
           if (distSq < maxDistSq) {
             const dist = Math.sqrt(distSq);
-            const force = (1 - dist / maxDist) * 32;
-            y += Math.sin((dist / maxDist) * Math.PI) * force * (dy < 0 ? -1 : 1);
+            const force = (1 - dist * invMaxDist) * 32;
+            y += Math.sin(dist * invMaxDistPi) * force * (dy < 0 ? -1 : 1);
           }
 
           if (ptCount < linePointsBuffer.length) {
@@ -231,6 +249,9 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
       }
 
       // 3. Subtle floating connective constellation nodes
+      const maxConnAlpha = isDark ? 0.18 : 0.06;
+      const nodeAlphaFactor = isDark ? 0.7 : 0.5;
+
       for (let i = 0; i < points.length; i++) {
         const pt = points[i];
         pt.x += pt.vx;
@@ -253,7 +274,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
 
           if (distSq < connectDistSq) {
             const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / connectDist) * (isDark ? 0.18 : 0.06);
+            const alpha = (1 - dist / connectDist) * maxConnAlpha;
             ctx.strokeStyle = isDark ? `rgba(226, 232, 240, ${alpha})` : `rgba(71, 85, 105, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
@@ -265,7 +286,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
 
         // Draw node
         const pulse = Math.sin(pt.phase) * 0.3 + 0.7;
-        const currentAlpha = pt.baseAlpha * pulse * (isDark ? 0.7 : 0.5);
+        const currentAlpha = pt.baseAlpha * pulse * nodeAlphaFactor;
         ctx.fillStyle = isDark
           ? `rgba(245, 158, 11, ${currentAlpha})`
           : `rgba(217, 119, 6, ${currentAlpha * 0.9})`;
@@ -302,4 +323,4 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = ({ theme })
       />
     </div>
   );
-};
+});
