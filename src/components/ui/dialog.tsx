@@ -65,12 +65,12 @@ function DialogContent({
                 variant="ghost"
                 className="absolute top-2 right-2"
                 size="icon-sm"
+                aria-label="Sluit venster"
               />
             }
           >
-            <XIcon
-            />
-            <span className="sr-only">Close</span>
+            <XIcon />
+            <span className="sr-only">Sluit venster</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>
