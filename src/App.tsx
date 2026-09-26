@@ -11,7 +11,6 @@ import { AbstractBackground } from './components/AbstractBackground';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { Typography } from './components/ui/Typography';
-import { Button } from './components/ui/button';
 import { MagneticWrapper } from './components/ui/MagneticWrapper';
 
 // Lazy load the heavy ContactCard (and its Dialog dependencies)
