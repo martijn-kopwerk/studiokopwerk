@@ -8,8 +8,8 @@
 
 * **Brand Name:** Studio Kopwerk
 * **Tagline:** *Zien wat wérkt.* (See what *works*.)
-* **Core Identity:** Premium, high-end digital agency specializing in bespoke UX/UI design, intelligent AI implementations, and high-impact digital prototypes.
-* **Aesthetic Vibe:** "Awwwards-winning", minimalist, architectural, hyper-clean, confident.
+* **Core Identity:** Studio Kopwerk helpt iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook.
+* **Aesthetic Vibe:** Rustig, minimalistisch, doordacht, toegankelijk en zonder poeha.
 * **Anti-Slop Design Principles:**
   * **Extreme Intentional Whitespace:** Generous breathing room; avoid cluttered layouts and dense text blocks.
   * **High Contrast:** Crisp dark mode (`#07090e`) and refined light mode (`#f8fafc`). **Never use pure `#000000`**.

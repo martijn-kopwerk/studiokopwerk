@@ -1,8 +1,8 @@
 # Studio Kopwerk
 
-> Premium, high-end digital agency web application. Minimalist design, high-contrast layouts, and bespoke micro-interactions.
+> Helpt iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook. Zien wat wérkt.
 
-Studio Kopwerk is a high-performance, minimalist digital agency landing experience designed with an anti-slop aesthetic, extreme white space, and refined micro-interactions.
+Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthetiek, royale witruimte en subtiele interacties.
 
 ---
 
