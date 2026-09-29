@@ -1,15 +1,13 @@
 import { ThemeToggle } from '../ThemeToggle';
-import { ThemeMode, ResolvedTheme } from '../../types';
+import { ResolvedTheme } from '../../types';
 import { KopwerkLogo } from '../ui/KopwerkLogo';
 
 export function Header({
-  themeMode,
   resolvedTheme,
-  onThemeChange,
+  onToggleTheme,
 }: {
-  themeMode: ThemeMode;
   resolvedTheme: ResolvedTheme;
-  onThemeChange: (mode: ThemeMode) => void;
+  onToggleTheme: () => void;
 }) {
   return (
     <header
@@ -19,11 +17,7 @@ export function Header({
       {/* Brand mark on every screen size */}
       <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8" />
 
-      <ThemeToggle
-        themeMode={themeMode}
-        resolvedTheme={resolvedTheme}
-        onThemeChange={onThemeChange}
-      />
+      <ThemeToggle resolvedTheme={resolvedTheme} onToggle={onToggleTheme} />
     </header>
   );
 }

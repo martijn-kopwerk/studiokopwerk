@@ -20,6 +20,28 @@
   --animate-rise: kopwerk-rise 0.9s var(--ease-kopwerk) both;
   /* The signature amber dot's slow pulse */
   --animate-pulse-ring: kopwerk-pulse-ring 3s ease-out infinite;
+  /* Background: the amber dot landing on the K's vertex, and the ambient light drifting on touch screens */
+  --animate-dot-land: kopwerk-dot-land 0.8s var(--ease-kopwerk) 1.9s both;
+  --animate-glow-drift: kopwerk-glow-drift 28s ease-in-out infinite alternate;
+
+  @keyframes kopwerk-dot-land {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes kopwerk-glow-drift {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-22vw, 12vh);
+    }
+    100% {
+      transform: translate(-8vw, -14vh);
+    }
+  }
 
   @keyframes kopwerk-rise {
     from {
@@ -47,6 +69,20 @@ html {
 
 html.dark {
   background-color: #07090e;
+}
+
+/* Ambient amber light (BRAND_GUIDE: "Ambient Glows"). Centred on its `translate` point, which follows the cursor. */
+.kopwerk-glow {
+  width: 140vmax;
+  height: 140vmax;
+  margin: -70vmax 0 0 -70vmax;
+  border-radius: 50%;
+  translate: 62vw 45vh;
+  background: radial-gradient(closest-side, rgb(217 119 6 / 0.08), rgb(217 119 6 / 0.03) 40%, transparent);
+}
+
+.dark .kopwerk-glow {
+  background: radial-gradient(closest-side, rgb(245 158 11 / 0.11), rgb(245 158 11 / 0.04) 40%, transparent);
 }
 
 ::selection {

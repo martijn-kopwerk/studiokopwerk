@@ -17,7 +17,7 @@ const ContactCard = lazy(() => loadContactCard().then((m) => ({ default: m.Conta
 const contactEmail = 'hallo@studiokopwerk.nl';
 
 export default function App() {
-  const { themeMode, resolvedTheme, setThemeMode } = useTheme();
+  const { resolvedTheme, toggleTheme } = useTheme();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isContactMounted, setIsContactMounted] = useState(false);
 
@@ -44,12 +44,12 @@ export default function App() {
         setIsContactMounted(true);
         setIsContactOpen((prev) => !prev);
       } else if (key === 't') {
-        setThemeMode(resolvedTheme === 'dark' ? 'light' : 'dark');
+        toggleTheme();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [resolvedTheme, setThemeMode]);
+  }, [toggleTheme]);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -60,11 +60,7 @@ export default function App() {
         >
           <AbstractBackground theme={resolvedTheme} />
 
-          <Header
-            themeMode={themeMode}
-            resolvedTheme={resolvedTheme}
-            onThemeChange={setThemeMode}
-          />
+          <Header resolvedTheme={resolvedTheme} onToggleTheme={toggleTheme} />
 
           <main
             id="hero-section"

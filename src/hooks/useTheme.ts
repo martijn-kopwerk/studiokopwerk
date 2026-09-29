@@ -52,9 +52,16 @@ export function useTheme() {
     }
   }, []);
 
+  // One-button toggle: flip light/dark. Landing back on the system's own theme
+  // forgets the manual choice, so the site follows the system again.
+  const toggleTheme = useCallback(() => {
+    const next: ResolvedTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
+    updateTheme(next === systemTheme ? 'system' : next);
+  }, [resolvedTheme, systemTheme, updateTheme]);
+
   return {
     themeMode,
     resolvedTheme,
-    setThemeMode: updateTheme,
+    toggleTheme,
   };
 }
