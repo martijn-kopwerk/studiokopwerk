@@ -4,4 +4,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    // Never inline fonts as data: URIs; the CSP (font-src 'self') only allows same-origin font files.
+    assetsInlineLimit: (filePath) => (/\.(woff2?|ttf|otf)$/.test(filePath) ? false : undefined),
+  },
 });
