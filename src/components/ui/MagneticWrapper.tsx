@@ -1,16 +1,17 @@
 import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { m, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
 
-export function MagneticWrapper({ 
-  children, 
-  className = '', 
-  strength = 0.5 
-}: { 
-  children: React.ReactNode, 
-  className?: string, 
-  strength?: number 
+export function MagneticWrapper({
+  children,
+  className = '',
+  strength = 0.5
+}: {
+  children: React.ReactNode,
+  className?: string,
+  strength?: number
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   // Performance Optimization:
   // Using motion values (useMotionValue + useSpring) instead of React useState
@@ -23,6 +24,7 @@ export function MagneticWrapper({
   const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
   const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
     const { clientX, clientY } = e;
     const boundingRect = ref.current?.getBoundingClientRect();
     if (boundingRect) {
@@ -40,7 +42,7 @@ export function MagneticWrapper({
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
@@ -48,6 +50,6 @@ export function MagneticWrapper({
       className={`inline-block ${className}`}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

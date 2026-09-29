@@ -18,6 +18,11 @@ interface Point {
 // Memoized to prevent parent re-renders (e.g. contact dialog toggle) from triggering React re-evaluations
 export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // The render loop reads the theme from a ref, so a theme toggle recolours the scene
+  // without tearing down the canvas or re-seeding the nodes.
+  const themeRef = useRef(theme);
+  // Redraws one still frame; only does work when reduced motion has paused the loop.
+  const redrawStillRef = useRef<() => void>(() => {});
   const mouseRef = useRef<{ x: number; y: number; targetX: number; targetY: number; isHovering: boolean }>({
     x: -1000,
     y: -1000,
@@ -32,7 +37,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let width = 0;
     let height = 0;
     let time = 0;
@@ -53,6 +59,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       
       ctx.resetTransform?.();
       ctx.scale(dpr, dpr);
+      redrawStillRef.current();
     };
 
     handleResize();
@@ -116,8 +123,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     const connectDist = 130;
     const connectDistSq = connectDist * connectDist;
 
-    // Render loop
-    const render = () => {
+    // Draws a single frame of the scene
+    const drawFrame = () => {
       time += 0.008;
 
       // Smooth mouse interpolation
@@ -131,7 +138,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
 
       ctx.clearRect(0, 0, width, height);
 
-      const isDark = theme === 'dark';
+      const isDark = themeRef.current === 'dark';
 
       // 1. Subtle ambient background glow / gradient
       const bgGradient = ctx.createRadialGradient(
@@ -294,20 +301,45 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
         ctx.arc(pt.x, pt.y, pt.radius * pulse, 0, Math.PI * 2);
         ctx.fill();
       }
-
-      animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    const loop = () => {
+      drawFrame();
+      animationFrameId = requestAnimationFrame(loop);
+    };
+
+    // Respect reduced motion: show one still frame instead of the endless animation.
+    const start = () => {
+      cancelAnimationFrame(animationFrameId);
+      if (reducedMotion.matches) {
+        drawFrame();
+      } else {
+        loop();
+      }
+    };
+
+    redrawStillRef.current = () => {
+      if (reducedMotion.matches) drawFrame();
+    };
+
+    start();
+    reducedMotion.addEventListener('change', start);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      redrawStillRef.current = () => {};
+      reducedMotion.removeEventListener('change', start);
       resizeObserver.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('touchend', handleTouchEnd);
     };
+  }, []);
+
+  useEffect(() => {
+    themeRef.current = theme;
+    redrawStillRef.current();
   }, [theme]);
 
   return (

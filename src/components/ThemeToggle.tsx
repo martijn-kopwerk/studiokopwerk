@@ -1,6 +1,6 @@
-import React from 'react';
+import type React from 'react';
 import { Sun, Moon, Settings } from 'lucide-react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ResolvedTheme, ThemeMode } from '../types';
 
 interface ThemeToggleProps {
@@ -47,7 +47,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             }`}
           >
             {isActive && (
-              <motion.div
+              <m.div
                 layoutId="theme-active-indicator"
                 className="absolute inset-0 rounded-full bg-slate-100 dark:bg-slate-800 shadow-xs"
                 transition={{ type: 'spring', stiffness: 450, damping: 32 }}

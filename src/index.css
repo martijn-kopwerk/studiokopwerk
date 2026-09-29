@@ -2,24 +2,54 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-display: "Syne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Syne Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --color-kopwerk-dark: #07090e;
-  
+
   --tracking-wide-sm: 0.04em;
   --tracking-wide-md: 0.1em;
   --tracking-wide-lg: 0.15em;
   --tracking-wide-xl: 0.2em;
   --tracking-super-wide: 0.4em;
   --tracking-ultra-wide: 0.5em;
+
+  /* Premium Apple-like curve: use `ease-kopwerk` instead of ease-in-out */
+  --ease-kopwerk: cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* Hero entrance: fade + rise. Pair with `motion-safe:` and an [animation-delay:…] */
+  --animate-rise: kopwerk-rise 0.9s var(--ease-kopwerk) both;
+  /* The signature amber dot's slow pulse */
+  --animate-pulse-ring: kopwerk-pulse-ring 3s ease-out infinite;
+
+  @keyframes kopwerk-rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise-from, 16px)) scale(var(--rise-scale, 1));
+    }
+  }
+
+  @keyframes kopwerk-pulse-ring {
+    from {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    to {
+      transform: scale(3.5);
+      opacity: 0;
+    }
+  }
 }
 
 html {
+  background-color: #f8fafc;
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html.dark {
+  background-color: #07090e;
 }
 
 ::selection {
   background-color: rgba(217, 119, 6, 0.25);
   color: inherit;
 }
-

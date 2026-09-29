@@ -1,26 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ResolvedTheme, ThemeMode } from '../types';
 
+// Keep in sync with public/theme-init.js, which applies the theme before first paint.
 const STORAGE_KEY = 'kopwerk_theme_preference';
 
-export function useTheme() {
-  const [themeMode, setThemeMode] = useState<ThemeMode>(() => {
-    if (typeof window === 'undefined') return 'system';
-    const saved = localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
+function readStoredMode(): ThemeMode {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'light' || saved === 'dark' || saved === 'system') {
       return saved;
     }
-    return 'system';
-  });
+  } catch {
+    // Storage can be blocked (private mode, sandboxed frames); fall back to the system preference.
+  }
+  return 'system';
+}
 
-  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() => {
-    if (typeof window === 'undefined') return 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+export function useTheme() {
+  const [themeMode, setThemeMode] = useState<ThemeMode>(readStoredMode);
+
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     const handleChange = (e: MediaQueryListEvent) => {
       setSystemTheme(e.matches ? 'dark' : 'light');
     };
@@ -33,23 +38,19 @@ export function useTheme() {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (resolvedTheme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    }
+    root.classList.toggle('dark', resolvedTheme === 'dark');
+    root.classList.toggle('light', resolvedTheme === 'light');
+    root.style.colorScheme = resolvedTheme;
   }, [resolvedTheme]);
 
-  const updateTheme = (mode: ThemeMode) => {
+  const updateTheme = useCallback((mode: ThemeMode) => {
     setThemeMode(mode);
     try {
       localStorage.setItem(STORAGE_KEY, mode);
     } catch {
       // Ignore storage errors if private browsing restricts localStorage
     }
-  };
+  }, []);
 
   return {
     themeMode,
