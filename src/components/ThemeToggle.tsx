@@ -1,64 +1,33 @@
-import type React from 'react';
-import { Sun, Moon, Monitor } from 'lucide-react';
-import { m } from 'motion/react';
-import { ResolvedTheme, ThemeMode } from '../types';
+import { Sun, Moon } from 'lucide-react';
+import { cn } from '../lib/utils';
+import { ResolvedTheme } from '../types';
 
 interface ThemeToggleProps {
-  themeMode: ThemeMode;
   resolvedTheme: ResolvedTheme;
-  onThemeChange: (mode: ThemeMode) => void;
+  onToggle: () => void;
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({
-  themeMode,
-  resolvedTheme,
-  onThemeChange,
-}) => {
-  const options: { mode: ThemeMode; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-    { mode: 'system', label: 'Systeemvoorkeur', icon: Monitor },
-    { mode: 'light', label: 'Licht', icon: Sun },
-    { mode: 'dark', label: 'Donker', icon: Moon },
-  ];
+/**
+ * A single round button: shows the theme you'll switch to (moon in light, sun in dark).
+ * The icons turn over on the brand curve. Following the system is the default;
+ * see useTheme().toggleTheme for how a manual choice is forgotten again.
+ */
+export function ThemeToggle({ resolvedTheme, onToggle }: ThemeToggleProps) {
+  const isDark = resolvedTheme === 'dark';
+  const label = isDark ? 'Schakel naar lichte weergave' : 'Schakel naar donkere weergave';
+  const icon = 'absolute h-4 w-4 transition-[rotate,scale,opacity] duration-500 ease-kopwerk motion-reduce:transition-none';
 
   return (
-    <div
-      id="theme-toggle-container"
-      className="inline-flex items-center p-1 rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-xs transition-colors duration-300"
-      role="group"
-      aria-label="Weergave modus schakelaar"
+    <button
+      id="theme-toggle"
+      type="button"
+      onClick={onToggle}
+      aria-label={label}
+      title={label}
+      className="group relative flex size-10 items-center justify-center rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-xs text-slate-500 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 ease-kopwerk outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
     >
-      {options.map((opt) => {
-        const Icon = opt.icon;
-        const isActive = themeMode === opt.mode;
-
-        return (
-          <button
-            key={opt.mode}
-            id={`theme-btn-${opt.mode}`}
-            type="button"
-            onClick={() => onThemeChange(opt.mode)}
-            aria-label={opt.label}
-            aria-pressed={isActive}
-            title={`${opt.label} ${opt.mode === 'system' ? `(${resolvedTheme === 'dark' ? 'Donker' : 'Licht'})` : ''}`}
-            className={`relative flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium transition-colors duration-200 outline-hidden focus-visible:ring-2 focus-visible:ring-amber-500/60 ${
-              isActive
-                ? 'text-amber-700 dark:text-amber-400 font-semibold'
-                : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
-            }`}
-          >
-            {isActive && (
-              <m.div
-                layoutId="theme-active-indicator"
-                className="absolute inset-0 rounded-full bg-slate-100 dark:bg-slate-800 shadow-xs"
-                transition={{ type: 'spring', stiffness: 450, damping: 32 }}
-              />
-            )}
-            <span className="relative z-10">
-              <Icon className="w-4 h-4" />
-            </span>
-          </button>
-        );
-      })}
-    </div>
+      <Moon aria-hidden="true" className={cn(icon, isDark ? '-rotate-90 scale-50 opacity-0' : 'rotate-0 scale-100 opacity-100')} />
+      <Sun aria-hidden="true" className={cn(icon, isDark ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-50 opacity-0')} />
+    </button>
   );
-};
+}
