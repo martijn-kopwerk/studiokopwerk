@@ -10,8 +10,9 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 
 - **Framework:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **Build Tool:** [Vite 6](https://vitejs.dev/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + Custom Design System (`Syne` & `Plus Jakarta Sans` typography)
-- **Animations:** [Motion](https://motion.dev/) (`motion/react`)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + Custom Design System (self-hosted `Syne` & `Plus Jakarta Sans` via Fontsource)
+- **Animations:** CSS for entrances, [Motion](https://motion.dev/) (`motion/react`, lazily loaded via `LazyMotion`) for layout and spring interactions
+- **Hosting:** [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/)
 - **UI Primitives & Icons:** [Base UI](https://base-ui.com/) (`@base-ui/react`) + [Lucide Icons](https://lucide.dev/)
 
 ---
@@ -21,8 +22,8 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 - **High-Contrast & Dark Mode Support:** Seamless theme toggling with support for system preferences and persistent user state (`useTheme` hook).
 - **Interactive Micro-Interactions:** Custom magnetic button wrappers, rolling text hover animations, and smooth physics-based transitions.
 - **Interactive Contact Modal:** Accessible dialog overlay (`ContactCard`) with dynamic email copy functionality and direct mailto actions.
-- **Keyboard Navigation & Accessibility:** Keyboard shortcuts (`C` to toggle contact modal, `T` to toggle theme, `Esc` to close modal).
-- **Performance Optimized:** Lazy-loaded modal dialogs and lightweight canvas-rendered abstract background animation.
+- **Keyboard Navigation & Accessibility:** Keyboard shortcuts (`C` to toggle contact modal, `T` to toggle theme, `Esc` to close modal; ignored with modifier keys, so copy/paste keeps working). All motion respects `prefers-reduced-motion`.
+- **Performance Optimized:** Contact dialog loaded on first intent, lazily loaded animation engine, no-flash theme init, and a lightweight canvas-rendered background.
 
 ---
 
@@ -64,16 +65,26 @@ studio-kopwerk/
 ├── src/
 │   ├── components/
 │   │   ├── layout/       # Header, Footer
-│   │   ├── ui/           # Typography, Button, Dialog, MagneticWrapper
+│   │   ├── ui/           # CapsuleButton, RollingText, Typography, Button, Dialog, MagneticWrapper
 │   │   ├── AbstractBackground.tsx
 │   │   ├── ContactCard.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── hooks/            # Custom hooks (e.g. useTheme)
-│   ├── lib/              # Utility functions (cn)
+│   ├── lib/              # Utility functions (cn), lazy Motion features
 │   ├── App.tsx           # Main application entry component
 │   ├── index.css         # Design system CSS variables & Tailwind imports
 │   ├── main.tsx          # React application root
 │   └── types.ts          # TypeScript type definitions
-├── AGENTS.md             # Design system & brand guidelines
+├── public/
+│   ├── staticwebapp.config.json  # Azure SWA security headers & routing
+│   └── theme-init.js     # Applies the theme before first paint
+├── AGENTS.md             # Codebase rules for AI agents
+├── BRAND_GUIDE.md        # Brand source of truth
 └── README.md             # Project documentation
 ```
+
+---
+
+## 🚢 Deployment
+
+Every push to `main` runs the Azure Static Web Apps workflow: `npm ci`, `npm run lint` (strict typecheck), then build and deploy. Pull requests against `main` get a preview environment.

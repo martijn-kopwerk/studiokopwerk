@@ -83,36 +83,40 @@ A standalone amber glowing indicator represents the pulse of Kopwerk. Used in he
 
 ## 4. Typography System & Letter-Spacing
 
-### Fonts (Google Fonts)
+### Fonts
+The website self-hosts both fonts (`@fontsource-variable/syne`, `@fontsource-variable/plus-jakarta-sans`). For standalone documents, Google Fonts is fine:
+
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 ```
 
-1. **Display / Titles:** `Syne` (`sans-serif`, geometric, architectural, bold).
+1. **Display / Titles:** `Syne` (`sans-serif`, geometric, architectural, bold). Weights run 400–800: **400 (`font-normal`) is the lightest**. Never use `font-light` on Syne; it silently renders at the nearest loaded weight.
 2. **Body & UI / Numerals:** `Plus Jakarta Sans` (`sans-serif`, legible, modern, geometric).
 
 ### Strict Letter-Spacing (Tracking) Rules
 Studio Kopwerk relies on exaggerated, deliberate letter-spacing for premium micro-typography:
 
-| Level | Value | Usage |
-| :--- | :--- | :--- |
-| **Ultra-Wide** | `0.5em` | Hero eyebrows (`STUDIO`, `OFFERTE`, `ROADMAP`) |
-| **Super-Wide** | `0.4em` | Section eyebrows, card tags, metadata labels |
-| **Wide-XL** | `0.2em` | Uppercase buttons, navigation items, status badges |
-| **Wide-LG** | `0.15em` | Large H1 titles and hero numbers |
-| **Wide-MD** | `0.1em` | H2 section titles |
-| **Wide-SM** | `0.04em` | Lead paragraphs, key takeaways, summary quotes |
+| Level | Tailwind token (website) | Value | Usage |
+| :--- | :--- | :--- | :--- |
+| **Ultra-Wide** | `tracking-ultra-wide` | `0.5em` | Hero eyebrows (`STUDIO`, `OFFERTE`, `ROADMAP`) |
+| **Super-Wide** | `tracking-super-wide` | `0.4em` | Section eyebrows, card tags, metadata labels |
+| **Wide-XL** | `tracking-wide-xl` | `0.2em` | Uppercase buttons, navigation items, status badges |
+| **Wide-LG** | `tracking-wide-lg` | `0.15em` | Large H1 titles and hero numbers |
+| **Wide-MD** | `tracking-wide-md` | `0.1em` | H1 and H2 titles |
+| **Wide-SM** | `tracking-wide-sm` | `0.04em` | Lead paragraphs, key takeaways, summary quotes, mixed-case button labels |
+
+In the website codebase, always use the token names (defined in `src/index.css`). The literal values below are for standalone documents that don't have the Tailwind theme. Tailwind's own `tracking-tight` / `tracking-wide` are not part of the system.
 
 ### Hierarchy Scale
 
 * **Eyebrow (`span`):**  
   `font-sans text-xs sm:text-sm font-medium tracking-[0.4em] uppercase text-slate-500 dark:text-slate-400`
 * **H1 / Document Title (`h1`):**  
-  `font-display font-light text-4xl sm:text-6xl md:text-7xl tracking-[0.1em] uppercase leading-none text-slate-900 dark:text-white`
+  `font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-[0.1em] uppercase leading-none text-slate-900 dark:text-white`
 * **H2 / Section Title (`h2`):**  
-  `font-display font-medium text-2xl sm:text-4xl tracking-tight text-slate-900 dark:text-white`
+  `font-display font-medium text-2xl sm:text-4xl tracking-[0.1em] text-slate-900 dark:text-white`
 * **Lead / Tagline (`p`):**  
   `font-sans text-xl sm:text-2xl font-light tracking-[0.04em] text-slate-600 dark:text-slate-300`  
   *(Key words in lead text are often italicized, e.g. `Zien wat <em class="italic font-normal">wérkt</em>.`)*
@@ -120,6 +124,11 @@ Studio Kopwerk relies on exaggerated, deliberate letter-spacing for premium micr
   `font-sans text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300`
 * **Metadata / Footnote (`small`):**  
   `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500`
+
+### Motion
+* **Easing:** `cubic-bezier(0.19, 1, 0.22, 1)` (Tailwind token `ease-kopwerk`), typically 500ms. Avoid `ease-in-out` and `easeOut`.
+* **Rolling text:** on hover *and* keyboard focus the label rolls up and an amber copy rolls in (overflow hidden). The duplicate is `aria-hidden`. In code: `<RollingText>`.
+* **Reduced motion:** every animation (canvas, pulse, entrance, magnetic pull) stops or becomes a still state under `prefers-reduced-motion: reduce`.
 
 ---
 
@@ -143,10 +152,10 @@ When generating **Offertes (Proposals)**, **Project Roadmaps**, or **Executive S
   </div>
   
   <span class="text-xs font-medium tracking-[0.4em] uppercase text-slate-400 dark:text-slate-500 block mb-2">Voorstel</span>
-  <h1 class="font-display font-light text-5xl sm:text-6xl tracking-[0.08em] uppercase text-slate-900 dark:text-white mb-4">
+  <h1 class="font-display font-normal text-5xl sm:text-6xl tracking-[0.1em] uppercase text-slate-900 dark:text-white mb-4">
     AI Prototype & Platform
   </h1>
-  <p class="text-xl font-light tracking-wide text-slate-600 dark:text-slate-300">
+  <p class="text-xl font-light tracking-[0.04em] text-slate-600 dark:text-slate-300">
     Van concept naar een schaalbaar, werkend digitaal fundament.
   </p>
 </header>
@@ -182,6 +191,8 @@ When generating **Offertes (Proposals)**, **Project Roadmaps**, or **Executive S
 * **Total Highlight:** Large Syne display font with an amber accent bar or background pill.
 
 ### E. Asymmetric Capsule Button (CTA)
+In the website codebase this is the `<CapsuleButton>` component. Don't rebuild it inline.
+
 ```html
 <a href="mailto:hallo@studiokopwerk.nl" class="group inline-flex items-center gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 text-white dark:text-slate-950 shadow-xl transition-all duration-300 hover:scale-[1.02]">
   <span class="text-sm font-medium tracking-[0.1em] uppercase">
