@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Sun, Moon, Settings } from 'lucide-react';
+import { Sun, Moon, Monitor } from 'lucide-react';
 import { m } from 'motion/react';
 import { ResolvedTheme, ThemeMode } from '../types';
 
@@ -15,7 +15,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   onThemeChange,
 }) => {
   const options: { mode: ThemeMode; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-    { mode: 'system', label: 'Systeemvoorkeur', icon: Settings },
+    { mode: 'system', label: 'Systeemvoorkeur', icon: Monitor },
     { mode: 'light', label: 'Licht', icon: Sun },
     { mode: 'dark', label: 'Donker', icon: Moon },
   ];
@@ -42,7 +42,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             title={`${opt.label} ${opt.mode === 'system' ? `(${resolvedTheme === 'dark' ? 'Donker' : 'Licht'})` : ''}`}
             className={`relative flex items-center justify-center w-8 h-8 rounded-full text-xs font-medium transition-colors duration-200 outline-hidden focus-visible:ring-2 focus-visible:ring-amber-500/60 ${
               isActive
-                ? 'text-amber-600 dark:text-amber-400 font-semibold'
+                ? 'text-amber-700 dark:text-amber-400 font-semibold'
                 : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
             }`}
           >

@@ -64,8 +64,6 @@ export default function App() {
             themeMode={themeMode}
             resolvedTheme={resolvedTheme}
             onThemeChange={setThemeMode}
-            onContactClick={openContact}
-            onContactIntent={preloadContact}
           />
 
           <main
@@ -92,6 +90,14 @@ export default function App() {
                 className="motion-safe:animate-rise [--rise-from:10px] [animation-delay:250ms]"
               >
                 Zien wat <em className="italic font-normal">wérkt</em>.
+              </Typography>
+
+              <Typography
+                variant="subtext"
+                id="hero-mission"
+                className="max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
+              >
+                Wij helpen iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook.
               </Typography>
             </div>
 
