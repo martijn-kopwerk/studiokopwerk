@@ -18,7 +18,7 @@ const baseStyles = {
   lead: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-wide-sm text-slate-600 dark:text-slate-300",
   body: "text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300",
   subtext: "text-sm sm:text-base font-normal text-slate-500 dark:text-slate-400",
-  small: "text-xs text-slate-400 dark:text-slate-500",
+  small: "text-xs text-slate-500 dark:text-slate-400",
 };
 
 const defaultElements: Record<NonNullable<TypographyProps['variant']>, React.ElementType> = {

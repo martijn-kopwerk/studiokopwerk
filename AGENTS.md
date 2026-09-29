@@ -27,7 +27,8 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Dark Mode Core:** `--color-kopwerk-dark` (`#07090e`) - Use via `bg-kopwerk-dark`. Never use pure black (`#000000`), including for overlays and shadows (use `kopwerk-dark/…`).
 - **Light Mode Core:** `slate-50` (`#f8fafc`).
 - **Text & Borders:** Use Tailwind's `slate` scale (`slate-900` for light mode text, `slate-400`/`500` for secondary text/eyebrows).
-- **Accents:** Tailwind's `amber` scale. `amber-500` (`#f59e0b`) for primary interaction. `amber-400` or `amber-600` in dark mode for depth and glows. Success states use amber too; no green/emerald.
+- **Accents:** Tailwind's `amber` scale. `amber-500` (`#f59e0b`) for primary interaction, dots and fills. `amber-400` or `amber-600` for depth and glows. Success states use amber too; no green/emerald.
+- **Contrast (WCAG AA, 4.5:1 for text):** amber *text* on light backgrounds is `amber-700` (never `amber-500`/`600`); on dark it is `amber-400`. Small grey labels: `text-slate-500 dark:text-slate-400` (never `slate-400` on white or `slate-500` on `kopwerk-dark`).
 
 ### Typography
 - **Headings (Display):** `Syne` via `font-display` (Architectural, geometric, confident). Weights 400–800; `font-normal` is the lightest. Never `font-light` on Syne.
@@ -42,6 +43,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
   - `tracking-ultra-wide` (0.5em) - For extreme micro-typography.
 
 ## 4. Components & Interactions
+- **Logo:** `<KopwerkLogo>` (`src/components/ui/KopwerkLogo.tsx`), the K with its amber dot, in the header on every screen size.
 - **Buttons:** Avoid generic symmetric pills. Primary CTAs use `<CapsuleButton>` (`src/components/ui/CapsuleButton.tsx`): the bespoke asymmetric capsule with a distinct icon well and contrast inversion on hover. `<Button>` is only for quiet utility controls (ghost icon buttons).
 - **Micro-interactions:** Rolling-text on hover/focus via `<RollingText>` (`src/components/ui/RollingText.tsx`). Don't hand-roll the two-span pattern.
 - **Easing:** Use the `ease-kopwerk` token (`cubic-bezier(0.19,1,0.22,1)`), usually with `duration-500`. In Motion, use `[0.19, 1, 0.22, 1]`. Never `ease-in-out` or `easeOut`.

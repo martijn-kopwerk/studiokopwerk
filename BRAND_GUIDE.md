@@ -55,6 +55,9 @@ When generating HTML, React, PDF, or SVG documents, embed this exact SVG:
 </svg>
 ```
 
+### On the Website
+The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), with a slow pulse around its amber dot (off for reduced motion).
+
 ### The Signature "Amber Dot" Element
 A standalone amber glowing indicator represents the pulse of Kopwerk. Used in headers, live status indicators, timeline nodes, and key action items:
 * **HTML/Tailwind:** `<span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]"></span>`
@@ -69,7 +72,8 @@ A standalone amber glowing indicator represents the pulse of Kopwerk. Used in he
 | **Kopwerk Light (Canvas)** | `#f8fafc` | `bg-slate-50` | Primary light mode background. Clean crisp alabaster. |
 | **Amber Primary (Energy)** | `#f59e0b` | `text-amber-500` / `bg-amber-500` | Primary brand accent, glowing dots, interactive highlights. |
 | **Amber Glow / Light Text** | `#fbbf24` | `text-amber-400` | Accent text on dark backgrounds and subtle glows. |
-| **Amber Deep / Dark Text** | `#d97706` | `text-amber-600` | Accent text on light backgrounds and active states. |
+| **Amber Deep** | `#d97706` | `bg-amber-600` / `border-amber-600` | Dots, borders, icons and glows on light backgrounds. **Not for text** (3.2:1 on white). |
+| **Amber Text (Light)** | `#b45309` | `text-amber-700` | Accent text on light backgrounds: hover labels, active states, confirmations (5.0:1 on white). |
 | **Slate Dark (Headings)** | `#0f172a` | `text-slate-900` | Primary light-mode typography & dark-mode card surfaces. |
 | **Slate White (Headings)** | `#ffffff` | `text-white` | Primary dark-mode typography & light-mode card surfaces. |
 | **Slate Muted (Body)** | `#475569` / `#cbd5e1` | `text-slate-600` / `text-slate-300` | Secondary body text, descriptions, table cells. |
@@ -77,6 +81,7 @@ A standalone amber glowing indicator represents the pulse of Kopwerk. Used in he
 | **Subtle Borders** | `#e2e8f0` / `#1e293b` | `border-slate-200` / `dark:border-slate-800` | Hairline dividers, card outlines, table borders. |
 
 * **Selection Color:** `rgba(217, 119, 6, 0.25)` with inherited text color.
+* **Contrast:** all text meets WCAG AA (4.5:1). On light backgrounds that means `slate-500` or darker for small labels and `amber-700` for amber text. On `#07090e`, use `slate-400` or lighter and `amber-400`.
 * **Ambient Glows:** Radial gradients with `rgba(245, 158, 11, 0.05)` to `rgba(245, 158, 11, 0)` for background atmosphere.
 
 ---
@@ -123,7 +128,7 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 * **Body Text (`p`):**  
   `font-sans text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300`
 * **Metadata / Footnote (`small`):**  
-  `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500`
+  `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400`
 
 ### Motion
 * **Easing:** `cubic-bezier(0.19, 1, 0.22, 1)` (Tailwind token `ease-kopwerk`), typically 500ms. Avoid `ease-in-out` and `easeOut`.
@@ -151,7 +156,7 @@ When generating **Offertes (Proposals)**, **Project Roadmaps**, or **Executive S
     </span>
   </div>
   
-  <span class="text-xs font-medium tracking-[0.4em] uppercase text-slate-400 dark:text-slate-500 block mb-2">Voorstel</span>
+  <span class="text-xs font-medium tracking-[0.4em] uppercase text-slate-500 dark:text-slate-400 block mb-2">Voorstel</span>
   <h1 class="font-display font-normal text-5xl sm:text-6xl tracking-[0.1em] uppercase text-slate-900 dark:text-white mb-4">
     AI Prototype & Platform
   </h1>
@@ -167,7 +172,7 @@ When generating **Offertes (Proposals)**, **Project Roadmaps**, or **Executive S
   <!-- Subtle Amber Ambient Glow in Corner -->
   <div class="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
   
-  <span class="text-xs font-semibold tracking-[0.3em] uppercase text-amber-600 dark:text-amber-400 mb-2 block">
+  <span class="text-xs font-semibold tracking-[0.3em] uppercase text-amber-700 dark:text-amber-400 mb-2 block">
     Fase 01
   </span>
   <h3 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4">

@@ -29,7 +29,7 @@ export function CapsuleButton({
     >
       <RollingText
         className="text-sm sm:text-base font-medium tracking-wide-sm text-white dark:text-slate-950"
-        accentClassName="text-amber-400 dark:text-amber-600"
+        accentClassName="text-amber-400 dark:text-amber-700"
       >
         {children}
       </RollingText>

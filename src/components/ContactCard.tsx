@@ -32,6 +32,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   const resetTimer = useRef<number | undefined>(undefined);
   const emailRef = useRef<HTMLSpanElement>(null);
   const mailtoHref = `mailto:${email}?subject=${encodeURIComponent('Kennismaking Studio Kopwerk')}`;
+  const [emailLocal, emailDomain] = email.split('@');
   const copied = copyState === 'copied';
 
   useEffect(() => () => window.clearTimeout(resetTimer.current), []);
@@ -75,7 +76,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
 
         <DialogHeader className="mb-12 relative z-10">
           <Typography variant="eyebrow" className="mb-4 inline-block">
-            Rechtstreeks
+            Jouw zet
           </Typography>
           <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
             Tijd voor actie.
@@ -92,13 +93,14 @@ export const ContactCard: React.FC<ContactCardProps> = ({
             className="group relative text-left flex flex-col outline-none w-full rounded-xl focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-8 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
           >
             <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors duration-300 ease-kopwerk ${
-              copyState === 'idle' ? 'text-slate-400 dark:text-slate-500 group-hover:text-amber-500' : 'text-amber-600 dark:text-amber-400'
+              copyState === 'idle' ? 'text-slate-500 dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400' : 'text-amber-700 dark:text-amber-400'
             }`}>
               {copyLabels[copyState]}
             </span>
             <span className="flex items-center justify-between w-full border-b border-slate-200 dark:border-slate-800 pb-4 transition-colors duration-300 ease-kopwerk group-hover:border-amber-500/50 gap-4">
-              <span ref={emailRef} className="text-xl sm:text-2xl md:text-3xl font-light tracking-wide-sm text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors break-all">
-                {email}
+              {/* <wbr> after the @ so narrow screens wrap there, never mid-word */}
+              <span ref={emailRef} className="min-w-0 text-xl sm:text-2xl md:text-3xl font-light tracking-wide-sm text-slate-800 dark:text-slate-200 group-hover:text-slate-950 dark:group-hover:text-white transition-colors">
+                {emailLocal}@<wbr />{emailDomain}
               </span>
               <span className={`flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-300 ease-kopwerk shrink-0 ${
                 copied
@@ -108,7 +110,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 {copied ? (
                   <Check className="w-5 h-5 text-slate-950" aria-hidden="true" />
                 ) : (
-                  <Copy className="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-amber-600 dark:group-hover:text-amber-400" aria-hidden="true" />
+                  <Copy className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400" aria-hidden="true" />
                 )}
               </span>
             </span>
@@ -118,16 +120,19 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           </button>
 
           {/* Mailto link */}
-          <div className="w-full pt-4">
+          <div className="w-full pt-4 flex flex-col items-start gap-3">
             <a
               href={mailtoHref}
               className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white outline-none rounded-md focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
             >
-              <RollingText accentClassName="text-amber-600 dark:text-amber-400">
+              <RollingText accentClassName="text-amber-700 dark:text-amber-400">
                 Deel je plannen
               </RollingText>
-              <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
+              <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
             </a>
+            <Typography variant="subtext" className="tracking-wide-sm text-pretty">
+              Je hoort binnen twee werkdagen van ons.
+            </Typography>
           </div>
 
         </div>
