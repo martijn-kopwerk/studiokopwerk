@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Check, Copy, ArrowUpRight } from 'lucide-react';
 import { Typography } from './ui/Typography';
 import { RollingText } from './ui/RollingText';
+import { contactEmail, mailtoHref } from '../lib/contact';
 import {
   Dialog,
   DialogContent,
@@ -26,12 +27,11 @@ const copyLabels: Record<CopyState, string> = {
 export const ContactCard: React.FC<ContactCardProps> = ({
   isOpen,
   onClose,
-  email = 'hallo@studiokopwerk.nl',
+  email = contactEmail,
 }) => {
   const [copyState, setCopyState] = useState<CopyState>('idle');
   const resetTimer = useRef<number | undefined>(undefined);
   const emailRef = useRef<HTMLSpanElement>(null);
-  const mailtoHref = `mailto:${email}?subject=${encodeURIComponent('Kennismaking Studio Kopwerk')}`;
   const [emailLocal, emailDomain] = email.split('@');
   const copied = copyState === 'copied';
 
@@ -122,7 +122,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           {/* Mailto link */}
           <div className="w-full pt-4 flex flex-col items-start gap-3">
             <a
-              href={mailtoHref}
+              href={mailtoHref(email)}
               className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white outline-none rounded-md focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
             >
               <RollingText accentClassName="text-amber-700 dark:text-amber-400">

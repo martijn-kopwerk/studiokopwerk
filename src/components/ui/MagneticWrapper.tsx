@@ -23,8 +23,9 @@ export function MagneticWrapper({
   const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
   const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
-  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion) return;
+  // Mouse and pen only: a tap fires a move without a matching leave, which would leave the child stuck off-centre.
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch' || prefersReducedMotion) return;
     const { clientX, clientY } = e;
     const boundingRect = ref.current?.getBoundingClientRect();
     if (boundingRect) {
@@ -44,8 +45,8 @@ export function MagneticWrapper({
   return (
     <m.div
       ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={reset}
       style={{ x: springX, y: springY }}
       className={`inline-block ${className}`}
     >
