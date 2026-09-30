@@ -32,7 +32,9 @@ jobs:
         run: npm ci
       - name: Typecheck
         run: npm run lint
-      - name: Build And Deploy
+      - name: Build
+        run: npm run build
+      - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -41,9 +43,10 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
+          # The site is built above with the pinned Node version and lockfile; Azure only uploads the result.
+          app_location: "dist" # Vite build output, including staticwebapp.config.json from public/
           api_location: "" # No API folder in this project
-          output_location: "dist" # Vite default build output directory
+          skip_app_build: true
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:

@@ -7,6 +7,8 @@ import { Footer } from './components/layout/Footer';
 import { Typography } from './components/ui/Typography';
 import { MagneticWrapper } from './components/ui/MagneticWrapper';
 import { CapsuleButton } from './components/ui/CapsuleButton';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { contactEmail, mailtoHref } from './lib/contact';
 
 const loadMotionFeatures = () => import('./lib/motion-features').then((m) => m.default);
 
@@ -14,20 +16,36 @@ const loadMotionFeatures = () => import('./lib/motion-features').then((m) => m.d
 const loadContactCard = () => import('./components/ContactCard');
 const ContactCard = lazy(() => loadContactCard().then((m) => ({ default: m.ContactCard })));
 
-const contactEmail = 'hallo@studiokopwerk.nl';
+const openMail = () => {
+  window.location.href = mailtoHref();
+};
 
 export default function App() {
   const { resolvedTheme, toggleTheme } = useTheme();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isContactMounted, setIsContactMounted] = useState(false);
+  // Set when the contact card can't load (offline, or a stale tab after a deploy).
+  // The call to action then goes straight to the mail app instead of opening the card.
+  const [isContactUnavailable, setIsContactUnavailable] = useState(false);
 
   const openContact = useCallback(() => {
+    if (isContactUnavailable) {
+      openMail();
+      return;
+    }
     setIsContactMounted(true);
     setIsContactOpen(true);
-  }, []);
+  }, [isContactUnavailable]);
 
   const preloadContact = useCallback(() => {
-    void loadContactCard();
+    // A failed preload is handled when the card is opened (see the ErrorBoundary below).
+    loadContactCard().catch(() => {});
+  }, []);
+
+  const handleContactError = useCallback(() => {
+    setIsContactUnavailable(true);
+    setIsContactOpen(false);
+    openMail();
   }, []);
 
   // Keyboard shortcuts: C toggles contact, T toggles theme.
@@ -41,6 +59,10 @@ export default function App() {
       }
       const key = e.key.toLowerCase();
       if (key === 'c') {
+        if (isContactUnavailable) {
+          openMail();
+          return;
+        }
         setIsContactMounted(true);
         setIsContactOpen((prev) => !prev);
       } else if (key === 't') {
@@ -49,7 +71,7 @@ export default function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTheme]);
+  }, [toggleTheme, isContactUnavailable]);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -111,13 +133,15 @@ export default function App() {
 
           <Footer />
           {isContactMounted && (
-            <Suspense fallback={null}>
-              <ContactCard
-                isOpen={isContactOpen}
-                onClose={() => setIsContactOpen(false)}
-                email={contactEmail}
-              />
-            </Suspense>
+            <ErrorBoundary onError={handleContactError}>
+              <Suspense fallback={null}>
+                <ContactCard
+                  isOpen={isContactOpen}
+                  onClose={() => setIsContactOpen(false)}
+                  email={contactEmail}
+                />
+              </Suspense>
+            </ErrorBoundary>
           )}
         </div>
       </LazyMotion>
