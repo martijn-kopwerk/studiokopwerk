@@ -15,23 +15,61 @@ const INTRO_SECONDS = 2.6;
 // Brand curve cubic-bezier(0.19, 1, 0.22, 1), approximated with an ease-out quart.
 const ease = (x: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 4);
 
+const ARM_SLOPE = (K.mid - K.top) / (K.armX - K.vertexX);
+
 interface Layout {
   width: number;
   height: number;
-  scale: number;
   stemX: number;
+  vertexX: number;
   midY: number;
+  // x of the vertical guide through the arm ends
+  armX: number;
+  // Half-height of the large K; 0 when only the guides are drawn
+  armDY: number;
+  dotX: number;
+  showDot: boolean;
 }
 
-function computeLayout(width: number, height: number): Layout {
-  // The K is drawn large and faint, a little left of centre so it never competes with the wordmark.
-  const narrow = width < 640;
+interface Box {
+  left: number;
+  top: number;
+  width: number;
+}
+
+function computeLayout(width: number, height: number, logo?: Box): Layout {
+  if (width < 640 && logo) {
+    // Phones: there's no room for a large K, so the guides grow out of the header logo itself.
+    // Its own amber dot is the vertex; the arm guide mirrors the stem as a right-hand margin.
+    const unit = logo.width / 120;
+    const stemX = logo.left + K.stemX * unit;
+    return {
+      width,
+      height,
+      stemX,
+      vertexX: logo.left + K.vertexX * unit,
+      midY: logo.top + K.mid * unit,
+      armX: width - stemX,
+      armDY: 0,
+      dotX: 0,
+      showDot: false,
+    };
+  }
+
+  // Wider screens: the K is drawn large and faint, a little left of centre so it never competes with the wordmark.
   const scale = Math.min(height * 1.05, width * 1.1) / (K.bottom - K.top);
-  const stemX = narrow ? width * 0.08 : width * 0.1;
-  // On phones the hero text spans the full width, so the vertex (and its dot) moves down
-  // into the quiet band between the call to action and the footer.
-  const midY = narrow ? height * 0.8 : height * 0.54;
-  return { width, height, scale, stemX, midY };
+  const stemX = width * 0.1;
+  return {
+    width,
+    height,
+    stemX,
+    vertexX: stemX + (K.vertexX - K.stemX) * scale,
+    midY: height * 0.54,
+    armX: stemX + (K.armX - K.stemX) * scale,
+    armDY: (K.mid - K.top) * scale,
+    dotX: stemX + (K.dotX - K.stemX) * scale,
+    showDot: true,
+  };
 }
 
 /**
@@ -59,18 +97,15 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     let start = 0;
 
     const draw = () => {
-      const { width, height, scale: s, stemX, midY } = layout;
+      const { width, height, stemX, vertexX, midY, armX, armDY } = layout;
       const isDark = themeRef.current === 'dark';
       const ink = isDark ? '226, 232, 240' : '51, 65, 85';
       const t = progress;
 
       ctx.clearRect(0, 0, width, height);
 
-      const vertexX = stemX + (K.vertexX - K.stemX) * s;
-      const armDX = (K.armX - K.vertexX) * s;
-      const armDY = (K.mid - K.top) * s;
-      const slope = armDY / armDX;
-      const far = width * 1.3;
+      const slope = ARM_SLOPE;
+      const far = Math.max(width, height) * 1.5;
 
       const segment = (x1: number, y1: number, x2: number, y2: number, p: number) => {
         if (p <= 0) return;
@@ -89,22 +124,24 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       segment(vertexX, midY, vertexX + far, midY + far * slope, ease((t - 0.45) / 1.5));
       segment(vertexX, midY, vertexX - far, midY + far * slope, ease((t - 0.6) / 1.5));
       segment(vertexX, midY, vertexX - far, midY - far * slope, ease((t - 0.6) / 1.5));
-      segment(vertexX + armDX, 0, vertexX + armDX, height, ease((t - 0.8) / 1.4));
+      segment(armX, 0, armX, height, ease((t - 0.8) / 1.4));
 
-      // The K itself, a touch stronger.
-      const k = ease((t - 1) / 1.3);
-      ctx.lineWidth = 1.25;
-      ctx.strokeStyle = `rgba(${ink}, ${isDark ? 0.13 : 0.11})`;
-      segment(stemX, midY - armDY, stemX, midY + armDY, k);
-      segment(vertexX, midY, vertexX + armDX, midY - armDY, k);
-      segment(vertexX, midY, vertexX + armDX, midY + armDY, k);
+      // The K itself, a touch stronger (wider screens only).
+      if (armDY > 0) {
+        const k = ease((t - 1) / 1.3);
+        ctx.lineWidth = 1.25;
+        ctx.strokeStyle = `rgba(${ink}, ${isDark ? 0.13 : 0.11})`;
+        segment(stemX, midY - armDY, stemX, midY + armDY, k);
+        segment(vertexX, midY, armX, midY - armDY, k);
+        segment(vertexX, midY, armX, midY + armDY, k);
+      }
     };
 
     const placeDot = () => {
       const dot = dotRef.current;
       if (!dot) return;
-      const x = layout.stemX + (K.dotX - K.stemX) * layout.scale;
-      dot.style.left = `${x}px`;
+      dot.hidden = !layout.showDot;
+      dot.style.left = `${layout.dotX}px`;
       dot.style.top = `${layout.midY}px`;
     };
 
@@ -113,7 +150,12 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       if (!parent) return;
       const rect = parent.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      layout = computeLayout(rect.width, rect.height);
+      const logo = document.querySelector('#main-header svg')?.getBoundingClientRect();
+      layout = computeLayout(
+        rect.width,
+        rect.height,
+        logo && { left: logo.left - rect.left, top: logo.top - rect.top, width: logo.width }
+      );
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;

@@ -91,7 +91,7 @@ export default function App() {
               <Typography
                 variant="subtext"
                 id="hero-mission"
-                className="max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
+                className="max-w-[17rem] sm:max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
               >
                 Wij helpen iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook.
               </Typography>
