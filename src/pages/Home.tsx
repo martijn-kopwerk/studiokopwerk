@@ -1,4 +1,8 @@
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
+import { stories } from '../lib/stories';
 import { Typography } from '../components/ui/Typography';
+import { RollingText } from '../components/ui/RollingText';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { useContact } from '../hooks/useContact';
@@ -44,13 +48,25 @@ export function Home() {
 
       <div
         id="hero-contact-trigger-wrapper"
-        className="mt-10 sm:mt-14 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-6 sm:px-0 motion-safe:animate-rise [--rise-from:15px] [animation-delay:450ms]"
+        className="mt-10 sm:mt-14 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 w-full sm:w-auto px-6 sm:px-0 motion-safe:animate-rise [--rise-from:15px] [animation-delay:450ms]"
       >
         <MagneticWrapper>
           <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact}>
             Daag ons uit
           </CapsuleButton>
         </MagneticWrapper>
+        {stories.length > 0 && (
+          <Link
+            href="/werk"
+            className="group inline-flex items-center gap-3 min-h-11 px-2 text-sm sm:text-base font-medium tracking-wide-sm text-slate-900 dark:text-white rounded-md outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+          >
+            <RollingText accentClassName="text-amber-700 dark:text-amber-400">Bekijk wat wérkt</RollingText>
+            <ArrowRight
+              className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none"
+              aria-hidden="true"
+            />
+          </Link>
+        )}
       </div>
     </main>
   );

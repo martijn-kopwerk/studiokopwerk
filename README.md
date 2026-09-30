@@ -77,6 +77,8 @@ Elk succesverhaal is een map in `src/content/werk/`, met een `index.mdx` en de b
 5. **Laat `concept: true` staan**, maak een branch en open een PR. De Azure-preview toont concepten, de live site niet. Klopt er iets niet in het bovenste blok, dan faalt de build met een melding die zegt wat er mist.
 6. **Klaar?** Haal `concept: true` weg en merge. De lijst, de nummering (nieuwste bovenaan) en de sitemap werken zichzelf bij.
 
+De drie mappen `voorbeeld-*` laten elke vorm zien en blijven altijd concept. Verwijder ze zodra de eerste echte verhalen er staan.
+
 Liever niet zelf? Vraag Claude Code: "voeg een verhaal toe over …"; deze stappen staan ook in `AGENTS.md`.
 
 ---
@@ -89,12 +91,14 @@ studio-kopwerk/
 │   ├── components/
 │   │   ├── layout/       # Header, Footer
 │   │   ├── ui/           # CapsuleButton, RollingText, Typography, Button, Dialog, MagneticWrapper
+│   │   ├── werk/         # Story previews and the building blocks stories are written with
 │   │   ├── AbstractBackground.tsx
 │   │   ├── ContactCard.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── hooks/            # Custom hooks (e.g. useTheme, useContact)
 │   ├── lib/              # Utility functions (cn), head tags, contact details, lazy Motion features
-│   ├── pages/            # One component per page (Home, NotFound)
+│   ├── pages/            # One component per page (Home, Werk, Story, NotFound)
+│   ├── content/werk/     # The success stories, one folder each (see "Een verhaal toevoegen")
 │   ├── App.tsx           # The frame that stays put across pages
 │   ├── routes.tsx        # Every page: its path, head tags and component
 │   ├── entry-client.tsx  # Browser entry: hydrates the prerendered page

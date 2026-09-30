@@ -9,6 +9,12 @@ import type { MDXComponents } from 'mdx/types';
 
 export type StoryForm = 'beeld' | 'woorden' | 'cijfers';
 
+export const formLabels: Record<StoryForm, string> = {
+  beeld: 'In beeld',
+  woorden: 'In woorden',
+  cijfers: 'In cijfers',
+};
+
 export type StoryPreview =
   | { form: 'beeld'; image: string; alt: string }
   | { form: 'woorden'; quote: string; name: string; role?: string }

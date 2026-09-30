@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from './entry-server';
 import { renderHead } from './lib/head';
+import { stories } from './lib/stories';
 import { findRoute, normalizePath } from './routes';
 
 describe('prerendering', () => {
@@ -23,6 +24,36 @@ describe('prerendering', () => {
     const { html } = render('/');
     expect(html).toContain('Schakel naar donkere weergave');
     expect(html).toContain('Schakel naar lichte weergave');
+  });
+});
+
+describe('portfolio pages', () => {
+  // Tests run in dev mode, so drafts count: with only the example stories this still covers every page.
+  it.skipIf(stories.length === 0)('renders the index with every story and a link to each', () => {
+    const { html, head } = render('/werk');
+    expect(html).toContain('Wat wérkt');
+    for (const story of stories) {
+      expect(html).toContain(`href="/werk/${story.slug}"`);
+    }
+    expect(head).toContain('<title>Wat wérkt · Studio Kopwerk</title>');
+  });
+
+  it.skipIf(stories.length === 0)('renders each story with its own title, text and head tags', () => {
+    for (const story of stories) {
+      const { html, head } = render(`/werk/${story.slug}`);
+      expect(html).toMatch(/<h1[^>]*>.*<\/h1>/s);
+      expect(html).toContain('Tijd voor actie.');
+      if (story.draft) {
+        // Drafts only appear in previews and must never be indexed
+        expect(head).toContain('<meta name="robots" content="noindex" />');
+      } else {
+        expect(head).toContain(`<link rel="canonical" href="https://www.studiokopwerk.nl/werk/${story.slug}" />`);
+      }
+    }
+  });
+
+  it.skipIf(stories.length === 0)('links home to the portfolio', () => {
+    expect(render('/').html).toContain('href="/werk"');
   });
 });
 

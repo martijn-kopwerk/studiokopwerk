@@ -57,6 +57,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Because pages are rendered without a browser first: never touch `window`, `document` or `localStorage` while rendering, only in effects or event handlers. Markup must not depend on client-only state such as the theme; use `dark:` variants instead.
 - Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
 - Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
+- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`): the index marks the story under the cursor, a story page marks the section being read. Put dot targets in a margin, never over text, and position them without transforms (the dot ignores them so it isn't thrown off by entrance animations).
 
 ### Success stories (`src/content/werk/`)
 - One folder per story: `index.mdx` plus its images. The folder name is the URL slug (lowercase, digits, hyphens). Folders starting with `_` are skipped; `_sjabloon/` is the template to copy.
