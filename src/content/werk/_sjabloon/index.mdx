@@ -1,0 +1,53 @@
+---
+# Kopieer deze map naar src/content/werk/<korte-naam>/ (kleine letters en streepjes; dat wordt de URL /werk/<korte-naam>).
+# Alles hieronder tussen [haken] vervang je. Velden met "optioneel" mag je weglaten.
+
+titel: "[De uitkomst in één zin, als conclusie]"
+klant: "[Naam klant]"
+sector: "[Sector]"                   # optioneel
+datum: 2026-01-31                    # JJJJ-MM-DD; de nieuwste verhalen staan bovenaan
+samenvatting: "[Eén regel over wat het de klant opleverde.]"
+vraag: "[De vraag, in de woorden van de klant]"   # optioneel
+doorlooptijd: "[Aantal weken]"       # optioneel
+concept: true                        # alleen zichtbaar in previews; haal weg om te publiceren
+
+# Hoe het verhaal zich in de lijst laat zien: kies één vorm en vul de bijbehorende voorproef in.
+vorm: woorden                        # beeld, woorden of cijfers
+
+voorproef:
+  # bij vorm: woorden
+  citaat: "[Eén zin van de klant die het verhaal samenvat.]"
+  naam: "[Naam]"
+  rol: "[Rol, klant]"                # optioneel
+  # bij vorm: beeld (zet het bestand in deze map)
+  # beeld: ./foto.webp
+  # alt: "[Wat er op het beeld te zien is]"
+  # bij vorm: cijfers
+  # getal: "[00]"
+  # label: "[Wat het getal meet]"
+---
+
+## [Tussenkop als conclusie: waar het begon]
+
+[Aanleiding. Wat gebeurde er in de praktijk, en voor wie was dat een probleem? Twee tot drie zinnen, in gewone taal.]
+
+## [Tussenkop als conclusie: wat we maakten]
+
+[Wat we deden. Het werkende prototype, de keuzes die ertoe deden en wat we bewust niet bouwden.]
+
+{/* Bouwstenen die je vrij kunt gebruiken, zo vaak als je wilt: */}
+
+<Citaat naam="[Naam]" rol="[Rol, klant]">
+  [Eén zin van de klant, in eigen woorden.]
+</Citaat>
+
+<Cijfers>
+  <Cijfer waarde="[00]" label="[Wat het eerste getal meet]" />
+  <Cijfer waarde="[00]" label="[Wat het tweede getal meet]" />
+</Cijfers>
+
+{/* <Beeld src="./foto.webp" alt="[Wat er te zien is]" bijschrift="[Optioneel bijschrift]" /> */}
+
+## [Tussenkop als conclusie: wat het opleverde]
+
+[Het resultaat en wat het betekent voor de mensen die ermee werken.]

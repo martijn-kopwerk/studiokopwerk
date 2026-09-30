@@ -63,6 +63,24 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 
 ---
 
+## ✍️ Een verhaal toevoegen
+
+Elk succesverhaal is een map in `src/content/werk/`, met een `index.mdx` en de beelden ernaast. De mapnaam wordt de URL: `src/content/werk/snellere-intake/` wordt `/werk/snellere-intake`.
+
+1. **Kopieer het sjabloon:** `src/content/werk/_sjabloon/` naar `src/content/werk/<korte-naam>/` (kleine letters, cijfers en streepjes).
+2. **Vul het bovenste blok in** (titel, klant, datum, samenvatting) en kies een `vorm`:
+   - `woorden`: de lijst toont een citaat;
+   - `beeld`: de lijst toont een foto;
+   - `cijfers`: de lijst toont één getal.
+3. **Schrijf het verhaal** eronder. Tussenkoppen (`##`) zijn conclusies, geen labels. Gebruik vrij de bouwstenen `<Beeld>`, `<Citaat>` en `<Cijfers>`/`<Cijfer>` uit het sjabloon.
+4. **Beelden:** zet ze in dezelfde map (bij voorkeur `.webp`, maximaal ±2000 px breed) en verwijs ernaar als `./foto.webp`. Geef elk beeld een `alt` die beschrijft wat er te zien is.
+5. **Laat `concept: true` staan**, maak een branch en open een PR. De Azure-preview toont concepten, de live site niet. Klopt er iets niet in het bovenste blok, dan faalt de build met een melding die zegt wat er mist.
+6. **Klaar?** Haal `concept: true` weg en merge. De lijst, de nummering (nieuwste bovenaan) en de sitemap werken zichzelf bij.
+
+Liever niet zelf? Vraag Claude Code: "voeg een verhaal toe over …"; deze stappen staan ook in `AGENTS.md`.
+
+---
+
 ## 📁 Project Structure
 
 ```

@@ -58,6 +58,13 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
 - Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
 
+### Success stories (`src/content/werk/`)
+- One folder per story: `index.mdx` plus its images. The folder name is the URL slug (lowercase, digits, hyphens). Folders starting with `_` are skipped; `_sjabloon/` is the template to copy.
+- The frontmatter is validated by `parseStory` in `src/lib/stories.ts`; its field names are Dutch (`titel`, `klant`, `datum`, `samenvatting`, `vorm`, `voorproef`, `concept`, …). Keep the template valid (a test checks it).
+- New stories start as `concept: true`: visible in `npm run dev` and PR previews, hidden on the live site. Publishing is removing that line.
+- Write stories in the brand voice: headings are conclusions, never labels; no invented numbers, quotes or clients. Anything not given yet stays a `[placeholder]` and the story stays a draft.
+- The step-by-step guide for people is in `README.md`, "Een verhaal toevoegen".
+
 ## 6. Delivery
 - Hosting: Azure Static Web Apps (`.github/workflows/azure-static-web-apps-*.yml`), deployed on push to `main`.
 - Security headers and routing live in `public/staticwebapp.config.json`. The CSP allows no inline scripts and no third-party origins; keep it that way. The prerender step fails the build if a page would contain an inline script.
