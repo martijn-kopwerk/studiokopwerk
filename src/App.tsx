@@ -1,14 +1,16 @@
-import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
 import { LazyMotion, MotionConfig } from 'motion/react';
+import { useLocation } from 'wouter';
 import { useTheme } from './hooks/useTheme';
+import { ContactContext } from './hooks/useContact';
+import { usePageChange } from './hooks/usePageChange';
 import { AbstractBackground } from './components/AbstractBackground';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
-import { Typography } from './components/ui/Typography';
-import { MagneticWrapper } from './components/ui/MagneticWrapper';
-import { CapsuleButton } from './components/ui/CapsuleButton';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { contactEmail, mailtoHref } from './lib/contact';
+import { siteUrl } from './lib/head';
+import { findRoute } from './routes';
 
 const loadMotionFeatures = () => import('./lib/motion-features').then((m) => m.default);
 
@@ -20,13 +22,21 @@ const openMail = () => {
   window.location.href = mailtoHref();
 };
 
+/**
+ * The frame that stays put while pages change: the drafting-table background, header, footer and contact card.
+ * Only the page inside it is swapped, so the background never redraws on navigation.
+ */
 export default function App() {
   const { resolvedTheme, toggleTheme } = useTheme();
+  const [location] = useLocation();
+  const route = findRoute(location);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isContactMounted, setIsContactMounted] = useState(false);
   // Set when the contact card can't load (offline, or a stale tab after a deploy).
   // The call to action then goes straight to the mail app instead of opening the card.
   const [isContactUnavailable, setIsContactUnavailable] = useState(false);
+
+  usePageChange(route.meta, siteUrl);
 
   const openContact = useCallback(() => {
     if (isContactUnavailable) {
@@ -41,6 +51,8 @@ export default function App() {
     // A failed preload is handled when the card is opened (see the ErrorBoundary below).
     loadContactCard().catch(() => {});
   }, []);
+
+  const contactActions = useMemo(() => ({ openContact, preloadContact }), [openContact, preloadContact]);
 
   const handleContactError = useCallback(() => {
     setIsContactUnavailable(true);
@@ -82,54 +94,12 @@ export default function App() {
         >
           <AbstractBackground theme={resolvedTheme} />
 
-          <Header resolvedTheme={resolvedTheme} onToggleTheme={toggleTheme} />
+          <Header onToggleTheme={toggleTheme} />
 
-          <main
-            id="hero-section"
-            className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 flex-1 flex flex-col items-center justify-center text-center my-auto"
-          >
-            <div className="w-full space-y-5 sm:space-y-6 md:space-y-8 flex flex-col items-center justify-center motion-safe:animate-rise [--rise-from:20px] [--rise-scale:0.96]">
-              <h1 id="hero-title" className="flex flex-col items-center gap-5 sm:gap-6 md:gap-8">
-                <Typography
-                  as="span"
-                  variant="eyebrow"
-                  className="block motion-safe:animate-rise [--rise-from:-10px] [animation-delay:100ms]"
-                >
-                  Studio
-                </Typography>
-                <Typography as="span" variant="h1" className="block">
-                  Kopwerk
-                </Typography>
-              </h1>
-
-              <Typography
-                variant="lead"
-                id="hero-tagline"
-                className="motion-safe:animate-rise [--rise-from:10px] [animation-delay:250ms]"
-              >
-                Zien wat <em className="italic font-normal">wérkt</em>.
-              </Typography>
-
-              <Typography
-                variant="subtext"
-                id="hero-mission"
-                className="max-w-[17rem] sm:max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
-              >
-                Wij helpen iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook.
-              </Typography>
-            </div>
-
-            <div
-              id="hero-contact-trigger-wrapper"
-              className="mt-10 sm:mt-14 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-6 sm:px-0 motion-safe:animate-rise [--rise-from:15px] [animation-delay:450ms]"
-            >
-              <MagneticWrapper>
-                <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact}>
-                  Daag ons uit
-                </CapsuleButton>
-              </MagneticWrapper>
-            </div>
-          </main>
+          <ContactContext.Provider value={contactActions}>
+            {/* Keyed by path so each page plays its entrance again */}
+            <route.Page key={route.meta.path} />
+          </ContactContext.Provider>
 
           <Footer />
           {isContactMounted && (

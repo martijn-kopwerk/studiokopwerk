@@ -46,7 +46,7 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
    npm run dev
    ```
 
-3. **Build for production:**
+3. **Build for production** (prerenders every page to static HTML in `dist/`):
    ```bash
    npm run build
    ```
@@ -54,6 +54,11 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 4. **Lint & Typecheck:**
    ```bash
    npm run lint
+   ```
+
+5. **Tests:**
+   ```bash
+   npm test
    ```
 
 ---
@@ -69,14 +74,19 @@ studio-kopwerk/
 │   │   ├── AbstractBackground.tsx
 │   │   ├── ContactCard.tsx
 │   │   └── ThemeToggle.tsx
-│   ├── hooks/            # Custom hooks (e.g. useTheme)
-│   ├── lib/              # Utility functions (cn), lazy Motion features
-│   ├── App.tsx           # Main application entry component
+│   ├── hooks/            # Custom hooks (e.g. useTheme, useContact)
+│   ├── lib/              # Utility functions (cn), head tags, contact details, lazy Motion features
+│   ├── pages/            # One component per page (Home, NotFound)
+│   ├── App.tsx           # The frame that stays put across pages
+│   ├── routes.tsx        # Every page: its path, head tags and component
+│   ├── entry-client.tsx  # Browser entry: hydrates the prerendered page
+│   ├── entry-server.tsx  # Renders a page to HTML at build time
 │   ├── index.css         # Design system CSS variables & Tailwind imports
-│   ├── main.tsx          # React application root
 │   └── types.ts          # TypeScript type definitions
+├── scripts/
+│   └── prerender.mjs     # Writes one HTML file per page, 404.html and sitemap.xml
 ├── public/
-│   ├── staticwebapp.config.json  # Azure SWA security headers & routing
+│   ├── staticwebapp.config.json  # Azure SWA security headers, 404 page & routing
 │   └── theme-init.js     # Applies the theme before first paint
 ├── AGENTS.md             # Codebase rules for AI agents
 ├── BRAND_GUIDE.md        # Brand source of truth
@@ -87,4 +97,4 @@ studio-kopwerk/
 
 ## 🚢 Deployment
 
-Every push to `main` runs the Azure Static Web Apps workflow: `npm ci`, `npm run lint` (strict typecheck), then build and deploy. Pull requests against `main` get a preview environment.
+Every push to `main` runs the Azure Static Web Apps workflow: `npm ci`, `npm run lint` (strict typecheck), `npm test`, then build (with prerender) and deploy. Pull requests against `main` get a preview environment.
