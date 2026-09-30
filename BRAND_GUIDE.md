@@ -58,7 +58,7 @@ When generating HTML, React, PDF, or SVG documents, embed this exact SVG:
 ### On the Website
 The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), with a slow pulse around its amber dot (off for reduced motion).
 
-**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow.
+**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) there is no room for the large K: the guides grow out of the header logo instead (its stem becomes the left margin line, mirrored on the right), and the logo's own dot is the only amber dot.
 
 **Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). The site follows the system by default; toggling back to the system's own theme forgets the manual choice.
 
