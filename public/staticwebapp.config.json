@@ -1,7 +1,9 @@
 {
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.{svg,png,ico,js,txt,json,xml}"]
+  "trailingSlash": "never",
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
   },
   "routes": [
     {
