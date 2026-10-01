@@ -4,7 +4,16 @@ import { ResolvedTheme, ThemeMode } from '../types';
 // Keep in sync with public/theme-init.js, which applies the theme before first paint.
 const STORAGE_KEY = 'kopwerk_theme_preference';
 
+// The build prerenders pages without a browser. The markup never depends on the theme
+// (the toggle switches icons with dark: classes), so server and client may start from different values.
+const isBrowser = typeof window !== 'undefined';
+
+function readSystemTheme(): ResolvedTheme {
+  return isBrowser && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 function readStoredMode(): ThemeMode {
+  if (!isBrowser) return 'system';
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === 'light' || saved === 'dark' || saved === 'system') {
@@ -19,9 +28,7 @@ function readStoredMode(): ThemeMode {
 export function useTheme() {
   const [themeMode, setThemeMode] = useState<ThemeMode>(readStoredMode);
 
-  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() =>
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(readSystemTheme);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

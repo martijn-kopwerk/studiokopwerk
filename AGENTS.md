@@ -51,7 +51,22 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Motion library:** Use `m.*` components (the app is wrapped in `LazyMotion` + `MotionConfig reducedMotion="user"`), never `motion.*`.
 - **Reduced motion:** Use `motion-safe:` / `motion-reduce:` variants for CSS, `useReducedMotion()` in React.
 
-## 5. Delivery
+## 5. Pages & prerendering
+- Every page is a concrete path in `src/routes.tsx` (its `meta` plus a component from `src/pages/`). `src/App.tsx` is the frame that stays put across pages (background, header, footer, contact card); only the page inside it changes.
+- `npm run build` prerenders each route to its own HTML file (`scripts/prerender.mjs`, via `src/entry-server.tsx`), plus `404.html` and `sitemap.xml`. The browser then hydrates it (`src/entry-client.tsx`).
+- Because pages are rendered without a browser first: never touch `window`, `document` or `localStorage` while rendering, only in effects or event handlers. Markup must not depend on client-only state such as the theme; use `dark:` variants instead.
+- Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
+- Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
+- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s; the dot ignores transforms so entrance animations don't throw it off.
+
+### Opdrachten (`src/content/werk/`)
+- `/werk` is deliberately small: one short card per opdracht (title, client, two or three sentences, at most one image, quote or number). No pages per opdracht.
+- One folder per opdracht: `index.md` (plain Markdown, no components) plus its image. Folders starting with `_` are skipped; `_sjabloon/` is the template to copy, and a test keeps it valid.
+- The fields are validated by `parseProject` in `src/lib/projects.ts`; their names are Dutch (`titel`, `klant`, `datum`, `beeld`/`alt`, `citaat`/`naam`/`rol`, `getal`/`label`, `concept`).
+- New opdrachten start as `concept: true`: visible in `npm run dev` and PR previews, hidden on the live site. Publishing is removing that line.
+- Write in the brand voice; never invent clients, quotes or numbers. Anything not given yet stays a `[placeholder]` and the opdracht stays a draft.
+
+## 6. Delivery
 - Hosting: Azure Static Web Apps (`.github/workflows/azure-static-web-apps-*.yml`), deployed on push to `main`.
-- Security headers and routing live in `public/staticwebapp.config.json`. The CSP allows no inline scripts and no third-party origins; keep it that way.
-- `npm run lint` (strict `tsc`) must pass; CI runs it before deploying.
+- Security headers and routing live in `public/staticwebapp.config.json`. The CSP allows no inline scripts and no third-party origins; keep it that way. The prerender step fails the build if a page would contain an inline script.
+- `npm run lint` (strict `tsc`) and `npm test` (Vitest) must pass; CI runs both before building and deploying.
