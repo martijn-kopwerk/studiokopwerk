@@ -1,7 +1,9 @@
 import type { ComponentType } from 'react';
 import type { PageMeta } from './lib/head';
+import { projects } from './lib/projects';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { Werk } from './pages/Werk';
 
 export interface PageRoute {
   meta: PageMeta;
@@ -17,6 +19,20 @@ export const routes: PageRoute[] = [
     meta: { path: '/', title: 'Studio Kopwerk · Zien wat wérkt', description: siteDescription },
     Page: Home,
   },
+  // /werk exists once there's an opdracht to show (drafts count in dev and previews only).
+  ...(projects.length > 0
+    ? [
+        {
+          meta: {
+            path: '/werk',
+            title: 'Wat wérkt · Studio Kopwerk',
+            description: 'Opdrachten uit de praktijk, kort verteld: de vraag, wat we maakten en wat het opleverde.',
+            noindex: projects.every((project) => project.draft),
+          },
+          Page: Werk,
+        },
+      ]
+    : []),
 ];
 
 export const notFoundRoute: PageRoute = {

@@ -3,6 +3,7 @@ import { LazyMotion, MotionConfig } from 'motion/react';
 import { useLocation } from 'wouter';
 import { useTheme } from './hooks/useTheme';
 import { ContactContext } from './hooks/useContact';
+import { AmberDotContext, type DotTarget } from './hooks/useAmberDot';
 import { usePageChange } from './hooks/usePageChange';
 import { AbstractBackground } from './components/AbstractBackground';
 import { Header } from './components/layout/Header';
@@ -35,6 +36,7 @@ export default function App() {
   // Set when the contact card can't load (offline, or a stale tab after a deploy).
   // The call to action then goes straight to the mail app instead of opening the card.
   const [isContactUnavailable, setIsContactUnavailable] = useState(false);
+  const [dotTarget, setDotTarget] = useState<DotTarget | null>(null);
 
   usePageChange(route.meta, siteUrl);
 
@@ -92,13 +94,15 @@ export default function App() {
           id="kopwerk-app-root"
           className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-slate-50 dark:bg-kopwerk-dark transition-colors duration-500 font-sans"
         >
-          <AbstractBackground theme={resolvedTheme} />
+          <AbstractBackground theme={resolvedTheme} dotTarget={dotTarget} />
 
           <Header onToggleTheme={toggleTheme} />
 
           <ContactContext.Provider value={contactActions}>
-            {/* Keyed by path so each page plays its entrance again */}
-            <route.Page key={route.meta.path} />
+            <AmberDotContext.Provider value={setDotTarget}>
+              {/* Keyed by path so each page plays its entrance again */}
+              <route.Page key={route.meta.path} />
+            </AmberDotContext.Provider>
           </ContactContext.Provider>
 
           <Footer />

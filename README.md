@@ -63,6 +63,26 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 
 ---
 
+## ✍️ Een opdracht toevoegen
+
+`/werk` toont per opdracht één korte kaart: een titel, de klant, twee of drie zinnen en eventueel één beeld, citaat of getal. Elke opdracht is een map in `src/content/werk/`.
+
+1. **Kopieer het sjabloon** `src/content/werk/_sjabloon/` naar `src/content/werk/<korte-naam>/` (kleine letters, cijfers en streepjes).
+2. **Vul bovenin in:** `titel` (wat het opleverde, in één zin), `klant`, `datum` en eventueel `sector`.
+3. **Kies hoogstens één extra**, of geen:
+   - `beeld` en `alt`: zet het bestand in dezelfde map, bij voorkeur `.webp` van maximaal ±2000 px breed;
+   - `citaat` en `naam` (en eventueel `rol`);
+   - `getal` en `label`.
+4. **Schrijf eronder** twee of drie zinnen: de vraag, wat we maakten, wat het opleverde.
+5. **Laat `concept: true` staan** en open een PR. De Azure-preview toont concepten, de live site niet. Klopt er iets niet, dan faalt de build met een melding die zegt wat er mist.
+6. **Klaar?** Haal `concept: true` weg en merge. De nieuwste opdracht komt bovenaan.
+
+`/werk` bestaat pas zodra er een gepubliceerde opdracht is. De drie mappen `voorbeeld-*` tonen elke variant in previews; verwijder ze zodra de eerste echte opdrachten er staan.
+
+Liever niet zelf? Vraag Claude Code: "voeg een opdracht toe over …".
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -76,7 +96,8 @@ studio-kopwerk/
 │   │   └── ThemeToggle.tsx
 │   ├── hooks/            # Custom hooks (e.g. useTheme, useContact)
 │   ├── lib/              # Utility functions (cn), head tags, contact details, lazy Motion features
-│   ├── pages/            # One component per page (Home, NotFound)
+│   ├── pages/            # One component per page (Home, Werk, NotFound)
+│   ├── content/werk/     # The opdrachten on /werk, one folder each (see "Een opdracht toevoegen")
 │   ├── App.tsx           # The frame that stays put across pages
 │   ├── routes.tsx        # Every page: its path, head tags and component
 │   ├── entry-client.tsx  # Browser entry: hydrates the prerendered page

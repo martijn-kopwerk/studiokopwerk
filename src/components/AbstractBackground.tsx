@@ -1,8 +1,26 @@
 import React, { useEffect, useRef } from 'react';
 import { ResolvedTheme } from '../types';
+import type { DotTarget } from '../hooks/useAmberDot';
 
 interface AbstractBackgroundProps {
   theme: ResolvedTheme;
+  // Where the amber dot should be; null sends it back to the K's vertex. Set through useAmberDot().
+  dotTarget: DotTarget | null;
+}
+
+// Clear of the header at the top and of the screen edge at the bottom, for a clamped dot.
+const DOT_CLAMP = { top: 96, bottom: 48 };
+
+// An element's centre in viewport coordinates, from its layout position: entrance animations
+// (transforms) are ignored, so the dot heads for where the element will come to rest.
+function layoutCenter(element: HTMLElement) {
+  let x = element.offsetWidth / 2;
+  let y = element.offsetHeight / 2;
+  for (let node: HTMLElement | null = element; node; node = node.offsetParent as HTMLElement | null) {
+    x += node.offsetLeft;
+    y += node.offsetTop;
+  }
+  return { x: x - window.scrollX, y: y - window.scrollY };
 }
 
 // Logo geometry in its own 120×120 units (see KopwerkLogo): the vertical stroke runs from
@@ -76,14 +94,19 @@ function computeLayout(width: number, height: number, logo?: Box): Layout {
  * The drafting table: hairlines draw the geometry of the Kopwerk K once on load,
  * the amber dot lands on the vertex, and a soft amber light follows the cursor.
  * After the intro nothing animates on the canvas; the dot pulse and the light are CSS.
+ * The table is fixed to the viewport and stays mounted across pages; pages can send the dot
+ * to an element of theirs (useAmberDot), such as the story under the cursor.
  */
-export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme }) => {
+export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme, dotTarget }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const dotRef = useRef<HTMLSpanElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
   const themeRef = useRef(theme);
+  const targetRef = useRef(dotTarget);
   // Redraws the finished drawing (used after the intro, on resize and on theme change).
   const redrawRef = useRef<() => void>(() => {});
+  // Moves the dot to its target or the vertex; `animate` glides it there, otherwise it jumps (scroll, resize).
+  const placeDotRef = useRef<(animate: boolean) => void>(() => {});
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -137,12 +160,28 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       }
     };
 
-    const placeDot = () => {
+    const placeDot = (animate: boolean) => {
       const dot = dotRef.current;
       if (!dot) return;
-      dot.hidden = !layout.showDot;
-      dot.style.left = `${layout.dotX}px`;
-      dot.style.top = `${layout.midY}px`;
+      const target = targetRef.current;
+      let x = layout.dotX;
+      let y = layout.midY;
+      if (target) {
+        ({ x, y } = layoutCenter(target.element));
+        if (target.clamp) y = Math.min(Math.max(y, DOT_CLAMP.top), window.innerHeight - DOT_CLAMP.bottom);
+      }
+      const visible = Boolean(target) || layout.showDot;
+      // A dot that was hidden appears in place rather than gliding in from its old spot.
+      const glide = animate && !dot.hidden && !reducedMotion.matches;
+      dot.hidden = !visible;
+      if (!glide) dot.style.transitionDuration = '0s';
+      dot.style.left = `${x}px`;
+      dot.style.top = `${y}px`;
+      if (!glide) {
+        requestAnimationFrame(() => {
+          dot.style.transitionDuration = '';
+        });
+      }
     };
 
     const resize = () => {
@@ -161,7 +200,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      placeDot();
+      placeDot(false);
       draw();
     };
 
@@ -175,7 +214,22 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     };
 
     redrawRef.current = draw;
+    placeDotRef.current = placeDot;
     resize();
+    // Web fonts can shift the page once they load; put the dot back on its target.
+    document.fonts?.ready.then(() => placeDot(false));
+
+    // A target scrolls with the page, so the dot follows it (without gliding).
+    let scrollPending = false;
+    const handleScroll = () => {
+      if (!targetRef.current || scrollPending) return;
+      scrollPending = true;
+      requestAnimationFrame(() => {
+        scrollPending = false;
+        placeDot(false);
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     const resizeObserver = new ResizeObserver(resize);
     if (canvas.parentElement) resizeObserver.observe(canvas.parentElement);
 
@@ -205,8 +259,10 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     return () => {
       cancelAnimationFrame(frameId);
       redrawRef.current = () => {};
+      placeDotRef.current = () => {};
       resizeObserver.disconnect();
       window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -215,25 +271,34 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     redrawRef.current();
   }, [theme]);
 
+  useEffect(() => {
+    targetRef.current = dotTarget;
+    placeDotRef.current(true);
+  }, [dotTarget]);
+
   return (
-    <div
-      id="abstract-background-container"
-      className="absolute inset-0 pointer-events-none overflow-hidden z-0"
-      aria-hidden="true"
-    >
+    <>
       <div
-        ref={glowRef}
-        className="kopwerk-glow absolute left-0 top-0 transition-[translate] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
-      />
-      <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
-      {/* The amber dot lands on the K's vertex, then pulses like the logo */}
+        id="abstract-background-container"
+        className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+        aria-hidden="true"
+      >
+        <div
+          ref={glowRef}
+          className="kopwerk-glow absolute left-0 top-0 transition-[translate] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
+        />
+        <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
+      </div>
+      {/* The amber dot lands on the K's vertex, then pulses like the logo; pages can send it elsewhere.
+          It sits above the page (below the header) so it can rest on a page's own markers; those are always in a margin. */}
       <span
         ref={dotRef}
-        className="absolute -translate-x-1/2 -translate-y-1/2 size-3.5 motion-safe:animate-dot-land"
+        aria-hidden="true"
+        className="fixed z-20 pointer-events-none -translate-x-1/2 -translate-y-1/2 size-3.5 transition-[left,top] duration-500 ease-kopwerk motion-reduce:transition-none motion-safe:animate-dot-land"
       >
         <span className="absolute inset-0 rounded-full bg-amber-500/60 opacity-0 [--pulse-scale:2.8] motion-safe:animate-pulse-ring motion-safe:[animation-delay:2.7s]" />
         <span className="absolute inset-0 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.5)]" />
       </span>
-    </div>
+    </>
   );
 });

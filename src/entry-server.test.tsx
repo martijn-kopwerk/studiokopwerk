@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from './entry-server';
 import { renderHead } from './lib/head';
+import { projects } from './lib/projects';
 import { findRoute, normalizePath } from './routes';
 
 describe('prerendering', () => {
@@ -23,6 +24,28 @@ describe('prerendering', () => {
     const { html } = render('/');
     expect(html).toContain('Schakel naar donkere weergave');
     expect(html).toContain('Schakel naar lichte weergave');
+  });
+});
+
+describe('werk', () => {
+  // Tests run in dev mode, so drafts count: with only the example opdrachten this still covers the page.
+  it.skipIf(projects.length === 0)('renders every opdracht, with the first one beside the list', () => {
+    const { html, head } = render('/werk');
+    expect(html).toContain('Wat wérkt');
+    for (const project of projects) {
+      expect(html).toContain(`id="opdracht-${project.slug}"`);
+    }
+    expect(html).toMatch(/role="tabpanel"[^>]*aria-labelledby="opdracht-/);
+    expect(head).toContain('<title>Wat wérkt · Studio Kopwerk</title>');
+  });
+
+  it.skipIf(projects.length === 0)('keeps a page of drafts out of search results', () => {
+    const { head } = render('/werk');
+    if (projects.every((project) => project.draft)) {
+      expect(head).toContain('<meta name="robots" content="noindex" />');
+    } else {
+      expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/werk" />');
+    }
   });
 });
 

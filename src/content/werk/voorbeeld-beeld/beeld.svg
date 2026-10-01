@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200">
+  <rect width="1600" height="1200" fill="#0f172a"/>
+  <g fill="none" stroke="#e2e8f0" stroke-opacity="0.08" stroke-width="2">
+    <line x1="160" y1="0" x2="160" y2="1200"/>
+    <line x1="0" y1="648" x2="1600" y2="648"/>
+    <line x1="291" y1="648" x2="1600" y2="-322"/>
+    <line x1="291" y1="648" x2="1600" y2="1618"/>
+    <line x1="1000" y1="0" x2="1000" y2="1200"/>
+  </g>
+  <circle cx="258" cy="648" r="14" fill="#f59e0b"/>
+  <text x="800" y="1110" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="30" font-weight="600" letter-spacing="6" text-anchor="middle">[BEELD • VERVANG DOOR EEN EIGEN FOTO]</text>
+</svg>
