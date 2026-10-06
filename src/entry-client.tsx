@@ -17,7 +17,8 @@ const app = (
 );
 
 // Built pages arrive prerendered and are hydrated; the dev server serves an empty shell and renders from scratch.
-if (container.hasChildNodes()) {
+// The shell still holds the `<!--app-html-->` placeholder comment, so check for an element rather than any child node.
+if (container.firstElementChild) {
   hydrateRoot(container, app);
 } else {
   createRoot(container).render(app);
