@@ -1,89 +1,58 @@
 import React, { useEffect, useRef } from 'react';
 import { ResolvedTheme } from '../types';
+import type { DotTarget } from '../hooks/useAmberDot';
+import { ARM_SLOPE, LINES, computeLayout, ease } from '../lib/tekentafel';
 
 interface AbstractBackgroundProps {
   theme: ResolvedTheme;
+  // Where the amber dot should be; null sends it back to the K's vertex. Set through useAmberDot().
+  dotTarget: DotTarget | null;
+  // The current page's path: on phones a page can place the vertex (data-tekentafel-vertex), so it is measured again.
+  page: string;
 }
 
-// Logo geometry in its own 120×120 units (see KopwerkLogo): the vertical stroke runs from
-// y=20 to y=100 at x=30, the diagonals meet at the vertex (40, 60) and end at x=94,
-// and the amber dot sits at (37, 60).
-const K = { stemX: 30, vertexX: 40, dotX: 37, armX: 94, top: 20, bottom: 100, mid: 60 };
+// Clear of the header at the top and of the screen edge at the bottom, for a clamped dot.
+const DOT_CLAMP = { top: 96, bottom: 48 };
+
+// An element's centre in viewport coordinates, from its layout position: entrance animations
+// (transforms) are ignored, so the dot heads for where the element will come to rest.
+function layoutCenter(element: HTMLElement) {
+  let x = element.offsetWidth / 2;
+  let y = element.offsetHeight / 2;
+  for (let node: HTMLElement | null = element; node; node = node.offsetParent as HTMLElement | null) {
+    x += node.offsetLeft;
+    y += node.offsetTop;
+  }
+  return { x: x - window.scrollX, y: y - window.scrollY };
+}
+
+// The y a page asks for the K's vertex, as if scrolled to the top (the drawing is fixed to the viewport).
+function vertexAnchorY() {
+  const anchor = document.querySelector<HTMLElement>('[data-tekentafel-vertex]');
+  return anchor ? layoutCenter(anchor).y + window.scrollY : undefined;
+}
 
 const INTRO_SECONDS = 2.6;
-
-// Brand curve cubic-bezier(0.19, 1, 0.22, 1), approximated with an ease-out quart.
-const ease = (x: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 4);
-
-const ARM_SLOPE = (K.mid - K.top) / (K.armX - K.vertexX);
-
-interface Layout {
-  width: number;
-  height: number;
-  stemX: number;
-  vertexX: number;
-  midY: number;
-  // x of the vertical guide through the arm ends
-  armX: number;
-  // Half-height of the large K; 0 when only the guides are drawn
-  armDY: number;
-  dotX: number;
-  showDot: boolean;
-}
-
-interface Box {
-  left: number;
-  top: number;
-  width: number;
-}
-
-function computeLayout(width: number, height: number, logo?: Box): Layout {
-  if (width < 640 && logo) {
-    // Phones: there's no room for a large K, so the guides grow out of the header logo itself.
-    // Its own amber dot is the vertex; the arm guide mirrors the stem as a right-hand margin.
-    const unit = logo.width / 120;
-    const stemX = logo.left + K.stemX * unit;
-    return {
-      width,
-      height,
-      stemX,
-      vertexX: logo.left + K.vertexX * unit,
-      midY: logo.top + K.mid * unit,
-      armX: width - stemX,
-      armDY: 0,
-      dotX: 0,
-      showDot: false,
-    };
-  }
-
-  // Wider screens: the K is drawn large and faint, a little left of centre so it never competes with the wordmark.
-  const scale = Math.min(height * 1.05, width * 1.1) / (K.bottom - K.top);
-  const stemX = width * 0.1;
-  return {
-    width,
-    height,
-    stemX,
-    vertexX: stemX + (K.vertexX - K.stemX) * scale,
-    midY: height * 0.54,
-    armX: stemX + (K.armX - K.stemX) * scale,
-    armDY: (K.mid - K.top) * scale,
-    dotX: stemX + (K.dotX - K.stemX) * scale,
-    showDot: true,
-  };
-}
 
 /**
  * The drafting table: hairlines draw the geometry of the Kopwerk K once on load,
  * the amber dot lands on the vertex, and a soft amber light follows the cursor.
  * After the intro nothing animates on the canvas; the dot pulse and the light are CSS.
+ * The table is fixed to the viewport and stays mounted across pages; pages can send the dot
+ * to an element of theirs (useAmberDot), such as the story under the cursor.
  */
-export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme }) => {
+export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme, dotTarget, page }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const dotRef = useRef<HTMLSpanElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
   const themeRef = useRef(theme);
+  const targetRef = useRef(dotTarget);
   // Redraws the finished drawing (used after the intro, on resize and on theme change).
   const redrawRef = useRef<() => void>(() => {});
+  // Measures the page again and redraws (page change, fonts loaded).
+  const relayoutRef = useRef<() => void>(() => {});
+  // Moves the dot to its target or the vertex; `animate` glides it there, otherwise it jumps (scroll, resize).
+  const placeDotRef = useRef<(animate: boolean) => void>(() => {});
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -97,9 +66,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     let start = 0;
 
     const draw = () => {
-      const { width, height, stemX, vertexX, midY, armX, armDY } = layout;
-      const isDark = themeRef.current === 'dark';
-      const ink = isDark ? '226, 232, 240' : '51, 65, 85';
+      const { width, height, stemX, vertexX, midY, armX, armDY, phone } = layout;
+      const lines = themeRef.current === 'dark' ? LINES.dark : LINES.light;
       const t = progress;
 
       ctx.clearRect(0, 0, width, height);
@@ -116,8 +84,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       };
 
       // Construction lines: full-bleed guides through the K's stem, vertex and arm ends.
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = `rgba(${ink}, ${isDark ? 0.055 : 0.05})`;
+      ctx.lineWidth = LINES.guideWidth;
+      ctx.strokeStyle = `rgba(${lines.ink}, ${phone ? lines.phoneGuide : lines.guide})`;
       segment(stemX, 0, stemX, height, ease(t / 1.3));
       segment(0, midY, width, midY, ease((t - 0.2) / 1.4));
       segment(vertexX, midY, vertexX + far, midY - far * slope, ease((t - 0.45) / 1.5));
@@ -126,23 +94,35 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       segment(vertexX, midY, vertexX - far, midY - far * slope, ease((t - 0.6) / 1.5));
       segment(armX, 0, armX, height, ease((t - 0.8) / 1.4));
 
-      // The K itself, a touch stronger (wider screens only).
-      if (armDY > 0) {
-        const k = ease((t - 1) / 1.3);
-        ctx.lineWidth = 1.25;
-        ctx.strokeStyle = `rgba(${ink}, ${isDark ? 0.13 : 0.11})`;
-        segment(stemX, midY - armDY, stemX, midY + armDY, k);
-        segment(vertexX, midY, armX, midY - armDY, k);
-        segment(vertexX, midY, armX, midY + armDY, k);
-      }
+      // The K itself, a touch stronger.
+      const k = ease((t - 1) / 1.3);
+      ctx.lineWidth = LINES.kWidth;
+      ctx.strokeStyle = `rgba(${lines.ink}, ${phone ? lines.phoneK : lines.k})`;
+      segment(stemX, midY - armDY, stemX, midY + armDY, k);
+      segment(vertexX, midY, armX, midY - armDY, k);
+      segment(vertexX, midY, armX, midY + armDY, k);
     };
 
-    const placeDot = () => {
+    const placeDot = (animate: boolean) => {
       const dot = dotRef.current;
       if (!dot) return;
-      dot.hidden = !layout.showDot;
-      dot.style.left = `${layout.dotX}px`;
-      dot.style.top = `${layout.midY}px`;
+      // A target from the page that just left is no longer in the document.
+      const target = targetRef.current?.element.isConnected ? targetRef.current : null;
+      let x = layout.dotX;
+      let y = layout.midY;
+      if (target) {
+        ({ x, y } = layoutCenter(target.element));
+        if (target.clamp) y = Math.min(Math.max(y, DOT_CLAMP.top), window.innerHeight - DOT_CLAMP.bottom);
+      }
+      const glide = animate && !reducedMotion.matches;
+      if (!glide) dot.style.transitionDuration = '0s';
+      dot.style.left = `${x}px`;
+      dot.style.top = `${y}px`;
+      if (!glide) {
+        requestAnimationFrame(() => {
+          dot.style.transitionDuration = '';
+        });
+      }
     };
 
     const resize = () => {
@@ -154,14 +134,15 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       layout = computeLayout(
         rect.width,
         rect.height,
-        logo && { left: logo.left - rect.left, top: logo.top - rect.top, width: logo.width }
+        logo && { left: logo.left - rect.left, top: logo.top - rect.top, width: logo.width },
+        vertexAnchorY()
       );
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      placeDot();
+      placeDot(false);
       draw();
     };
 
@@ -175,7 +156,23 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     };
 
     redrawRef.current = draw;
+    relayoutRef.current = resize;
+    placeDotRef.current = placeDot;
     resize();
+    // Web fonts can shift the page once they load; measure the vertex again and put the dot back on its target.
+    document.fonts?.ready.then(() => relayoutRef.current());
+
+    // A target scrolls with the page, so the dot follows it (without gliding).
+    let scrollPending = false;
+    const handleScroll = () => {
+      if (!targetRef.current || scrollPending) return;
+      scrollPending = true;
+      requestAnimationFrame(() => {
+        scrollPending = false;
+        placeDot(false);
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     const resizeObserver = new ResizeObserver(resize);
     if (canvas.parentElement) resizeObserver.observe(canvas.parentElement);
 
@@ -205,8 +202,11 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     return () => {
       cancelAnimationFrame(frameId);
       redrawRef.current = () => {};
+      relayoutRef.current = () => {};
+      placeDotRef.current = () => {};
       resizeObserver.disconnect();
       window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -215,25 +215,39 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     redrawRef.current();
   }, [theme]);
 
+  // A new page may place the vertex elsewhere.
+  useEffect(() => {
+    relayoutRef.current();
+  }, [page]);
+
+  useEffect(() => {
+    targetRef.current = dotTarget;
+    placeDotRef.current(true);
+  }, [dotTarget]);
+
   return (
-    <div
-      id="abstract-background-container"
-      className="absolute inset-0 pointer-events-none overflow-hidden z-0"
-      aria-hidden="true"
-    >
+    <>
       <div
-        ref={glowRef}
-        className="kopwerk-glow absolute left-0 top-0 transition-[translate] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
-      />
-      <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
-      {/* The amber dot lands on the K's vertex, then pulses like the logo */}
+        id="abstract-background-container"
+        className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+        aria-hidden="true"
+      >
+        <div
+          ref={glowRef}
+          className="kopwerk-glow absolute left-0 top-0 transition-[translate] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
+        />
+        <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
+      </div>
+      {/* The amber dot lands on the K's vertex, then pulses like the logo; pages can send it elsewhere.
+          It sits above the page (below the header) so it can rest on a page's own markers; those are always in a margin. */}
       <span
         ref={dotRef}
-        className="absolute -translate-x-1/2 -translate-y-1/2 size-3.5 motion-safe:animate-dot-land"
+        aria-hidden="true"
+        className="fixed z-20 pointer-events-none -translate-x-1/2 -translate-y-1/2 size-3.5 transition-[left,top] duration-500 ease-kopwerk motion-reduce:transition-none motion-safe:animate-dot-land"
       >
         <span className="absolute inset-0 rounded-full bg-amber-500/60 opacity-0 [--pulse-scale:2.8] motion-safe:animate-pulse-ring motion-safe:[animation-delay:2.7s]" />
         <span className="absolute inset-0 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.5)]" />
       </span>
-    </div>
+    </>
   );
 });

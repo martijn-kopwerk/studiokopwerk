@@ -32,8 +32,14 @@ jobs:
         run: npm ci
       - name: Typecheck
         run: npm run lint
+      - name: Test
+        run: npm test
       - name: Build
+        # Also prerenders every page to static HTML and fails on a page the CSP would break
         run: npm run build
+        env:
+          # Stories marked `concept: true` show in pull request previews, never on the live site.
+          VITE_TOON_CONCEPTEN: ${{ github.event_name == 'pull_request' }}
       - name: Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
