@@ -11,8 +11,8 @@ const WIDE = '(min-width: 1024px)';
 
 /**
  * Opdrachten, one short card each. Wide screens: a list of titles with the chosen opdracht beside it (tabs);
- * the amber dot marks the one under the cursor or keyboard focus. Phones: every card in full, one below the other;
- * the dot marks the card passing through the middle of the screen.
+ * the amber dot marks the one under the cursor or keyboard focus. Phones: every card in full, one below the other, right of the K's stem;
+ * the dot rides the stem and marks the card passing through the middle of the screen.
  */
 export function Werk() {
   const { openContact, preloadContact } = useContact();
@@ -61,7 +61,7 @@ export function Werk() {
   };
 
   return (
-    <main className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-20 sm:pb-28 motion-safe:animate-rise [--rise-from:16px]">
+    <main className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-20 sm:pb-28 motion-safe:animate-rise [--rise-from:16px]">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] lg:gap-x-16 lg:items-end">
         <div className="flex flex-col gap-4 sm:gap-5">
           <Typography variant="eyebrow">Werk</Typography>
@@ -162,14 +162,14 @@ export function Werk() {
               cards.current[index] = el;
             }}
             data-index={index}
-            className="relative flex flex-col gap-5 py-8 pl-10 sm:pl-14 border-t border-slate-200 dark:border-slate-800"
+            className="relative flex flex-col gap-5 py-8 sm:pl-14 border-t border-slate-200 dark:border-slate-800"
           >
             <span
               ref={(el) => {
                 cardMarkers.current[index] = el;
               }}
               aria-hidden="true"
-              className="absolute left-2 sm:left-4 top-[2.55rem] size-3.5"
+              className="absolute -left-8 sm:left-4 top-[2.55rem] size-3.5"
             />
             <div className="flex items-baseline gap-5 sm:gap-8">
               <span className="shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">
@@ -189,7 +189,7 @@ export function Werk() {
         ))}
       </ol>
 
-      <section className="mt-20 sm:mt-28 flex flex-col sm:flex-row sm:items-center justify-between gap-8 pl-10 sm:pl-14">
+      <section className="mt-20 sm:mt-28 flex flex-col sm:flex-row sm:items-center justify-between gap-8 sm:pl-14">
         <Typography variant="lead" as="p">
           Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
         </Typography>

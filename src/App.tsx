@@ -94,7 +94,7 @@ export default function App() {
           id="kopwerk-app-root"
           className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-slate-50 dark:bg-kopwerk-dark transition-colors duration-500 font-sans"
         >
-          <AbstractBackground theme={resolvedTheme} dotTarget={dotTarget} />
+          <AbstractBackground theme={resolvedTheme} dotTarget={dotTarget} page={route.meta.path} />
 
           <Header onToggleTheme={toggleTheme} />
 

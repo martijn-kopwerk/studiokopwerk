@@ -58,7 +58,7 @@ When generating HTML, React, PDF, or SVG documents, embed this exact SVG:
 ### On the Website
 The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), with a slow pulse around its amber dot (off for reduced motion).
 
-**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) there is no room for the large K: the guides grow out of the header logo instead (its stem becomes the left margin line, mirrored on the right), and the logo's own dot is the only amber dot.
+**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) the K is drawn cropped: its stem continues the header logo's stem, the arms run off the right edge and the content stands left-aligned beside the stem. The full rules are in §5F.
 
 **Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). The site follows the system by default; toggling back to the system's own theme forgets the manual choice.
 
@@ -212,6 +212,24 @@ In the website codebase this is the `<CapsuleButton>` component. Don't rebuild i
   </span>
 </a>
 ```
+
+### F. De tekentafel (drafting-table background)
+The signature backdrop: the construction drawing of the K, as if the page were still on the drafting table. On the website it is `<AbstractBackground>`; its geometry and line values live in `src/lib/tekentafel.ts` and are the source for every other use.
+
+* **Geometry:** the K from the logo (120×120 units: stem at x=30 from y=20 to y=100, vertex at (40, 60), arm ends at x=94, dot at (37, 60)), drawn large. Full-bleed guides run through the stem, the horizontal through the vertex, both arm angles extended in both directions, and the vertical through the arm ends.
+* **Lines:** guides 1px, the K itself 1.25px, in slate ink at very low opacity:
+
+  | | Ink | Guides | K | Guides (phone) | K (phone) |
+  | :--- | :--- | :--- | :--- | :--- | :--- |
+  | Light | `rgb(51 65 85)` (slate-700) | 0.05 | 0.11 | 0.07 | 0.15 |
+  | Dark | `rgb(226 232 240)` (slate-200) | 0.055 | 0.13 | 0.075 | 0.17 |
+
+* **Layers, back to front:** the ambient amber glow, the drawing, the content, then the amber dot on the vertex (the only amber in the drawing).
+* **Wide screens (640px and up):** the K is about as tall as the screen, its stem at 10% of the width, left of centre, so it never competes with the wordmark.
+* **Phones (under 640px):** the K is drawn cropped. Its stem continues the header logo's stem as one line, the arms run off the right edge, and the content stands left-aligned just right of the stem. A page gives the vertex a place with an empty, `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks (on the home page: between the mission line and the button); without one the vertex sits at 60% of the height. Pages that move the dot (`/werk`) put their markers on the stem line.
+* **The dot never sits on text:** only in a margin, on the stem, or in a gap left for it.
+* **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
+* **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 
 ---
 

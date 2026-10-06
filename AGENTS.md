@@ -58,6 +58,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
 - Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
 - The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s; the dot ignores transforms so entrance animations don't throw it off.
+- On phones (under 640px) the K is drawn cropped, its stem continuing the header logo's stem (x ≈ 31px), and page content starts right of it (`pl-14 sm:px-…`). A page places the K's vertex with an empty `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks. Geometry and line values: `src/lib/tekentafel.ts`; rules: `BRAND_GUIDE.md` §5F.
 
 ### Opdrachten (`src/content/werk/`)
 - `/werk` is deliberately small: one short card per opdracht (title, client, two or three sentences, at most one image, quote or number). No pages per opdracht.
