@@ -77,7 +77,7 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 5. **Laat `concept: true` staan** en open een PR. De Azure-preview toont concepten, de live site niet. Klopt er iets niet, dan faalt de build met een melding die zegt wat er mist.
 6. **Klaar?** Haal `concept: true` weg en merge. De nieuwste opdracht komt bovenaan.
 
-`/werk` bestaat pas zodra er een gepubliceerde opdracht is. De drie mappen `voorbeeld-*` tonen elke variant in previews; verwijder ze zodra de eerste echte opdrachten er staan.
+Zolang er geen opdracht is, bestaat `/werk` niet: geen pagina, geen regel in de sitemap, en de URL geeft een 404. Een concept maakt de pagina alleen zichtbaar in de PR-preview; op de live site verschijnt hij pas bij de eerste gepubliceerde opdracht.
 
 Liever niet zelf? Vraag Claude Code: "voeg een opdracht toe over …".
 

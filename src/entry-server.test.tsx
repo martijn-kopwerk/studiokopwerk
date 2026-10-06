@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { render } from './entry-server';
 import { renderHead } from './lib/head';
-import { projects } from './lib/projects';
-import { findRoute, normalizePath } from './routes';
+import { projects, type Project } from './lib/projects';
+import { buildRoutes, findRoute, normalizePath } from './routes';
 
 describe('prerendering', () => {
   it('renders home with its heading, call to action and own head tags', () => {
@@ -28,7 +28,35 @@ describe('prerendering', () => {
 });
 
 describe('werk', () => {
-  // Tests run in dev mode, so drafts count: with only the example opdrachten this still covers the page.
+  const opdracht = (draft: boolean): Project => ({
+    slug: 'x',
+    number: '01',
+    title: 't',
+    client: 'k',
+    date: '2026-01-01',
+    draft,
+    Text: () => null,
+  });
+
+  it('does not exist without opdrachten: no page, so no sitemap entry', () => {
+    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/']);
+  });
+
+  it('exists with only drafts (dev and previews), kept out of search results', () => {
+    const werk = buildRoutes([opdracht(true)]).find((route) => route.meta.path === '/werk');
+    expect(werk?.meta.noindex).toBe(true);
+  });
+
+  it('exists once an opdracht is published', () => {
+    const werk = buildRoutes([opdracht(false)]).find((route) => route.meta.path === '/werk');
+    expect(werk?.meta.noindex).toBe(false);
+  });
+
+  it.runIf(projects.length === 0)('renders /werk as the 404 page while there are none', () => {
+    expect(render('/werk').html).toContain('Hier is niets');
+  });
+
+  // Tests run in dev mode, so drafts count too.
   it.skipIf(projects.length === 0)('renders every opdracht, with the first one beside the list', () => {
     const { html, head } = render('/werk');
     expect(html).toContain('Wat wérkt');
