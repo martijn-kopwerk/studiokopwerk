@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Check, Copy, ArrowUpRight } from 'lucide-react';
-import { Typography } from './ui/Typography';
 import { RollingText } from './ui/RollingText';
 import { contactEmail, mailtoHref } from '../lib/contact';
 import {
@@ -118,7 +117,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           </button>
 
           {/* Mailto link */}
-          <div className="w-full pt-4 flex flex-col items-start gap-3">
+          <div className="w-full pt-4 flex flex-col items-start">
             <a
               href={mailtoHref(email)}
               className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white outline-none rounded-md focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
@@ -128,9 +127,6 @@ export const ContactCard: React.FC<ContactCardProps> = ({
               </RollingText>
               <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
             </a>
-            <Typography variant="subtext" className="tracking-wide-sm text-pretty">
-              Je hoort binnen twee werkdagen van ons.
-            </Typography>
           </div>
 
         </div>
