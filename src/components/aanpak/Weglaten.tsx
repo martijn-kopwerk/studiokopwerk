@@ -2,21 +2,20 @@ import { useState } from 'react';
 import { RollingText } from '../ui/RollingText';
 import { cn } from '../../lib/utils';
 
-const extras = ['Meer tools.', 'Meer schermen.', 'Meer stappen.'];
 // One after the other, so the strike reads as a single gesture.
-const delays = ['', '[transition-delay:90ms]', '[transition-delay:180ms]'];
+const delays = ['', '[transition-delay:90ms]', '[transition-delay:180ms]', '[transition-delay:270ms]'];
 
 /**
  * The vision, done rather than told: what piles up is struck through with one click, and can come back.
  * The lines stay in place and readable; screen readers hear them as left out.
  */
-export function Weglaten() {
+export function Weglaten({ items }: { items: string[] }) {
   const [weg, setWeg] = useState(false);
 
   return (
     <div className="flex flex-col gap-6">
       <ul className="flex flex-col gap-1">
-        {extras.map((extra, index) => (
+        {items.map((extra, index) => (
           <li key={extra}>
             <span
               className={cn(

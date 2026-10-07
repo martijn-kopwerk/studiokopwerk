@@ -13,6 +13,8 @@ interface AbstractBackgroundProps {
 
 // Clear of the header at the top and of the screen edge at the bottom, for a clamped dot.
 const DOT_CLAMP = { top: 96, bottom: 48 };
+// How long the dot takes to fade out before it reappears somewhere off the reading line (matches duration-300).
+const DOT_FADE_MS = 300;
 
 // An element's centre in viewport coordinates, from its layout position: entrance animations
 // (transforms) are ignored, so the dot heads for where the element will come to rest.
@@ -44,6 +46,8 @@ const INTRO_SECONDS = 2.6;
 export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(({ theme, dotTarget, page }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const dotRef = useRef<HTMLSpanElement | null>(null);
+  // Fades the dot out and in when it moves off the reading line, instead of sliding across the page.
+  const fadeRef = useRef<HTMLSpanElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
   const themeRef = useRef(theme);
   const targetRef = useRef(dotTarget);
@@ -103,26 +107,51 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       segment(vertexX, midY, armX, midY + armDY, k);
     };
 
-    const placeDot = (animate: boolean) => {
-      const dot = dotRef.current;
-      if (!dot) return;
+    // Where the dot belongs now: its target's centre (kept on screen when clamped), or the K's vertex.
+    const dotPoint = () => {
       // A target from the page that just left is no longer in the document.
       const target = targetRef.current?.element.isConnected ? targetRef.current : null;
-      let x = layout.dotX;
-      let y = layout.midY;
-      if (target) {
-        ({ x, y } = layoutCenter(target.element));
-        if (target.clamp) y = Math.min(Math.max(y, DOT_CLAMP.top), window.innerHeight - DOT_CLAMP.bottom);
-      }
-      const glide = animate && !reducedMotion.matches;
-      if (!glide) dot.style.transitionDuration = '0s';
-      dot.style.left = `${x}px`;
-      dot.style.top = `${y}px`;
-      if (!glide) {
+      if (!target) return { x: layout.dotX, y: layout.midY };
+      const point = layoutCenter(target.element);
+      if (target.clamp) point.y = Math.min(Math.max(point.y, DOT_CLAMP.top), window.innerHeight - DOT_CLAMP.bottom);
+      return point;
+    };
+
+    let fadeTimer = 0;
+    const placeDot = (animate: boolean) => {
+      const dot = dotRef.current;
+      const fade = fadeRef.current;
+      if (!dot || !fade) return;
+      const { x, y } = dotPoint();
+      const fromX = parseFloat(dot.style.left);
+
+      const jump = (to: { x: number; y: number }) => {
+        dot.style.transitionDuration = '0s';
+        dot.style.left = `${to.x}px`;
+        dot.style.top = `${to.y}px`;
         requestAnimationFrame(() => {
           dot.style.transitionDuration = '';
         });
+      };
+
+      window.clearTimeout(fadeTimer);
+      fade.style.opacity = '';
+      if (!animate || reducedMotion.matches || Number.isNaN(fromX)) {
+        jump({ x, y });
+        return;
       }
+      // Along the reading line (same x: the margin, or the K's stem on phones) it glides.
+      if (Math.abs(fromX - x) <= 2) {
+        dot.style.left = `${x}px`;
+        dot.style.top = `${y}px`;
+        return;
+      }
+      // Anywhere else it would slide across text and buttons, so it fades out and reappears at its new place.
+      fade.style.opacity = '0';
+      fadeTimer = window.setTimeout(() => {
+        jump(dotPoint());
+        fade.style.opacity = '';
+      }, DOT_FADE_MS);
     };
 
     const resize = () => {
@@ -201,6 +230,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
 
     return () => {
       cancelAnimationFrame(frameId);
+      window.clearTimeout(fadeTimer);
       redrawRef.current = () => {};
       relayoutRef.current = () => {};
       placeDotRef.current = () => {};
@@ -245,8 +275,10 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
         aria-hidden="true"
         className="fixed z-20 pointer-events-none -translate-x-1/2 -translate-y-1/2 size-3.5 transition-[left,top] duration-500 ease-kopwerk motion-reduce:transition-none motion-safe:animate-dot-land"
       >
-        <span className="absolute inset-0 rounded-full bg-amber-500/60 opacity-0 [--pulse-scale:2.8] motion-safe:animate-pulse-ring motion-safe:[animation-delay:2.7s]" />
-        <span className="absolute inset-0 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.5)]" />
+        <span ref={fadeRef} className="absolute inset-0 transition-opacity duration-300 ease-kopwerk motion-reduce:transition-none">
+          <span className="absolute inset-0 rounded-full bg-amber-500/60 opacity-0 [--pulse-scale:2.8] motion-safe:animate-pulse-ring motion-safe:[animation-delay:2.7s]" />
+          <span className="absolute inset-0 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.5)]" />
+        </span>
       </span>
     </>
   );

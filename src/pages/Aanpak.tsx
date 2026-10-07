@@ -11,7 +11,7 @@ import { projects } from '../lib/projects';
 import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { visie: 0, missie: 1, werkwijze: 2, stap: 3, einde: 6 } as const;
+const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
@@ -27,8 +27,8 @@ const hairline = 'border-slate-200 dark:border-slate-800';
 
 /**
  * Hoe Studio Kopwerk werkt, as a short walk: visie, missie, werkwijze. Whitespace separates the chapters; hairlines
- * only separate rows within a list. The amber dot keeps pace with the reader, from chapter to chapter and down the
- * three steps of "AI maakt, jij beslist", ending beside the call to action. It reads the same without the dot.
+ * only separate rows within a list. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
+ * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
  */
 export function Aanpak() {
   const { openContact, preloadContact } = useContact();
@@ -111,21 +111,40 @@ export function Aanpak() {
       {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
       <div data-tekentafel-vertex aria-hidden="true" className="h-28 sm:h-12 shrink-0" />
 
-      <Chapter id="visie" number="01" label="Visie" title="Meer is niet vanzelf beter" zoneRef={zone(STOP.visie)} markerRef={stop(STOP.visie)}>
+      <Chapter
+        id="visie"
+        number="01"
+        label="Visie"
+        title="Pas goed als het voor mensen beter wordt"
+        zoneRef={zone(STOP.visie)}
+        markerRef={stop(STOP.visie)}
+      >
         <p>
           Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een prototype: met AI staat het er in een
           middag.
         </p>
-        <p>Toch wordt het daar niet vanzelf beter van. Vaak komt er vooral méér bij:</p>
-        <div className="py-4">
-          <Weglaten />
-        </div>
         <p>
-          Het echte werk zit in zien wat ertoe doet, en de rest durven weglaten. Dat zie je het snelst door het te maken.
+          Toch wordt het daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken.
+        </p>
+        <div className="py-2">
+          <Weglaten items={['Meer schermen.', 'Meer stappen.']} />
+        </div>
+        <p>Mensen passen zich aan de techniek aan, in plaats van andersom.</p>
+        <p>
+          Volgens ons hoort het andersom. Technologie is pas goed als het voor mensen beter wordt: rustiger, duidelijker
+          en fijner. Het echte werk zit in zien wat ertoe doet, en de rest durven weglaten. Dat zie je het snelst door
+          het te maken, samen met de mensen voor wie het is.
         </p>
       </Chapter>
 
-      <Chapter id="missie" number="02" label="Missie" title="Vast in van alles eromheen" zoneRef={zone(STOP.missie)} markerRef={stop(STOP.missie)}>
+      <Chapter
+        id="missie"
+        number="02"
+        label="Missie"
+        title="Vast in van alles eromheen"
+        zoneRef={zone(STOP.missie)}
+        markerRef={stop(STOP.missie)}
+      >
         <p>
           Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen.
         </p>
@@ -139,22 +158,27 @@ export function Aanpak() {
             </li>
           ))}
         </ul>
-        <p>We maken het eenvoudiger, mooier en fijner.</p>
+        <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
       </Chapter>
 
-      <Chapter id="werkwijze" number="03" label="Werkwijze" title="AI maakt, jij beslist" zoneRef={zone(STOP.werkwijze)} markerRef={stop(STOP.werkwijze)}>
-        {/* A timeline: the dot steps down its nodes as you read. A hairline joins the nodes. */}
-        <ol className="relative before:absolute before:left-[0.40625rem] before:top-10 before:bottom-10 before:w-px before:bg-slate-200 dark:before:bg-slate-800">
+      <Chapter
+        id="werkwijze"
+        number="03"
+        label="Werkwijze"
+        title="AI maakt, jij beslist"
+        zoneRef={zone(STOP.werkwijze)}
+        markerRef={stop(STOP.werkwijze)}
+      >
+        {/* The same numbered steps as home's preview. No dots here: amber stays for the one on the reading line */}
+        <ol className="flex flex-col gap-6">
           {steps.map((step, index) => (
-            <li key={step} ref={zone(STOP.stap + index)} className="relative pl-10 py-6">
-              <span
-                ref={stop(STOP.stap + index)}
-                aria-hidden="true"
-                className="absolute left-0 top-[calc(1.5rem+0.5lh-0.4375rem)] size-3.5 rounded-full border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-kopwerk-dark"
-              />
-              <p className="font-display font-medium text-2xl sm:text-3xl leading-tight text-slate-900 dark:text-white">
+            <li key={step} className="flex items-baseline gap-5">
+              <span className="font-display font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="font-display font-medium text-2xl sm:text-3xl leading-tight text-slate-900 dark:text-white">
                 {step}
-              </p>
+              </span>
             </li>
           ))}
         </ol>
