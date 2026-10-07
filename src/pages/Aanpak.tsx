@@ -9,7 +9,8 @@ import { useContact } from '../hooks/useContact';
 
 import { projects } from '../lib/projects';
 import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
-import { hairline, raster, row } from '../lib/raster';
+import { hairline, raster } from '../lib/raster';
+import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
 const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
@@ -19,20 +20,21 @@ const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 // "AI maakt, jij beslist" in three steps, word for word from the positionering.
 const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
 
-const frictions = [
-  'Een manier van werken die zo gegroeid is, niet zo bedacht.',
-  "Programma's die niet met elkaar samenwerken.",
-  'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
+// What gets stuck, and what we make for it: what it does for people, never the kind of product.
+const pairs = [
+  { knelt: 'Een manier van werken die zo gegroeid is, niet zo bedacht.', maken: 'Een manier van werken die klopt.' },
+  { knelt: "Programma's die niet met elkaar samenwerken.", maken: 'Eén plek waar je team alles terugvindt.' },
+  {
+    knelt: 'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
+    maken: 'Een website die klanten in één keer begrijpen.',
+  },
+  { knelt: 'Werk dat elke week opnieuw met de hand gaat.', maken: 'AI die terugkerend werk overneemt, terwijl jij beslist.' },
+  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.' },
 ];
 
-// What we make, as the answer to the frictions: what it does for people, not the kind of product.
-const makes = [
-  'Een website die klanten in één keer begrijpen.',
-  'Een manier van werken die klopt, in plaats van gegroeid is.',
-  'AI die terugkerend werk overneemt, terwijl jij beslist.',
-  'Eén plek waar je team alles terugvindt.',
-  'Schermen die zonder uitleg werken.',
-];
+// Running text, and the small uppercase labels above columns.
+const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
+const label = 'text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400';
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
@@ -153,26 +155,35 @@ export function Aanpak() {
         title="Vast in van alles eromheen"
         zoneRef={zone(STOP.missie)}
         markerRef={stop(STOP.missie)}
+        wide={
+          <>
+            {/* Each friction beside its answer, on the page's two columns; on phones the answer follows its friction */}
+            <div aria-hidden="true" className={cn(raster, 'hidden lg:grid pb-3', label)}>
+              <span>Wat knelt</span>
+              <span>Wat we maken</span>
+            </div>
+            <dl className={`border-b ${hairline}`}>
+              {pairs.map(({ knelt, maken }) => (
+                <div key={knelt} className={cn(raster, 'gap-y-2 py-4 border-t', hairline)}>
+                  <dt className={prose}>{knelt}</dt>
+                  <dd className="font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
+                    {maken}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <div className={raster}>
+              <p className={cn('lg:col-start-2 max-w-xl pt-8', prose)}>
+                We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.
+              </p>
+            </div>
+          </>
+        }
       >
         <p>
           Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen.
         </p>
-        <ul className={`border-b ${hairline}`}>
-          {frictions.map((item) => (
-            <li key={item} className={row}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p>Wat we maken, hangt af van waar het knelt:</p>
-        <ul className={`border-b ${hairline}`}>
-          {makes.map((item) => (
-            <li key={item} className={row}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
+        <p>Wat we maken, hangt af van waar het knelt.</p>
       </Chapter>
 
       <Chapter
@@ -183,16 +194,35 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
-        {/* Numbered rows, no dots: amber stays for the one on the reading line */}
-        <ol className={`border-b ${hairline}`}>
-          {steps.map((step, index) => (
-            <li key={step} className={`${row} flex items-baseline gap-4`}>
-              <span className="w-8 shrink-0 font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              {step}
-            </li>
-          ))}
+        {/* The design system's Timeline: hollow nodes on a hairline, and amber only where a person decides */}
+        <ol className="flex flex-col">
+          {steps.map((step, index) => {
+            const last = index === steps.length - 1;
+            return (
+              <li
+                key={step}
+                className={cn(
+                  'relative flex items-baseline gap-4 pl-10 py-4 font-display font-medium text-lg sm:text-xl leading-snug text-slate-900 dark:text-white',
+                  !last &&
+                    'after:absolute after:left-[6.5px] after:top-[calc(1rem+0.5lh)] after:h-full after:w-px after:bg-slate-300 dark:after:bg-slate-700'
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'absolute left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 rounded-full',
+                    last
+                      ? 'bg-amber-500 shadow-[0_0_0_4px_rgba(245,158,11,0.2)]'
+                      : 'border border-slate-500 dark:border-slate-400 bg-slate-50 dark:bg-kopwerk-dark'
+                  )}
+                />
+                <span className="w-8 shrink-0 font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {step}
+              </li>
+            );
+          })}
         </ol>
         <p>
           AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, en jij houdt alleen wat je echt helpt.
@@ -234,6 +264,7 @@ function Chapter({
   title,
   zoneRef,
   markerRef,
+  wide,
   children,
 }: {
   id: string;
@@ -242,6 +273,8 @@ function Chapter({
   title: string;
   zoneRef: (el: HTMLElement | null) => void;
   markerRef: (el: HTMLElement | null) => void;
+  // Content across both columns, below the row (it keeps to the grid itself).
+  wide?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -260,9 +293,8 @@ function Chapter({
           {title}
         </Typography>
       </div>
-      <div className="max-w-xl flex flex-col gap-6 text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
-        {children}
-      </div>
+      <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>
+      {wide && <div className="lg:col-span-2">{wide}</div>}
     </section>
   );
 }
