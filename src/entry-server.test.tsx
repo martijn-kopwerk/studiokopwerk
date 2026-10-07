@@ -41,12 +41,6 @@ describe('aanpak', () => {
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
   });
 
-  it('is previewed on home, with the way on to the full page', () => {
-    const { html } = render('/');
-    expect(html).toContain('AI maakt, jij beslist');
-    expect(html).toContain('Lees hoe we werken');
-  });
-
   it('is offered as a way on from the 404 page', () => {
     expect(render('/bestaat-niet').html).toMatch(/<a[^>]*href="\/aanpak"/);
   });

@@ -6,7 +6,7 @@ import { NextLink } from '../components/ui/NextLink';
 import { Weglaten } from '../components/aanpak/Weglaten';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
-import { steps } from '../lib/aanpak';
+
 import { projects } from '../lib/projects';
 import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
 
@@ -14,6 +14,9 @@ import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
 const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
+
+// "AI maakt, jij beslist" in three steps, word for word from the positionering.
+const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
 
 const frictions = [
   'Processen die gegroeid zijn in plaats van ontworpen.',
@@ -169,7 +172,7 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
-        {/* The same numbered steps as home's preview. No dots here: amber stays for the one on the reading line */}
+        {/* Numbered steps, no dots: amber stays for the one on the reading line */}
         <ol className="flex flex-col gap-6">
           {steps.map((step, index) => (
             <li key={step} className="flex items-baseline gap-5">
