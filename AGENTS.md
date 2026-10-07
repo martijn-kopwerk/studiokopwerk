@@ -41,11 +41,12 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Both are self-hosted through `@fontsource-variable/*` (imported in `src/main.tsx`). Don't add Google Fonts links; the CSP blocks them.
 - **Tracking (Letter-spacing):** Use the custom tokens instead of hardcoded values or `tracking-tight`/`tracking-wide`:
   - `tracking-wide-sm` (0.04em) - For lead/body text and mixed-case button labels.
-  - `tracking-wide-md` (0.1em) - For headings (H1/H2).
+  - `tracking-wide-md` (0.1em) - For H1 titles and 14px capsule CTA labels.
   - `tracking-wide-lg` (0.15em) - For large open titles.
   - `tracking-wide-xl` (0.2em) - For uppercase buttons/labels.
   - `tracking-super-wide` (0.4em) - For eyebrow text.
   - `tracking-ultra-wide` (0.5em) - For extreme micro-typography.
+  - `tracking-heading` (-0.025em) - For H2 section titles (sentence case, set tight).
 
 ## 4. Components & Interactions
 - **Logo:** `<KopwerkLogo>` (`src/components/ui/KopwerkLogo.tsx`), the K with its amber dot, in the header on every screen size.
