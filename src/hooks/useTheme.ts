@@ -8,8 +8,12 @@ const STORAGE_KEY = 'kopwerk_theme_preference';
 // (the toggle switches icons with dark: classes), so server and client may start from different values.
 const isBrowser = typeof window !== 'undefined';
 
+// Dark first, the person decides: only a system setting for light makes the system theme light.
+// No setting, or no way to tell, is dark (design system, Themes).
+const LIGHT_QUERY = '(prefers-color-scheme: light)';
+
 function readSystemTheme(): ResolvedTheme {
-  return isBrowser && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return isBrowser && window.matchMedia(LIGHT_QUERY).matches ? 'light' : 'dark';
 }
 
 function readStoredMode(): ThemeMode {
@@ -31,10 +35,10 @@ export function useTheme() {
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(readSystemTheme);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const mediaQuery = window.matchMedia(LIGHT_QUERY);
 
     const handleChange = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? 'dark' : 'light');
+      setSystemTheme(e.matches ? 'light' : 'dark');
     };
 
     mediaQuery.addEventListener('change', handleChange);
