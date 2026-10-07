@@ -2,7 +2,9 @@
 
 These instructions define the design system, copywriting voice, and UX philosophy for Studio Kopwerk. You MUST adhere to these rules when generating or modifying code for this project.
 
-`BRAND_GUIDE.md` is the single source of truth for the brand (palette, type scale, tracking, component blueprints, voice). This file summarises it for work in this codebase. If the two ever disagree, `BRAND_GUIDE.md` wins; fix this file.
+**Design system first.** The Studio Kopwerk design system is the single source of truth for the brand (positioning, palette, type scale, tracking, motion, components, voice): https://claude.ai/artifact/8m9zeziNGjkdFoJCX2w3Vi. Read it with the Artifact tool (`read` with `paths`; start with `project/README.md`, `project/voice.md` and `project/tokens.json`). `BRAND_GUIDE.md` and this file translate it into this codebase and add what only the website has (de tekentafel, the dot's reading line, prerendering). If they disagree with the design system, the design system wins: fix the repo files, or, if the website should deliberately differ, record that in the design system itself.
+
+Known places where the code still differs from the design system are listed in the newest `docs/ux-review/` file ("Repo wijkt af van design system"); align them when you touch that code.
 
 ## 1. Brand Identity & UX Philosophy
 - **Identity:** Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen, hun werk eenvoudiger, mooier en fijner te maken. AI doet het maakwerk, jij beslist wat blijft. Toegankelijk, bescheiden, doordacht en zonder poeha.
@@ -22,6 +24,9 @@ These instructions define the design system, copywriting voice, and UX philosoph
 ## 3. Design System & CSS Variables (Tailwind)
 
 All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's generic equivalents or arbitrary values.
+
+### Theme
+- **Dark first, the person decides:** the toggle's choice wins; otherwise a system setting for light (`prefers-color-scheme: light`) wins; otherwise dark. Test for light, not for dark, and render dark before any script runs.
 
 ### Colors
 - **Dark Mode Core:** `--color-kopwerk-dark` (`#07090e`) - Use via `bg-kopwerk-dark`. Never use pure black (`#000000`), including for overlays and shadows (use `kopwerk-dark/…`).
@@ -57,7 +62,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Because pages are rendered without a browser first: never touch `window`, `document` or `localStorage` while rendering, only in effects or event handlers. Markup must not depend on client-only state such as the theme; use `dark:` variants instead.
 - Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
 - Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
-- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s; the dot ignores transforms so entrance animations don't throw it off.
+- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s; the dot ignores transforms so entrance animations don't throw it off. All of a page's targets sit on one reading line (the left margin on wider screens, the K's stem on phones): the dot glides only along that line, and fades out and back in when it has to go anywhere else (to or from the vertex), so it never slides across text or buttons. The footer takes the dot while it's in view and rests it in the margin beside its first line.
 - On phones (under 640px) the K is drawn cropped, its stem continuing the header logo's stem (x ≈ 31px), and page content starts right of it (`pl-14 sm:px-…`). A page places the K's vertex with an empty `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks. Geometry and line values: `src/lib/tekentafel.ts`; rules: `BRAND_GUIDE.md` §5F.
 
 ### Opdrachten (`src/content/werk/`)

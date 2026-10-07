@@ -27,14 +27,15 @@ export function CapsuleButton({
       )}
       {...props}
     >
+      {/* Design system: a 14px uppercase label at 0.1em, beside a 40px arrow disc */}
       <RollingText
-        className="text-sm sm:text-base font-medium tracking-wide-sm text-white dark:text-slate-950"
+        className="text-sm font-medium tracking-wide-md uppercase text-white dark:text-slate-950"
         accentClassName="text-amber-400 dark:text-amber-700"
       >
         {children}
       </RollingText>
-      <span className="relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/20 dark:bg-slate-900/10 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-500 group-focus-visible:bg-amber-500 dark:group-hover:bg-amber-400 dark:group-focus-visible:bg-amber-400 shrink-0">
-        <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-white dark:text-slate-950 transition-transform duration-500 ease-kopwerk group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-950 group-focus-visible:text-slate-950 motion-reduce:transition-none" />
+      <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/20 dark:bg-slate-900/10 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-500 group-focus-visible:bg-amber-500 dark:group-hover:bg-amber-400 dark:group-focus-visible:bg-amber-400 shrink-0">
+        <Icon className="h-4 w-4 text-white dark:text-slate-950 transition-transform duration-500 ease-kopwerk group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-950 group-focus-visible:text-slate-950 motion-reduce:transition-none" />
       </span>
     </button>
   );

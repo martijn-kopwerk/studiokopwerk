@@ -1,6 +1,6 @@
 # Studio Kopwerk — Brand Identity, Design System & Agent Style Guide
 
-> **Purpose:** This document is the definitive design and styling blueprint for **Studio Kopwerk**. External AI agents, designers, and developers should use this specification to generate on-brand proposals (*offertes*), roadmaps, strategic documents, presentations, and web UI components that match the exact aesthetic, typography, color palette, and voice of Studio Kopwerk.
+> **Design system first.** The definitive source for the Studio Kopwerk brand is the design system: https://claude.ai/artifact/8m9zeziNGjkdFoJCX2w3Vi. This file is the website's translation of it into this codebase, plus what only the website has (de tekentafel, §5F). Where this file disagrees with the design system, the design system wins and this file should be corrected.
 
 ---
 
@@ -60,7 +60,7 @@ The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), w
 
 **Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) the K is drawn cropped: its stem continues the header logo's stem, the arms run off the right edge and the content stands left-aligned beside the stem. The full rules are in §5F.
 
-**Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). The site follows the system by default; toggling back to the system's own theme forgets the manual choice.
+**Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). Dark first, and the person decides (design system, Themes): a choice made with the toggle wins; otherwise a system setting for light wins; otherwise the site is dark. Toggling back to the system's own theme forgets the manual choice.
 
 ### The Signature "Amber Dot" Element
 A standalone amber glowing indicator represents the pulse of Kopwerk. Used in headers, live status indicators, timeline nodes, and key action items:
@@ -228,6 +228,7 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 * **Wide screens (640px and up):** the K is about as tall as the screen, its stem at 10% of the width, left of centre, so it never competes with the wordmark.
 * **Phones (under 640px):** the K is drawn cropped. Its stem continues the header logo's stem as one line, the arms run off the right edge, and the content stands left-aligned just right of the stem. A page gives the vertex a place with an empty, `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks (on the home page: between the mission line and the button); without one the vertex sits at 60% of the height. Pages that move the dot (`/werk`) put their markers on the stem line.
 * **The dot never sits on text:** only in a margin, on the stem, or in a gap left for it.
+* **The dot never crosses text either:** a page's dot positions all lie on one reading line (the left margin on wide screens, the stem on phones). Along that line the dot glides; to anywhere else (to or from the vertex) it fades out and reappears. While the footer is in view the dot rests in the margin beside it.
 * **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 

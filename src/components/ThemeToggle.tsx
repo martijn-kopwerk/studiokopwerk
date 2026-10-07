@@ -7,7 +7,7 @@ interface ThemeToggleProps {
 
 /**
  * A single round button: shows the theme you'll switch to (moon in light, sun in dark).
- * The icons turn over on the brand curve. Following the system is the default;
+ * The icons turn over on the brand curve. Dark first: the site is dark unless the system asks for light;
  * see useTheme().toggleTheme for how a manual choice is forgotten again.
  * Icons and label follow the `dark` class (set before first paint by theme-init.js), not React state,
  * so the prerendered markup is the same for every visitor.

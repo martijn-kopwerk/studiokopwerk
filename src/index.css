@@ -69,6 +69,7 @@ html {
 
 html.dark {
   background-color: #07090e;
+  color-scheme: dark;
 }
 
 /* Ambient amber light (BRAND_GUIDE: "Ambient Glows"). Centred on its `translate` point, which follows the cursor. */

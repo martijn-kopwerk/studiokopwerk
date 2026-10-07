@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { RollingText } from '../components/ui/RollingText';
+import { NextLink } from '../components/ui/NextLink';
 
 export function NotFound() {
   return (
@@ -26,6 +27,7 @@ export function NotFound() {
           />
           <RollingText accentClassName="text-amber-700 dark:text-amber-400">Terug naar home</RollingText>
         </Link>
+        <NextLink href="/aanpak">Of lees hoe we werken</NextLink>
       </div>
     </main>
   );
