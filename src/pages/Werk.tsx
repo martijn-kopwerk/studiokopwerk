@@ -112,7 +112,7 @@ export function Werk() {
                   onPointerEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
                   onClick={() => setActive(index)}
-                  className="w-full flex items-baseline gap-8 py-8 pl-14 text-left border-t border-slate-200 dark:border-slate-800 rounded-md outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+                  className="w-full flex items-baseline gap-8 py-8 pl-14 text-left border-t border-slate-200 dark:border-slate-800 rounded-md"
                 >
                   <span
                     className={cn(
@@ -145,7 +145,7 @@ export function Werk() {
             id="opdracht-detail"
             aria-labelledby={`opdracht-${current.slug}`}
             tabIndex={0}
-            className="sticky top-10 pt-8 rounded-md outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+            className="sticky top-10 pt-8 rounded-md"
           >
             <div key={current.slug} className="motion-safe:animate-rise [--rise-from:8px] [animation-duration:0.6s]">
               <ProjectBody project={current} />

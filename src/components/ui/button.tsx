@@ -6,7 +6,7 @@ import { cn } from "../../lib/utils"
 // Utility button for quiet, secondary controls (e.g. closing a dialog).
 // For primary calls to action use <CapsuleButton>, the brand's asymmetric capsule.
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-medium transition-colors duration-300 ease-kopwerk disabled:pointer-events-none disabled:opacity-50 select-none outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark",
+  "inline-flex items-center justify-center gap-2 font-medium transition-colors duration-300 ease-kopwerk disabled:pointer-events-none disabled:opacity-50 select-none",
   {
     variants: {
       variant: {

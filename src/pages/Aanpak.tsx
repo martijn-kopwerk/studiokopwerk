@@ -19,9 +19,18 @@ const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
 
 const frictions = [
-  'Processen die gegroeid zijn in plaats van ontworpen.',
-  'Tools die niet op elkaar aansluiten.',
-  'Een klantervaring die rommeliger is dan het werk verdient.',
+  'Een manier van werken die zo gegroeid is, niet zo bedacht.',
+  "Programma's die niet met elkaar samenwerken.",
+  'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
+];
+
+// What we make, as the answer to the frictions: what it does for people, not the kind of product.
+const makes = [
+  'Een website die klanten in één keer begrijpen.',
+  'Een manier van werken die klopt, in plaats van gegroeid is.',
+  'AI die terugkerend werk overneemt, terwijl jij beslist.',
+  'Eén plek waar je team alles terugvindt.',
+  'Schermen die zonder uitleg werken.',
 ];
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
@@ -118,12 +127,12 @@ export function Aanpak() {
         id="visie"
         number="01"
         label="Visie"
-        title="Pas goed als het voor mensen beter wordt"
+        title="Technologie is pas goed als mensen er beter van worden"
         zoneRef={zone(STOP.visie)}
         markerRef={stop(STOP.visie)}
       >
         <p>
-          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een prototype: met AI staat het er in een
+          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een eerste versie: met AI staat het er in een
           middag.
         </p>
         <p>
@@ -161,6 +170,17 @@ export function Aanpak() {
             </li>
           ))}
         </ul>
+        <p>Wat we maken, hangt af van waar het knelt:</p>
+        <ul className={`border-b ${hairline}`}>
+          {makes.map((item) => (
+            <li
+              key={item}
+              className={`py-3 border-t ${hairline} font-medium text-base sm:text-lg leading-snug text-pretty text-slate-900 dark:text-white`}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
         <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
       </Chapter>
 
@@ -175,8 +195,8 @@ export function Aanpak() {
         {/* Numbered steps, no dots: amber stays for the one on the reading line */}
         <ol className="flex flex-col gap-6">
           {steps.map((step, index) => (
-            <li key={step} className="flex items-baseline gap-5">
-              <span className="font-display font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
+            <li key={step} className="flex items-baseline gap-3 sm:gap-5">
+              <span className="w-8 shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <span className="font-display font-medium text-2xl sm:text-3xl leading-tight text-slate-900 dark:text-white">
@@ -185,14 +205,17 @@ export function Aanpak() {
             </li>
           ))}
         </ol>
-        <p>Geen slogan: zo draait Studio Kopwerk zelf ook.</p>
+        <p>
+          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, en jij houdt alleen wat je echt helpt.
+        </p>
+        <p>Ook deze site is zo gemaakt.</p>
       </Chapter>
 
       {/* One call to action, and the quiet way on to the work once there is some */}
       <section
         ref={zone(STOP.einde)}
         aria-label="Daag ons uit"
-        className="py-20 sm:py-28 sm:pl-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10"
+        className="py-10 sm:py-16 sm:pl-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10"
       >
         <Typography variant="lead" className="relative">
           <span ref={stop(STOP.einde)} aria-hidden="true" className={marker} />
@@ -234,15 +257,15 @@ function Chapter({
     <section
       ref={zoneRef}
       aria-labelledby={id}
-      className="py-16 sm:py-24 sm:pl-14 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-x-16"
+      className="py-10 sm:py-16 sm:pl-14 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-x-16"
     >
       <div className="flex flex-col gap-5">
-        <p className="relative flex items-baseline gap-4 text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400">
+        <p className="relative flex items-baseline gap-4 text-xs sm:text-sm font-medium tracking-super-wide uppercase text-slate-500 dark:text-slate-400">
           <span ref={markerRef} aria-hidden="true" className={marker} />
           <span className="font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">{number}</span>
           {label}
         </p>
-        <Typography variant="h2" id={id} className="text-balance leading-tight md:text-4xl xl:text-5xl">
+        <Typography variant="h2" id={id} className="text-balance">
           {title}
         </Typography>
       </div>

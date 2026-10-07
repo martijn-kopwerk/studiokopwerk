@@ -12,7 +12,7 @@ export function NextLink({ href, children, className }: { href: string; children
     <Link
       href={href}
       className={cn(
-        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300 outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark',
+        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300',
         className
       )}
     >

@@ -113,7 +113,7 @@ Studio Kopwerk relies on exaggerated, deliberate letter-spacing for premium micr
 | **Super-Wide** | `tracking-super-wide` | `0.4em` | Section eyebrows, card tags, metadata labels |
 | **Wide-XL** | `tracking-wide-xl` | `0.2em` | Uppercase buttons, navigation items, status badges |
 | **Wide-LG** | `tracking-wide-lg` | `0.15em` | Large H1 titles and hero numbers |
-| **Wide-MD** | `tracking-wide-md` | `0.1em` | H1 and H2 titles |
+| **Wide-MD** | `tracking-wide-md` | `0.1em` | H1 titles; 14px capsule CTA labels |
 | **Wide-SM** | `tracking-wide-sm` | `0.04em` | Lead paragraphs, key takeaways, summary quotes, mixed-case button labels |
 
 In the website codebase, always use the token names (defined in `src/index.css`). The literal values below are for standalone documents that don't have the Tailwind theme. Tailwind's own `tracking-tight` / `tracking-wide` are not part of the system.
@@ -125,7 +125,7 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 * **H1 / Document Title (`h1`):**  
   `font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-[0.1em] uppercase leading-none text-slate-900 dark:text-white`
 * **H2 / Section Title (`h2`):**  
-  `font-display font-medium text-2xl sm:text-4xl tracking-[0.1em] text-slate-900 dark:text-white`
+  `font-display font-medium text-2xl sm:text-4xl tracking-[-0.025em] text-slate-900 dark:text-white`
 * **Lead / Tagline (`p`):**  
   `font-sans text-xl sm:text-2xl font-light tracking-[0.04em] text-slate-600 dark:text-slate-300`  
   *(Key words in lead text are often italicized, e.g. `Zien wat <em class="italic font-normal">wérkt</em>.`)*

@@ -6,9 +6,7 @@ import { useContact } from '../../hooks/useContact';
 import { contactEmail } from '../../lib/contact';
 import { navItems } from '../../lib/nav';
 
-const focusRing =
-  'outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark';
-const link = `group -mx-1 px-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300 ${focusRing}`;
+const link = 'group -mx-1 px-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
 
 const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525964B92'];
 
@@ -75,7 +73,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
           onPointerEnter={preloadContact}
           onFocus={preloadContact}
           aria-label={`Daag ons uit: ${contactEmail}`}
-          className={`group self-start sm:self-auto -mx-1 px-1 rounded-md text-sm text-slate-700 dark:text-slate-300 ${focusRing}`}
+          className="group self-start sm:self-auto -mx-1 px-1 rounded-md text-sm text-slate-700 dark:text-slate-300"
         >
           <RollingText accentClassName="text-amber-700 dark:text-amber-400">{contactEmail}</RollingText>
         </button>
