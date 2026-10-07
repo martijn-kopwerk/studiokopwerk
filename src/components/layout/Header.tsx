@@ -15,13 +15,18 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
       id="main-header"
       className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 flex items-center justify-between shrink-0"
     >
-      {/* Brand mark on every screen size; it leads home from every other page */}
+      {/* The design system's lock-up: the K and the wordmark, the way home from every page.
+          Phones keep the bare K (the wordmark doesn't fit beside the menu); its stem is where the drawing grows from. */}
       <Link
         href="/"
         aria-label="Studio Kopwerk, naar home"
-        className="-m-2 p-2 rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+        aria-current={current === '/' ? 'page' : undefined}
+        className="group -m-2 p-2 flex items-center gap-3 rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
       >
-        <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8" />
+        <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" />
+        <span aria-hidden="true" className="hidden sm:inline-flex font-display font-bold text-sm tracking-wide-xl uppercase text-slate-900 dark:text-white">
+          <RollingText accentClassName="text-amber-700 dark:text-amber-400">Studio Kopwerk</RollingText>
+        </span>
       </Link>
 
       <div className="flex items-center gap-5 sm:gap-8">
