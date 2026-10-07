@@ -9,6 +9,7 @@ import { useContact } from '../hooks/useContact';
 
 import { projects } from '../lib/projects';
 import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
+import { hairline, raster, row } from '../lib/raster';
 
 // The stops the amber dot travels past while you read, in document order.
 const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
@@ -35,11 +36,10 @@ const makes = [
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
-const hairline = 'border-slate-200 dark:border-slate-800';
 
 /**
- * Hoe Studio Kopwerk werkt, as a short walk: visie, missie, werkwijze. Whitespace separates the chapters; hairlines
- * only separate rows within a list. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
+ * Hoe Studio Kopwerk werkt, as a short walk: visie, missie, werkwijze. Each chapter is a row on the site's grid
+ * (src/lib/raster.ts) with a hairline above, and every list uses the same row style. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
  * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
  */
 export function Aanpak() {
@@ -101,20 +101,19 @@ export function Aanpak() {
 
   return (
     <main className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-8 motion-safe:animate-rise [--rise-from:16px]">
-      <div className="sm:pl-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] lg:gap-x-16 lg:items-end">
-        <div className="flex flex-col gap-4 sm:gap-5">
-          <Typography variant="eyebrow" as="p" className="relative">
-            <span ref={intro} aria-hidden="true" className={marker} />
-            Aanpak
-          </Typography>
-          <h1
-            tabIndex={-1}
-            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
-          >
-            Wat ertoe doet
-          </h1>
-        </div>
-        <Typography variant="lead" className="max-w-md text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
+      {/* Eyebrow, title and lead stacked on the text line, as the design system's hero */}
+      <div className="sm:pl-14 flex flex-col gap-4 sm:gap-5">
+        <Typography variant="eyebrow" as="p" className="relative">
+          <span ref={intro} aria-hidden="true" className={marker} />
+          Aanpak
+        </Typography>
+        <h1
+          tabIndex={-1}
+          className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
+        >
+          Wat ertoe doet
+        </h1>
+        <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           Zien wat <em className="italic font-normal">wérkt</em>. Snel iets werkends in handen, in plaats van een plan
           op papier.
         </Typography>
@@ -138,9 +137,7 @@ export function Aanpak() {
         <p>
           Toch wordt het daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken.
         </p>
-        <div className="py-2">
-          <Weglaten items={['Meer schermen.', 'Meer stappen.']} />
-        </div>
+        <Weglaten items={['Meer schermen.', 'Meer stappen.']} />
         <p>Mensen passen zich aan de techniek aan, in plaats van andersom.</p>
         <p>
           Volgens ons hoort het andersom. Technologie is pas goed als het voor mensen beter wordt: rustiger, duidelijker
@@ -162,10 +159,7 @@ export function Aanpak() {
         </p>
         <ul className={`border-b ${hairline}`}>
           {frictions.map((item) => (
-            <li
-              key={item}
-              className={`py-5 border-t ${hairline} font-display font-medium text-xl sm:text-2xl leading-snug text-balance text-slate-900 dark:text-white`}
-            >
+            <li key={item} className={row}>
               {item}
             </li>
           ))}
@@ -173,10 +167,7 @@ export function Aanpak() {
         <p>Wat we maken, hangt af van waar het knelt:</p>
         <ul className={`border-b ${hairline}`}>
           {makes.map((item) => (
-            <li
-              key={item}
-              className={`py-3 border-t ${hairline} font-medium text-base sm:text-lg leading-snug text-pretty text-slate-900 dark:text-white`}
-            >
+            <li key={item} className={row}>
               {item}
             </li>
           ))}
@@ -192,16 +183,14 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
-        {/* Numbered steps, no dots: amber stays for the one on the reading line */}
-        <ol className="flex flex-col gap-6">
+        {/* Numbered rows, no dots: amber stays for the one on the reading line */}
+        <ol className={`border-b ${hairline}`}>
           {steps.map((step, index) => (
-            <li key={step} className="flex items-baseline gap-3 sm:gap-5">
-              <span className="w-8 shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
+            <li key={step} className={`${row} flex items-baseline gap-4`}>
+              <span className="w-8 shrink-0 font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <span className="font-display font-medium text-2xl sm:text-3xl leading-tight text-slate-900 dark:text-white">
-                {step}
-              </span>
+              {step}
             </li>
           ))}
         </ol>
@@ -211,17 +200,17 @@ export function Aanpak() {
         <p>Ook deze site is zo gemaakt.</p>
       </Chapter>
 
-      {/* One call to action, and the quiet way on to the work once there is some */}
+      {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
       <section
         ref={zone(STOP.einde)}
         aria-label="Daag ons uit"
-        className="py-10 sm:py-16 sm:pl-14 flex flex-col lg:flex-row lg:items-center justify-between gap-10"
+        className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
       >
-        <Typography variant="lead" className="relative">
+        <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           <span ref={stop(STOP.einde)} aria-hidden="true" className={marker} />
           Klein beginnen, snel iets maken dat <em className="italic font-normal">werkt</em>.
         </Typography>
-        <div className="flex flex-col items-start lg:items-end gap-6">
+        <div className="flex flex-col items-start gap-6">
           {/* The same button as on home, magnetic too */}
           <MagneticWrapper>
             <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
@@ -236,6 +225,8 @@ export function Aanpak() {
   );
 }
 
+// A chapter is a row on the grid, as the design system sets a document: the conclusion on the left, its
+// explanation on the right, a hairline above. On phones the two stack.
 function Chapter({
   id,
   number,
@@ -257,7 +248,7 @@ function Chapter({
     <section
       ref={zoneRef}
       aria-labelledby={id}
-      className="py-10 sm:py-16 sm:pl-14 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-x-16"
+      className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}
     >
       <div className="flex flex-col gap-5">
         <p className="relative flex items-baseline gap-4 text-xs sm:text-sm font-medium tracking-super-wide uppercase text-slate-500 dark:text-slate-400">

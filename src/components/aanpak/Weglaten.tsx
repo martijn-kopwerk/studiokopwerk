@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RollingText } from '../ui/RollingText';
 import { cn } from '../../lib/utils';
+import { hairline, row } from '../../lib/raster';
 
 // One after the other, so the strike reads as a single gesture.
 const delays = ['', '[transition-delay:90ms]', '[transition-delay:180ms]', '[transition-delay:270ms]'];
@@ -14,12 +15,12 @@ export function Weglaten({ items }: { items: string[] }) {
 
   return (
     <div className="flex flex-col gap-6">
-      <ul className="flex flex-col gap-1">
+      <ul className={`border-b ${hairline}`}>
         {items.map((extra, index) => (
-          <li key={extra}>
+          <li key={extra} className={row}>
             <span
               className={cn(
-                'font-display font-medium text-3xl sm:text-4xl leading-tight line-through decoration-2 transition-[color,text-decoration-color] duration-500 ease-kopwerk motion-reduce:transition-none',
+                'line-through decoration-2 transition-[color,text-decoration-color] duration-500 ease-kopwerk motion-reduce:transition-none',
                 delays[index],
                 weg
                   ? 'text-slate-500 dark:text-slate-400 decoration-slate-500 dark:decoration-slate-400'
