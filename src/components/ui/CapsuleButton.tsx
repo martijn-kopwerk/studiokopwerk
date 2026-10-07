@@ -22,7 +22,7 @@ export function CapsuleButton({
     <button
       type={type}
       className={cn(
-        'group relative inline-flex w-full sm:w-auto items-center justify-between sm:justify-start gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 shadow-xl shadow-slate-900/10 dark:shadow-kopwerk-dark/20 transition-transform duration-500 ease-kopwerk hover:scale-[1.02] active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:scale-100 outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark',
+        'group relative inline-flex w-full sm:w-auto items-center justify-between sm:justify-start gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 shadow-xl shadow-slate-900/10 dark:shadow-kopwerk-dark/20 transition-transform duration-500 ease-kopwerk hover:scale-[1.02] active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:scale-100',
         className
       )}
       {...props}

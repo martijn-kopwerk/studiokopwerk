@@ -36,7 +36,7 @@ export function Weglaten({ items }: { items: string[] }) {
         type="button"
         aria-pressed={weg}
         onClick={() => setWeg((current) => !current)}
-        className="group self-start -mx-3 px-3 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400 outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+        className="group self-start -mx-3 px-3 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400"
       >
         <RollingText accentClassName="text-amber-700 dark:text-amber-400">
           {weg ? 'Zet het terug' : 'Streep het door'}

@@ -69,6 +69,19 @@ html {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+/* Focus, as the design system has it: a 2px solid outline in `focus` (amber-600 on light, amber-400 on dark),
+   2px from the element, on every interactive element. In the base layer, so a heading that only receives
+   focus after navigation can still opt out with `outline-none`. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid #d97706;
+    outline-offset: 2px;
+  }
+  .dark :focus-visible {
+    outline-color: #fbbf24;
+  }
+}
+
 html.dark {
   background-color: #07090e;
   color-scheme: dark;

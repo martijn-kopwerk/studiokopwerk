@@ -91,7 +91,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
             type="button"
             onClick={handleCopyEmail}
             aria-label={copied ? 'E-mailadres gekopieerd naar klembord' : `Kopieer e-mailadres ${email}`}
-            className="group relative text-left flex flex-col outline-none w-full rounded-xl focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-8 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
+            className="group relative text-left flex flex-col w-full rounded-xl"
           >
             <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors duration-300 ease-kopwerk ${
               copyState === 'idle' ? 'text-slate-500 dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400' : 'text-amber-700 dark:text-amber-400'
@@ -124,7 +124,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <div className="w-full pt-4 flex flex-col items-start">
             <a
               href={mailtoHref(email)}
-              className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white outline-none rounded-md focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-white dark:focus-visible:ring-offset-kopwerk-dark"
+              className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
             >
               <RollingText accentClassName="text-amber-700 dark:text-amber-400">
                 Deel je plannen

@@ -14,7 +14,7 @@ const baseStyles = {
   h1: "font-display font-normal text-[clamp(2.5rem,10vw,7.5rem)] tracking-wide-md sm:tracking-wide-lg uppercase leading-none text-slate-900 dark:text-white whitespace-nowrap",
   h2: "font-display font-medium text-2xl sm:text-4xl leading-8 sm:leading-10 tracking-heading text-slate-900 dark:text-white",
   h3: "font-display text-2xl font-semibold tracking-wide-sm text-slate-900 dark:text-white",
-  eyebrow: "text-xs sm:text-sm md:text-base font-medium tracking-super-wide sm:tracking-ultra-wide uppercase text-slate-500 dark:text-slate-400",
+  eyebrow: "text-xs sm:text-sm font-medium tracking-super-wide sm:tracking-ultra-wide uppercase text-slate-500 dark:text-slate-400",
   lead: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-wide-sm text-slate-600 dark:text-slate-300",
   body: "text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300",
   subtext: "text-sm sm:text-base font-normal text-slate-500 dark:text-slate-400",

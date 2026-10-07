@@ -19,7 +19,7 @@ export function NotFound() {
         <div data-tekentafel-vertex aria-hidden="true" className="h-12 sm:h-0 shrink-0" />
         <Link
           href="/"
-          className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white outline-none rounded-md focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+          className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
         >
           <ArrowLeft
             className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:-translate-x-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none"

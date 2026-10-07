@@ -20,7 +20,7 @@ export function ThemeToggle({ onToggle }: ThemeToggleProps) {
       id="theme-toggle"
       type="button"
       onClick={onToggle}
-      className="group relative flex size-10 items-center justify-center rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-xs text-slate-500 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 ease-kopwerk outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+      className="group relative flex size-10 items-center justify-center rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-xs text-slate-500 dark:text-slate-400 hover:text-amber-700 dark:hover:text-amber-400 transition-colors duration-300 ease-kopwerk"
     >
       <span className="sr-only dark:hidden">Schakel naar donkere weergave</span>
       <span className="sr-only hidden dark:inline">Schakel naar lichte weergave</span>

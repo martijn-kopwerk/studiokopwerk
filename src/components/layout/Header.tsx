@@ -22,7 +22,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
         href="/"
         aria-label="Studio Kopwerk, naar home"
         aria-current={current === '/' ? 'page' : undefined}
-        className="group -m-2 p-2 flex items-center gap-3 rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-amber-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark"
+        className="group -m-2 p-2 flex items-center gap-3 rounded-lg"
       >
         <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" />
         <span
@@ -49,7 +49,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
                       href={path}
                       aria-current={isCurrent ? 'page' : undefined}
                       className={cn(
-                        'group flex -mx-2 px-2 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase transition-colors duration-500 ease-kopwerk outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark',
+                        'group flex -mx-2 px-2 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase transition-colors duration-500 ease-kopwerk',
                         isCurrent ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'
                       )}
                     >
