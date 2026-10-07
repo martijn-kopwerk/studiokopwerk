@@ -37,6 +37,8 @@ export default function App() {
   // The call to action then goes straight to the mail app instead of opening the card.
   const [isContactUnavailable, setIsContactUnavailable] = useState(false);
   const [dotTarget, setDotTarget] = useState<DotTarget | null>(null);
+  // The footer takes the dot over from the page while it's in view.
+  const [footerDotTarget, setFooterDotTarget] = useState<DotTarget | null>(null);
 
   usePageChange(route.meta, siteUrl);
 
@@ -94,7 +96,7 @@ export default function App() {
           id="kopwerk-app-root"
           className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-slate-50 dark:bg-kopwerk-dark transition-colors duration-500 font-sans"
         >
-          <AbstractBackground theme={resolvedTheme} dotTarget={dotTarget} page={route.meta.path} />
+          <AbstractBackground theme={resolvedTheme} dotTarget={footerDotTarget ?? dotTarget} page={route.meta.path} />
 
           <Header onToggleTheme={toggleTheme} />
 
@@ -105,7 +107,7 @@ export default function App() {
             </AmberDotContext.Provider>
           </ContactContext.Provider>
 
-          <Footer />
+          <Footer onDotTarget={setFooterDotTarget} />
           {isContactMounted && (
             <ErrorBoundary onError={handleContactError}>
               <Suspense fallback={null}>

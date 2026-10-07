@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render } from './entry-server';
 import { renderHead } from './lib/head';
 import { projects, type Project } from './lib/projects';
-import { buildRoutes, findRoute, normalizePath } from './routes';
+import { buildRoutes, findRoute, normalizePath, routes } from './routes';
 
 describe('prerendering', () => {
   it('renders home with its heading, call to action and own head tags', () => {
@@ -38,6 +38,24 @@ describe('over', () => {
     expect(html).toContain('Daag ons uit');
     expect(head).toContain('<title>Wat ertoe doet · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/over" />');
+  });
+});
+
+describe('header and footer', () => {
+  it('links to Over from every page and marks the current one', () => {
+    expect(render('/').html).toMatch(/<a[^>]*href="\/over"/);
+    expect(render('/over').html).toMatch(/<a[^>]*href="\/over"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/over"/);
+  });
+
+  it('links to Werk only while that page exists', () => {
+    const hasWerk = routes.some((route) => route.meta.path === '/werk');
+    expect(render('/').html.includes('href="/werk"')).toBe(hasWerk);
+  });
+
+  it('shows the contact address and company details in the footer', () => {
+    const { html } = render('/');
+    expect(html).toContain('href="mailto:hallo@studiokopwerk.nl');
+    expect(html).toContain('KvK 42154955');
   });
 });
 

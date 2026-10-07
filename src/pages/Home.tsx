@@ -5,13 +5,14 @@ import { useContact } from '../hooks/useContact';
 
 // Phones: the hero stands left, just right of the K's stem (which continues the header logo's stem),
 // and leaves a gap above the button for the vertex and its amber dot. Wider screens: centred.
+// The hero fills the screen below the header, so the footer waits just below the fold.
 export function Home() {
   const { openContact, preloadContact } = useContact();
 
   return (
     <main
       id="hero-section"
-      className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-8 flex-1 flex flex-col items-start sm:items-center justify-center text-left sm:text-center my-auto"
+      className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-8 flex-1 min-h-[calc(100dvh-5rem)] sm:min-h-[calc(100dvh-5.5rem)] flex flex-col items-start sm:items-center justify-center text-left sm:text-center my-auto"
     >
       <div className="w-full space-y-5 sm:space-y-6 md:space-y-8 flex flex-col items-start sm:items-center justify-center motion-safe:animate-rise [--rise-from:20px] [--rise-scale:0.96]">
         <h1 id="hero-title" tabIndex={-1} className="flex flex-col items-start sm:items-center gap-4 sm:gap-6 md:gap-8 outline-none">
