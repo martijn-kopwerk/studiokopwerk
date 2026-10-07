@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Eraser, RotateCcw } from 'lucide-react';
 import { RollingText } from '../ui/RollingText';
 import { cn } from '../../lib/utils';
 import { hairline, row } from '../../lib/raster';
@@ -16,14 +17,16 @@ const fade = 'transition-opacity duration-500 ease-kopwerk motion-reduce:transit
 export function Weglaten({ items }: { items: string[] }) {
   const [weg, setWeg] = useState(false);
   const extra = (delay = '') => cn(fade, weg && ['opacity-0', delay]);
+  const toggle = () => setWeg((current) => !current);
 
   return (
     <figure className="flex flex-col gap-6">
-      {/* Decorative: the words below carry the meaning */}
+      {/* Decorative (the words below carry the meaning); a click on it does what the button does, for the mouse */}
       <svg
         viewBox="0 0 320 200"
         aria-hidden="true"
-        className="w-full max-w-md text-slate-300 dark:text-slate-700"
+        onClick={toggle}
+        className="w-full max-w-md cursor-pointer text-slate-300 dark:text-slate-700 transition-colors duration-300 ease-kopwerk hover:text-slate-400 dark:hover:text-slate-600 motion-reduce:transition-none"
         fill="none"
         stroke="currentColor"
         strokeWidth="1"
@@ -67,6 +70,24 @@ export function Weglaten({ items }: { items: string[] }) {
         </g>
       </svg>
 
+      {/* The design system's small outline button: clearly a control, with an icon that says what a click does */}
+      <button
+        type="button"
+        aria-pressed={weg}
+        onClick={toggle}
+        className="group self-start inline-flex items-center gap-3 rounded-full border border-slate-500 dark:border-slate-400 pl-2 pr-5 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
+      >
+        <span
+          aria-hidden="true"
+          className="flex size-7 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 transition-colors duration-300 ease-kopwerk group-hover:bg-amber-500 group-hover:text-slate-950 group-focus-visible:bg-amber-500 group-focus-visible:text-slate-950 motion-reduce:transition-none"
+        >
+          {weg ? <RotateCcw className="size-3.5" /> : <Eraser className="size-3.5" />}
+        </span>
+        <RollingText accentClassName="text-amber-700 dark:text-amber-400">
+          {weg ? 'Zet het terug' : 'Streep het door'}
+        </RollingText>
+      </button>
+
       <ul className={`border-b ${hairline}`}>
         {items.map((item, index) => (
           <li key={item} className={row}>
@@ -85,16 +106,6 @@ export function Weglaten({ items }: { items: string[] }) {
           </li>
         ))}
       </ul>
-      <button
-        type="button"
-        aria-pressed={weg}
-        onClick={() => setWeg((current) => !current)}
-        className="group self-start -mx-3 px-3 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400"
-      >
-        <RollingText accentClassName="text-amber-700 dark:text-amber-400">
-          {weg ? 'Zet het terug' : 'Streep het door'}
-        </RollingText>
-      </button>
     </figure>
   );
 }
