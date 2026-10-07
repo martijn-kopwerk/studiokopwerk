@@ -27,24 +27,35 @@ describe('prerendering', () => {
   });
 });
 
-describe('over', () => {
-  it('renders the walk through visie, missie, werkwijze and principes, ending in a call to action', () => {
-    const { html, head } = render('/over');
+describe('aanpak', () => {
+  it('walks through visie, missie and werkwijze, ending in one call to action', () => {
+    const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
-    for (const id of ['visie', 'missie', 'werkwijze', 'principes']) {
+    for (const id of ['visie', 'missie', 'werkwijze']) {
       expect(html).toContain(`aria-labelledby="${id}"`);
     }
+    expect(html).not.toContain('aria-labelledby="principes"');
     expect(html).toContain('aria-pressed="false"');
     expect(html).toContain('Daag ons uit');
-    expect(head).toContain('<title>Wat ertoe doet · Studio Kopwerk</title>');
-    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/over" />');
+    expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
+    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
+  });
+
+  it('is previewed on home, with the way on to the full page', () => {
+    const { html } = render('/');
+    expect(html).toContain('AI maakt, jij beslist');
+    expect(html).toContain('Lees hoe we werken');
+  });
+
+  it('is offered as a way on from the 404 page', () => {
+    expect(render('/bestaat-niet').html).toMatch(/<a[^>]*href="\/aanpak"/);
   });
 });
 
 describe('header and footer', () => {
-  it('links to Over from every page and marks the current one', () => {
-    expect(render('/').html).toMatch(/<a[^>]*href="\/over"/);
-    expect(render('/over').html).toMatch(/<a[^>]*href="\/over"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/over"/);
+  it('links to Aanpak from every page and marks the current one', () => {
+    expect(render('/').html).toMatch(/<a[^>]*href="\/aanpak"/);
+    expect(render('/aanpak').html).toMatch(/<a[^>]*href="\/aanpak"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/aanpak"/);
   });
 
   it('links to Werk only while that page exists', () => {
@@ -52,9 +63,9 @@ describe('header and footer', () => {
     expect(render('/').html.includes('href="/werk"')).toBe(hasWerk);
   });
 
-  it('shows the contact address and company details in the footer', () => {
+  it('opens the contact card from the footer address and shows the company details', () => {
     const { html } = render('/');
-    expect(html).toContain('href="mailto:hallo@studiokopwerk.nl');
+    expect(html).toContain('aria-label="Daag ons uit: hallo@studiokopwerk.nl"');
     expect(html).toContain('KvK 42154955');
   });
 });
@@ -71,7 +82,7 @@ describe('werk', () => {
   });
 
   it('does not exist without opdrachten: no page, so no sitemap entry', () => {
-    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/over']);
+    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/aanpak']);
   });
 
   it('exists with only drafts (dev and previews), kept out of search results', () => {

@@ -105,9 +105,10 @@ export default function App() {
               {/* Keyed by path so each page plays its entrance again */}
               <route.Page key={route.meta.path} />
             </AmberDotContext.Provider>
-          </ContactContext.Provider>
 
-          <Footer onDotTarget={setFooterDotTarget} />
+            {/* Inside the contact provider: the footer's address opens the same contact card */}
+            <Footer onDotTarget={setFooterDotTarget} />
+          </ContactContext.Provider>
           {isContactMounted && (
             <ErrorBoundary onError={handleContactError}>
               <Suspense fallback={null}>

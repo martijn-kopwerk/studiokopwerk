@@ -74,12 +74,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({
         {/* Subtle decorative background element */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-amber-500/5 dark:bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
+        {/* One heading that answers the button that opened the card; the action below says "Deel je plannen" */}
         <DialogHeader className="mb-12 relative z-10">
-          <Typography variant="eyebrow" className="mb-4 inline-block">
-            Jouw zet
-          </Typography>
           <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
-            Tijd voor actie.
+            Daag ons uit.
           </DialogTitle>
         </DialogHeader>
 

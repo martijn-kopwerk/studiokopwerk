@@ -1,40 +1,37 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
-import type { DotTarget } from '../../hooks/useAmberDot';
 import { RollingText } from '../ui/RollingText';
-import { contactEmail, mailtoHref } from '../../lib/contact';
-import { routes } from '../../routes';
+import type { DotTarget } from '../../hooks/useAmberDot';
+import { useContact } from '../../hooks/useContact';
+import { contactEmail } from '../../lib/contact';
+import { navItems } from '../../lib/nav';
 
 const focusRing =
   'outline-none focus-visible:ring-4 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-kopwerk-dark';
-const meta = 'text-xs text-slate-500 dark:text-slate-400';
 
-const footerLinks = [
-  { path: '/werk', label: 'Werk' },
-  { path: '/over', label: 'Over' },
-].filter(({ path }) => routes.some((route) => route.meta.path === path));
-
-// The company details the design system's footer shows in its meta row.
+// The company details the design system's footer shows, in one quiet line.
 const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525964B92'];
 
 /**
- * The design system's footer: the wordmark, "Deel je plannen" with the address in Syne,
- * and a meta row with the pages and the company details. On phones it stands right of the K's stem, like the pages.
+ * The footer starts with contact: "Deel je plannen" and the address, which opens the same card as every
+ * "Daag ons uit". Then the pages, and the company details in one line. No wordmark: the logo is in the header.
+ * On phones it stands right of the K's stem, like the pages.
  */
 export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null) => void }) {
+  const { openContact, preloadContact } = useContact();
   const currentYear = new Date().getFullYear();
   const footer = useRef<HTMLElement | null>(null);
-  const wordmarkDot = useRef<HTMLSpanElement | null>(null);
+  const addressMarker = useRef<HTMLSpanElement | null>(null);
 
   // The drafting table is fixed to the screen and the footer scrolls over it, so once the footer is in view
-  // the amber dot comes down to rest on the wordmark's own dot instead of floating over the text.
+  // the amber dot comes down to rest beside the address instead of floating over the text.
   useEffect(() => {
     const element = footer.current;
     if (!element) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const dot = wordmarkDot.current;
-        onDotTarget(entry?.isIntersecting && dot ? { element: dot } : null);
+        const marker = addressMarker.current;
+        onDotTarget(entry?.isIntersecting && marker ? { element: marker } : null);
       },
       { rootMargin: '0px 0px -15% 0px' }
     );
@@ -49,39 +46,42 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
     <footer
       ref={footer}
       id="main-footer"
-      className="relative z-20 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 pt-12 sm:pt-16 pb-8 shrink-0"
+      className="relative z-20 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 pt-16 sm:pt-24 pb-8 shrink-0"
     >
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8">
-        {/* No tagline here: home and Over already close on "Zien wat wérkt" just above */}
-        <span className="flex items-center gap-3">
-          <span
-            ref={wordmarkDot}
-            aria-hidden="true"
-            className="size-2 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
-          />
-          <span className="font-display font-bold text-sm tracking-wide-xl uppercase text-slate-900 dark:text-white">
-            Studio Kopwerk
-          </span>
-        </span>
-
-        <div className="flex flex-col gap-2 sm:items-end">
+      <div className="sm:pl-14 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+        <div className="flex flex-col gap-3">
           <span className="text-xs font-medium tracking-super-wide uppercase text-slate-500 dark:text-slate-400">
             Deel je plannen
           </span>
-          <a
-            href={mailtoHref()}
-            className={`group -mx-1 px-1 rounded-md font-display font-medium text-lg sm:text-2xl text-slate-900 dark:text-white ${focusRing}`}
-          >
-            <RollingText accentClassName="text-amber-700 dark:text-amber-400">{contactEmail}</RollingText>
-          </a>
+          <p className="relative font-display font-medium text-xl sm:text-3xl">
+            {/* Where the amber dot rests while the footer is in view: in the margin, on the K's stem on phones */}
+            <span
+              ref={addressMarker}
+              aria-hidden="true"
+              className="absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5"
+            />
+            <button
+              type="button"
+              onClick={openContact}
+              onPointerEnter={preloadContact}
+              onFocus={preloadContact}
+              aria-label={`Daag ons uit: ${contactEmail}`}
+              className={`group -mx-1 px-1 rounded-md text-left text-slate-900 dark:text-white ${focusRing}`}
+            >
+              <RollingText accentClassName="text-amber-700 dark:text-amber-400">{contactEmail}</RollingText>
+            </button>
+          </p>
         </div>
-      </div>
 
-      <div className="mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        {footerLinks.length > 0 && (
+        {navItems.length > 0 && (
           <nav aria-label="Pagina's">
             <ul className="flex items-center gap-6">
-              {footerLinks.map(({ path, label }) => (
+              <li>
+                <Link href="/" className={`group -mx-1 px-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300 ${focusRing}`}>
+                  <RollingText accentClassName="text-amber-700 dark:text-amber-400">Home</RollingText>
+                </Link>
+              </li>
+              {navItems.map(({ path, label }) => (
                 <li key={path}>
                   <Link
                     href={path}
@@ -94,16 +94,17 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
             </ul>
           </nav>
         )}
-        <p className={`${meta} flex flex-wrap gap-x-2 gap-y-1`}>
-          {details.map((detail) => (
-            <span key={detail} className="after:content-['•'] after:ml-2">
-              {detail}
-            </span>
-          ))}
-          {/* The year comes from the build; in the first days of a new year the browser may know better */}
-          <span suppressHydrationWarning>© {currentYear}</span>
-        </p>
       </div>
+
+      <p className="sm:pl-14 mt-12 sm:mt-16 flex flex-wrap gap-x-2 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+        {details.map((detail) => (
+          <span key={detail} className="after:content-['•'] after:ml-2">
+            {detail}
+          </span>
+        ))}
+        {/* The year comes from the build; in the first days of a new year the browser may know better */}
+        <span suppressHydrationWarning>© {currentYear} Studio Kopwerk</span>
+      </p>
     </footer>
   );
 }

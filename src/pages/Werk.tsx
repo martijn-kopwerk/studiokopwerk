@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
+import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { ProjectBody, ProjectMeta } from '../components/werk/ProjectCard';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
@@ -193,9 +194,12 @@ export function Werk() {
         <Typography variant="lead" as="p">
           Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
         </Typography>
-        <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="sm:w-auto">
-          Daag ons uit
-        </CapsuleButton>
+        {/* The same button as on home, magnetic too; Werk is the last stop, so there's no link on */}
+        <MagneticWrapper className="self-start sm:self-auto">
+          <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
+            Daag ons uit
+          </CapsuleButton>
+        </MagneticWrapper>
       </section>
     </main>
   );
