@@ -8,7 +8,7 @@
 
 * **Brand Name:** Studio Kopwerk
 * **Tagline:** *Zien wat wérkt.* (See what *works*.)
-* **Core Identity:** Studio Kopwerk helpt iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook.
+* **Core Identity:** Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen. We maken het eenvoudiger, mooier en fijner: AI doet het maakwerk, jij beslist wat blijft. Beschrijf de doelgroep naar hun situatie, nooit naar grootte (geen "mkb").
 * **Aesthetic Vibe:** Rustig, minimalistisch, doordacht, toegankelijk en zonder poeha.
 * **Anti-Slop Design Principles:**
   * **Extreme Intentional Whitespace:** Generous breathing room; avoid cluttered layouts and dense text blocks.
