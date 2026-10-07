@@ -5,7 +5,7 @@ These instructions define the design system, copywriting voice, and UX philosoph
 `BRAND_GUIDE.md` is the single source of truth for the brand (palette, type scale, tracking, component blueprints, voice). This file summarises it for work in this codebase. If the two ever disagree, `BRAND_GUIDE.md` wins; fix this file.
 
 ## 1. Brand Identity & UX Philosophy
-- **Identity:** Studio Kopwerk helpt iedereen om mooiere en fijnere ervaringen te maken, op welk vlak dan ook. Toegankelijk, bescheiden, doordacht en zonder poeha.
+- **Identity:** Studio Kopwerk helpt ondernemers en kleine bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen, hun werk eenvoudiger, mooier en fijner te maken. AI doet het maakwerk, jij beslist wat blijft. Toegankelijk, bescheiden, doordacht en zonder poeha.
 - **Vibe:** Rustig, minimalistisch, verfijnd en doordacht.
 - **Anti-Slop Design:** No generic SaaS templates. No standard 3-column grids with boring icons. Use extreme white space, high-contrast layouts, and bespoke micro-interactions.
 - **Simplicity:** Don't build unnecessary UI elements (like complex forms). Prioritize low cognitive load and high-impact interactions (e.g., mailto links with copy-to-clipboard functionality instead of generic contact forms).
