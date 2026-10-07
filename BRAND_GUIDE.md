@@ -1,6 +1,6 @@
 # Studio Kopwerk — Brand Identity, Design System & Agent Style Guide
 
-> **Purpose:** This document is the definitive design and styling blueprint for **Studio Kopwerk**. External AI agents, designers, and developers should use this specification to generate on-brand proposals (*offertes*), roadmaps, strategic documents, presentations, and web UI components that match the exact aesthetic, typography, color palette, and voice of Studio Kopwerk.
+> **Design system first.** The definitive source for the Studio Kopwerk brand is the design system: https://claude.ai/artifact/8m9zeziNGjkdFoJCX2w3Vi. This file is the website's translation of it into this codebase, plus what only the website has (de tekentafel, §5F). Where this file disagrees with the design system, the design system wins and this file should be corrected.
 
 ---
 
@@ -60,7 +60,7 @@ The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), w
 
 **Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) the K is drawn cropped: its stem continues the header logo's stem, the arms run off the right edge and the content stands left-aligned beside the stem. The full rules are in §5F.
 
-**Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). The site follows the system by default; toggling back to the system's own theme forgets the manual choice.
+**Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). Dark first, and the person decides (design system, Themes): a choice made with the toggle wins; otherwise a system setting for light wins; otherwise the site is dark. Toggling back to the system's own theme forgets the manual choice.
 
 ### The Signature "Amber Dot" Element
 A standalone amber glowing indicator represents the pulse of Kopwerk. Used in headers, live status indicators, timeline nodes, and key action items:
