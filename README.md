@@ -1,6 +1,6 @@
 # Studio Kopwerk
 
-> Helpt ondernemers en kleine bedrijven hun werk eenvoudiger, mooier en fijner te maken. Zien wat wérkt.
+> Helpt ondernemers en bedrijven hun werk eenvoudiger, mooier en fijner te maken. Zien wat wérkt.
 
 Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthetiek, royale witruimte en subtiele interacties.
 

@@ -11,7 +11,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  'Studio Kopwerk helpt ondernemers en kleine bedrijven hun werk eenvoudiger, mooier en fijner te maken. Zien wat wérkt.';
+  'Studio Kopwerk helpt ondernemers en bedrijven hun werk eenvoudiger, mooier en fijner te maken. Zien wat wérkt.';
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
