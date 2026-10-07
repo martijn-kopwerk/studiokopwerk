@@ -17,12 +17,13 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
     >
       {/* The design system's lock-up: the K and the wordmark, the way home from every other page.
           On home the hero already says the name, so the K stands alone there. Phones keep the bare K everywhere
-          (the wordmark doesn't fit beside the menu); its stem is where the drawing grows from. */}
+          (the wordmark doesn't fit beside the menu); its stem is where the drawing grows from. On wider screens the K
+          stands in the dot's margin and the wordmark starts on the text line (src/lib/raster.ts). */}
       <Link
         href="/"
         aria-label="Studio Kopwerk, naar home"
         aria-current={current === '/' ? 'page' : undefined}
-        className="group -m-2 p-2 flex items-center gap-3 rounded-lg"
+        className="group -m-2 p-2 flex items-center gap-3 sm:gap-6 rounded-lg"
       >
         <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" />
         <span

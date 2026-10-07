@@ -117,6 +117,16 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       return point;
     };
 
+    // On phones the drawing is fixed and the page scrolls over it. Resting on the vertex, the dot is only shown while
+    // the gap the page leaves for it (data-tekentafel-vertex) is still under it; once text scrolls there, it fades out.
+    const restOpacity = () => {
+      if (targetRef.current?.element.isConnected || !layout.phone) return '';
+      const gap = document.querySelector<HTMLElement>('[data-tekentafel-vertex]')?.getBoundingClientRect();
+      if (!gap) return '';
+      const half = 7; // half the dot's size
+      return gap.top <= layout.midY - half && gap.bottom >= layout.midY + half ? '' : '0';
+    };
+
     let fadeTimer = 0;
     const placeDot = (animate: boolean) => {
       const dot = dotRef.current;
@@ -135,7 +145,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       };
 
       window.clearTimeout(fadeTimer);
-      fade.style.opacity = '';
+      fade.style.opacity = restOpacity();
       if (!animate || reducedMotion.matches || Number.isNaN(fromX)) {
         jump({ x, y });
         return;
@@ -150,7 +160,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       fade.style.opacity = '0';
       fadeTimer = window.setTimeout(() => {
         jump(dotPoint());
-        fade.style.opacity = '';
+        fade.style.opacity = restOpacity();
       }, DOT_FADE_MS);
     };
 
@@ -191,14 +201,16 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     // Web fonts can shift the page once they load; measure the vertex again and put the dot back on its target.
     document.fonts?.ready.then(() => relayoutRef.current());
 
-    // A target scrolls with the page, so the dot follows it (without gliding).
+    // A target scrolls with the page, so the dot follows it (without gliding). Without one, it stays on the vertex
+    // and only checks whether that spot is still clear of text.
     let scrollPending = false;
     const handleScroll = () => {
-      if (!targetRef.current || scrollPending) return;
+      if (scrollPending) return;
       scrollPending = true;
       requestAnimationFrame(() => {
         scrollPending = false;
-        placeDot(false);
+        if (targetRef.current) placeDot(false);
+        else if (fadeRef.current) fadeRef.current.style.opacity = restOpacity();
       });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
