@@ -41,7 +41,8 @@ export function Home() {
           id="hero-mission"
           className="max-w-[17rem] sm:max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
         >
-          Voor ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen.
+          Voor ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen. Soms wordt
+          het een website, soms AI die werk overneemt. We beginnen bij waar het knelt.
         </Typography>
       </div>
 

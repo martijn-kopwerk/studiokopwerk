@@ -5,6 +5,7 @@ import { contactEmail, mailtoHref } from '../lib/contact';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from './ui/dialog';
@@ -73,11 +74,14 @@ export const ContactCard: React.FC<ContactCardProps> = ({
         {/* Subtle decorative background element */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-amber-500/5 dark:bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
-        {/* One heading that answers the button that opened the card; the action below says "Deel je plannen" */}
-        <DialogHeader className="mb-12 relative z-10">
+        {/* One heading that answers the button that opened the card, and one line on what to write */}
+        <DialogHeader className="mb-12 relative z-10 gap-4">
           <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
             Daag ons uit.
           </DialogTitle>
+          <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
+            Vertel waar je op vastloopt.
+          </DialogDescription>
         </DialogHeader>
 
         <div className="relative z-10 flex flex-col items-start gap-8">

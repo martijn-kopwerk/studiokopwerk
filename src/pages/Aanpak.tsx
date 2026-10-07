@@ -19,9 +19,18 @@ const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
 
 const frictions = [
-  'Processen die gegroeid zijn in plaats van ontworpen.',
-  'Tools die niet op elkaar aansluiten.',
-  'Een klantervaring die rommeliger is dan het werk verdient.',
+  'Een manier van werken die zo gegroeid is, niet zo bedacht.',
+  "Programma's die niet met elkaar samenwerken.",
+  'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
+];
+
+// What we make, as the answer to the frictions: what it does for people, not the kind of product.
+const makes = [
+  'Een website die klanten in één keer begrijpen.',
+  'Een manier van werken die klopt, in plaats van gegroeid is.',
+  'AI die terugkerend werk overneemt, terwijl jij beslist.',
+  'Eén plek waar je team alles terugvindt.',
+  'Schermen die zonder uitleg werken.',
 ];
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
@@ -118,12 +127,12 @@ export function Aanpak() {
         id="visie"
         number="01"
         label="Visie"
-        title="Pas goed als het voor mensen beter wordt"
+        title="Technologie is pas goed als mensen er beter van worden"
         zoneRef={zone(STOP.visie)}
         markerRef={stop(STOP.visie)}
       >
         <p>
-          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een prototype: met AI staat het er in een
+          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een eerste versie: met AI staat het er in een
           middag.
         </p>
         <p>
@@ -161,6 +170,17 @@ export function Aanpak() {
             </li>
           ))}
         </ul>
+        <p>Wat we maken, hangt af van waar het knelt:</p>
+        <ul className="flex flex-col gap-3">
+          {makes.map((item) => (
+            <li
+              key={item}
+              className="font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
         <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
       </Chapter>
 
@@ -185,7 +205,10 @@ export function Aanpak() {
             </li>
           ))}
         </ol>
-        <p>Geen slogan: zo draait Studio Kopwerk zelf ook.</p>
+        <p>
+          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, en jij houdt alleen wat je echt helpt.
+        </p>
+        <p>Ook deze site is zo gemaakt.</p>
       </Chapter>
 
       {/* One call to action, and the quiet way on to the work once there is some */}
