@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
+import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { Weglaten } from '../components/over/Weglaten';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
@@ -15,7 +16,6 @@ const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wa
 
 const principles = [
   { title: 'Maken boven praten.', text: 'Een werkend prototype zegt meer dan een plan.' },
-  { title: 'Rust.', text: 'Witruimte, weinig tekst en één punt van aandacht, zoals de amber stip.' },
   { title: 'De mens beslist.', text: 'AI schrijft en maakt, een mens kijkt en tekent.' },
   { title: 'Eenvoud.', text: 'De eigen processen zo simpel mogelijk, en die van de klant ook.' },
 ];
@@ -190,7 +190,7 @@ export function Over() {
         id="principes"
         number="04"
         label="Principes"
-        title="Vier principes houden het werk scherp"
+        title="Drie principes houden het werk scherp"
         zoneRef={zone(STOP.principes)}
         markerRef={stop(STOP.principes)}
       >
@@ -220,9 +220,12 @@ export function Over() {
             Snel iets werkends in handen, in plaats van een plan op papier.
           </Typography>
         </div>
-        <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="sm:w-auto">
-          Daag ons uit
-        </CapsuleButton>
+        {/* The same button as on home, magnetic too */}
+        <MagneticWrapper className="self-start lg:self-auto">
+          <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
+            Daag ons uit
+          </CapsuleButton>
+        </MagneticWrapper>
       </section>
     </main>
   );
