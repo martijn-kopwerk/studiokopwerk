@@ -3,6 +3,7 @@ import type { PageMeta } from './lib/head';
 import { projects, type Project } from './lib/projects';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { Over } from './pages/Over';
 import { Werk } from './pages/Werk';
 
 export interface PageRoute {
@@ -24,9 +25,19 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     meta: { path: '/', title: 'Studio Kopwerk · Zien wat wérkt', description: siteDescription },
     Page: Home,
   };
-  if (shown.length === 0) return [home];
+  const over: PageRoute = {
+    meta: {
+      path: '/over',
+      title: 'Wat ertoe doet · Studio Kopwerk',
+      description:
+        'Visie, missie en werkwijze van Studio Kopwerk. AI doet het maakwerk, wij kijken wat werkt, jij beslist wat blijft.',
+    },
+    Page: Over,
+  };
+  if (shown.length === 0) return [home, over];
   return [
     home,
+    over,
     {
       meta: {
         path: '/werk',

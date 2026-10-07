@@ -27,6 +27,20 @@ describe('prerendering', () => {
   });
 });
 
+describe('over', () => {
+  it('renders the walk through visie, missie, werkwijze and principes, ending in a call to action', () => {
+    const { html, head } = render('/over');
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
+    for (const id of ['visie', 'missie', 'werkwijze', 'principes']) {
+      expect(html).toContain(`aria-labelledby="${id}"`);
+    }
+    expect(html).toContain('aria-pressed="false"');
+    expect(html).toContain('Daag ons uit');
+    expect(head).toContain('<title>Wat ertoe doet · Studio Kopwerk</title>');
+    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/over" />');
+  });
+});
+
 describe('werk', () => {
   const opdracht = (draft: boolean): Project => ({
     slug: 'x',
@@ -39,7 +53,7 @@ describe('werk', () => {
   });
 
   it('does not exist without opdrachten: no page, so no sitemap entry', () => {
-    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/']);
+    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/over']);
   });
 
   it('exists with only drafts (dev and previews), kept out of search results', () => {
