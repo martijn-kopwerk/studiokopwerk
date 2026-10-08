@@ -236,7 +236,7 @@ export function Aanpak() {
       {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
       <section
         ref={zone(STOP.einde)}
-        aria-label="Daag ons uit"
+        aria-label="Vertel waar het knelt"
         className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
       >
         <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
@@ -247,7 +247,7 @@ export function Aanpak() {
           {/* The same button as on home, magnetic too */}
           <MagneticWrapper>
             <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-              Daag ons uit
+              Vertel waar het knelt
             </CapsuleButton>
           </MagneticWrapper>
           {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}

@@ -197,7 +197,7 @@ export function Werk() {
         {/* The same button as on home, magnetic too; Werk is the last stop, so there's no link on */}
         <MagneticWrapper className="self-start sm:self-auto">
           <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-            Daag ons uit
+            Vertel waar het knelt
           </CapsuleButton>
         </MagneticWrapper>
       </section>

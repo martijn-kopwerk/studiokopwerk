@@ -35,7 +35,7 @@ Per pagina en voor het geheel:
 
 1. **Positionering**: staan visie, missie, belofte, hero-regel en "AI maakt, jij beslist" er zoals in de positionering (het design system zegt: gebruik ze zoals geschreven)? Wat ziet een nieuwe bezoeker in 5 seconden?
 2. **Vertrouwen**: is er een mens, bewijs (opdrachten), duidelijkheid over wat je krijgt en wat de eerste stap is?
-3. **Route**: is er altijd een volgende stap voor wie nog niet klaar is voor "Daag ons uit"?
+3. **Route**: is er altijd een volgende stap voor wie nog niet klaar is voor "Vertel waar het knelt"?
 4. **Design system, onderdeel voor onderdeel**: thema per medium, kleurtokens, amber één à twee keer per beeld, typografie (h1/h2/eyebrow/lead: grootte, gewicht, tracking, hoofdletters), witruimte tussen secties, radius (alleen 2xl en full), focusstijl, motion-regels, logo en lock-up, iconen, beeld. Vergelijk ook met de componenten (Hero, Nav, Footer, Timeline, CapsuleButton, AiNote).
 5. **Stem** (`voice.md`): koppen zijn conclusies, alinea's van één tot vier zinnen, de redeneerlijn, geen jargon, niets verzonnen.
 6. **Ritme en beweging**: leest het als een verhaal of als lopende tekst? Waar kan beweging binnen de motion-regels van het design system iets uitleggen?

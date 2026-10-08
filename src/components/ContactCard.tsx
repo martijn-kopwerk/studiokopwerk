@@ -77,10 +77,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({
         {/* One heading that answers the button that opened the card, and one line on what to write */}
         <DialogHeader className="mb-12 relative z-10 gap-4">
           <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
-            Daag ons uit.
+            Vertel waar het knelt.
           </DialogTitle>
           <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
-            Vertel waar je op vastloopt.
+            Een paar zinnen is genoeg.
           </DialogDescription>
         </DialogHeader>
 

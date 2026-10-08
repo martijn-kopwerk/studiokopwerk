@@ -18,7 +18,7 @@ Known places where the code still differs from the design system are listed in t
 - **Language:** Dutch, including labels, eyebrows and tooltips.
 - **Rule:** Write copy that drives intent, not mechanism.
 - **Examples:**
-  - Use "Daag ons uit" (Challenge us) instead of "Start een gesprek", "Neem contact op" or "Contact us".
+  - Use "Vertel waar het knelt" (Tell us where it pinches) instead of "Daag ons uit", "Start een gesprek", "Neem contact op" or "Contact us". It is the one call to action, on every page: it starts from the reader's situation and needs no "ons" or "me".
   - Use "Deel je plannen" (Share your plans) instead of "Open e-mailapplicatie".
 
 ## 3. Design System & CSS Variables (Tailwind)

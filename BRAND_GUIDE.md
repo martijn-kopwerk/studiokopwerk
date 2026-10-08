@@ -205,7 +205,7 @@ In the website codebase this is the `<CapsuleButton>` component. Don't rebuild i
 ```html
 <a href="mailto:hallo@studiokopwerk.nl" class="group inline-flex items-center gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 text-white dark:text-slate-950 shadow-xl transition-all duration-300 hover:scale-[1.02]">
   <span class="text-sm font-medium tracking-[0.1em] uppercase">
-    Daag ons uit
+    Vertel waar het knelt
   </span>
   <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 dark:bg-black/10 transition-colors duration-300 group-hover:bg-amber-500">
     &nearr;
@@ -237,7 +237,7 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 ## 6. Copywriting Tone & Voice Guidelines
 
 * **Dutch Primary Voice / Intent-Driven:**
-  * Use *"Daag ons uit"* instead of *"Neem contact op"* or *"Contact us"*.
+  * Use *"Vertel waar het knelt"* instead of *"Neem contact op"* or *"Contact us"* (it replaced *"Daag ons uit"*).
   * Use *"Zien wat wérkt"* as the definitive statement of value.
   * Use *"Deel je plannen"* instead of *"Stuur een e-mail"*.
   * Use *"Tijd voor actie"* for proposal closing and decision points.
@@ -256,7 +256,7 @@ Generate this document strictly following the Studio Kopwerk Design System:
 - Typography: Display font 'Syne' (geometric/bold) and Body font 'Plus Jakarta Sans'.
 - Letter-spacing: Ultra-wide (0.4em-0.5em) for uppercase eyebrows/labels; wide (0.1em) for headings.
 - Aesthetic: Minimalist, architectural, generous whitespace, frosted glass cards (backdrop-blur), glowing amber dots for status.
-- Tone: Confident, action-oriented ("Zien wat wérkt", "Daag ons uit"), zero corporate filler.
+- Tone: Confident, action-oriented ("Zien wat wérkt", "Vertel waar het knelt"), zero corporate filler.
 - Logo URL: https://www.studiokopwerk.nl/favicon.svg
 - Contact: hallo@studiokopwerk.nl
 ```
