@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Aanpak } from './pages/Aanpak';
 import { Werk } from './pages/Werk';
+import { Privacy } from './pages/Privacy';
 
 export interface PageRoute {
   meta: PageMeta;
@@ -34,10 +35,19 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Aanpak,
   };
-  if (shown.length === 0) return [home, aanpak];
+  const privacy: PageRoute = {
+    meta: {
+      path: '/privacy',
+      title: 'Privacy · Studio Kopwerk',
+      description: 'Wat Studio Kopwerk van je bewaart: zo weinig mogelijk. Geen cookies, geen tracking.',
+    },
+    Page: Privacy,
+  };
+  if (shown.length === 0) return [home, aanpak, privacy];
   return [
     home,
     aanpak,
+    privacy,
     {
       meta: {
         path: '/werk',
