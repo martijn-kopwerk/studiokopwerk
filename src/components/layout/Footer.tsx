@@ -56,7 +56,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
           <ul className="flex items-center gap-6">
             <li>
               <Link href="/" className={link}>
-                <RollingText accentClassName="text-amber-700 dark:text-amber-400">Home</RollingText>
+                <RollingText accentClassName="text-amber-700 dark:text-amber-400">Begin</RollingText>
               </Link>
             </li>
             {navItems.map(({ path, label }) => (

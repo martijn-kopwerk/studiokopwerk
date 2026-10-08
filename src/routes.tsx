@@ -13,7 +13,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  "Studio Kopwerk maakt de schermen, sites en programma's waarmee ondernemers en bedrijven hun werk eenvoudiger, mooier en fijner maken. Zien wat wérkt.";
+  'Goed in je vak, maar vastgelopen in het digitale eromheen? Wij maken het eenvoudig, met AI en samen met jou. Zien wat wérkt.';
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
@@ -31,7 +31,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/aanpak',
       title: 'Aanpak · Studio Kopwerk',
       description:
-        'Visie, missie en werkwijze van Studio Kopwerk. AI doet het maakwerk, wij kijken wat werkt, jij beslist wat blijft.',
+        'Hoe we werken: AI maakt snel een eerste versie, samen kijken we wat werkt en jij beslist wat blijft.',
     },
     Page: Aanpak,
   };
@@ -52,7 +52,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       meta: {
         path: '/werk',
         title: 'Wat wérkt · Studio Kopwerk',
-        description: 'Opdrachten uit de praktijk, kort verteld: de vraag, wat we maakten en wat het opleverde.',
+        description: 'We begonnen bij onszelf. Elke opdracht kort verteld: de vraag, wat we maakten en wat het opleverde.',
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,

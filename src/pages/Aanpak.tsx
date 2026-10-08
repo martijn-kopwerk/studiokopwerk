@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { CornerDownRight, RotateCw } from 'lucide-react';
+import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
@@ -14,12 +15,12 @@ import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
+const STOP = { knelt: 0, werkwijze: 1, waarom: 2, einde: 3 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
 // "AI maakt, jij beslist" in three steps, word for word from the positionering. They go round, not in order.
-const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
+const steps = ['AI doet het maakwerk.', 'Samen kijken we wat werkt.', 'Jij beslist wat blijft.'];
 
 // What gets stuck, and what we make for it: what it does for people, never the kind of product.
 const pairs = [
@@ -27,12 +28,15 @@ const pairs = [
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
     maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
   },
-  { knelt: "Programma's die niet met elkaar samenwerken.", maken: 'Eén plek waar je team alles terugvindt.' },
+  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je team alles terugvindt.' },
   {
-    knelt: 'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
-    maken: 'Een website die klanten in één keer begrijpen.',
+    knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
+    maken: 'Een website waarop klanten meteen zien wat je doet.',
   },
-  { knelt: 'Werk dat elke week opnieuw met de hand gaat.', maken: 'AI die terugkerend werk overneemt, terwijl jij beslist.' },
+  {
+    knelt: 'Werk dat elke week opnieuw met de hand gaat.',
+    maken: 'AI die het werk doet dat steeds terugkomt. Jij beslist wat ermee gebeurt.',
+  },
   { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.' },
 ];
 
@@ -43,7 +47,8 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
 
 /**
- * Hoe Studio Kopwerk werkt, as a short walk: visie, missie, werkwijze. Each chapter is a row on the site's grid
+ * Hoe Studio Kopwerk werkt, as a short walk in the reader's order: where it pinches (the missie), how we work
+ * (the werkwijze) and why (the visie). Each chapter is a row on the site's grid
  * (src/lib/raster.ts) with a hairline above, and every list uses the same row style. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
  * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
  */
@@ -128,40 +133,15 @@ export function Aanpak() {
       <div data-tekentafel-vertex aria-hidden="true" className="h-28 sm:h-12 shrink-0" />
 
       <Chapter
-        id="visie"
+        id="knelt"
         number="01"
-        label="Visie"
-        title="Technologie is pas goed als mensen er beter van worden"
-        zoneRef={zone(STOP.visie)}
-        markerRef={stop(STOP.visie)}
-      >
-        <p>
-          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een tool, een eerste versie: met AI staat het er in een
-          middag.
-        </p>
-        <p>
-          Toch wordt het daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken.
-        </p>
-        <Weglaten items={['Meer schermen.', 'Meer stappen.']} />
-        <p>Mensen passen zich aan de techniek aan, in plaats van andersom.</p>
-        <p>
-          Volgens ons hoort het andersom. Technologie is pas goed als het voor mensen beter wordt: rustiger, duidelijker
-          en fijner. Het echte werk zit in zien wat ertoe doet en de rest durven weglaten. Dat zie je het snelst door
-          het te maken, samen met de mensen voor wie het is.
-        </p>
-      </Chapter>
-
-      <Chapter
-        id="missie"
-        number="02"
-        label="Missie"
+        label="Waar het knelt"
         title="Goed in je vak, vast in je systemen"
-        zoneRef={zone(STOP.missie)}
-        markerRef={stop(STOP.missie)}
+        zoneRef={zone(STOP.knelt)}
+        markerRef={stop(STOP.knelt)}
       >
         <p>
-          Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen.
-          Wat we maken, hangt af van waar het knelt.
+          Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
         </p>
         {/* Each friction as a couplet: what knelt, quiet, and below it what we make for it, in Syne. No table, no
             column labels: it reads as one sentence turning round, the same on every screen. */}
@@ -181,13 +161,12 @@ export function Aanpak() {
             </div>
           ))}
         </dl>
-        <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
       </Chapter>
 
       <Chapter
         id="werkwijze"
-        number="03"
-        label="Werkwijze"
+        number="02"
+        label="Hoe we werken"
         title="AI maakt, jij beslist"
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
@@ -227,10 +206,60 @@ export function Aanpak() {
           </li>
         </ul>
         <p>
-          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt en jij houdt alleen wat je echt helpt.
-          Daarmee begint de volgende ronde.
+          AI maakt in korte tijd een eerste versie. Je hoeft er zelf geen verstand van te hebben: je ziet het en zegt wat
+          klopt.
         </p>
-        <p>Ook deze site is zo gemaakt.</p>
+        <p>
+          Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
+          een vaste prijs.
+        </p>
+        <p>
+          Die eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die
+          we gebruiken, traint er niet mee. Meer daarover lees je bij{' '}
+          <Link href="/privacy" className="underline underline-offset-4">
+            privacy
+          </Link>
+          .
+        </p>
+        {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
+        <p>
+          {projects.length > 0 ? (
+            <>
+              Ook deze site is zo gemaakt, net als{' '}
+              <Link href="/werk" className="underline underline-offset-4">
+                ons eigen programma
+              </Link>
+              .
+            </>
+          ) : (
+            'Ook deze site is zo gemaakt.'
+          )}
+        </p>
+      </Chapter>
+
+      <Chapter
+        id="waarom"
+        number="03"
+        label="Waarom zo"
+        title="Techniek is pas goed als mensen er beter van worden"
+        zoneRef={zone(STOP.waarom)}
+        markerRef={stop(STOP.waarom)}
+      >
+        <p>
+          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een programma, een eerste versie: met AI staat het er in
+          een middag.
+        </p>
+        <p>
+          Toch wordt het werk daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken. Er komen
+          meer schermen en meer stappen bij. Mensen passen zich aan de techniek aan.
+        </p>
+        <p>
+          Volgens ons hoort het andersom: rustiger, duidelijker en fijner. Het echte werk is zien wat ertoe doet en de
+          rest durven weglaten.
+        </p>
+        {/* First the story, then the reader does it: strike out what piles up and what matters is left */}
+        <Weglaten items={['Meer schermen.', 'Meer stappen.']} rest="Wat ertoe doet." />
+        <p>Dat zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
       </Chapter>
 
       {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
@@ -241,7 +270,7 @@ export function Aanpak() {
       >
         <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           <span ref={stop(STOP.einde)} aria-hidden="true" className={marker} />
-          Klein beginnen, snel iets maken dat <em className="italic font-normal">werkt</em>.
+          Klein beginnen, snel iets maken dat werkt.
         </Typography>
         <div className="flex flex-col items-start gap-6">
           {/* The same button as on home, magnetic too */}
@@ -251,7 +280,7 @@ export function Aanpak() {
             </CapsuleButton>
           </MagneticWrapper>
           {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}
-          {projects.length > 0 && <NextLink href="/werk">Verder: wat wérkt</NextLink>}
+          {projects.length > 0 && <NextLink href="/werk">Bekijk wat we maakten</NextLink>}
         </div>
       </section>
     </main>

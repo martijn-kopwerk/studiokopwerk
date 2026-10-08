@@ -11,10 +11,11 @@ const fade = 'transition-opacity duration-500 ease-kopwerk motion-reduce:transit
 
 /**
  * The vision, done rather than told: a screen drawn in the system's hairlines, crowded with tabs, panels, steps and
- * buttons. One click leaves out everything but what matters (a title, a few lines, one amber action), and can bring
- * it back. The lines beneath say the same in words, struck through; screen readers hear them as left out.
+ * buttons. It comes after the story, so the reader does what they just read: one click leaves out everything but
+ * what matters (a title, a few lines, one amber action), and can bring it back. The lines beneath say the same in
+ * words, struck through, and `rest` (what is left) appears below them; screen readers hear it all through a status.
  */
-export function Weglaten({ items }: { items: string[] }) {
+export function Weglaten({ items, rest }: { items: string[]; rest?: string }) {
   const [weg, setWeg] = useState(false);
   const extra = (delay = '') => cn(fade, weg && ['opacity-0', delay]);
   const toggle = () => setWeg((current) => !current);
@@ -105,7 +106,16 @@ export function Weglaten({ items }: { items: string[] }) {
             {weg && <span className="sr-only"> (weggelaten)</span>}
           </li>
         ))}
+        {/* What is left once the rest is struck: it rises in after the strike, in ink */}
+        {weg && rest && (
+          <li className={row}>
+            <span className="block motion-safe:animate-rise [--rise-from:8px] [animation-delay:360ms]">{rest}</span>
+          </li>
+        )}
       </ul>
+      <p role="status" className="sr-only">
+        {weg ? `Weggelaten: ${items.join(' ')}${rest ? ` Over: ${rest}` : ''}` : ''}
+      </p>
     </figure>
   );
 }

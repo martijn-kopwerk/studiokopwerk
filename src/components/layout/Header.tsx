@@ -21,7 +21,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
           stands in the dot's margin and the wordmark starts on the text line (src/lib/raster.ts). */}
       <Link
         href="/"
-        aria-label="Studio Kopwerk, naar home"
+        aria-label="Studio Kopwerk, naar het begin"
         aria-current={current === '/' ? 'page' : undefined}
         className="group -m-2 p-2 flex items-center gap-3 sm:gap-6 rounded-lg"
       >
