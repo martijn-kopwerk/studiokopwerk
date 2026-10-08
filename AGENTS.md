@@ -7,7 +7,7 @@ These instructions define the design system, copywriting voice, and UX philosoph
 Known places where the code still differs from the design system are listed in the newest `docs/ux-review/` file ("Repo wijkt af van design system"); align them when you touch that code.
 
 ## 1. Brand Identity & UX Philosophy
-- **Identity:** Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen, hun werk eenvoudiger, mooier en fijner te maken. AI doet het maakwerk, jij beslist wat blijft. Toegankelijk, bescheiden, doordacht en zonder poeha.
+- **Identity:** Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen, hun werk eenvoudiger, mooier en fijner te maken. AI doet het maakwerk, jij beslist wat blijft. Toegankelijk, bescheiden, doordacht en zonder poeha.
 - **Vibe:** Rustig, minimalistisch, verfijnd en doordacht.
 - **Anti-Slop Design:** No generic SaaS templates. No standard 3-column grids with boring icons. Use extreme white space, high-contrast layouts, and bespoke micro-interactions.
 - **Simplicity:** Don't build unnecessary UI elements (like complex forms). Prioritize low cognitive load and high-impact interactions (e.g., mailto links with copy-to-clipboard functionality instead of generic contact forms).

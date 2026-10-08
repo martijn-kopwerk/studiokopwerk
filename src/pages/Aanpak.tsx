@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { RotateCw } from 'lucide-react';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
@@ -17,7 +18,7 @@ const STOP = { visie: 0, missie: 1, werkwijze: 2, einde: 3 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
-// "AI maakt, jij beslist" in three steps, word for word from the positionering.
+// "AI maakt, jij beslist" in three steps, word for word from the positionering. They go round, not in order.
 const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wat blijft.'];
 
 // What gets stuck, and what we make for it: what it does for people, never the kind of product.
@@ -152,7 +153,7 @@ export function Aanpak() {
         id="missie"
         number="02"
         label="Missie"
-        title="Vast in van alles eromheen"
+        title="Vast in het digitale eromheen"
         zoneRef={zone(STOP.missie)}
         markerRef={stop(STOP.missie)}
         wide={
@@ -181,7 +182,7 @@ export function Aanpak() {
         }
       >
         <p>
-          Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in van alles eromheen.
+          Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen.
         </p>
         <p>Wat we maken, hangt af van waar het knelt.</p>
       </Chapter>
@@ -194,38 +195,43 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
-        {/* The design system's Timeline: hollow nodes on a hairline, and amber only where a person decides */}
-        <ol className="flex flex-col">
+        {/* The design system's Timeline without numbers, because it's a loop, not a sequence: hollow nodes on a
+            hairline, amber only where a person decides, and the line ending in the turn back to the start */}
+        <ul className="flex flex-col">
           {steps.map((step, index) => {
             const last = index === steps.length - 1;
             return (
               <li
                 key={step}
                 className={cn(
-                  'relative flex items-baseline gap-4 pl-10 py-4 font-display font-medium text-lg sm:text-xl leading-snug text-slate-900 dark:text-white',
-                  !last &&
-                    'after:absolute after:left-[6.5px] after:top-[calc(1rem+0.5lh)] after:h-full after:w-px after:bg-slate-300 dark:after:bg-slate-700'
+                  'relative pl-10 py-4 font-display font-medium text-lg sm:text-xl leading-snug text-slate-900 dark:text-white',
+                  'after:absolute after:left-[6.5px] after:top-[calc(1rem+0.5lh)] after:h-full after:w-px after:bg-slate-300 dark:after:bg-slate-700'
                 )}
               >
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'absolute left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 rounded-full',
+                    'absolute z-10 left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 rounded-full',
                     last
                       ? 'bg-amber-500 shadow-[0_0_0_4px_rgba(245,158,11,0.2)]'
                       : 'border border-slate-500 dark:border-slate-400 bg-slate-50 dark:bg-kopwerk-dark'
                   )}
                 />
-                <span className="w-8 shrink-0 font-bold text-sm tracking-wide-lg text-slate-500 dark:text-slate-400">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
                 {step}
               </li>
             );
           })}
-        </ol>
+          <li className="relative pl-10 py-4 text-slate-500 dark:text-slate-400">
+            <RotateCw
+              aria-hidden="true"
+              className="absolute left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 bg-slate-50 dark:bg-kopwerk-dark"
+            />
+            En dan weer opnieuw, tot het werkt.
+          </li>
+        </ul>
         <p>
-          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, en jij houdt alleen wat je echt helpt.
+          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, jij houdt alleen wat je echt helpt, en
+          daarmee begint de volgende ronde.
         </p>
         <p>Ook deze site is zo gemaakt.</p>
       </Chapter>
