@@ -12,7 +12,7 @@ alt: "Het overzicht van Operatie Kopwerk, met voorbeeldgegevens: mails die op ee
 film:
   - beeld: ./film-1-overzicht.webp
     alt: "Het overzicht van de dag: mails die op een antwoord wachten, twee te late facturen en een offerte die klaarstaat."
-    tekst: "Eén scherm voor de hele dag, in plaats van zeven programma's."
+    tekst: "Eén scherm voor de hele dag, in plaats van een handvol losse programma's."
     focus: "55% 55%"
   - beeld: ./film-2-mail.webp
     alt: "De inbox onder Nu oppakken: elke mail met een samenvatting in één zin en labels als Offerteaanvraag, Klant en Planning."
@@ -36,4 +36,4 @@ film:
     focus: "50% 30%"
 ---
 
-Ons eigen bedrijf was onze eerste opdracht: Operatie Kopwerk bundelt offertes, klanten, mail, presentaties en facturen in één app in onze stijl, en vervangt zo zeven losse programma's. AI bouwde de app, scheidt in de mail het kaf van het koren en schrijft offertes en antwoorden in onze toon; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en vijf minuten per mail, tijd die nu naar het echte werk gaat.
+Ons eigen bedrijf was onze eerste opdracht: Operatie Kopwerk bundelt offertes, klanten, mail, presentaties en facturen in één app in onze stijl, en vervangt zo een handvol losse programma's. AI bouwde de app, scheidt in de mail het kaf van het koren en schrijft offertes en antwoorden in onze toon; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en vijf minuten per mail, tijd die nu naar het echte werk gaat.
