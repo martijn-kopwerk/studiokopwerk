@@ -9,6 +9,4 @@ beeld: ./overzicht.webp
 alt: "Het overzicht van Operatie Kopwerk, met voorbeeldgegevens: mails die op een antwoord wachten, openstaande facturen en een offerte in de maak."
 ---
 
-Onze eerste opdracht was ons eigen bedrijf. In Operatie Kopwerk staan offertes, klanten, mail, presentaties en facturen samen in één app, in de stijl van Studio Kopwerk, en die app vervangt zeven losse programma's.
-
-AI bouwde de app en schrijft offertes in onze toon, met vaste opmaak en waar nodig vertaald. Wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte, en die tijd gaat nu naar het echte werk.
+Ons eigen bedrijf was onze eerste opdracht: Operatie Kopwerk bundelt offertes, klanten, mail, presentaties en facturen in één app in onze stijl, en vervangt zo zeven losse programma's. AI bouwde de app, scheidt in de mail het kaf van het koren en schrijft offertes en antwoorden in onze toon; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en vijf minuten per mail, tijd die nu naar het echte werk gaat.
