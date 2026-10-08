@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { RotateCw } from 'lucide-react';
+import { CornerDownRight, RotateCw } from 'lucide-react';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
@@ -23,7 +23,10 @@ const steps = ['AI doet het maakwerk.', 'Wij kijken wat werkt.', 'Jij beslist wa
 
 // What gets stuck, and what we make for it: what it does for people, never the kind of product.
 const pairs = [
-  { knelt: 'Een manier van werken die zo gegroeid is, niet zo bedacht.', maken: 'Een manier van werken die klopt.' },
+  {
+    knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
+    maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
+  },
   { knelt: "Programma's die niet met elkaar samenwerken.", maken: 'Eén plek waar je team alles terugvindt.' },
   {
     knelt: 'Klanten die merken dat het rommelig loopt, terwijl je werk goed is.',
@@ -33,9 +36,8 @@ const pairs = [
   { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.' },
 ];
 
-// Running text, and the small uppercase labels above columns.
+// Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
-const label = 'text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400';
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
@@ -153,38 +155,33 @@ export function Aanpak() {
         id="missie"
         number="02"
         label="Missie"
-        title="Vast in het digitale eromheen"
+        title="Je vak loopt, het werk eromheen niet"
         zoneRef={zone(STOP.missie)}
         markerRef={stop(STOP.missie)}
-        wide={
-          <>
-            {/* Each friction beside its answer, on the page's two columns; on phones the answer follows its friction */}
-            <div aria-hidden="true" className={cn(raster, 'hidden lg:grid pb-3', label)}>
-              <span>Wat knelt</span>
-              <span>Wat we maken</span>
-            </div>
-            <dl className={`border-b ${hairline}`}>
-              {pairs.map(({ knelt, maken }) => (
-                <div key={knelt} className={cn(raster, 'gap-y-2 py-4 border-t', hairline)}>
-                  <dt className={prose}>{knelt}</dt>
-                  <dd className="font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
-                    {maken}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <div className={raster}>
-              <p className={cn('lg:col-start-2 max-w-xl pt-8', prose)}>
-                We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.
-              </p>
-            </div>
-          </>
-        }
       >
         <p>
           Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen.
+          Wat we maken, hangt af van waar het knelt.
         </p>
-        <p>Wat we maken, hangt af van waar het knelt.</p>
+        {/* Each friction as a couplet: what knelt, quiet, and below it what we make for it, in Syne. No table, no
+            column labels: it reads as one sentence turning round, the same on every screen. */}
+        <dl className={`border-b ${hairline}`}>
+          {pairs.map(({ knelt, maken }) => (
+            <div key={knelt} className={cn('flex flex-col gap-1.5 py-5 border-t', hairline)}>
+              <dt className="text-sm sm:text-base leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
+                {knelt}
+              </dt>
+              <dd className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
+                <CornerDownRight
+                  aria-hidden="true"
+                  className="absolute left-0 top-[calc(0.5lh-0.5rem)] size-4 text-slate-400 dark:text-slate-500"
+                />
+                {maken}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p>We maken het eenvoudiger, mooier en fijner, voor jou, je team en je klanten.</p>
       </Chapter>
 
       <Chapter
@@ -270,7 +267,6 @@ function Chapter({
   title,
   zoneRef,
   markerRef,
-  wide,
   children,
 }: {
   id: string;
@@ -279,8 +275,6 @@ function Chapter({
   title: string;
   zoneRef: (el: HTMLElement | null) => void;
   markerRef: (el: HTMLElement | null) => void;
-  // Content across both columns, below the row (it keeps to the grid itself).
-  wide?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -300,7 +294,6 @@ function Chapter({
         </Typography>
       </div>
       <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>
-      {wide && <div className="lg:col-span-2">{wide}</div>}
     </section>
   );
 }
