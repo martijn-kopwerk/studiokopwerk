@@ -20,8 +20,8 @@ const portraitFiles = import.meta.glob<string>('../content/over/portret.{avif,we
 });
 const portrait = Object.values(portraitFiles)[0];
 
-// TODO(Martijn): describe what's in the photo, for people who can't see it.
-const portraitAlt = '[Beschrijving van de foto: wat er te zien is en waar]';
+// TODO(Martijn): once the photo is in, say what's in it (where, what he's doing), for people who can't see it.
+const portraitAlt = 'Zwart-witportret van Martijn Fieten';
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -30,9 +30,9 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
 
 /**
- * Wie je spreekt: a name, a black-and-white portrait and a few sentences in the first person. Set on the same
- * grid as Aanpak: the photo in the narrow column, the text beside it, then rows with a conclusion on the left.
- * Everything in [brackets] is still to be written by Martijn; nothing here is invented.
+ * Wie je spreekt: a name, a black-and-white portrait and a few sentences about Martijn. The studio speaks
+ * ("we"), Martijn is "hij". Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
+ * then rows with a conclusion on the left. Every fact here comes from Martijn; nothing is invented.
  */
 export function Over() {
   const { openContact, preloadContact } = useContact();
@@ -55,7 +55,8 @@ export function Over() {
           Martijn Fieten
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          [Eén zin over wie je bent, met één <em className="italic font-normal">woord</em> cursief.]
+          Martijn helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale{' '}
+          <em className="italic font-normal">eromheen</em>.
         </Typography>
       </div>
 
@@ -64,20 +65,54 @@ export function Over() {
 
       {/* The portrait in the narrow column, off-centre, with room beside it for the first words */}
       <section aria-label="Wie je spreekt" className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
-        <Portrait />
+        <div className="flex flex-col gap-4">
+          <Portrait />
+          <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
+            Hij woont in het groen, omdat hij het liefst buiten is.
+          </p>
+        </div>
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
-          <p>[Twee of drie zinnen in de ik-vorm: wat je deed voordat je Studio Kopwerk begon.]</p>
-          <p>[Wat je daar zag gebeuren, en waarom je dit nu doet.]</p>
+          <p>
+            Martijn werkt al jaren als productmanager bij grote organisaties. Hij bepaalt wat er gemaakt wordt en
+            waarom, en hielp grote systemen als Salesforce en ServiceNow invoeren.
+          </p>
+          <p>
+            Daar zag hij steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige stappen die het werk
+            vertraagden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
+          </p>
+          <p>Studio Kopwerk begon hij ernaast, om wat hij daar leerde ook voor ondernemers te doen.</p>
         </div>
       </section>
 
-      <Row id="waarom" title="[Een kop die iets zegt: waarom Studio Kopwerk]">
-        <p>[Een tot vier zinnen.]</p>
+      <Row id="waarom" title="Ondernemers missen vaak iemand die dit al eens gedaan heeft">
+        <p>
+          Een grote organisatie en een ondernemer hebben iets gemeen: ze zijn goed in hun vak. Het verschil is dat een
+          ondernemer meestal niemand in huis heeft die het digitale eromheen al eens heeft ingericht.
+        </p>
+        <p>
+          Vroeger had je daar een heel team voor nodig. Met AI maakt Martijn nu zelf wat hij als productmanager alleen
+          kon bedenken.
+        </p>
       </Row>
 
-      <Row id="verwachten" title="[Een kop die iets zegt: wat je van me kunt verwachten]">
-        <p>[Een tot vier zinnen over hoe het is om met je te werken.]</p>
+      <Row id="verwachten" title="Je spreekt met wie het maakt">
+        <p>
+          Martijn ziet snel waar het knelt en maakt snel iets dat werkt. Hij weet wat een fijne ervaring is, en hoe je
+          die maakt.
+        </p>
+        <p>
+          Door zijn achtergrond in het onderwijs is hij een goede brug tussen het werk zoals jij het kent en de digitale
+          wereld. Je hoeft er de taal niet voor te spreken.
+        </p>
         <p>AI doet het maakwerk, wij kijken wat werkt en jij beslist wat blijft.</p>
+      </Row>
+
+      <Row id="keuzes" title="Studio Kopwerk bouwt geen groot systeem van begin tot eind">
+        <p>
+          We maken wat het werk eenvoudiger, mooier en fijner maakt, en houden het zo klein als kan. Daarom werken we
+          het liefst met mensen die vinden dat het voor de mensen beter moet worden, en die AI een eerlijke kans willen
+          geven.
+        </p>
       </Row>
 
       <section
