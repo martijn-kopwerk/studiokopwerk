@@ -1,6 +1,8 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Typography } from '../components/ui/Typography';
+import { useAmberDot } from '../hooks/useAmberDot';
 import { contactEmail } from '../lib/contact';
+import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
@@ -8,16 +10,37 @@ import { cn } from '../lib/utils';
 const prose =
   'max-w-xl flex flex-col gap-6 text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty [&_a]:underline [&_a]:underline-offset-4';
 
+const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
+
 /**
  * What the site and Studio Kopwerk keep about you, as short as the AVG allows. Set like Aanpak: each part a row on
  * the site's grid with a hairline above, the conclusion on the left and its explanation on the right.
- * No amber dot targets: the dot rests on the vertex and goes to the footer.
+ * On wider screens the K's vertex would land on the first heading, so the amber dot rests in the margin beside
+ * the eyebrow; on phones it stays on the vertex, in the gap below the intro. The footer takes it from there.
  */
 export function Privacy() {
+  const intro = useRef<HTMLSpanElement | null>(null);
+  const [phone, setPhone] = useState(false);
+
+  useAmberDot(() => (phone ? null : intro.current), phone, true);
+
+  useEffect(() => {
+    const query = window.matchMedia(PHONE);
+    const update = () => setPhone(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+
   return (
     <main className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-8 motion-safe:animate-rise [--rise-from:16px]">
       <div className="sm:pl-14 flex flex-col gap-4 sm:gap-5">
-        <Typography variant="eyebrow" as="p">
+        <Typography variant="eyebrow" as="p" className="relative">
+          <span
+            ref={intro}
+            aria-hidden="true"
+            className="absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5"
+          />
           Privacy
         </Typography>
         <h1
