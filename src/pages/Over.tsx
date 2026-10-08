@@ -31,7 +31,7 @@ const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.
 
 /**
  * Wie je spreekt: a name, a black-and-white portrait and a few sentences by Martijn, in the first person.
- * The brand lines stay "we" ("wij kijken wat werkt", "Daag ons uit"). Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
+ * The brand line "wij kijken wat werkt" stays "we". Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
  * then rows with a conclusion on the left. Every fact here comes from Martijn; nothing is invented.
  */
 export function Over() {
@@ -116,7 +116,7 @@ export function Over() {
       </Row>
 
       <section
-        aria-label="Daag ons uit"
+        aria-label="Vertel waar het knelt"
         className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
       >
         <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
@@ -125,7 +125,7 @@ export function Over() {
         <div className="flex flex-col items-start gap-6">
           <MagneticWrapper>
             <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-              Daag ons uit
+              Vertel waar het knelt
             </CapsuleButton>
           </MagneticWrapper>
           <NextLink href="/aanpak">Verder: hoe we werken</NextLink>
