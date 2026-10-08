@@ -88,7 +88,12 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
               </span>
             ))}
             {/* The year comes from the build; in the first days of a new year the browser may know better */}
-            <span suppressHydrationWarning>© {currentYear} Studio Kopwerk</span>
+            <span suppressHydrationWarning className="after:content-['•'] after:ml-2">
+              © {currentYear} Studio Kopwerk
+            </span>
+            <Link href="/privacy" className="underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
+              Privacy
+            </Link>
           </p>
         </div>
       </div>

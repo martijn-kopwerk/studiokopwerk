@@ -64,6 +64,15 @@ describe('header and footer', () => {
   });
 });
 
+describe('privacy', () => {
+  it('says what we keep, linked from the footer of every page', () => {
+    const { html, head } = render('/privacy');
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat we bewaren<\/h1>/i);
+    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/privacy" />');
+    expect(render('/').html).toMatch(/<a[^>]*href="\/privacy"/);
+  });
+});
+
 describe('werk', () => {
   const opdracht = (draft: boolean): Project => ({
     slug: 'x',
@@ -76,7 +85,7 @@ describe('werk', () => {
   });
 
   it('does not exist without opdrachten: no page, so no sitemap entry', () => {
-    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/aanpak']);
+    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/aanpak', '/privacy']);
   });
 
   it('exists with only drafts (dev and previews), kept out of search results', () => {
