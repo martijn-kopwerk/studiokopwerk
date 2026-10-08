@@ -118,7 +118,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                   </p>
                   <div className="flex flex-col sm:flex-row items-center gap-6">
                     <CapsuleButton onClick={challenge} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-                      Daag ons uit
+                      Vertel waar het knelt
                     </CapsuleButton>
                     <button
                       type="button"
