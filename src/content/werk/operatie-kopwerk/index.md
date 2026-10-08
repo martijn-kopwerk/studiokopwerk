@@ -1,5 +1,5 @@
 ---
-titel: "Onze hele bedrijfsvoering in één app, in onze eigen stijl"
+titel: "Onze hele bedrijfsvoering op één plek, in onze eigen stijl"
 klant: "Studio Kopwerk"
 sector: "Eigen onderneming"
 datum: 2026-09-30
@@ -11,22 +11,22 @@ alt: "Het overzicht van Operatie Kopwerk, met voorbeeldgegevens: mails die op ee
 film:
   - beeld: ./film-1-menu.webp
     alt: "Het menu van Operatie Kopwerk: overzicht, offertes, klanten, diensten, e-mail, presentaties en instellingen."
-    tekst: "Alles op één plek."
+    tekst: "Al het werk op één plek. Niet meer zoeken tussen programma's."
   - beeld: ./film-2-mail.webp
     alt: "Twee mails, elk met een samenvatting in één zin en labels als Offerteaanvraag, Klant en Planning."
-    tekst: "De mail is al gelezen, samengevat en gesorteerd."
+    tekst: "Bij elke mail staat in één zin wat hij vraagt."
   - beeld: ./film-3-kanweg.webp
     alt: "Onder Kan weg een nieuwsbrief, met de knop Alles archiveren."
-    tekst: "Nieuwsbrieven en meldingen: in één keer weg."
+    tekst: "Wat weg kan, staat apart. Eén klik en het is opgeruimd."
   - beeld: ./film-4-antwoord.webp
     alt: "Een antwoord in concept aan Jeroen Bos, met eronder de aanwijzing: zeg ja, we starten maandag 2 november."
-    tekst: "AI schrijft het antwoord, wij sturen bij. Zeker vijf minuten per mail."
+    tekst: "AI schrijft het antwoord, wij sturen bij. Dat scheelt zeker vijf minuten per mail."
   - beeld: ./film-5-offerte.webp
     alt: "De voorkant van een offerte in de huisstijl: Automatische koppeling voor de planning."
-    tekst: "De offerte in onze stijl. Minstens twee uur per offerte."
+    tekst: "AI schrijft de offerte in onze stijl, wij kiezen wat blijft. Dat scheelt minstens twee uur per offerte."
   - beeld: ./film-6-vertaald.webp
     alt: "Dezelfde offerte in het Nederlands en in het Engels, schuin over elkaar, in dezelfde opmaak."
-    tekst: "In elke taal dezelfde opmaak."
+    tekst: "AI vertaalt de offerte, de opmaak blijft hetzelfde."
 ---
 
-Ons eigen bedrijf was onze eerste opdracht: Operatie Kopwerk bundelt offertes, klanten, mail, presentaties en facturen in één app in onze stijl, en vervangt zo een handvol losse programma's. AI bouwde de app, scheidt in de mail het kaf van het koren en schrijft offertes en antwoorden in onze toon; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en vijf minuten per mail, tijd die nu naar het echte werk gaat.
+Ons eigen bedrijf was onze eerste opdracht: in Operatie Kopwerk komen offertes, klanten, mail, presentaties en facturen samen, waar eerst een handvol losse programma's nodig was. AI bouwde het en doet het schrijfwerk; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en zeker vijf minuten per mail: tijd voor het echte werk.

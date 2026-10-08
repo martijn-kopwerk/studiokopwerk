@@ -236,11 +236,12 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 
 The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). It never plays on the card itself.
 
-* **Scenes, not video:** each scene is a still image from a demo with example data (never real client data or company details) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About six seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
+* **Scenes, not video:** each scene is a still image from a demo with example data (never real client data or company details) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About seven seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
 * **One detail per scene, never a whole screen:** crop each image to the one thing the caption is about (the menu, two mails, one draft, one cover) and show it whole and large on the dark stage, with room around it. A full screen of interface is a wall of text.
 * **Always dark,** like a cinema, in either theme. Phones get an upright stage.
 * **The viewer decides:** pause, previous, next, a bar per scene to jump to, arrow keys, Escape. With reduced motion there is no drift and nothing plays by itself; the viewer steps through.
-* **Captions are text,** in Syne, readable and selectable, and short: one line that says what the scene means, not what it shows (that is the image's `alt`).
+* **Captions are text,** in Syne, readable and selectable, and short: one or two sentences that say what the scene means for people, not what it shows (that is the image's `alt`). They follow the voice rules (`programma's`, not `apps`; no comma before *en*) and must be true of the image beside them.
+* **A saving reads as a saving:** "Dat scheelt minstens twee uur per offerte", never a bare "Minstens twee uur per offerte", which reads as what it costs.
 
 ---
 
