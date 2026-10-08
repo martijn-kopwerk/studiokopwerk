@@ -74,7 +74,7 @@ export function Over() {
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
           <p>
             Ik werk al jaren als productmanager bij grote organisaties. Ik bepaal wat er gemaakt wordt en
-            waarom, en hielp grote systemen als Salesforce en ServiceNow invoeren.
+            waarom. Ook hielp ik grote systemen invoeren.
           </p>
           <p>
             Daar zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige stappen die het werk
@@ -97,7 +97,7 @@ export function Over() {
 
       <Row id="verwachten" title="Je spreekt met wie het maakt">
         <p>
-          Ik zie snel waar het knelt en maak snel iets dat werkt. Ik weet wat een fijne ervaring is, en hoe je
+          Ik zie snel waar het knelt en maak snel iets dat werkt. Ik weet wat een fijne ervaring is en hoe je
           die maakt.
         </p>
         <p>
@@ -109,8 +109,8 @@ export function Over() {
 
       <Row id="keuzes" title="Studio Kopwerk bouwt geen groot systeem van begin tot eind">
         <p>
-          Ik maak wat het werk eenvoudiger, mooier en fijner maakt, en houd het zo klein als kan. Daarom werk ik
-          het liefst met mensen die vinden dat het voor de mensen beter moet worden, en die AI een eerlijke kans willen
+          Ik maak wat het werk eenvoudiger, mooier en fijner maakt. Daarbij houd ik het zo klein als kan. Daarom werk ik
+          het liefst met mensen die vinden dat het voor de mensen beter moet worden en die AI een eerlijke kans willen
           geven.
         </p>
       </Row>
