@@ -232,6 +232,15 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 * **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 
+### G. Een film bij een opdracht (`/werk`)
+
+The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). It never plays on the card itself.
+
+* **Scenes, not video:** each scene is a still image (webp, 16:10, from a demo with example data, never real client data) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About six seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
+* **Always dark,** like a cinema, in either theme. Phones get an upright stage cropped around each scene's focus.
+* **The viewer decides:** pause, previous, next, a bar per scene to jump to, arrow keys, Escape. With reduced motion there is no drift and nothing plays by itself; the viewer steps through.
+* **Captions are text,** in Syne, readable and selectable; they say what the scene means, not what it shows (that is the image's `alt`).
+
 ---
 
 ## 6. Copywriting Tone & Voice Guidelines

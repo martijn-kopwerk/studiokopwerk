@@ -73,6 +73,7 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
    - `beeld` en `alt`: zet het bestand in dezelfde map, bij voorkeur `.webp` van maximaal ±2000 px breed;
    - `citaat` en `naam` (en eventueel `rol`);
    - `getal` en `label`.
+   - Bij een `beeld` kan er een korte `film` achter: een lijst scènes met elk een `beeld` (16:10, voorbeeldgegevens, geen echte klantdata), `alt`, één regel `tekst` en eventueel een `focus` waar het beeld langzaam naartoe schuift (bijv. `"70% 40%"`). Zie `operatie-kopwerk/` als voorbeeld.
 4. **Schrijf eronder** twee of drie zinnen: de vraag, wat we maakten, wat het opleverde.
 5. **Laat `concept: true` staan** en open een PR. De Azure-preview toont concepten, de live site niet. Klopt er iets niet, dan faalt de build met een melding die zegt wat er mist.
 6. **Klaar?** Haal `concept: true` weg en merge. De nieuwste opdracht komt bovenaan.

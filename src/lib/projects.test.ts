@@ -44,6 +44,27 @@ describe('parseProject', () => {
     );
   });
 
+  it('takes a film beside the image, scene by scene', () => {
+    const images = { './foto.webp': '/assets/foto.webp', './scene.webp': '/assets/scene.webp' };
+    const withImage = { ...base, beeld: './foto.webp', alt: 'Een scherm' };
+    const project = parseProject(
+      'film',
+      module({ ...withImage, film: [{ beeld: './scene.webp', alt: 'Een inbox', tekst: 'Wat om je vraagt staat bovenaan.' }] }),
+      images
+    );
+    expect(project.film).toEqual([
+      { image: '/assets/scene.webp', alt: 'Een inbox', text: 'Wat om je vraagt staat bovenaan.', focus: '50% 50%' },
+    ]);
+
+    expect(() =>
+      parseProject('film', module({ ...withImage, film: [{ beeld: './weg.webp', focus: 'links' }] }), images)
+    ).toThrow(/scène 1: \.\/weg\.webp staat niet in de map van deze opdracht; scène 1: "alt" ontbreekt.*"tekst" ontbreekt.*"focus" moet/);
+    expect(() => parseProject('film', module({ ...base, film: [] }), images)).toThrow(/lijst met scènes/);
+    expect(() =>
+      parseProject('film', module({ ...base, getal: '7', label: 'programma\'s', film: [{ beeld: './scene.webp' }] }), images)
+    ).toThrow(/alleen naast een "beeld"/);
+  });
+
   it('rejects folder names that would make an awkward name', () => {
     expect(() => parseProject('Mijn Opdracht', module(base), {})).toThrow(/mapnaam/);
   });

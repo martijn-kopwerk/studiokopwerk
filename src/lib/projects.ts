@@ -12,6 +12,15 @@ export type ProjectMedia =
   | { kind: 'citaat'; quote: string; name: string; role?: string }
   | { kind: 'getal'; value: string; label: string };
 
+// One scene of an opdracht's short film: an image, what it shows, one line of explanation,
+// and the point the slow zoom moves towards (a CSS transform-origin, e.g. "70% 40%").
+export interface FilmScene {
+  image: string;
+  alt: string;
+  text: string;
+  focus: string;
+}
+
 export interface Project {
   slug: string;
   // Position in the list, as shown: '01', '02', …
@@ -22,6 +31,8 @@ export interface Project {
   date: string;
   draft: boolean;
   media?: ProjectMedia;
+  // Optional: a short film that opens from the image.
+  film?: FilmScene[];
   // The two or three sentences below the fields.
   Text: ComponentType;
 }
@@ -41,6 +52,7 @@ const imageFiles = import.meta.glob<string>('../content/werk/*/*.{png,jpg,jpeg,w
 });
 
 const slugPattern = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const focusPattern = /^(100|[1-9]?\d)% (100|[1-9]?\d)%$/;
 
 /** Checks one opdracht's fields and turns them into a Project; throws one error naming every problem, in Dutch. */
 export function parseProject(
@@ -99,6 +111,29 @@ export function parseProject(
     media = { kind: 'getal', value, label: label ?? '' };
   }
 
+  let film: FilmScene[] | undefined;
+  if (fm.film !== undefined) {
+    if (!Array.isArray(fm.film) || fm.film.length === 0) {
+      problems.push('"film" moet een lijst met scènes zijn');
+    } else if (media?.kind !== 'beeld') {
+      problems.push('"film" kan alleen naast een "beeld": de film opent vanaf dat beeld');
+    } else {
+      film = fm.film.map((scene: unknown, index) => {
+        const fields = ((typeof scene === 'object' && scene) || {}) as Record<string, unknown>;
+        const field = (key: string) => (typeof fields[key] === 'string' ? (fields[key] as string).trim() : '');
+        const where = `scène ${index + 1}`;
+        const image = field('beeld');
+        const focus = field('focus') || '50% 50%';
+        if (!image) problems.push(`${where}: "beeld" ontbreekt`);
+        else if (!images[image]) problems.push(`${where}: ${image} staat niet in de map van deze opdracht`);
+        if (!field('alt')) problems.push(`${where}: "alt" ontbreekt: beschrijf wat er op het beeld te zien is`);
+        if (!field('tekst')) problems.push(`${where}: "tekst" ontbreekt: één regel uitleg bij het beeld`);
+        if (!focusPattern.test(focus)) problems.push(`${where}: "focus" moet de vorm "70% 40%" hebben`);
+        return { image: images[image] ?? '', alt: field('alt'), text: field('tekst'), focus };
+      });
+    }
+  }
+
   if (problems.length > 0) {
     throw new Error(`Opdracht "${slug}" (src/content/werk/${slug}/index.md): ${problems.join('; ')}.`);
   }
@@ -111,6 +146,7 @@ export function parseProject(
     date: date!,
     draft: fm.concept === true,
     media,
+    film,
     Text: module.default,
   };
 }
