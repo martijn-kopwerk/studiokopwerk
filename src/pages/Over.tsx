@@ -31,7 +31,7 @@ const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.
 
 /**
  * Wie je spreekt: a name, a black-and-white portrait and a few sentences by Martijn, in the first person.
- * The brand line "wij kijken wat werkt" stays "we". Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
+ * It answers what the other pages leave open: who you talk to, where, and why it works this way. Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
  * then rows with a conclusion on the left. Every fact here comes from Martijn; nothing is invented.
  */
 export function Over() {
@@ -55,8 +55,8 @@ export function Over() {
           Martijn
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Ik help ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale{' '}
-          <em className="italic font-normal">eromheen</em>.
+          Vroeger had je een heel team nodig om het digitale goed in te richten. Nu maak ik het{' '}
+          <em className="italic font-normal">zelf</em>, met AI.
         </Typography>
       </div>
 
@@ -68,51 +68,59 @@ export function Over() {
         <div className="flex flex-col gap-4">
           <Portrait />
           <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
-            Ik woon in het groen, omdat ik het liefst buiten ben.
+            Ik woon in Haren, net onder Groningen. Langskomen kan in heel Nederland.
           </p>
         </div>
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
           <p>
-            Ik werk al jaren als productmanager bij grote organisaties. Ik bepaal wat er gemaakt wordt en
-            waarom. Ook hielp ik grote systemen invoeren.
+            Werk eenvoudiger maken doe ik al sinds het begin van mijn loopbaan. Een collega zette elke week met de hand
+            rapportages in elkaar. Ik dacht dat het handiger kon, leerde mezelf hoe en automatiseerde ze. Dat scheelde een
+            dag werk per week.
           </p>
           <p>
-            Daar zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige stappen die het werk
-            vertraagden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
+            Inmiddels werk ik al tien jaar in productmanagement bij grote organisaties: lang als product owner, nu als
+            productmanager. In gewone woorden: ik bepaal wat er gemaakt wordt en waarom. Ook hielp ik er grote systemen
+            invoeren.
           </p>
-          <p>Studio Kopwerk begon ik ernaast, om wat ik daar leerde ook voor ondernemers te doen.</p>
+          <p>
+            Bij grote organisaties zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige
+            stappen die het werk vertraagden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
+          </p>
+          <p>Daarom begon ik Studio Kopwerk: wat ik daar leerde, gun ik ook ondernemers.</p>
         </div>
       </section>
 
-      <Row id="waarom" title="Ondernemers missen vaak iemand die dit al eens gedaan heeft">
+      <Row id="ervaring" title="Je krijgt wat werkt bij grote organisaties, zonder hun kosten">
         <p>
-          Een grote organisatie en een ondernemer hebben iets gemeen: ze zijn goed in hun vak. Het verschil is dat een
-          ondernemer meestal niemand in huis heeft die het digitale eromheen al eens heeft ingericht.
+          Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht.
         </p>
         <p>
-          Vroeger had je daar een heel team voor nodig. Met AI maak ik nu zelf wat ik als productmanager alleen
-          kon bedenken.
+          Ik neem mee wat ik bij grote organisaties leerde, zonder hun lange trajecten en vergaderingen. Wat ik als
+          productmanager alleen kon bedenken, maak ik nu zelf.
         </p>
       </Row>
 
       <Row id="verwachten" title="Je spreekt met wie het maakt">
         <p>
-          Ik zie snel waar het knelt en maak meteen iets dat werkt. Ik weet wat een fijne ervaring is en hoe je
-          die maakt.
+          Ik zie snel waar het knelt. Daarna heb je in korte tijd iets in handen dat werkt. Ik praat over je werk, niet
+          over techniek: je hoeft geen computertaal te spreken.
         </p>
         <p>
-          Ik heb ook een achtergrond in het onderwijs. Daardoor ben ik een goede brug tussen het werk zoals jij het kent
-          en de digitale wereld. Je hoeft er de taal niet voor te spreken.
+          Studio Kopwerk doe ik naast mijn werk als productmanager. Daarom neem ik weinig opdrachten tegelijk aan: wie
+          met mij werkt, krijgt mijn aandacht.
         </p>
-        <p>AI doet het maakwerk, samen kijken we wat werkt en jij beslist wat blijft.</p>
       </Row>
 
-      <Row id="keuzes" title="Studio Kopwerk bouwt geen groot systeem van begin tot eind">
+      <Row id="klein" title="Ik begin klein en bouw alleen wat helpt">
         <p>
-          Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo klein als kan. Daarom werk ik
-          het liefst met mensen die vinden dat het voor de mensen beter moet worden en die AI een eerlijke kans willen
-          geven.
+          Ik bouw geen groot systeem van begin tot eind. Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo
+          klein als kan.
         </p>
+        <p>Ik werk het liefst met ondernemers die nieuwsgierig zijn naar wat AI voor hen kan doen.</p>
+      </Row>
+
+      <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
+        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven met wat AI kan.</p>
       </Row>
 
       <section
@@ -120,7 +128,7 @@ export function Over() {
         className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
       >
         <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Klein beginnen, snel iets maken dat werkt.
+          Je mail komt bij mij binnen. Ik lees hem zelf.
         </Typography>
         <div className="flex flex-col items-start gap-6">
           <MagneticWrapper>
