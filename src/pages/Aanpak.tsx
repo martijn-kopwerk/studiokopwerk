@@ -146,7 +146,7 @@ export function Aanpak() {
         <p>Mensen passen zich aan de techniek aan, in plaats van andersom.</p>
         <p>
           Volgens ons hoort het andersom. Technologie is pas goed als het voor mensen beter wordt: rustiger, duidelijker
-          en fijner. Het echte werk zit in zien wat ertoe doet, en de rest durven weglaten. Dat zie je het snelst door
+          en fijner. Het echte werk zit in zien wat ertoe doet en de rest durven weglaten. Dat zie je het snelst door
           het te maken, samen met de mensen voor wie het is.
         </p>
       </Chapter>
