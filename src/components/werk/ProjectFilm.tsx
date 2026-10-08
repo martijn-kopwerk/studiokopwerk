@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 import { CapsuleButton } from '../ui/CapsuleButton';
 import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
 
-const SCENE_SECONDS = 6;
+const SCENE_SECONDS = 7;
 const EASE = [0.19, 1, 0.22, 1] as const;
 // Stage and captions share one width: as wide as fits, but never so tall that the captions drop off the screen.
 // Phones get an upright stage.
