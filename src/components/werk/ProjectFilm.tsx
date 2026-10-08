@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
 const SCENE_SECONDS = 6;
 const EASE = [0.19, 1, 0.22, 1] as const;
 // Stage and captions share one width: as wide as fits, but never so tall that the captions drop off the screen.
-// Phones get an upright stage, cropped around each scene's focus.
+// Phones get an upright stage.
 const WIDTH: CSSProperties = { maxWidth: 'min(72rem, calc((100dvh - 17rem) * 1.6))' };
 
 interface ProjectFilmProps {
@@ -21,8 +21,8 @@ interface ProjectFilmProps {
 }
 
 /**
- * An opdracht's short film: its scenes one after another, each drifting slowly towards its focus with one line
- * of explanation, then a closing frame. Always dark, like a cinema. It plays by itself unless the viewer asked
+ * An opdracht's short film: its scenes one after another, each one detail of a screen shown whole and large, drifting
+ * slowly towards its focus, with one line of explanation; then a closing frame. Always dark, like a cinema. It plays by itself unless the viewer asked
  * for less motion; then there is no zoom and the viewer steps through. The zoom and the progress bar are CSS
  * animations of the same length, so pausing stops both and the bar's end moves on to the next scene.
  */
@@ -85,13 +85,13 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
         <div className="flex-1 min-h-0 flex items-center justify-center">
           <div
             style={WIDTH}
-            className="relative w-full aspect-[4/5] sm:aspect-[16/10] overflow-hidden rounded-2xl border border-slate-800 bg-kopwerk-dark"
+            className="relative w-full aspect-[4/5] sm:aspect-[16/10] overflow-hidden bg-kopwerk-dark"
           >
             <AnimatePresence initial={false}>
               {scene ? (
                 <m.div
                   key={index}
-                  className="absolute inset-0"
+                  className="absolute inset-0 p-4 sm:p-10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -100,8 +100,8 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                   <img
                     src={scene.image}
                     alt={scene.alt}
-                    className="size-full object-cover motion-safe:animate-film-zoom"
-                    style={{ ...timing, transformOrigin: scene.focus, objectPosition: scene.focus }}
+                    className="size-full object-contain motion-safe:animate-film-zoom"
+                    style={{ ...timing, transformOrigin: scene.focus }}
                   />
                 </m.div>
               ) : (
