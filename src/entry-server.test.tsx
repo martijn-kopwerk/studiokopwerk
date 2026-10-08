@@ -8,7 +8,7 @@ describe('prerendering', () => {
   it('renders home with its heading, call to action and own head tags', () => {
     const { html, head } = render('/');
     expect(html).toMatch(/<h1[^>]*id="hero-title"/);
-    expect(html).toContain('Daag ons uit');
+    expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Studio Kopwerk · Zien wat wérkt</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
@@ -36,7 +36,7 @@ describe('aanpak', () => {
     }
     expect(html).not.toContain('aria-labelledby="principes"');
     expect(html).toContain('aria-pressed="false"');
-    expect(html).toContain('Daag ons uit');
+    expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
   });
@@ -59,7 +59,7 @@ describe('header and footer', () => {
 
   it('opens the contact card from the footer address and shows the company details', () => {
     const { html } = render('/');
-    expect(html).toContain('aria-label="Daag ons uit: hallo@studiokopwerk.nl"');
+    expect(html).toContain('aria-label="Vertel waar het knelt: hallo@studiokopwerk.nl"');
     expect(html).toContain('KvK 42154955');
   });
 });

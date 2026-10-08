@@ -60,7 +60,7 @@ export function Home() {
             onFocus={preloadContact}
             className="w-auto"
           >
-            Daag ons uit
+            Vertel waar het knelt
           </CapsuleButton>
         </MagneticWrapper>
       </div>

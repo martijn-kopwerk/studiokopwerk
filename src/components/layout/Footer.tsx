@@ -15,7 +15,7 @@ const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525
 /**
  * A quiet footer on the site's grid, below a hairline: the pages on the text line, the address and the company
  * details in the second column, all in one small style. No second call to action:
- * every page already ends with "Daag ons uit", and the address opens that same contact card.
+ * every page already ends with "Vertel waar het knelt", and the address opens that same contact card.
  * On phones it stands right of the K's stem, like the pages.
  */
 export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null) => void }) {
@@ -76,7 +76,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
             onClick={openContact}
             onPointerEnter={preloadContact}
             onFocus={preloadContact}
-            aria-label={`Daag ons uit: ${contactEmail}`}
+            aria-label={`Vertel waar het knelt: ${contactEmail}`}
             className="group -mx-1 px-1 py-1 rounded-md text-slate-700 dark:text-slate-300"
           >
             <RollingText accentClassName="text-amber-700 dark:text-amber-400">{contactEmail}</RollingText>

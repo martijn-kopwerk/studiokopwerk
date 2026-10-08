@@ -22,12 +22,13 @@ export function CapsuleButton({
     <button
       type={type}
       className={cn(
-        'group relative inline-flex w-full sm:w-auto items-center justify-between sm:justify-start gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 shadow-xl shadow-slate-900/10 dark:shadow-kopwerk-dark/20 transition-transform duration-500 ease-kopwerk hover:scale-[1.02] active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:scale-100',
+        'group relative inline-flex w-full sm:w-auto items-center justify-between sm:justify-start gap-4 sm:gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 shadow-xl shadow-slate-900/10 dark:shadow-kopwerk-dark/20 transition-transform duration-500 ease-kopwerk hover:scale-[1.02] active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:scale-100',
         className
       )}
       {...props}
     >
-      {/* Design system: a 14px uppercase label at 0.1em, beside a 40px arrow disc */}
+      {/* Design system: a 14px uppercase label at 0.1em, beside a 40px arrow disc (a little closer on phones, so
+          "Vertel waar het knelt" stays on one line at 375px) */}
       <RollingText
         className="text-sm font-medium tracking-wide-md uppercase text-white dark:text-slate-950"
         accentClassName="text-amber-400 dark:text-amber-700"
