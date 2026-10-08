@@ -69,6 +69,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 
 ### Opdrachten (`src/content/werk/`)
 - `/werk` is deliberately small: one short card per opdracht (title, client, two or three sentences, at most one image, quote or number). No pages per opdracht.
+- An opdracht with an image may add a short `film:` (scenes of `beeld`, `alt`, `tekst`, optional `focus`) that opens from that image in a dialog (`src/components/werk/ProjectFilm.tsx`). Scenes are stills from a demo with example data, never real client data. Rules: `BRAND_GUIDE.md` §5G.
 - One folder per opdracht: `index.md` (plain Markdown, no components) plus its image. Folders starting with `_` are skipped; `_sjabloon/` is the template to copy, and a test keeps it valid.
 - The fields are validated by `parseProject` in `src/lib/projects.ts`; their names are Dutch (`titel`, `klant`, `datum`, `beeld`/`alt`, `citaat`/`naam`/`rol`, `getal`/`label`, `concept`).
 - New opdrachten start as `concept: true`: visible in `npm run dev` and PR previews, hidden on the live site. Publishing is removing that line.

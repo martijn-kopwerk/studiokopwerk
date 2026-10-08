@@ -25,6 +25,28 @@
   /* Background: the amber dot landing on the K's vertex, and the ambient light drifting on touch screens */
   --animate-dot-land: kopwerk-dot-land 0.8s var(--ease-kopwerk) 1.9s both;
   --animate-glow-drift: kopwerk-glow-drift 28s ease-in-out infinite alternate;
+  /* An opdracht's film: each scene drifts slowly towards its focus while its progress bar fills.
+     Both run for --scene seconds and pause together (animation-play-state). */
+  --animate-film-zoom: kopwerk-film-zoom var(--scene, 6s) var(--ease-kopwerk) both;
+  --animate-film-progress: kopwerk-film-progress var(--scene, 6s) linear both;
+
+  @keyframes kopwerk-film-zoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes kopwerk-film-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
 
   @keyframes kopwerk-dot-land {
     from {
