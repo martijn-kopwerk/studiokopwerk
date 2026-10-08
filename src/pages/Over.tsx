@@ -97,19 +97,19 @@ export function Over() {
 
       <Row id="verwachten" title="Je spreekt met wie het maakt">
         <p>
-          Ik zie snel waar het knelt en maak snel iets dat werkt. Ik weet wat een fijne ervaring is en hoe je
+          Ik zie snel waar het knelt en maak meteen iets dat werkt. Ik weet wat een fijne ervaring is en hoe je
           die maakt.
         </p>
         <p>
-          Door mijn achtergrond in het onderwijs ben ik een goede brug tussen het werk zoals jij het kent en de digitale
-          wereld. Je hoeft er de taal niet voor te spreken.
+          Ik heb ook een achtergrond in het onderwijs. Daardoor ben ik een goede brug tussen het werk zoals jij het kent
+          en de digitale wereld. Je hoeft er de taal niet voor te spreken.
         </p>
-        <p>AI doet het maakwerk, wij kijken wat werkt en jij beslist wat blijft.</p>
+        <p>AI doet het maakwerk, samen kijken we wat werkt en jij beslist wat blijft.</p>
       </Row>
 
       <Row id="keuzes" title="Studio Kopwerk bouwt geen groot systeem van begin tot eind">
         <p>
-          Ik maak wat het werk eenvoudiger, mooier en fijner maakt. Daarbij houd ik het zo klein als kan. Daarom werk ik
+          Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo klein als kan. Daarom werk ik
           het liefst met mensen die vinden dat het voor de mensen beter moet worden en die AI een eerlijke kans willen
           geven.
         </p>
@@ -120,7 +120,7 @@ export function Over() {
         className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
       >
         <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Klein beginnen, snel iets maken dat <em className="italic font-normal">werkt</em>.
+          Klein beginnen, snel iets maken dat werkt.
         </Typography>
         <div className="flex flex-col items-start gap-6">
           <MagneticWrapper>
@@ -128,7 +128,7 @@ export function Over() {
               Vertel waar het knelt
             </CapsuleButton>
           </MagneticWrapper>
-          <NextLink href="/aanpak">Verder: hoe we werken</NextLink>
+          <NextLink href="/aanpak">Lees hoe we werken</NextLink>
         </div>
       </section>
     </main>
