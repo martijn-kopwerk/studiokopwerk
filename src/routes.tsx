@@ -12,7 +12,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  'Studio Kopwerk maakt de schermen, sites en programma's waarmee ondernemers en bedrijven hun werk eenvoudiger, mooier en fijner maken. Zien wat wérkt.';
+  "Studio Kopwerk maakt de schermen, sites en programma's waarmee ondernemers en bedrijven hun werk eenvoudiger, mooier en fijner maken. Zien wat wérkt.";
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
