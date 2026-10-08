@@ -20,8 +20,8 @@ const portraitFiles = import.meta.glob<string>('../content/over/portret.{avif,we
 });
 const portrait = Object.values(portraitFiles)[0];
 
-// TODO(Martijn): once the photo is in, say what's in it (where, what he's doing), for people who can't see it.
-const portraitAlt = 'Zwart-witportret van Martijn Fieten';
+// TODO(Martijn): once the photo is in, say what's in it (where, what he is doing), for people who can't see it.
+const portraitAlt = 'Zwart-witportret van Martijn';
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -30,8 +30,8 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
 
 /**
- * Wie je spreekt: a name, a black-and-white portrait and a few sentences about Martijn. The studio speaks
- * ("we"), Martijn is "hij". Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
+ * Wie je spreekt: a name, a black-and-white portrait and a few sentences by Martijn, in the first person.
+ * The brand lines stay "we" ("wij kijken wat werkt", "Daag ons uit"). Set on the same grid as Aanpak: the photo in the narrow column, the text beside it,
  * then rows with a conclusion on the left. Every fact here comes from Martijn; nothing is invented.
  */
 export function Over() {
@@ -52,10 +52,10 @@ export function Over() {
           tabIndex={-1}
           className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
         >
-          Martijn Fieten
+          Martijn
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Martijn helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale{' '}
+          Ik help ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale{' '}
           <em className="italic font-normal">eromheen</em>.
         </Typography>
       </div>
@@ -68,19 +68,19 @@ export function Over() {
         <div className="flex flex-col gap-4">
           <Portrait />
           <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
-            Hij woont in het groen, omdat hij het liefst buiten is.
+            Ik woon in het groen, omdat ik het liefst buiten ben.
           </p>
         </div>
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
           <p>
-            Martijn werkt al jaren als productmanager bij grote organisaties. Hij bepaalt wat er gemaakt wordt en
+            Ik werk al jaren als productmanager bij grote organisaties. Ik bepaal wat er gemaakt wordt en
             waarom, en hielp grote systemen als Salesforce en ServiceNow invoeren.
           </p>
           <p>
-            Daar zag hij steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige stappen die het werk
+            Daar zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige stappen die het werk
             vertraagden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
           </p>
-          <p>Studio Kopwerk begon hij ernaast, om wat hij daar leerde ook voor ondernemers te doen.</p>
+          <p>Studio Kopwerk begon ik ernaast, om wat ik daar leerde ook voor ondernemers te doen.</p>
         </div>
       </section>
 
@@ -90,18 +90,18 @@ export function Over() {
           ondernemer meestal niemand in huis heeft die het digitale eromheen al eens heeft ingericht.
         </p>
         <p>
-          Vroeger had je daar een heel team voor nodig. Met AI maakt Martijn nu zelf wat hij als productmanager alleen
+          Vroeger had je daar een heel team voor nodig. Met AI maak ik nu zelf wat ik als productmanager alleen
           kon bedenken.
         </p>
       </Row>
 
       <Row id="verwachten" title="Je spreekt met wie het maakt">
         <p>
-          Martijn ziet snel waar het knelt en maakt snel iets dat werkt. Hij weet wat een fijne ervaring is, en hoe je
+          Ik zie snel waar het knelt en maak snel iets dat werkt. Ik weet wat een fijne ervaring is, en hoe je
           die maakt.
         </p>
         <p>
-          Door zijn achtergrond in het onderwijs is hij een goede brug tussen het werk zoals jij het kent en de digitale
+          Door mijn achtergrond in het onderwijs ben ik een goede brug tussen het werk zoals jij het kent en de digitale
           wereld. Je hoeft er de taal niet voor te spreken.
         </p>
         <p>AI doet het maakwerk, wij kijken wat werkt en jij beslist wat blijft.</p>
@@ -109,7 +109,7 @@ export function Over() {
 
       <Row id="keuzes" title="Studio Kopwerk bouwt geen groot systeem van begin tot eind">
         <p>
-          We maken wat het werk eenvoudiger, mooier en fijner maakt, en houden het zo klein als kan. Daarom werken we
+          Ik maak wat het werk eenvoudiger, mooier en fijner maakt, en houd het zo klein als kan. Daarom werk ik
           het liefst met mensen die vinden dat het voor de mensen beter moet worden, en die AI een eerlijke kans willen
           geven.
         </p>

@@ -43,7 +43,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
             path: '/over',
             title: 'Over · Studio Kopwerk',
             description:
-              'Martijn Fieten, de maker achter Studio Kopwerk: jaren productmanagement bij grote organisaties, nu met AI voor ondernemers.',
+              'Martijn, de maker achter Studio Kopwerk: jaren productmanagement bij grote organisaties, nu met AI voor ondernemers.',
             noindex: true,
           },
           Page: Over,
