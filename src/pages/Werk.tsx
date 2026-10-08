@@ -74,7 +74,7 @@ export function Werk() {
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">
-          Opdrachten uit de praktijk, kort verteld: de vraag, wat we maakten en wat het opleverde.
+          We begonnen bij onszelf. Elke opdracht kort verteld: de vraag, wat we maakten en wat het opleverde.
         </Typography>
       </div>
 
@@ -197,7 +197,7 @@ export function Werk() {
         {/* The same button as on home, magnetic too; Werk is the last stop, so there's no link on */}
         <MagneticWrapper className="self-start sm:self-auto">
           <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-            Daag ons uit
+            Vertel waar het knelt
           </CapsuleButton>
         </MagneticWrapper>
       </section>

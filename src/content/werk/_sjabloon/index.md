@@ -11,6 +11,11 @@ concept: true               # alleen zichtbaar in previews; haal weg om te publi
 # Optioneel, hoogstens één van deze drie naast de tekst:
 # beeld: ./foto.webp        # zet het bestand in deze map
 # alt: "[Wat er op het beeld te zien is]"
+# film:                     # optioneel, alleen naast een beeld: een korte film die opent vanaf het beeld
+#   - beeld: ./film-1.webp  # één uitsnede van een scherm, met voorbeeldgegevens
+#     alt: "[Wat er op het beeld te zien is]"
+#     tekst: "[Eén regel: wat het betekent]"
+#     focus: "50% 50%"      # optioneel: waar het beeld langzaam naartoe schuift
 #
 # citaat: "[Eén zin van de klant]"
 # naam: "[Naam]"

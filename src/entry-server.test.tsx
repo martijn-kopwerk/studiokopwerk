@@ -8,7 +8,7 @@ describe('prerendering', () => {
   it('renders home with its heading, call to action and own head tags', () => {
     const { html, head } = render('/');
     expect(html).toMatch(/<h1[^>]*id="hero-title"/);
-    expect(html).toContain('Daag ons uit');
+    expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Studio Kopwerk · Zien wat wérkt</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
@@ -28,15 +28,16 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('walks through visie, missie and werkwijze, ending in one call to action', () => {
+  it('walks in the reader\'s order, where it pinches, how we work and why, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
-    for (const id of ['visie', 'missie', 'werkwijze']) {
-      expect(html).toContain(`aria-labelledby="${id}"`);
-    }
+    const ids = ['knelt', 'werkwijze', 'waarom'];
+    const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
+    expect(positions.every((position) => position >= 0)).toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
     expect(html).toContain('aria-pressed="false"');
-    expect(html).toContain('Daag ons uit');
+    expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
   });
@@ -59,8 +60,17 @@ describe('header and footer', () => {
 
   it('opens the contact card from the footer address and shows the company details', () => {
     const { html } = render('/');
-    expect(html).toContain('aria-label="Daag ons uit: hallo@studiokopwerk.nl"');
+    expect(html).toContain('aria-label="Vertel waar het knelt: hallo@studiokopwerk.nl"');
     expect(html).toContain('KvK 42154955');
+  });
+});
+
+describe('privacy', () => {
+  it('says what we keep, linked from the footer of every page', () => {
+    const { html, head } = render('/privacy');
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat we bewaren<\/h1>/i);
+    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/privacy" />');
+    expect(render('/').html).toMatch(/<a[^>]*href="\/privacy"/);
   });
 });
 

@@ -17,9 +17,10 @@ Known places where the code still differs from the design system are listed in t
 - **Tone:** Confident, human-centric, and action-oriented. No robotic or overly formal tech-jargon.
 - **Language:** Dutch, including labels, eyebrows and tooltips.
 - **Rule:** Write copy that drives intent, not mechanism.
+- **Word choice:** one word for one thing, as listed under "Words we use" in the design system's `project/voice.md` (*mailadres*, *Begin* not *Home*, *programma's* not *tools*, imperative labels). `src/tekstwacht.test.tsx` checks every page for a comma before *en* and for words we don't use.
 - **Examples:**
-  - Use "Daag ons uit" (Challenge us) instead of "Start een gesprek", "Neem contact op" or "Contact us".
-  - Use "Deel je plannen" (Share your plans) instead of "Open e-mailapplicatie".
+  - Use "Vertel waar het knelt" (Tell us where it pinches) instead of "Daag ons uit", "Start een gesprek", "Neem contact op" or "Contact us". It is the one call to action, on every page: it starts from the reader's situation and needs no "ons" or "me".
+  - Use "Vertel het in een mail" instead of "Deel je plannen" or "Open e-mailapplicatie": the way to the mail after "Vertel waar het knelt" asks for the same story.
 
 ## 3. Design System & CSS Variables (Tailwind)
 
@@ -69,6 +70,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 
 ### Opdrachten (`src/content/werk/`)
 - `/werk` is deliberately small: one short card per opdracht (title, client, two or three sentences, at most one image, quote or number). No pages per opdracht.
+- An opdracht with an image may add a short `film:` (scenes of `beeld`, `alt`, `tekst`, optional `focus`) that opens from that image in a dialog (`src/components/werk/ProjectFilm.tsx`). Scenes are stills from a demo with example data, never real client data. Rules: `BRAND_GUIDE.md` §5G.
 - One folder per opdracht: `index.md` (plain Markdown, no components) plus its image. Folders starting with `_` are skipped; `_sjabloon/` is the template to copy, and a test keeps it valid.
 - The fields are validated by `parseProject` in `src/lib/projects.ts`; their names are Dutch (`titel`, `klant`, `datum`, `beeld`/`alt`, `citaat`/`naam`/`rol`, `getal`/`label`, `concept`).
 - New opdrachten start as `concept: true`: visible in `npm run dev` and PR previews, hidden on the live site. Publishing is removing that line.

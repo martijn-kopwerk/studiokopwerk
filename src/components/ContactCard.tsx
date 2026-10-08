@@ -19,8 +19,8 @@ interface ContactCardProps {
 type CopyState = 'idle' | 'copied' | 'selected';
 
 const copyLabels: Record<CopyState, string> = {
-  idle: 'E-mailadres kopiëren',
-  copied: 'Gekopieerd naar klembord',
+  idle: 'Kopieer het mailadres',
+  copied: 'Gekopieerd naar het klembord',
   selected: 'Geselecteerd, kopieer met Ctrl+C of ⌘C',
 };
 
@@ -77,10 +77,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({
         {/* One heading that answers the button that opened the card, and one line on what to write */}
         <DialogHeader className="mb-12 relative z-10 gap-4">
           <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
-            Daag ons uit.
+            Vertel waar het knelt.
           </DialogTitle>
           <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
-            Vertel waar je op vastloopt.
+            Een paar zinnen is genoeg. Het eerste gesprek is vrijblijvend.
           </DialogDescription>
         </DialogHeader>
 
@@ -90,7 +90,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <button
             type="button"
             onClick={handleCopyEmail}
-            aria-label={copied ? 'E-mailadres gekopieerd naar klembord' : `Kopieer e-mailadres ${email}`}
+            aria-label={copied ? 'Mailadres gekopieerd naar het klembord' : `Kopieer het mailadres ${email}`}
             className="group relative text-left flex flex-col w-full rounded-xl"
           >
             <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors duration-300 ease-kopwerk ${
@@ -127,7 +127,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
               className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
             >
               <RollingText accentClassName="text-amber-700 dark:text-amber-400">
-                Deel je plannen
+                Vertel het in een mail
               </RollingText>
               <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
             </a>

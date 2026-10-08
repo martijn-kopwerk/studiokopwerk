@@ -205,7 +205,7 @@ In the website codebase this is the `<CapsuleButton>` component. Don't rebuild i
 ```html
 <a href="mailto:hallo@studiokopwerk.nl" class="group inline-flex items-center gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 text-white dark:text-slate-950 shadow-xl transition-all duration-300 hover:scale-[1.02]">
   <span class="text-sm font-medium tracking-[0.1em] uppercase">
-    Daag ons uit
+    Vertel waar het knelt
   </span>
   <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 dark:bg-black/10 transition-colors duration-300 group-hover:bg-amber-500">
     &nearr;
@@ -232,14 +232,25 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 * **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 
+### G. Een film bij een opdracht (`/werk`)
+
+The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). It never plays on the card itself.
+
+* **Scenes, not video:** each scene is a still image from a demo with example data (never real client data or company details) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About seven seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
+* **One detail per scene, never a whole screen:** crop each image to the one thing the caption is about (the menu, two mails, one draft, one cover) and show it whole and large on the dark stage, with room around it. A full screen of interface is a wall of text.
+* **Always dark,** like a cinema, in either theme. Phones get an upright stage.
+* **The viewer decides:** pause, previous, next, a bar per scene to jump to, arrow keys, Escape. With reduced motion there is no drift and nothing plays by itself; the viewer steps through.
+* **Captions are text,** in Syne, readable and selectable, and short: one or two sentences that say what the scene means for people, not what it shows (that is the image's `alt`). They follow the voice rules (`programma's`, not `apps`; no comma before *en*) and must be true of the image beside them.
+* **A saving reads as a saving:** "Dat scheelt minstens twee uur per offerte", never a bare "Minstens twee uur per offerte", which reads as what it costs.
+
 ---
 
 ## 6. Copywriting Tone & Voice Guidelines
 
 * **Dutch Primary Voice / Intent-Driven:**
-  * Use *"Daag ons uit"* instead of *"Neem contact op"* or *"Contact us"*.
+  * Use *"Vertel waar het knelt"* instead of *"Neem contact op"* or *"Contact us"* (it replaced *"Daag ons uit"*).
   * Use *"Zien wat wérkt"* as the definitive statement of value.
-  * Use *"Deel je plannen"* instead of *"Stuur een e-mail"*.
+  * Use *"Vertel het in een mail"* instead of *"Stuur een e-mail"* or *"Deel je plannen"*.
   * Use *"Tijd voor actie"* for proposal closing and decision points.
 * **Direct & Human:** No fluffy marketing jargon ("synergy", "paradigm shift", "turnkey solution"). Clear, sharp, and confident language.
 * **Outcome Focus:** Always describe the tangible business value, user speed, and working prototypes rather than technical complexity for its own sake.
@@ -256,7 +267,7 @@ Generate this document strictly following the Studio Kopwerk Design System:
 - Typography: Display font 'Syne' (geometric/bold) and Body font 'Plus Jakarta Sans'.
 - Letter-spacing: Ultra-wide (0.4em-0.5em) for uppercase eyebrows/labels; wide (0.1em) for headings.
 - Aesthetic: Minimalist, architectural, generous whitespace, frosted glass cards (backdrop-blur), glowing amber dots for status.
-- Tone: Confident, action-oriented ("Zien wat wérkt", "Daag ons uit"), zero corporate filler.
+- Tone: Confident, action-oriented ("Zien wat wérkt", "Vertel waar het knelt"), zero corporate filler.
 - Logo URL: https://www.studiokopwerk.nl/favicon.svg
 - Contact: hallo@studiokopwerk.nl
 ```
