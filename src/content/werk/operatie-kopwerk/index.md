@@ -3,7 +3,6 @@ titel: "Onze hele bedrijfsvoering in één app, in onze eigen stijl"
 klant: "Studio Kopwerk"
 sector: "Eigen onderneming"
 datum: 2026-09-30
-concept: true
 
 beeld: ./overzicht.webp
 alt: "Het overzicht van Operatie Kopwerk, met voorbeeldgegevens: mails die op een antwoord wachten, openstaande facturen en een offerte in de maak."
