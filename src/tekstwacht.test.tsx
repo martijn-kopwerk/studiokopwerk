@@ -26,7 +26,7 @@ const verboden = [
 
 // Wat nog in de positionering staat en daar eerst moet veranderen (docs/tekstreview/2026-10-08.md, fase 1).
 // Haal een regel weg zodra de site is bijgewerkt.
-const nogTeBeslissen = ['een tool'];
+const nogTeBeslissen: string[] = [];
 
 const entities: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', '#x27': "'", '#39': "'", nbsp: ' ' };
 const decode = (text: string) => text.replace(/&(#x27|#39|amp|lt|gt|quot|nbsp);/g, (_, name: string) => entities[name]);

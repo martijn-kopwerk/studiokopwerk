@@ -250,7 +250,7 @@ The card on `/werk` stays small. An opdracht with an image may add a short film 
 * **Dutch Primary Voice / Intent-Driven:**
   * Use *"Vertel waar het knelt"* instead of *"Neem contact op"* or *"Contact us"* (it replaced *"Daag ons uit"*).
   * Use *"Zien wat wérkt"* as the definitive statement of value.
-  * Use *"Deel je plannen"* instead of *"Stuur een e-mail"*.
+  * Use *"Vertel het in een mail"* instead of *"Stuur een e-mail"* or *"Deel je plannen"*.
   * Use *"Tijd voor actie"* for proposal closing and decision points.
 * **Direct & Human:** No fluffy marketing jargon ("synergy", "paradigm shift", "turnkey solution"). Clear, sharp, and confident language.
 * **Outcome Focus:** Always describe the tangible business value, user speed, and working prototypes rather than technical complexity for its own sake.

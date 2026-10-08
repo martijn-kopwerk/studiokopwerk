@@ -28,12 +28,13 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('walks through visie, missie and werkwijze, ending in one call to action', () => {
+  it('walks in the reader\'s order, where it pinches, how we work and why, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
-    for (const id of ['visie', 'missie', 'werkwijze']) {
-      expect(html).toContain(`aria-labelledby="${id}"`);
-    }
+    const ids = ['knelt', 'werkwijze', 'waarom'];
+    const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
+    expect(positions.every((position) => position >= 0)).toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
     expect(html).toContain('aria-pressed="false"');
     expect(html).toContain('Vertel waar het knelt');

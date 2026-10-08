@@ -127,7 +127,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
               className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
             >
               <RollingText accentClassName="text-amber-700 dark:text-amber-400">
-                Deel je plannen
+                Vertel het in een mail
               </RollingText>
               <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
             </a>
