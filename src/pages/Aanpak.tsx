@@ -28,7 +28,7 @@ const pairs = [
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
     maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je team alles terugvindt.' },
+  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je alles terugvindt.' },
   {
     knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
     maken: 'Een website waarop klanten meteen zien wat je doet.',
@@ -205,17 +205,18 @@ export function Aanpak() {
             En dan weer opnieuw, tot het werkt.
           </li>
         </ul>
-        <p>
-          AI maakt in korte tijd een eerste versie. Je hoeft er zelf geen verstand van te hebben: je ziet het en zegt wat
-          klopt.
-        </p>
+        {/* In the order it happens: the talk, the proposal, the first version, then real data only if you want */}
         <p>
           Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
           een vaste prijs.
         </p>
         <p>
-          Die eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die
-          we gebruiken, traint er niet mee. Meer daarover lees je bij{' '}
+          Dan maakt AI in korte tijd een eerste versie, met voorbeeldgegevens. Je hoeft er zelf geen verstand van te
+          hebben: je ziet het en zegt wat klopt.
+        </p>
+        <p>
+          Met echte gegevens werken we pas als jij dat wilt. De AI die we gebruiken, traint er niet mee. Meer daarover lees
+          je bij{' '}
           <Link href="/privacy" className="underline underline-offset-4">
             privacy
           </Link>
@@ -254,12 +255,12 @@ export function Aanpak() {
           meer schermen en meer stappen bij. Mensen passen zich aan de techniek aan.
         </p>
         <p>
-          Volgens ons hoort het andersom: rustiger, duidelijker en fijner. Het echte werk is zien wat ertoe doet en de
-          rest durven weglaten.
+          Volgens ons hoort het andersom: techniek moet het werk rustiger, duidelijker en fijner maken. Het echte werk is
+          zien wat ertoe doet en de rest durven weglaten.
         </p>
         {/* First the story, then the reader does it: strike out what piles up and what matters is left */}
         <Weglaten items={['Meer schermen.', 'Meer stappen.']} rest="Wat ertoe doet." />
-        <p>Dat zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
+        <p>Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
       </Chapter>
 
       {/* One call to action on the same grid: the line on the left, the button where the explanations start */}

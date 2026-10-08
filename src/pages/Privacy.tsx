@@ -47,7 +47,7 @@ export function Privacy() {
           tabIndex={-1}
           className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
         >
-          Wat we bewaren
+          Wat ik bewaar
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           Zo weinig mogelijk. Deze site volgt je niet.
@@ -59,51 +59,51 @@ export function Privacy() {
 
       <Part id="site" title="Geen cookies, geen tracking">
         <p>
-          We tellen geen bezoekers en tonen geen advertenties. Er laadt niets van andere partijen: ook de lettertypen
-          staan op onze eigen server.
+          Ik tel geen bezoekers en toon geen advertenties. Er laadt niets van andere partijen: ook de lettertypen staan
+          op dezelfde server als de site.
         </p>
         <p>
-          Kies je een lichte of donkere weergave, dan onthoudt je browser die keuze. Die blijft op je eigen apparaat. Wij
-          zien hem niet.
+          Kies je een lichte of donkere weergave, dan onthoudt je browser die keuze. Die blijft op je eigen apparaat. Ik
+          zie hem niet.
         </p>
       </Part>
 
-      <Part id="mail" title="Mail je ons, dan bewaren we je mail">
+      <Part id="mail" title="Mail je mij, dan bewaar ik je mail">
         <p>
-          Dan hebben we je naam, je mailadres en wat je schrijft. Dat gebruiken we om je te antwoorden en, als er een
+          Dan heb ik je naam, je mailadres en wat je schrijft. Dat gebruik ik om je te antwoorden en, als er een
           opdracht uit voortkomt, om die opdracht te doen.
         </p>
         <p>
-          Komt er geen opdracht, dan verwijderen we je mail uiterlijk een jaar na ons laatste contact. Hoort hij bij een
-          opdracht, dan bewaren we hem zeven jaar. Zo lang moeten we onze administratie bewaren.
+          Komt er geen opdracht, dan verwijder ik je mail uiterlijk een jaar na ons laatste contact. Hoort hij bij een
+          opdracht, dan bewaar ik hem zeven jaar. Zo lang moet ik mijn administratie bewaren.
         </p>
       </Part>
 
-      <Part id="microsoft" title="Microsoft host de site en onze mail">
+      <Part id="microsoft" title="Microsoft host de site en mijn mail">
         <p>
           Zoals bij elke website ziet de server wie een pagina opvraagt: je IP-adres, je browser en de pagina. Die server
-          is van Microsoft (Azure), net als onze mail (Microsoft 365). Microsoft verwerkt dat alleen voor ons.
+          is van Microsoft (Azure), net als mijn mail (Microsoft 365). Microsoft verwerkt dat alleen voor mij.
         </p>
       </Part>
 
       <Part id="ai" title="AI werkt mee, maar leert niet van jouw gegevens">
         <p>
-          Bij een opdracht gebruiken we AI van Anthropic (Claude), Google (Gemini) en Microsoft. Zij verwerken je gegevens
-          alleen voor ons en trainen hun AI er niet mee.
+          Bij een opdracht gebruik ik AI van Anthropic (Claude), Google (Gemini) en Microsoft. Zij verwerken je gegevens
+          alleen voor mij en trainen hun AI er niet mee.
         </p>
         <p>
-          Een eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt.
+          Een eerste versie maak ik met voorbeeldgegevens. Met echte gegevens werk ik pas als jij dat wilt.
         </p>
-        <p>We verkopen niets en delen je gegevens alleen met de diensten op deze pagina.</p>
+        <p>Ik verkoop je gegevens niet en deel ze alleen met de diensten op deze pagina.</p>
       </Part>
 
       <Part id="rechten" title="Je gegevens blijven van jou">
         <p>
-          Wil je weten wat we van je hebben, iets laten aanpassen of alles laten verwijderen? Mail naar{' '}
-          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Je hoort binnen een maand van ons.
+          Wil je weten wat ik van je heb, iets laten aanpassen of alles laten verwijderen? Mail naar{' '}
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Je hoort binnen een maand van mij.
         </p>
         <p>
-          Kom je er met ons niet uit, dan kun je een klacht indienen bij de{' '}
+          Kom je er met mij niet uit, dan kun je een klacht indienen bij de{' '}
           <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">

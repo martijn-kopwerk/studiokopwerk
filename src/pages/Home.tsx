@@ -42,7 +42,7 @@ export function Home() {
           className="max-w-[17rem] sm:max-w-md leading-relaxed tracking-wide-sm text-balance motion-safe:animate-rise [--rise-from:10px] [animation-delay:350ms]"
         >
           Voor ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen. Wij maken
-          het eenvoudig: van de eerste aanvraag tot de factuur, met de website en programma's die daarbij horen.
+          het eenvoudig: van de eerste aanvraag tot de factuur, met je website en de programma's die daarbij horen.
         </Typography>
       </div>
 

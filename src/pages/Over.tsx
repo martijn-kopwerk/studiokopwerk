@@ -73,13 +73,14 @@ export function Over() {
         </div>
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
           <p>
-            Al ruim tien jaar ben ik productmanager bij grote organisaties: ik bepaal wat er gemaakt wordt en waarom. Ook
-            hielp ik er grote systemen invoeren.
+            Werk eenvoudiger maken doe ik al sinds het begin van mijn loopbaan. Een collega zette elke week met de hand
+            rapportages in elkaar. Ik dacht dat het handiger kon, leerde mezelf hoe en automatiseerde ze. Dat scheelde een
+            dag werk per week.
           </p>
           <p>
-            Werk makkelijker maken doe ik al sinds het begin van mijn loopbaan. Een collega zette elke week met de hand rapportages in
-            elkaar. Ik dacht dat het handiger kon, leerde mezelf hoe en automatiseerde ze. Dat scheelde een dag werk per
-            week.
+            Inmiddels werk ik al tien jaar in productmanagement bij grote organisaties: lang als product owner, nu als
+            productmanager. In gewone woorden: ik bepaal wat er gemaakt wordt en waarom. Ook hielp ik er grote systemen
+            invoeren.
           </p>
           <p>
             Bij grote organisaties zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige
@@ -101,8 +102,8 @@ export function Over() {
 
       <Row id="verwachten" title="Je spreekt met wie het maakt">
         <p>
-          Ik zie snel waar het knelt en maak meteen iets dat werkt. Ik praat over je werk, niet over techniek: je hoeft
-          geen computertaal te spreken.
+          Ik zie snel waar het knelt. Daarna heb je in korte tijd iets in handen dat werkt. Ik praat over je werk, niet
+          over techniek: je hoeft geen computertaal te spreken.
         </p>
         <p>
           Studio Kopwerk doe ik naast mijn werk als productmanager. Daarom neem ik weinig opdrachten tegelijk aan: wie
@@ -119,7 +120,7 @@ export function Over() {
       </Row>
 
       <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
-        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven.</p>
+        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven met wat AI kan.</p>
       </Row>
 
       <section

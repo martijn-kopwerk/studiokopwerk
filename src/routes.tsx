@@ -44,7 +44,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
             path: '/over',
             title: 'Over · Studio Kopwerk',
             description:
-              'Martijn van Studio Kopwerk: ruim tien jaar ervaring bij grote organisaties. Nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
+              'Martijn van Studio Kopwerk: tien jaar ervaring bij grote organisaties. Nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
             noindex: true,
           },
           Page: Over,
@@ -68,7 +68,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       meta: {
         path: '/werk',
         title: 'Wat wérkt · Studio Kopwerk',
-        description: 'We begonnen bij onszelf. Elke opdracht kort verteld: de vraag, wat we maakten en wat het opleverde.',
+        description: 'Elke opdracht kort verteld: de vraag, wat ik maakte en wat het opleverde.',
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,

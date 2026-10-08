@@ -68,7 +68,7 @@ describe('header and footer', () => {
 describe('privacy', () => {
   it('says what we keep, linked from the footer of every page', () => {
     const { html, head } = render('/privacy');
-    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat we bewaren<\/h1>/i);
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ik bewaar<\/h1>/i);
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/privacy" />');
     expect(render('/').html).toMatch(/<a[^>]*href="\/privacy"/);
   });
