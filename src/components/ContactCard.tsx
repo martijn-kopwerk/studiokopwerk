@@ -19,8 +19,8 @@ interface ContactCardProps {
 type CopyState = 'idle' | 'copied' | 'selected';
 
 const copyLabels: Record<CopyState, string> = {
-  idle: 'E-mailadres kopiëren',
-  copied: 'Gekopieerd naar klembord',
+  idle: 'Kopieer het mailadres',
+  copied: 'Gekopieerd naar het klembord',
   selected: 'Geselecteerd, kopieer met Ctrl+C of ⌘C',
 };
 
@@ -90,7 +90,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <button
             type="button"
             onClick={handleCopyEmail}
-            aria-label={copied ? 'E-mailadres gekopieerd naar klembord' : `Kopieer e-mailadres ${email}`}
+            aria-label={copied ? 'Mailadres gekopieerd naar het klembord' : `Kopieer het mailadres ${email}`}
             className="group relative text-left flex flex-col w-full rounded-xl"
           >
             <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors duration-300 ease-kopwerk ${

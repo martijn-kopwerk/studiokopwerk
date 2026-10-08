@@ -17,6 +17,7 @@ Known places where the code still differs from the design system are listed in t
 - **Tone:** Confident, human-centric, and action-oriented. No robotic or overly formal tech-jargon.
 - **Language:** Dutch, including labels, eyebrows and tooltips.
 - **Rule:** Write copy that drives intent, not mechanism.
+- **Word choice:** one word for one thing, as listed under "Words we use" in the design system's `project/voice.md` (*mailadres*, *Begin* not *Home*, *programma's* not *tools*, imperative labels). `src/tekstwacht.test.tsx` checks every page for a comma before *en* and for words we don't use.
 - **Examples:**
   - Use "Vertel waar het knelt" (Tell us where it pinches) instead of "Daag ons uit", "Start een gesprek", "Neem contact op" or "Contact us". It is the one call to action, on every page: it starts from the reader's situation and needs no "ons" or "me".
   - Use "Deel je plannen" (Share your plans) instead of "Open e-mailapplicatie".

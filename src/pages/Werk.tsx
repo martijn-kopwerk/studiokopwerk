@@ -74,7 +74,7 @@ export function Werk() {
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">
-          Opdrachten uit de praktijk, kort verteld: de vraag, wat we maakten en wat het opleverde.
+          We begonnen bij onszelf. Elke opdracht kort verteld: de vraag, wat we maakten en wat het opleverde.
         </Typography>
       </div>
 

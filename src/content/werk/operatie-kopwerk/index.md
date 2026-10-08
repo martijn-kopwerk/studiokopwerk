@@ -1,5 +1,5 @@
 ---
-titel: "Onze hele bedrijfsvoering op één plek, in onze eigen stijl"
+titel: "Al ons werk op één plek, in onze eigen huisstijl"
 klant: "Studio Kopwerk"
 sector: "Eigen onderneming"
 datum: 2026-09-30
@@ -14,7 +14,7 @@ film:
     tekst: "Al het werk op één plek. Niet meer zoeken tussen programma's."
   - beeld: ./film-2-mail.webp
     alt: "Twee mails, elk met een samenvatting in één zin en labels als Offerteaanvraag, Klant en Planning."
-    tekst: "Bij elke mail staat in één zin wat hij vraagt."
+    tekst: "Bij elke mail staat in één zin wat de klant wil."
   - beeld: ./film-3-kanweg.webp
     alt: "Onder Kan weg een nieuwsbrief, met de knop Alles archiveren."
     tekst: "Wat weg kan, staat apart. Eén klik en het is opgeruimd."
@@ -26,7 +26,7 @@ film:
     tekst: "AI schrijft de offerte in onze stijl, wij kiezen wat blijft. Dat scheelt minstens twee uur per offerte."
   - beeld: ./film-6-vertaald.webp
     alt: "Dezelfde offerte in het Nederlands en in het Engels, schuin over elkaar, in dezelfde opmaak."
-    tekst: "AI vertaalt de offerte, de opmaak blijft hetzelfde."
+    tekst: "AI vertaalt de offerte. Opnieuw opmaken hoeft niet."
 ---
 
-Ons eigen bedrijf was onze eerste opdracht: in Operatie Kopwerk komen offertes, klanten, mail, presentaties en facturen samen, waar eerst een handvol losse programma's nodig was. AI bouwde het en doet het schrijfwerk; wij kiezen, controleren en passen aan. Dat scheelt minstens twee uur per offerte en zeker vijf minuten per mail: tijd voor het echte werk.
+Ons eigen bedrijf was onze eerste opdracht: één programma, Operatie Kopwerk, voor offertes, klanten, mail, presentaties en facturen, in plaats van een handvol losse. AI bouwde het en schrijft mee, wij kiezen wat blijft. Dat scheelt minstens twee uur per offerte en zeker vijf minuten per mail.

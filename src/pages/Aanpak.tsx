@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { CornerDownRight, RotateCw } from 'lucide-react';
+import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
@@ -230,7 +231,20 @@ export function Aanpak() {
           AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt en jij houdt alleen wat je echt helpt.
           Daarmee begint de volgende ronde.
         </p>
-        <p>Ook deze site is zo gemaakt.</p>
+        {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
+        <p>
+          {projects.length > 0 ? (
+            <>
+              Ook deze site is zo gemaakt, net als{' '}
+              <Link href="/werk" className="underline underline-offset-4">
+                ons eigen programma
+              </Link>
+              .
+            </>
+          ) : (
+            'Ook deze site is zo gemaakt.'
+          )}
+        </p>
       </Chapter>
 
       {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
@@ -241,7 +255,7 @@ export function Aanpak() {
       >
         <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           <span ref={stop(STOP.einde)} aria-hidden="true" className={marker} />
-          Klein beginnen, snel iets maken dat <em className="italic font-normal">werkt</em>.
+          Klein beginnen, snel iets maken dat werkt.
         </Typography>
         <div className="flex flex-col items-start gap-6">
           {/* The same button as on home, magnetic too */}
@@ -251,7 +265,7 @@ export function Aanpak() {
             </CapsuleButton>
           </MagneticWrapper>
           {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}
-          {projects.length > 0 && <NextLink href="/werk">Verder: wat wérkt</NextLink>}
+          {projects.length > 0 && <NextLink href="/werk">Bekijk wat we maakten</NextLink>}
         </div>
       </section>
     </main>

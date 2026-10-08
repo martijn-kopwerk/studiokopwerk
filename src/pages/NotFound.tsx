@@ -25,7 +25,7 @@ export function NotFound() {
             className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:-translate-x-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none"
             aria-hidden="true"
           />
-          <RollingText accentClassName="text-amber-700 dark:text-amber-400">Terug naar home</RollingText>
+          <RollingText accentClassName="text-amber-700 dark:text-amber-400">Terug naar het begin</RollingText>
         </Link>
         <NextLink href="/aanpak">Of lees hoe we werken</NextLink>
       </div>
