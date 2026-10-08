@@ -61,7 +61,17 @@ export function Privacy() {
           Zoals bij elke website ziet de server wie een pagina opvraagt: je IP-adres, je browser en de pagina. Die server
           is van Microsoft (Azure), net als onze mail (Microsoft 365). Microsoft verwerkt dat alleen voor ons.
         </p>
-        <p>We verkopen niets en delen je gegevens met niemand anders.</p>
+      </Part>
+
+      <Part id="ai" title="AI werkt mee, maar leert niet van jouw gegevens">
+        <p>
+          Bij een opdracht gebruiken we AI van Anthropic (Claude), Google (Gemini) en Microsoft. Zij verwerken je gegevens
+          alleen voor ons en trainen hun AI er niet mee.
+        </p>
+        <p>
+          Een eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt.
+        </p>
+        <p>We verkopen niets en delen je gegevens alleen met de diensten op deze pagina.</p>
       </Part>
 
       <Part id="rechten" title="Je gegevens blijven van jou">

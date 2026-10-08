@@ -80,7 +80,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
             Vertel waar het knelt.
           </DialogTitle>
           <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
-            Een paar zinnen is genoeg.
+            Een paar zinnen is genoeg. Het eerste gesprek is vrijblijvend.
           </DialogDescription>
         </DialogHeader>
 

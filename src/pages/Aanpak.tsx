@@ -209,6 +209,18 @@ export function Aanpak() {
           AI maakt in korte tijd een eerste versie. Je hoeft er zelf geen verstand van te hebben: je ziet het en zegt wat
           klopt.
         </p>
+        <p>
+          Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
+          een vaste prijs.
+        </p>
+        <p>
+          Die eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die
+          we gebruiken, traint er niet mee. Meer daarover lees je bij{' '}
+          <Link href="/privacy" className="underline underline-offset-4">
+            privacy
+          </Link>
+          .
+        </p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
           {projects.length > 0 ? (
@@ -237,13 +249,17 @@ export function Aanpak() {
           Iets maken is nog nooit zo makkelijk geweest. Een tekst, een programma, een eerste versie: met AI staat het er in
           een middag.
         </p>
-        <p>Toch wordt het werk daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken.</p>
-        <Weglaten items={['Meer schermen.', 'Meer stappen.']} />
-        <p>Mensen passen zich aan de techniek aan.</p>
+        <p>
+          Toch wordt het werk daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken. Er komen
+          meer schermen en meer stappen bij. Mensen passen zich aan de techniek aan.
+        </p>
         <p>
           Volgens ons hoort het andersom: rustiger, duidelijker en fijner. Het echte werk is zien wat ertoe doet en de
-          rest durven weglaten. Dat zie je het snelst door het te maken, samen met de mensen voor wie het is.
+          rest durven weglaten.
         </p>
+        {/* First the story, then the reader does it: strike out what piles up and what matters is left */}
+        <Weglaten items={['Meer schermen.', 'Meer stappen.']} rest="Wat ertoe doet." />
+        <p>Dat zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
       </Chapter>
 
       {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
