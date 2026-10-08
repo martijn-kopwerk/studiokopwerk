@@ -155,7 +155,7 @@ export function Aanpak() {
         id="missie"
         number="02"
         label="Missie"
-        title="Je vak loopt, het werk eromheen niet"
+        title="Goed in je vak, vast in je systemen"
         zoneRef={zone(STOP.missie)}
         markerRef={stop(STOP.missie)}
       >
@@ -227,8 +227,8 @@ export function Aanpak() {
           </li>
         </ul>
         <p>
-          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt, jij houdt alleen wat je echt helpt, en
-          daarmee begint de volgende ronde.
+          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt en jij houdt alleen wat je echt helpt.
+          Daarmee begint de volgende ronde.
         </p>
         <p>Ook deze site is zo gemaakt.</p>
       </Chapter>
