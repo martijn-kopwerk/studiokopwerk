@@ -1,8 +1,9 @@
 import type { ComponentType } from 'react';
 import type { PageMeta } from './lib/head';
-import { projects, type Project } from './lib/projects';
+import { projects, showDrafts, type Project } from './lib/projects';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { Over } from './pages/Over';
 import { Aanpak } from './pages/Aanpak';
 import { Werk } from './pages/Werk';
 import { Privacy } from './pages/Privacy';
@@ -35,6 +36,21 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Aanpak,
   };
+  // /over is a draft until the photo and the text are in: dev and pull request previews only, never indexed.
+  const over: PageRoute[] = showDrafts
+    ? [
+        {
+          meta: {
+            path: '/over',
+            title: 'Over · Studio Kopwerk',
+            description:
+              'Martijn, de maker achter Studio Kopwerk: jaren productmanagement bij grote organisaties, nu met AI voor ondernemers.',
+            noindex: true,
+          },
+          Page: Over,
+        },
+      ]
+    : [];
   const privacy: PageRoute = {
     meta: {
       path: '/privacy',
@@ -43,7 +59,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Privacy,
   };
-  if (shown.length === 0) return [home, aanpak, privacy];
+  if (shown.length === 0) return [home, aanpak, privacy, ...over];
   return [
     home,
     aanpak,
@@ -57,6 +73,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       },
       Page: Werk,
     },
+    ...over,
   ];
 }
 

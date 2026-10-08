@@ -86,7 +86,7 @@ describe('werk', () => {
   });
 
   it('does not exist without opdrachten: no page, so no sitemap entry', () => {
-    expect(buildRoutes([]).map((route) => route.meta.path)).toEqual(['/', '/aanpak', '/privacy']);
+    expect(buildRoutes([]).map((route) => route.meta.path)).not.toContain('/werk');
   });
 
   it('exists with only drafts (dev and previews), kept out of search results', () => {
@@ -137,5 +137,12 @@ describe('head tags', () => {
     const head = renderHead({ path: '/x', title: 'A "quote" & <tag>', description: 'd' });
     expect(head).toContain('<title>A &quot;quote&quot; &amp; &lt;tag&gt;</title>');
     expect(head).toContain('content="A &quot;quote&quot; &amp; &lt;tag&gt;"');
+  });
+});
+
+describe('over', () => {
+  it('is a draft while the photo and text are still to come: kept out of search results', () => {
+    const over = buildRoutes([]).find((route) => route.meta.path === '/over');
+    expect(over?.meta.noindex).toBe(true);
   });
 });
