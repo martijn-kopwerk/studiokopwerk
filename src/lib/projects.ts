@@ -123,7 +123,8 @@ export function orderProjects(projects: Omit<Project, 'number'>[]): Project[] {
 }
 
 // Drafts show in `npm run dev` and in pull request previews (the workflow sets VITE_TOON_CONCEPTEN), never on the live site.
-const showDrafts = import.meta.env.DEV || import.meta.env.VITE_TOON_CONCEPTEN === 'true';
+// /over uses the same switch while it is still a draft (see routes.tsx).
+export const showDrafts = import.meta.env.DEV || import.meta.env.VITE_TOON_CONCEPTEN === 'true';
 
 function imagesFor(slug: string) {
   const prefix = `../content/werk/${slug}/`;
