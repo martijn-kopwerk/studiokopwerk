@@ -80,7 +80,7 @@ export function Over() {
           </p>
           <p>
             Inmiddels werk ik al tien jaar in productmanagement bij grote organisaties: lang als product owner, nu als
-            productmanager. In gewone woorden: ik bepaal wat er gemaakt wordt en waarom. Ook hielp ik er grote systemen
+            productmanager. In gewone woorden: ik bepaal wat er gemaakt wordt en waarom. Ook hielp ik er grote programma's
             invoeren.
           </p>
           <p>
@@ -91,7 +91,7 @@ export function Over() {
         </div>
       </section>
 
-      <Row id="ervaring" title="Je krijgt wat werkt bij grote organisaties, zonder hun kosten">
+      <Row id="ervaring" title="Je krijgt de ervaring van grote organisaties">
         <p>
           Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht.
         </p>
@@ -114,7 +114,7 @@ export function Over() {
 
       <Row id="klein" title="Ik begin klein en bouw alleen wat helpt">
         <p>
-          Ik bouw geen groot systeem van begin tot eind. Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo
+          Ik bouw niet alles in één keer. Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo
           klein als kan.
         </p>
         <p>Ik werk het liefst met ondernemers die nieuwsgierig zijn naar wat AI voor hen kan doen.</p>

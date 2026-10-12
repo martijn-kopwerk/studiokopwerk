@@ -228,7 +228,7 @@ export function Aanpak() {
             <>
               Ook deze site is zo gemaakt, net als{' '}
               <Link href="/werk" className="underline underline-offset-4">
-                ons eigen programma
+                het programma waarmee Studio Kopwerk zelf draait
               </Link>
               .
             </>
@@ -281,7 +281,7 @@ export function Aanpak() {
             </CapsuleButton>
           </MagneticWrapper>
           {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}
-          {projects.length > 0 && <NextLink href="/werk">Bekijk wat we maakten</NextLink>}
+          {projects.length > 0 && <NextLink href="/werk">Bekijk het werk</NextLink>}
         </div>
       </section>
     </main>
