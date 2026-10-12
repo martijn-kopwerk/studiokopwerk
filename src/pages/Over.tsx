@@ -4,27 +4,12 @@ import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { NextLink } from '../components/ui/NextLink';
+import { Portret } from '../components/Portret';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
 import { projects } from '../lib/projects';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
-
-/**
- * The portrait: src/content/over/portret.(avif|webp|jpg|png), already graded black and white. No CSS filter
- * (the design system allows none), so amber stays the only warm point on the page. Until the file is there,
- * the frame shows where it goes.
- */
-const portraitFiles = import.meta.glob<string>('../content/over/portret.{avif,webp,jpg,jpeg,png}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
-const portrait = Object.values(portraitFiles)[0];
-
-// What's in the photo, for people who can't see it.
-const portraitAlt =
-  'Zwart-witportret van Martijn: krullend haar, een gestreept overhemd, de armen over elkaar. Hij lacht naar de camera, voor een open stalen kast.';
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -69,7 +54,7 @@ export function Over() {
       {/* The portrait in the narrow column, off-centre, with room beside it for the first words */}
       <section aria-label="Wie je spreekt" className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
         <div className="flex flex-col gap-4">
-          <Portrait />
+          <Portret className="max-w-sm" priority />
           <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
             Ik woon in Haren, net onder Groningen. Langskomen kan in heel Nederland.
           </p>
@@ -148,38 +133,6 @@ export function Over() {
         </div>
       </section>
     </main>
-  );
-}
-
-// The design system's ImageFrame: radius-2xl, a 1px `line` hairline, portrait 4:5. The photo sits a little
-// darker on dark pages, never tinted.
-function Portrait() {
-  const frame =
-    'block w-full max-w-sm aspect-[4/5] rounded-2xl border overflow-hidden bg-slate-100 dark:bg-slate-900 ' + hairline;
-
-  if (!portrait) {
-    return (
-      <div
-        aria-hidden="true"
-        className={cn(frame, 'flex items-center justify-center text-xs font-semibold tracking-wide-xl uppercase text-slate-600 dark:text-slate-400')}
-      >
-        [Foto]
-      </div>
-    );
-  }
-
-  return (
-    <figure className="max-w-sm">
-      <img
-        src={portrait}
-        alt={portraitAlt}
-        width={800}
-        height={1000}
-        decoding="async"
-        fetchPriority="high"
-        className={cn(frame, 'object-cover dark:brightness-90')}
-      />
-    </figure>
   );
 }
 

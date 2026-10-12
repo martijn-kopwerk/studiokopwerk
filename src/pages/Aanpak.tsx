@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { CornerDownRight, RotateCw } from 'lucide-react';
+import { RotateCw } from 'lucide-react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { NextLink } from '../components/ui/NextLink';
 import { Weglaten } from '../components/aanpak/Weglaten';
+import { Knelpunten } from '../components/Knelpunten';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
+import { useReadingStops } from '../hooks/useReadingStops';
 
 import { projects } from '../lib/projects';
 import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
@@ -21,24 +23,6 @@ const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
 // "AI maakt, jij beslist" in three steps, word for word from the positionering. They go round, not in order.
 const steps = ['AI doet het maakwerk.', 'Samen kijken we wat werkt.', 'Jij beslist wat blijft.'];
-
-// What gets stuck, and what we make for it: what it does for people, never the kind of product.
-const pairs = [
-  {
-    knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
-    maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
-  },
-  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je alles terugvindt.' },
-  {
-    knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
-    maken: 'Een website waarop klanten meteen zien wat je doet.',
-  },
-  {
-    knelt: 'Werk dat elke week opnieuw met de hand gaat.',
-    maken: 'AI die het werk doet dat steeds terugkomt. Jij beslist wat ermee gebeurt.',
-  },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.' },
-];
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -54,10 +38,8 @@ const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.
  */
 export function Aanpak() {
   const { openContact, preloadContact } = useContact();
-  const zones = useRef<(HTMLElement | null)[]>([]);
-  const markers = useRef<(HTMLElement | null)[]>([]);
+  const { active, markers, zone, stop } = useReadingStops();
   const intro = useRef<HTMLSpanElement | null>(null);
-  const [active, setActive] = useState<number | null>(null);
   const [phone, setPhone] = useState(false);
 
   // Before the first chapter the dot rests beside the eyebrow; on phones it stays on the K's vertex, in the gap below the intro.
@@ -74,40 +56,6 @@ export function Aanpak() {
     query.addEventListener('change', update);
     return () => query.removeEventListener('change', update);
   }, []);
-
-  // The active stop is the last one whose block has reached the middle of the screen (none above the first).
-  useEffect(() => {
-    let pending = false;
-    const update = () => {
-      pending = false;
-      const middle = window.innerHeight / 2;
-      let next: number | null = null;
-      for (let i = 0; i < zones.current.length; i++) {
-        const zone = zones.current[i];
-        if (zone && zone.getBoundingClientRect().top <= middle) next = i;
-      }
-      setActive(next);
-    };
-    const schedule = () => {
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-    };
-  }, []);
-
-  const zone = (index: number) => (el: HTMLElement | null) => {
-    zones.current[index] = el;
-  };
-  const stop = (index: number) => (el: HTMLElement | null) => {
-    markers.current[index] = el;
-  };
 
   return (
     <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-8 motion-safe:animate-rise [--rise-from:16px]">
@@ -143,24 +91,7 @@ export function Aanpak() {
         <p>
           Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
         </p>
-        {/* Each friction as a couplet: what knelt, quiet, and below it what we make for it, in Syne. No table, no
-            column labels: it reads as one sentence turning round, the same on every screen. */}
-        <dl className={`border-b ${hairline}`}>
-          {pairs.map(({ knelt, maken }) => (
-            <div key={knelt} className={cn('flex flex-col gap-1.5 py-5 border-t', hairline)}>
-              <dt className="text-sm sm:text-base leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
-                {knelt}
-              </dt>
-              <dd className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
-                <CornerDownRight
-                  aria-hidden="true"
-                  className="absolute left-0 top-[calc(0.5lh-0.5rem)] size-4 text-slate-400 dark:text-slate-500"
-                />
-                {maken}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <Knelpunten />
       </Chapter>
 
       <Chapter
