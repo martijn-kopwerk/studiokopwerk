@@ -8,7 +8,7 @@ import { navItems } from '../../lib/nav';
 import { hairline, raster } from '../../lib/raster';
 import { cn } from '../../lib/utils';
 
-const link = 'group -mx-1 px-1 py-1.5 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
+const link = 'group inline-block -mx-1 px-1 py-1.5 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
 
 const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525964B92'];
 

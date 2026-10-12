@@ -76,7 +76,7 @@ export default function App() {
           {/* The first stop for the keyboard: past the menu, straight to the page. Hidden until it has focus. */}
           <a
             href="#inhoud"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 rounded-full bg-slate-900 dark:bg-white px-5 py-3 text-xs font-semibold tracking-wide-xl uppercase text-white dark:text-slate-950"
+            className="absolute left-4 top-4 z-50 -translate-y-24 focus:translate-y-0 rounded-full bg-slate-900 dark:bg-white px-5 py-3 text-xs font-semibold tracking-wide-xl uppercase text-white dark:text-slate-950 transition-transform duration-500 ease-kopwerk motion-reduce:transition-none"
           >
             Naar de inhoud
           </a>
