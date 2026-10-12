@@ -23,7 +23,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
         href="/"
         aria-label="Studio Kopwerk, naar het begin"
         aria-current={current === '/' ? 'page' : undefined}
-        className="group -m-2 p-2 flex items-center gap-3 sm:gap-6 rounded-lg"
+        className="group -ml-2 -my-2 sm:-mr-2 py-2 pl-2 sm:pr-2 flex items-center gap-3 sm:gap-6 rounded-lg"
       >
         <KopwerkLogo className="h-7 w-7 sm:h-8 sm:w-8 shrink-0" />
         <span
@@ -37,10 +37,10 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
         </span>
       </Link>
 
-      <div className="flex items-center gap-5 sm:gap-8">
+      <div className="flex items-center gap-3 sm:gap-8">
         {navItems.length > 0 && (
           <nav aria-label="Hoofdmenu">
-            <ul className="flex items-center gap-5 sm:gap-8">
+            <ul className="flex items-center gap-4 sm:gap-8">
               {navItems.map(({ path, label }) => {
                 const isCurrent = current === path;
                 return (

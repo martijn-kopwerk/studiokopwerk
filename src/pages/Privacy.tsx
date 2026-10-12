@@ -33,7 +33,7 @@ export function Privacy() {
   }, []);
 
   return (
-    <main className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-8 motion-safe:animate-rise [--rise-from:16px]">
+    <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-8 motion-safe:animate-rise [--rise-from:16px]">
       <div className="sm:pl-14 flex flex-col gap-4 sm:gap-5">
         <Typography variant="eyebrow" as="p" className="relative">
           <span
