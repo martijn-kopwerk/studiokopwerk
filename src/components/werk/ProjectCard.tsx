@@ -35,7 +35,7 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
 }
 
 /** The opdracht's image, quote or number, if it has one. */
-function ProjectMedia({ project }: { project: Project }) {
+export function ProjectMedia({ project }: { project: Project }) {
   const media = project.media;
   if (!media) return null;
 
@@ -81,13 +81,20 @@ function ProjectMedia({ project }: { project: Project }) {
 
 /** What an opdracht says beyond its title: the image, quote or number, then its two or three sentences. */
 export function ProjectBody({ project }: { project: Project }) {
-  const { Text } = project;
   return (
     <div className="flex flex-col gap-6">
       <ProjectMedia project={project} />
-      <div className="max-w-xl flex flex-col gap-3 text-base leading-relaxed text-slate-700 dark:text-slate-300 text-pretty [&_a]:underline [&_a]:underline-offset-4 [&_strong]:font-semibold">
-        <Text />
-      </div>
+      <ProjectText project={project} />
+    </div>
+  );
+}
+
+/** The opdracht's two or three sentences. */
+export function ProjectText({ project }: { project: Project }) {
+  const { Text } = project;
+  return (
+    <div className="max-w-xl flex flex-col gap-3 text-base leading-relaxed text-slate-700 dark:text-slate-300 text-pretty [&_a]:underline [&_a]:underline-offset-4 [&_strong]:font-semibold">
+      <Text />
     </div>
   );
 }

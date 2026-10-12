@@ -5,12 +5,12 @@ import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { NextLink } from '../components/ui/NextLink';
 import { Knelpunten, knelpunten } from '../components/Knelpunten';
 import { Portret } from '../components/Portret';
-import { ProjectBody } from '../components/werk/ProjectCard';
+import { ProjectMedia, ProjectText } from '../components/werk/ProjectCard';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
 import { useReadingStops } from '../hooks/useReadingStops';
 import { projects } from '../lib/projects';
-import { hairline, raster } from '../lib/raster';
+import { raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // Running text.
@@ -24,10 +24,10 @@ const drieKnelpunten = [knelpunten[2], knelpunten[1], knelpunten[3]].filter((ite
 
 /**
  * Begin is the front door and a short walk: the promise, then who you talk to, what he made and where it pinches,
- * each with one quiet way on to the page behind it, then the call to action again. Whoever isn't ready to mail
+ * each a block of its own shape with one quiet way on to the page behind it, then the call to action again. Whoever isn't ready to mail
  * always has a next step on the page itself. The hero is almost one screen: the top of the next block shows below it, so it reads as a page to scroll.
  * Phones: the hero stands left, right of the K's stem, with a gap above the button for the vertex and its amber
- * dot. Wider screens: the hero is centred, the blocks below sit on the site's grid. The dot rests on the vertex
+ * dot. Wider screens: the hero is centred, the blocks below alternate their media left and right. The dot rests on the vertex
  * during the hero, then walks the margin from block to block, as on Aanpak.
  */
 export function Home() {
@@ -85,7 +85,12 @@ export function Home() {
         <div className="motion-safe:animate-rise [--rise-from:15px] [animation-delay:400ms]">{contact}</div>
       </section>
 
-      <Block id="martijn" label="Wie je spreekt" title="Je spreekt steeds met mij" {...at()} aside={<Portret className="w-40 sm:w-56" />}>
+      <Block
+        id="martijn"
+        title="Je spreekt steeds met mij"
+        media={<Portret className="w-48 sm:w-64 lg:w-80 lg:self-center" />}
+        {...at()}
+      >
         <p>
           Ik ben Martijn. Ik help ondernemers die vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets
           wat je kunt gebruiken.
@@ -95,25 +100,35 @@ export function Home() {
       </Block>
 
       {werk && (
-        <Block id="werk" label="Wat ik maakte" title={werk.title} {...at()}>
-          <ProjectBody project={werk} />
+        <Block id="werk" title={werk.title} media={<ProjectMedia project={werk} />} mediaSide="right" {...at()}>
+          <ProjectText project={werk} />
           <NextLink className="self-start" href="/werk">Bekijk het werk</NextLink>
         </Block>
       )}
 
-      <Block id="knelt" label="Waar het knelt" title="Goed in je vak, vast in je systemen" {...at()}>
+      <Block
+        id="knelt"
+        title="Goed in je vak, vast in je systemen"
+        media={
+          <div className="flex flex-col gap-6">
+            <Knelpunten items={drieKnelpunten} />
+            <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
+          </div>
+        }
+        mediaSide="right"
+        mediaFirst={false}
+        {...at()}
+      >
         <p>
           Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
         </p>
-        <Knelpunten items={drieKnelpunten} />
-        <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 
       {/* The same call to action as at the top, where the walk ends */}
       <section
         ref={zone(next)}
         aria-label="Vertel waar het knelt"
-        className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
+        className={`py-10 sm:py-16 sm:ml-14 ${raster} lg:items-center`}
       >
         <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
           <span ref={stop(next)} aria-hidden="true" className={marker} />
@@ -125,38 +140,48 @@ export function Home() {
   );
 }
 
-// A block of the walk on the site's grid: a label and a conclusion on the left (with an optional image below them),
-// a few sentences and the way on to the page behind it on the right, a hairline above. On phones the two stack.
+/**
+ * A block of the walk, a doorway to the page behind it. One heading per block, the conclusion: a label above it
+ * would read as a second title. Each block has its own shape, so scrolling reads as separate stops rather than one
+ * long table: the media sits left or right on wider screens, and on phones a block opens with its image. No
+ * hairlines between blocks; the whitespace and the change of shape separate them.
+ */
 function Block({
   id,
-  label,
   title,
-  aside,
+  media,
+  mediaSide = 'left',
+  mediaFirst = true,
   zoneRef,
   markerRef,
   children,
 }: {
   id: string;
-  label: string;
   title: string;
-  aside?: ReactNode;
+  media: ReactNode;
+  mediaSide?: 'left' | 'right';
+  // On phones, whether the media comes before the heading.
+  mediaFirst?: boolean;
   zoneRef: (el: HTMLElement | null) => void;
   markerRef: (el: HTMLElement | null) => void;
   children: ReactNode;
 }) {
+  const aside = <div className={cn('flex flex-col', mediaSide === 'right' ? 'lg:order-last' : 'lg:order-first')}>{media}</div>;
   return (
-    <section ref={zoneRef} aria-labelledby={id} className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
-      <div className="flex flex-col gap-5">
-        <p className="relative text-xs sm:text-sm font-medium tracking-super-wide uppercase text-slate-500 dark:text-slate-400">
+    <section
+      ref={zoneRef}
+      aria-labelledby={id}
+      className="py-10 sm:py-16 sm:ml-14 grid gap-8 lg:grid-cols-2 lg:gap-x-16 lg:items-center"
+    >
+      {mediaFirst && aside}
+      <div className="flex flex-col gap-6">
+        <Typography variant="h2" id={id} className="relative text-balance">
           <span ref={markerRef} aria-hidden="true" className={marker} />
-          {label}
-        </p>
-        <Typography variant="h2" id={id} className="text-balance">
           {title}
         </Typography>
-        {aside && <div className="pt-3">{aside}</div>}
+        <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>
       </div>
-      <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>
+      {!mediaFirst && aside}
     </section>
   );
 }
