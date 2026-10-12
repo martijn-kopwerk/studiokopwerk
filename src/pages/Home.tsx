@@ -25,7 +25,7 @@ const drieKnelpunten = [knelpunten[2], knelpunten[1], knelpunten[3]].filter((ite
 /**
  * Begin is the front door and a short walk: the promise, then who you talk to, what he made and where it pinches,
  * each with one quiet way on to the page behind it, then the call to action again. Whoever isn't ready to mail
- * always has a next step on the page itself. The hero is one screen, with the next block just showing below it.
+ * always has a next step on the page itself. The hero is almost one screen: the top of the next block shows below it, so it reads as a page to scroll.
  * Phones: the hero stands left, right of the K's stem, with a gap above the button for the vertex and its amber
  * dot. Wider screens: the hero is centred, the blocks below sit on the site's grid. The dot rests on the vertex
  * during the hero, then walks the margin from block to block, as on Aanpak.
@@ -56,7 +56,7 @@ export function Home() {
     <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pb-8">
       <section
         aria-labelledby="hero-title"
-        className="min-h-[calc(100dvh-10rem)] flex flex-col items-start sm:items-center justify-center text-left sm:text-center pb-12"
+        className="min-h-[calc(100dvh-10rem)] sm:min-h-[calc(100dvh-14rem)] flex flex-col items-start sm:items-center justify-center text-left sm:text-center pb-12"
       >
         <div className="w-full flex flex-col items-start sm:items-center gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:20px]">
           <Typography variant="eyebrow" as="p" className="motion-safe:animate-rise [--rise-from:-10px] [animation-delay:100ms]">
