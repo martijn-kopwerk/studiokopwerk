@@ -23,10 +23,10 @@ film:
     tekst: "AI schrijft het antwoord, ik stuur bij. Dat scheelt zeker vijf minuten per mail."
   - beeld: ./film-5-offerte.webp
     alt: "De voorkant van een offerte in de huisstijl: Automatische koppeling voor de planning."
-    tekst: "AI schrijft de offerte in mijn stijl, ik kies wat blijft. Dat scheelt minstens twee uur per offerte."
+    tekst: "AI schrijft de offerte in mijn stijl, ik beslis wat blijft. Dat scheelt minstens twee uur per offerte."
   - beeld: ./film-6-vertaald.webp
     alt: "Dezelfde offerte in het Nederlands en in het Engels, schuin over elkaar, in dezelfde opmaak."
     tekst: "AI vertaalt de offerte. Opnieuw opmaken hoeft niet."
 ---
 
-Mijn eigen bedrijf was de eerste opdracht. Offertes, klanten, mail en facturen staan nu in één programma: Operatie Kopwerk. AI bouwde het en schrijft mee, ik kies wat blijft.
+Mijn eigen bedrijf was de eerste opdracht. Offertes, klanten, mail en facturen staan nu in één programma: Operatie Kopwerk. AI bouwde het en schrijft mee, ik beslis wat blijft.

@@ -25,4 +25,4 @@ concept: true               # alleen zichtbaar in previews; haal weg om te publi
 # label: "[Wat het getal meet]"
 ---
 
-[Twee of drie zinnen: wat de vraag was, wat we maakten en wat het opleverde.]
+[Twee of drie zinnen: wat de vraag was, wat ik maakte en wat het opleverde.]

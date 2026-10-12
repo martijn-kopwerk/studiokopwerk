@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import type { PageMeta } from './lib/head';
-import { projects, showDrafts, type Project } from './lib/projects';
+import { projects, type Project } from './lib/projects';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Over } from './pages/Over';
@@ -36,21 +36,15 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Aanpak,
   };
-  // /over is a draft until the photo and the text are in: dev and pull request previews only, never indexed.
-  const over: PageRoute[] = showDrafts
-    ? [
-        {
-          meta: {
-            path: '/over',
-            title: 'Over · Studio Kopwerk',
-            description:
-              'Martijn van Studio Kopwerk: tien jaar ervaring bij grote organisaties. Nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
-            noindex: true,
-          },
-          Page: Over,
-        },
-      ]
-    : [];
+  const over: PageRoute = {
+    meta: {
+      path: '/over',
+      title: 'Over · Studio Kopwerk',
+      description:
+        'Ik ben Martijn van Studio Kopwerk. Tien jaar ervaring bij grote organisaties, nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
+    },
+    Page: Over,
+  };
   const privacy: PageRoute = {
     meta: {
       path: '/privacy',
@@ -59,7 +53,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Privacy,
   };
-  if (shown.length === 0) return [home, aanpak, privacy, ...over];
+  if (shown.length === 0) return [home, aanpak, privacy, over];
   return [
     home,
     aanpak,
@@ -67,13 +61,13 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     {
       meta: {
         path: '/werk',
-        title: 'Wat wérkt · Studio Kopwerk',
+        title: 'Wat ik maakte · Studio Kopwerk',
         description: 'Elke opdracht kort verteld: de vraag, wat ik maakte en wat het opleverde.',
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,
     },
-    ...over,
+    over,
   ];
 }
 

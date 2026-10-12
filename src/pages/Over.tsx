@@ -1,10 +1,12 @@
 import { useRef, type ReactNode } from 'react';
+import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { NextLink } from '../components/ui/NextLink';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
+import { projects } from '../lib/projects';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
@@ -20,8 +22,9 @@ const portraitFiles = import.meta.glob<string>('../content/over/portret.{avif,we
 });
 const portrait = Object.values(portraitFiles)[0];
 
-// TODO(Martijn): once the photo is in, say what's in it (where, what he is doing), for people who can't see it.
-const portraitAlt = 'Zwart-witportret van Martijn';
+// What's in the photo, for people who can't see it.
+const portraitAlt =
+  'Zwart-witportret van Martijn: krullend haar, een gestreept overhemd, de armen over elkaar. Hij lacht naar de camera, voor een open stalen kast.';
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -55,8 +58,8 @@ export function Over() {
           Martijn
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Vroeger had je een heel team nodig om het digitale goed in te richten. Nu maak ik het{' '}
-          <em className="italic font-normal">zelf</em>, met AI.
+          Ik help ondernemers die vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets wat je kunt{' '}
+          <em className="italic font-normal">gebruiken</em>.
         </Typography>
       </div>
 
@@ -73,50 +76,55 @@ export function Over() {
         </div>
         <div className={cn('max-w-xl flex flex-col gap-6 lg:pt-2', prose)}>
           <p>
-            Werk eenvoudiger maken doe ik al sinds het begin van mijn loopbaan. Een collega zette elke week met de hand
-            rapportages in elkaar. Ik dacht dat het handiger kon, leerde mezelf hoe en automatiseerde ze. Dat scheelde een
-            dag werk per week.
+            Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
+            handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
           </p>
           <p>
-            Inmiddels werk ik al tien jaar in productmanagement bij grote organisaties: lang als product owner, nu als
-            productmanager. In gewone woorden: ik bepaal wat er gemaakt wordt en waarom. Ook hielp ik er grote systemen
-            invoeren.
+            Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{' '}
+            {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
+            {projects.length > 0 ? (
+              <Link href="/werk" className="underline underline-offset-4">
+                mijn eigen programma
+              </Link>
+            ) : (
+              'mijn eigen programma'
+            )}
+            . Outlook hoef ik niet meer te openen.
           </p>
-          <p>
-            Bij grote organisaties zag ik steeds hetzelfde: schermen die ingewikkelder waren dan nodig en handmatige
-            stappen die het werk vertraagden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
-          </p>
-          <p>Daarom begon ik Studio Kopwerk: wat ik daar leerde, gun ik ook ondernemers.</p>
         </div>
       </section>
 
-      <Row id="ervaring" title="Je krijgt wat werkt bij grote organisaties, zonder hun kosten">
+      <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
-          Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht.
+          Al tien jaar bepaal ik bij grote organisaties wat er gemaakt wordt en waarom. Ik hielp er ook grote programma's
+          invoeren.
         </p>
         <p>
-          Ik neem mee wat ik bij grote organisaties leerde, zonder hun lange trajecten en vergaderingen. Wat ik als
-          productmanager alleen kon bedenken, maak ik nu zelf.
+          Steeds zag ik hetzelfde: schermen die ingewikkelder waren dan nodig en stappen met de hand die het werk
+          ophielden. Het extra werk kwam terecht bij de mensen die het al druk hadden.
         </p>
       </Row>
 
-      <Row id="verwachten" title="Je spreekt met wie het maakt">
+      <Row id="ervaring" title="Wat ik daar leerde, gun ik ook ondernemers">
         <p>
-          Ik zie snel waar het knelt. Daarna heb je in korte tijd iets in handen dat werkt. Ik praat over je werk, niet
-          over techniek: je hoeft geen computertaal te spreken.
+          Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht. Ik neem die
+          ervaring mee, zonder de lange trajecten en vergaderingen.
+        </p>
+        <p>
+          Maken kon ik altijd al, maar het duurde lang en vaak waren er meerdere mensen voor nodig. Met AI doe ik het nu
+          zelf, in korte tijd.
+        </p>
+      </Row>
+
+      <Row id="verwachten" title="Je spreekt steeds met mij">
+        <p>
+          Het eerste gesprek kan bij jou op de zaak. Dan zie ik hoe het werk nu loopt. Ik praat over je werk, niet over
+          techniek: je hoeft geen computertaal te spreken.
         </p>
         <p>
           Studio Kopwerk doe ik naast mijn werk als productmanager. Daarom neem ik weinig opdrachten tegelijk aan: wie
           met mij werkt, krijgt mijn aandacht.
         </p>
-      </Row>
-
-      <Row id="klein" title="Ik begin klein en bouw alleen wat helpt">
-        <p>
-          Ik bouw geen groot systeem van begin tot eind. Ik maak het werk eenvoudig, mooi en fijn. Daarbij houd ik het zo
-          klein als kan.
-        </p>
-        <p>Ik werk het liefst met ondernemers die nieuwsgierig zijn naar wat AI voor hen kan doen.</p>
       </Row>
 
       <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">

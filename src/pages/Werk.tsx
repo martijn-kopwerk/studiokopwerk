@@ -70,7 +70,7 @@ export function Werk() {
             tabIndex={-1}
             className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white outline-none"
           >
-            Wat wérkt
+            Wat ik maakte
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">

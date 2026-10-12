@@ -106,12 +106,12 @@ describe('werk', () => {
   // Tests run in dev mode, so drafts count too.
   it.skipIf(projects.length === 0)('renders every opdracht, with the first one beside the list', () => {
     const { html, head } = render('/werk');
-    expect(html).toContain('Wat wérkt');
+    expect(html).toContain('Wat ik maakte');
     for (const project of projects) {
       expect(html).toContain(`id="opdracht-${project.slug}"`);
     }
     expect(html).toMatch(/role="tabpanel"[^>]*aria-labelledby="opdracht-/);
-    expect(head).toContain('<title>Wat wérkt · Studio Kopwerk</title>');
+    expect(head).toContain('<title>Wat ik maakte · Studio Kopwerk</title>');
   });
 
   it.skipIf(projects.length === 0)('keeps a page of drafts out of search results', () => {
@@ -141,8 +141,9 @@ describe('head tags', () => {
 });
 
 describe('over', () => {
-  it('is a draft while the photo and text are still to come: kept out of search results', () => {
+  it('is published: on the live site and in search results, with or without opdrachten', () => {
     const over = buildRoutes([]).find((route) => route.meta.path === '/over');
-    expect(over?.meta.noindex).toBe(true);
+    expect(over).toBeDefined();
+    expect(over?.meta.noindex).toBeFalsy();
   });
 });
