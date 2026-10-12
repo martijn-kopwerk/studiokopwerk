@@ -22,7 +22,7 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 - **High-Contrast & Dark Mode Support:** One-button theme toggle, dark first: dark unless the system asks for light, and a manual choice is remembered (`useTheme` hook).
 - **Interactive Micro-Interactions:** Custom magnetic button wrappers, rolling text hover animations, and smooth physics-based transitions.
 - **Interactive Contact Modal:** Accessible dialog overlay (`ContactCard`) with dynamic email copy functionality and direct mailto actions.
-- **Keyboard Navigation & Accessibility:** Keyboard shortcuts (`C` to toggle contact modal, `T` to toggle theme, `Esc` to close modal; ignored with modifier keys, so copy/paste keeps working). All motion respects `prefers-reduced-motion`.
+- **Keyboard Navigation & Accessibility:** Everything works with Tab, Enter and `Esc`; no single-key shortcuts (WCAG 2.1.4). All motion respects `prefers-reduced-motion`.
 - **Performance Optimized:** Contact dialog loaded on first intent, lazily loaded animation engine, no-flash theme init, and a "drafting table" background that draws the K geometry once and then rests (CSS-only ambient light and pulse).
 
 ---

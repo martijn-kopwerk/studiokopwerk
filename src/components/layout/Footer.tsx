@@ -8,7 +8,7 @@ import { navItems } from '../../lib/nav';
 import { hairline, raster } from '../../lib/raster';
 import { cn } from '../../lib/utils';
 
-const link = 'group -mx-1 px-1 py-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
+const link = 'group -mx-1 px-1 py-1.5 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
 
 const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525964B92'];
 
@@ -53,7 +53,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
         <nav aria-label="Pagina's" className="relative">
           {/* Where the amber dot rests while the footer is in view: in the margin, on the K's stem on phones */}
           <span ref={marker} aria-hidden="true" className="absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.1875rem)] size-3.5" />
-          <ul className="flex items-center gap-6">
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <li>
               <Link href="/" className={link}>
                 <RollingText accentClassName="text-amber-700 dark:text-amber-400">Begin</RollingText>
@@ -77,7 +77,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
             onPointerEnter={preloadContact}
             onFocus={preloadContact}
             aria-label={`Vertel waar het knelt: ${contactEmail}`}
-            className="group -mx-1 px-1 py-1 rounded-md text-slate-700 dark:text-slate-300"
+            className="group -mx-1 px-1 py-1.5 rounded-md text-slate-700 dark:text-slate-300"
           >
             <RollingText accentClassName="text-amber-700 dark:text-amber-400">{contactEmail}</RollingText>
           </button>
@@ -91,7 +91,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
             <span suppressHydrationWarning className="after:content-['•'] after:ml-2">
               © {currentYear} Studio Kopwerk
             </span>
-            <Link href="/privacy" className="underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
+            <Link href="/privacy" className="-my-1 py-1 underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
               Privacy
             </Link>
           </p>

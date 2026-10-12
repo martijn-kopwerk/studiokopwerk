@@ -11,11 +11,11 @@ export function Home() {
 
   return (
     <main
-      id="hero-section"
+      id="inhoud"
       className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-8 flex-1 min-h-[calc(100dvh-5rem)] sm:min-h-[calc(100dvh-5.5rem)] flex flex-col items-start sm:items-center justify-center text-left sm:text-center"
     >
       <div className="w-full space-y-5 sm:space-y-6 md:space-y-8 flex flex-col items-start sm:items-center justify-center motion-safe:animate-rise [--rise-from:20px] [--rise-scale:0.96]">
-        <h1 id="hero-title" tabIndex={-1} className="flex flex-col items-start sm:items-center gap-4 sm:gap-6 md:gap-8 outline-none">
+        <h1 id="hero-title" tabIndex={-1} aria-label="Studio Kopwerk" className="flex flex-col items-start sm:items-center gap-4 sm:gap-6 md:gap-8 outline-none">
           <Typography
             as="span"
             variant="eyebrow"

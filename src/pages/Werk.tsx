@@ -62,7 +62,7 @@ export function Werk() {
   };
 
   return (
-    <main className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-20 sm:pb-28 motion-safe:animate-rise [--rise-from:16px]">
+    <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pt-6 sm:pt-12 pb-20 sm:pb-28 motion-safe:animate-rise [--rise-from:16px]">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] lg:gap-x-16 lg:items-end">
         <div className="flex flex-col gap-4 sm:gap-5">
           <Typography variant="eyebrow">Werk</Typography>

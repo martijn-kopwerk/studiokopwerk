@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, Suspense, lazy } from 'react';
+import { useState, useCallback, useMemo, Suspense, lazy } from 'react';
 import { LazyMotion, MotionConfig } from 'motion/react';
 import { useLocation } from 'wouter';
 import { useTheme } from './hooks/useTheme';
@@ -64,31 +64,6 @@ export default function App() {
     openMail();
   }, []);
 
-  // Keyboard shortcuts: C toggles contact, T toggles theme.
-  // Ignored with modifiers (so Ctrl/Cmd+C still copies), on key repeat, and while typing.
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
-      const target = e.target;
-      if (target instanceof HTMLElement && (target.isContentEditable || target.closest('input, textarea, select'))) {
-        return;
-      }
-      const key = e.key.toLowerCase();
-      if (key === 'c') {
-        if (isContactUnavailable) {
-          openMail();
-          return;
-        }
-        setIsContactMounted(true);
-        setIsContactOpen((prev) => !prev);
-      } else if (key === 't') {
-        toggleTheme();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTheme, isContactUnavailable]);
-
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={loadMotionFeatures} strict>
@@ -97,6 +72,14 @@ export default function App() {
           className="relative min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden bg-slate-50 dark:bg-kopwerk-dark transition-colors duration-500 font-sans"
         >
           <AbstractBackground theme={resolvedTheme} dotTarget={footerDotTarget ?? dotTarget} page={route.meta.path} />
+
+          {/* The first stop for the keyboard: past the menu, straight to the page. Hidden until it has focus. */}
+          <a
+            href="#inhoud"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 rounded-full bg-slate-900 dark:bg-white px-5 py-3 text-xs font-semibold tracking-wide-xl uppercase text-white dark:text-slate-950"
+          >
+            Naar de inhoud
+          </a>
 
           <Header onToggleTheme={toggleTheme} />
 
