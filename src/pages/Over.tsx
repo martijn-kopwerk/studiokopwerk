@@ -1,10 +1,12 @@
 import { useRef, type ReactNode } from 'react';
+import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { NextLink } from '../components/ui/NextLink';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useContact } from '../hooks/useContact';
+import { projects } from '../lib/projects';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
@@ -78,8 +80,16 @@ export function Over() {
             handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
           </p>
           <p>
-            Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI.
-            Outlook hoef ik niet meer te openen.
+            Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{' '}
+            {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
+            {projects.length > 0 ? (
+              <Link href="/werk" className="underline underline-offset-4">
+                mijn eigen programma
+              </Link>
+            ) : (
+              'mijn eigen programma'
+            )}
+            . Outlook hoef ik niet meer te openen.
           </p>
         </div>
       </section>
