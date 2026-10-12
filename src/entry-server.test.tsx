@@ -141,8 +141,9 @@ describe('head tags', () => {
 });
 
 describe('over', () => {
-  it('is a draft while the photo and text are still to come: kept out of search results', () => {
+  it('is published: on the live site and in search results, with or without opdrachten', () => {
     const over = buildRoutes([]).find((route) => route.meta.path === '/over');
-    expect(over?.meta.noindex).toBe(true);
+    expect(over).toBeDefined();
+    expect(over?.meta.noindex).toBeFalsy();
   });
 });

@@ -20,8 +20,9 @@ const portraitFiles = import.meta.glob<string>('../content/over/portret.{avif,we
 });
 const portrait = Object.values(portraitFiles)[0];
 
-// TODO(Martijn): once the photo is in, say what's in it (where, what he is doing), for people who can't see it.
-const portraitAlt = 'Zwart-witportret van Martijn';
+// What's in the photo, for people who can't see it.
+const portraitAlt =
+  'Zwart-witportret van Martijn: krullend haar, een gestreept overhemd, de armen over elkaar. Hij lacht naar de camera, voor een open stalen kast.';
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
