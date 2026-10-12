@@ -96,8 +96,9 @@ export function Over() {
           Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht.
         </p>
         <p>
-          Ik neem mee wat ik bij grote organisaties leerde, zonder hun lange trajecten en vergaderingen. Wat ik als
-          productmanager alleen kon bedenken, maak ik nu zelf.
+          Ik neem mee wat ik bij grote organisaties leerde, zonder hun lange trajecten en vergaderingen. Maken kon ik
+          altijd al, maar het duurde lang en vaak waren er meerdere mensen voor nodig. Met AI doe ik het nu zelf, in
+          korte tijd.
         </p>
       </Row>
 
