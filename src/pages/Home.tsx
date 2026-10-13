@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Typography } from '../components/ui/Typography';
 import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { CapsuleButton } from '../components/ui/CapsuleButton';
@@ -11,6 +11,7 @@ import { useContact } from '../hooks/useContact';
 import { useReadingStops } from '../hooks/useReadingStops';
 import { projects } from '../lib/projects';
 import { raster } from '../lib/raster';
+import { PHONE_MAX_WIDTH } from '../lib/tekentafel';
 import { cn } from '../lib/utils';
 
 // Running text.
@@ -18,6 +19,12 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 
 // A dot target beside a line of text, in the left margin: on the K's stem on phones, in the gutter on wider screens.
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
+// The same for a heading in a block's right column (media left, from lg): back in the block's margin, past the left
+// column and the 64px gap. The block is a container, so 50cqw is half its width.
+const markerRight = 'lg:left-[calc(-50cqw-4.5rem)]';
+
+// Between phones and wide screens the K's vertex would land on the centred hero text, so the dot rests in the margin.
+const BETWEEN = `(min-width: ${PHONE_MAX_WIDTH}px) and (max-width: 1279px)`;
 
 // Three of the five frictions, the ones a visitor recognises first: the website, scattered data, work by hand.
 const drieKnelpunten = [knelpunten[2], knelpunten[1], knelpunten[3]].filter((item) => item !== undefined);
@@ -27,15 +34,31 @@ const drieKnelpunten = [knelpunten[2], knelpunten[1], knelpunten[3]].filter((ite
  * each a block of its own shape with one quiet way on to the page behind it, then the call to action again. Whoever isn't ready to mail
  * always has a next step on the page itself. The hero is almost one screen: the top of the next block shows below it, so it reads as a page to scroll.
  * Phones: the hero stands left, right of the K's stem, with a gap above the button for the vertex and its amber
- * dot. Wider screens: the hero is centred, the blocks below alternate their media left and right. The dot rests on the vertex
- * during the hero, then walks the margin from block to block, as on Aanpak.
+ * dot. Wider screens: the hero is centred, the blocks below alternate their media left and right. During the hero the dot
+ * rests on the vertex (on tablets, where the vertex would fall on the text, in the margin of the gap above the button),
+ * then walks the margin from block to block, as on Aanpak.
  */
 export function Home() {
   const { openContact, preloadContact } = useContact();
   const { active, markers, zone, stop } = useReadingStops();
   const werk = projects.find((project) => project.film) ?? projects[0];
 
-  useAmberDot(() => (active !== null ? (markers.current[active] ?? null) : null), active, true);
+  const heroMarker = useRef<HTMLSpanElement | null>(null);
+  const [between, setBetween] = useState(false);
+
+  useAmberDot(
+    () => (active !== null ? (markers.current[active] ?? null) : between ? heroMarker.current : null),
+    `${active}-${between}`,
+    true
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia(BETWEEN);
+    const update = () => setBetween(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
 
   const contact = (
     <MagneticWrapper>
@@ -65,7 +88,7 @@ export function Home() {
           <h1
             id="hero-title"
             tabIndex={-1}
-            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
+            className="font-display font-normal text-4xl sm:text-6xl lg:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
           >
             Zien wat <em className="italic font-normal">wérkt</em>.
           </h1>
@@ -79,8 +102,11 @@ export function Home() {
           </Typography>
         </div>
 
-        {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
-        <div data-tekentafel-vertex aria-hidden="true" className="h-20 sm:h-12 md:h-14 shrink-0" />
+        {/* The gap where the background's K has its vertex on phones (read by AbstractBackground). On tablets the dot
+            rests in its margin instead, on the reading line of the blocks below. */}
+        <div data-tekentafel-vertex aria-hidden="true" className="relative self-stretch sm:ml-14 h-20 sm:h-12 md:h-14 shrink-0">
+          <span ref={heroMarker} className="absolute -left-8 sm:-left-10 top-[calc(50%-0.4375rem)] size-3.5" />
+        </div>
 
         <div className="motion-safe:animate-rise [--rise-from:15px] [animation-delay:400ms]">{contact}</div>
       </section>
@@ -92,16 +118,27 @@ export function Home() {
         {...at()}
       >
         <p>
-          Ik ben Martijn. Ik help ondernemers die vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets
-          wat je kunt gebruiken.
+          Ik ben Martijn. Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages
+          maken. Ik liet de computer het werk doen. Dat scheelde een dag per week.
         </p>
         <p>Je mail komt bij mij binnen. Ik lees hem zelf.</p>
         <NextLink className="self-start" href="/over">Lees wie ik ben</NextLink>
       </Block>
 
       {werk && (
-        <Block id="werk" title={werk.title} media={<ProjectMedia project={werk} />} mediaSide="right" {...at()}>
+        <Block
+          id="werk"
+          title={werk.title}
+          media={<ProjectMedia project={werk} still={werk.begin} />}
+          mediaSide="right"
+          {...at()}
+        >
           <ProjectText project={werk} />
+          {werk.begin && (
+            <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
+              {werk.begin.line}
+            </Typography>
+          )}
           <NextLink className="self-start" href="/werk">Bekijk het werk</NextLink>
         </Block>
       )}
@@ -109,12 +146,7 @@ export function Home() {
       <Block
         id="knelt"
         title="Goed in je vak, vast in je systemen"
-        media={
-          <div className="flex flex-col gap-6">
-            <Knelpunten items={drieKnelpunten} />
-            <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
-          </div>
-        }
+        media={<Knelpunten items={drieKnelpunten} />}
         mediaSide="right"
         mediaFirst={false}
         {...at()}
@@ -122,6 +154,7 @@ export function Home() {
         <p>
           Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
         </p>
+        <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 
       {/* The same call to action as at the top, where the walk ends */}
@@ -144,7 +177,8 @@ export function Home() {
  * A block of the walk, a doorway to the page behind it. One heading per block, the conclusion: a label above it
  * would read as a second title. Each block has its own shape, so scrolling reads as separate stops rather than one
  * long table: the media sits left or right on wider screens, and on phones a block opens with its image. No
- * hairlines between blocks; the whitespace and the change of shape separate them.
+ * hairlines between blocks; the whitespace and the change of shape separate them. The heading's dot marker stays in
+ * the block's margin, also when the heading sits in the right column, so the dot keeps one reading line.
  */
 function Block({
   id,
@@ -171,12 +205,12 @@ function Block({
     <section
       ref={zoneRef}
       aria-labelledby={id}
-      className="py-10 sm:py-16 sm:ml-14 grid gap-8 lg:grid-cols-2 lg:gap-x-16 lg:items-center"
+      className="@container py-10 sm:py-16 sm:ml-14 grid gap-8 lg:grid-cols-2 lg:gap-x-16 lg:items-center"
     >
       {mediaFirst && aside}
       <div className="flex flex-col gap-6">
         <Typography variant="h2" id={id} className="relative text-balance">
-          <span ref={markerRef} aria-hidden="true" className={marker} />
+          <span ref={markerRef} aria-hidden="true" className={cn(marker, mediaSide === 'left' && markerRight)} />
           {title}
         </Typography>
         <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>

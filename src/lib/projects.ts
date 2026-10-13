@@ -33,6 +33,8 @@ export interface Project {
   media?: ProjectMedia;
   // Optional: a short film that opens from the image.
   film?: FilmScene[];
+  // Optional: the film scene Begin shows instead of the image, with its own line (a scene's `begin:`).
+  begin?: { image: string; alt: string; line: string };
   // The two or three sentences below the fields.
   Text: ComponentType;
 }
@@ -112,6 +114,7 @@ export function parseProject(
   }
 
   let film: FilmScene[] | undefined;
+  let begin: Project['begin'];
   if (fm.film !== undefined) {
     if (!Array.isArray(fm.film) || fm.film.length === 0) {
       problems.push('"film" moet een lijst met scènes zijn');
@@ -129,6 +132,11 @@ export function parseProject(
         if (!field('alt')) problems.push(`${where}: "alt" ontbreekt: beschrijf wat er op het beeld te zien is`);
         if (!field('tekst')) problems.push(`${where}: "tekst" ontbreekt: één regel uitleg bij het beeld`);
         if (!focusPattern.test(focus)) problems.push(`${where}: "focus" moet de vorm "70% 40%" hebben`);
+        if (fields.begin !== undefined) {
+          if (!field('begin')) problems.push(`${where}: "begin" moet één zin zijn, de regel bij dit beeld op Begin`);
+          else if (begin) problems.push(`${where}: "begin" mag maar bij één scène staan`);
+          else begin = { image: images[image] ?? '', alt: field('alt'), line: field('begin') };
+        }
         return { image: images[image] ?? '', alt: field('alt'), text: field('tekst'), focus };
       });
     }
@@ -147,6 +155,7 @@ export function parseProject(
     draft: fm.concept === true,
     media,
     film,
+    begin,
     Text: module.default,
   };
 }

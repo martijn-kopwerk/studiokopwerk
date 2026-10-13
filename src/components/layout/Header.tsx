@@ -40,7 +40,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
       <div className="flex items-center gap-3 sm:gap-8">
         {navItems.length > 0 && (
           <nav aria-label="Hoofdmenu">
-            <ul className="flex items-center gap-4 sm:gap-8">
+            <ul className="flex items-center gap-3 min-[360px]:gap-4 sm:gap-8">
               {navItems.map(({ path, label }) => {
                 const isCurrent = current === path;
                 return (
