@@ -65,6 +65,21 @@ describe('parseProject', () => {
     ).toThrow(/alleen naast een "beeld"/);
   });
 
+  it('lets one scene stand in for the image on Begin, with its own line', () => {
+    const images = { './foto.webp': '/assets/foto.webp', './scene.webp': '/assets/scene.webp' };
+    const withImage = { ...base, beeld: './foto.webp', alt: 'Een scherm' };
+    const scene = { beeld: './scene.webp', alt: 'Een antwoord', tekst: 'AI schrijft mee.' };
+    const project = parseProject('film', module({ ...withImage, film: [scene, { ...scene, begin: 'Dat scheelt tijd.' }] }), images);
+    expect(project.begin).toEqual({ image: '/assets/scene.webp', alt: 'Een antwoord', line: 'Dat scheelt tijd.' });
+
+    expect(() =>
+      parseProject('film', module({ ...withImage, film: [{ ...scene, begin: 'Een.' }, { ...scene, begin: 'Twee.' }] }), images)
+    ).toThrow(/scène 2: "begin" mag maar bij één scène staan/);
+    expect(() => parseProject('film', module({ ...withImage, film: [{ ...scene, begin: true }] }), images)).toThrow(
+      /"begin" moet één zin zijn/
+    );
+  });
+
   it('rejects folder names that would make an awkward name', () => {
     expect(() => parseProject('Mijn Opdracht', module(base), {})).toThrow(/mapnaam/);
   });

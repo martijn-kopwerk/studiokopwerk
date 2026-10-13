@@ -11,6 +11,9 @@ export const ARM_SLOPE = (K.mid - K.top) / (K.armX - K.vertexX);
 // Below this width the K is drawn cropped, growing out of the header logo.
 export const PHONE_MAX_WIDTH = 640;
 
+// The width of the page's content (max-w-7xl), the header's included.
+const CONTENT_MAX_WIDTH = 1280;
+
 // Line weights and opacities. Guides: the full-bleed construction lines. K: the letter itself, a touch stronger.
 // Phones get slightly stronger lines: the screen is small and often seen in daylight.
 export const LINES = {
@@ -68,8 +71,9 @@ export function computeLayout(width: number, height: number, logo?: Box, vertexY
   }
 
   // Wider screens: the K is drawn large and faint, a little left of centre so it never competes with the wordmark.
+  // Beyond the content's width (max-w-7xl) the stem stays at the content's left edge, so the K doesn't drift away from it.
   const scale = Math.min(height * 1.05, width * 1.1) / (K.bottom - K.top);
-  const stemX = width * 0.1;
+  const stemX = Math.max(width * 0.1, (width - CONTENT_MAX_WIDTH) / 2);
   return {
     width,
     height,

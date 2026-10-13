@@ -35,15 +35,16 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
 }
 
 /** The opdracht's image, quote or number, if it has one. */
-export function ProjectMedia({ project }: { project: Project }) {
+export function ProjectMedia({ project, still }: { project: Project; still?: { image: string; alt: string } }) {
   const media = project.media;
   if (!media) return null;
 
   if (media.kind === 'beeld') {
+    // `still`: another image in its place (Begin shows one scene of the film), still opening the film.
     const image = (
       <img
-        src={media.image}
-        alt={media.alt}
+        src={still?.image ?? media.image}
+        alt={still?.alt ?? media.alt}
         loading="lazy"
         decoding="async"
         className={cn(

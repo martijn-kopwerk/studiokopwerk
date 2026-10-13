@@ -28,9 +28,9 @@ export function CapsuleButton({
       {...props}
     >
       {/* Design system: a 14px uppercase label at 0.1em, beside a 40px arrow disc (a little closer on phones, so
-          "Vertel waar het knelt" stays on one line at 375px) */}
+          "Vertel waar het knelt" stays on one line at 375px). Narrower still, it breaks into two even lines. */}
       <RollingText
-        className="text-sm font-medium tracking-wide-md uppercase text-white dark:text-slate-950"
+        className="text-sm font-medium tracking-wide-md uppercase text-balance text-white dark:text-slate-950"
         accentClassName="text-amber-400 dark:text-amber-700"
       >
         {children}

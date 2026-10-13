@@ -28,4 +28,9 @@ describe('computeLayout', () => {
     expect(layout.midY).toBeCloseTo(900 * 0.54);
     expect(layout.armX).toBeLessThan(1440);
   });
+
+  it('keeps the K with the content on very wide screens', () => {
+    const layout = computeLayout(2560, 1300);
+    expect(layout.stemX).toBeCloseTo((2560 - 1280) / 2);
+  });
 });
