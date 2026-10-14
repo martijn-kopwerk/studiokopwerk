@@ -133,7 +133,7 @@ export function CompactNav() {
     >
       <nav
         aria-label="Menu"
-        className="pointer-events-auto flex items-center gap-2 sm:gap-6 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/75 dark:bg-kopwerk-dark/75 backdrop-blur-xl shadow-xl shadow-slate-900/5 dark:shadow-kopwerk-dark/40 py-1.5 pl-4 pr-1.5"
+        className="pointer-events-auto flex items-center gap-2 sm:gap-6 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-kopwerk-dark/90 backdrop-blur-xl shadow-xl shadow-slate-900/5 dark:shadow-kopwerk-dark/40 py-1.5 pl-4 pr-1.5"
       >
         <Link href="/" aria-label="Studio Kopwerk, naar het begin" className="flex rounded-full p-1">
           <KopwerkLogo className="size-5" />
