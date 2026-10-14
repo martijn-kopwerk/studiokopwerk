@@ -9,7 +9,7 @@ import { AbstractBackground } from './components/AbstractBackground';
 import { CompactNav, Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { contactEmail, mailtoHref } from './lib/contact';
+import { mailtoHref } from './lib/contact';
 import { siteUrl } from './lib/head';
 import { findRoute } from './routes';
 
@@ -91,7 +91,7 @@ export default function App() {
             </AmberDotContext.Provider>
 
             {/* Inside the contact provider: the footer's address opens the same contact card */}
-            <Footer onDotTarget={setFooterDotTarget} />
+            <Footer slot={route.slot} onDotTarget={setFooterDotTarget} />
           </ContactContext.Provider>
           {isContactMounted && (
             <ErrorBoundary onError={handleContactError}>
@@ -99,7 +99,6 @@ export default function App() {
                 <ContactCard
                   isOpen={isContactOpen}
                   onClose={() => setIsContactOpen(false)}
-                  email={contactEmail}
                 />
               </Suspense>
             </ErrorBoundary>

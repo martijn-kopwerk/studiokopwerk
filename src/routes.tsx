@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import type { PageMeta } from './lib/head';
 import { projects, type Project } from './lib/projects';
 import { Home } from './pages/Home';
@@ -8,9 +8,17 @@ import { Aanpak } from './pages/Aanpak';
 import { Werk } from './pages/Werk';
 import { Privacy } from './pages/Privacy';
 
+// How a page ends (design system: Slot): its own last line and at most one quiet way on. Without one the page
+// ends with "Klein beginnen, snel iets maken dat werkt.".
+export interface PageSlot {
+  line?: ReactNode;
+  next?: { href: string; label: string };
+}
+
 export interface PageRoute {
   meta: PageMeta;
   Page: ComponentType;
+  slot?: PageSlot;
 }
 
 const siteDescription =
@@ -35,6 +43,8 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
         'Hoe we werken: AI maakt snel een eerste versie, samen kijken we wat werkt en jij beslist wat blijft.',
     },
     Page: Aanpak,
+    // The proof that it works, once /werk exists
+    slot: shown.length > 0 ? { next: { href: '/werk', label: 'Bekijk het werk' } } : undefined,
   };
   const over: PageRoute = {
     meta: {
@@ -44,6 +54,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
         'Ik ben Martijn van Studio Kopwerk. Tien jaar ervaring bij grote organisaties, nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
     },
     Page: Over,
+    slot: { next: { href: '/aanpak', label: 'Lees hoe we werken' } },
   };
   const privacy: PageRoute = {
     meta: {
@@ -66,6 +77,13 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,
+      slot: {
+        line: (
+          <>
+            Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
+          </>
+        ),
+      },
     },
     over,
   ];

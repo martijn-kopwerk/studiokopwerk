@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
-import { NextLink } from '../components/ui/NextLink';
 import { Weglaten } from '../components/aanpak/Weglaten';
 import { Knelpunten } from '../components/Knelpunten';
-import { ContactButton } from '../components/ContactButton';
 import { Rondgang } from '../components/Rondgang';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
@@ -15,7 +13,7 @@ import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { knelt: 0, werkwijze: 1, waarom: 2, einde: 3 } as const;
+const STOP = { knelt: 0, werkwijze: 1, waarom: 2 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
@@ -40,7 +38,10 @@ export function Aanpak() {
   useAmberDot(
     () => (active !== null ? (markers.current[active] ?? null) : phone ? null : intro.current),
     `${active}-${phone}`,
-    true
+    true,
+    false,
+    // The loop in "Hoe we werken" has its own dot: the reading dot steps aside while that chapter is read
+    active === STOP.werkwijze
   );
 
   useEffect(() => {
@@ -156,23 +157,6 @@ export function Aanpak() {
         <p>Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
       </Chapter>
 
-      {/* One call to action on the same grid: the line on the left, the button where the explanations start */}
-      <section
-        ref={zone(STOP.einde)}
-        aria-label="Vertel waar het knelt"
-        className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} lg:items-center`}
-      >
-        <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          <span ref={stop(STOP.einde)} aria-hidden="true" className={marker} />
-          Klein beginnen, snel iets maken dat werkt.
-        </Typography>
-        <div className="flex flex-col items-start gap-6">
-          {/* The same button as on home, magnetic too */}
-          <ContactButton />
-          {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}
-          {projects.length > 0 && <NextLink href="/werk">Bekijk het werk</NextLink>}
-        </div>
-      </section>
     </main>
   );
 }

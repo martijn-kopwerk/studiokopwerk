@@ -9,7 +9,6 @@ import { ProjectMedia, ProjectStat, ProjectText } from '../components/werk/Proje
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
 import { projects } from '../lib/projects';
-import { raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // Running text.
@@ -23,6 +22,9 @@ const markerRight = 'lg:left-[calc(-50cqw-4.5rem)]';
 
 // When the dot has landed on the K's vertex (animate-dot-land: 1.9s delay, 0.8s), it flies on to the full stop.
 const LANDED_MS = 2700;
+
+// The werkwijze block (the loop) is the second stop of the walk.
+const WERKWIJZE = 1;
 
 /**
  * Begin is the front door and a short walk: the promise, then who you talk to, how we work, what he made and where it
@@ -54,7 +56,9 @@ export function Home() {
     () => (inHero ? (geland ? punt.current : null) : (markers.current[active] ?? null)),
     `${active}-${geland}`,
     !inHero,
-    inHero
+    inHero,
+    // The loop has its own dot: while it is the block being read, the reading dot steps aside (one dot walking)
+    active === WERKWIJZE
   );
 
   // The blocks in reading order; Werk only while there's an opdracht to show (see routes.tsx).
@@ -177,20 +181,6 @@ export function Home() {
         <p>Kies wat bij jou knelt. Dan zie je wat we ervoor maken.</p>
       </Block>
 
-      {/* The same call to action as at the top, where the walk ends */}
-      <section
-        ref={zone(next)}
-        aria-label="Vertel waar het knelt"
-        className={`py-10 sm:py-16 sm:ml-14 ${raster} lg:items-center kopwerk-reveal`}
-      >
-        <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          <span ref={stop(next)} aria-hidden="true" className={marker} />
-          Klein beginnen, snel iets maken dat werkt.
-        </Typography>
-        <div className="flex flex-col items-start">
-          <ContactButton />
-        </div>
-      </section>
     </main>
   );
 }

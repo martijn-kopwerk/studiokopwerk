@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
-import { ContactButton } from '../components/ContactButton';
 import { ProjectBody, ProjectMedia, ProjectMeta, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { cn } from '../lib/utils';
@@ -89,7 +88,7 @@ export function Werk() {
         >
           {/* The dot's place: in the margin beside the card, on the reading line of the page */}
           <span ref={singleMarker} aria-hidden="true" className="absolute left-4 top-[3.35rem] size-3.5" />
-          <ProjectMedia project={single} />
+          <ProjectMedia project={single} still={single.begin} />
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <h2
@@ -206,9 +205,12 @@ export function Werk() {
               className="absolute -left-8 sm:left-4 top-[2.55rem] size-3.5"
             />
             <div className="flex items-baseline gap-5 sm:gap-8">
-              <span className="shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">
-                {project.number}
-              </span>
+              {/* A number only means something in a list of more than one */}
+              {!single && (
+                <span className="shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">
+                  {project.number}
+                </span>
+              )}
               <div className="flex flex-col gap-2 min-w-0">
                 <h2 className="font-display font-medium text-xl sm:text-2xl leading-snug text-balance text-slate-900 dark:text-white">
                   {project.title}
@@ -223,13 +225,6 @@ export function Werk() {
         ))}
       </ol>
 
-      <section className="mt-20 sm:mt-28 flex flex-col sm:flex-row sm:items-center justify-between gap-8 sm:pl-14">
-        <Typography variant="lead" as="p">
-          Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
-        </Typography>
-        {/* The same button as on home, magnetic too; Werk is the last stop, so there's no link on */}
-        <ContactButton className="self-start sm:self-auto" />
-      </section>
     </main>
   );
 }

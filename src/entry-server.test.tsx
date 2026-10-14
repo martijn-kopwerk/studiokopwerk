@@ -76,11 +76,16 @@ describe('header and footer', () => {
     expect(render('/').html.includes('href="/werk"')).toBe(hasWerk);
   });
 
-  it('opens the contact card from the footer address and shows the company details', () => {
+  it('ends every page with one invitation: its own last line, the button and, smaller, the address', () => {
     const { html } = render('/');
-    expect(html).toContain('aria-label="Vertel het in een mail: hallo@studiokopwerk.nl"');
-    expect(html).toContain('Kopieer het mailadres');
+    expect(html).toContain('Klein beginnen, snel iets maken dat werkt.');
+    expect(html).toContain('Of mail zelf');
+    expect(html).toContain('href="mailto:hallo@studiokopwerk.nl?subject=Waar%20het%20knelt"');
     expect(html).toContain('KvK 42154955');
+    // The hero, the slot and the compact bar (hidden until you scroll back up): nothing in between
+    expect(html.split('aria-haspopup="dialog"').length - 1).toBe(3);
+    if (projects.length > 0) expect(render('/werk').html).toContain('Hier is nog plek voor');
+    expect(render('/over').html).toContain('Je mail komt bij mij binnen. Ik lees hem zelf.');
   });
 });
 
