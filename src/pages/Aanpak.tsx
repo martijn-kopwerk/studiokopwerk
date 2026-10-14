@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { RotateCw } from 'lucide-react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
-import { CapsuleButton } from '../components/ui/CapsuleButton';
-import { MagneticWrapper } from '../components/ui/MagneticWrapper';
 import { NextLink } from '../components/ui/NextLink';
 import { Weglaten } from '../components/aanpak/Weglaten';
 import { Knelpunten } from '../components/Knelpunten';
+import { ContactButton } from '../components/ContactButton';
+import { Rondgang } from '../components/Rondgang';
 import { useAmberDot } from '../hooks/useAmberDot';
-import { useContact } from '../hooks/useContact';
 import { useReadingStops } from '../hooks/useReadingStops';
 
 import { projects } from '../lib/projects';
@@ -20,9 +18,6 @@ import { cn } from '../lib/utils';
 const STOP = { knelt: 0, werkwijze: 1, waarom: 2, einde: 3 } as const;
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
-
-// "AI maakt, jij beslist" in three steps, word for word from the positionering. They go round, not in order.
-const steps = ['AI doet het maakwerk.', 'Samen kijken we wat werkt.', 'Jij beslist wat blijft.'];
 
 // Running text.
 const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty';
@@ -37,7 +32,6 @@ const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.
  * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
  */
 export function Aanpak() {
-  const { openContact, preloadContact } = useContact();
   const { active, markers, zone, stop } = useReadingStops();
   const intro = useRef<HTMLSpanElement | null>(null);
   const [phone, setPhone] = useState(false);
@@ -102,40 +96,8 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
-        {/* The design system's Timeline without numbers, because it's a loop, not a sequence: hollow nodes on a
-            hairline, amber only where a person decides, and the line ending in the turn back to the start */}
-        <ul className="flex flex-col">
-          {steps.map((step, index) => {
-            const last = index === steps.length - 1;
-            return (
-              <li
-                key={step}
-                className={cn(
-                  'relative pl-10 py-4 font-display font-medium text-lg sm:text-xl leading-snug text-slate-900 dark:text-white',
-                  'after:absolute after:left-[6.5px] after:top-[calc(1rem+0.5lh)] after:h-full after:w-px after:bg-slate-300 dark:after:bg-slate-700'
-                )}
-              >
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    'absolute z-10 left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 rounded-full',
-                    last
-                      ? 'bg-amber-500 shadow-[0_0_0_4px_rgba(245,158,11,0.2)]'
-                      : 'border border-slate-500 dark:border-slate-400 bg-slate-50 dark:bg-kopwerk-dark'
-                  )}
-                />
-                {step}
-              </li>
-            );
-          })}
-          <li className="relative pl-10 py-4 text-slate-500 dark:text-slate-400">
-            <RotateCw
-              aria-hidden="true"
-              className="absolute left-0 top-[calc(1rem+0.5lh-0.4375rem)] size-3.5 bg-slate-50 dark:bg-kopwerk-dark"
-            />
-            En dan weer opnieuw, tot het werkt.
-          </li>
-        </ul>
+        {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
+        <Rondgang className="my-4" />
         {/* In the order it happens: the talk, the proposal, the first version, then real data only if you want */}
         <p>
           Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
@@ -206,11 +168,7 @@ export function Aanpak() {
         </Typography>
         <div className="flex flex-col items-start gap-6">
           {/* The same button as on home, magnetic too */}
-          <MagneticWrapper>
-            <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-              Vertel waar het knelt
-            </CapsuleButton>
-          </MagneticWrapper>
+          <ContactButton />
           {/* /werk only exists while there's an opdracht to show (see routes.tsx) */}
           {projects.length > 0 && <NextLink href="/werk">Bekijk het werk</NextLink>}
         </div>
@@ -242,10 +200,10 @@ function Chapter({
     <section
       ref={zoneRef}
       aria-labelledby={id}
-      className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}
+      className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} kopwerk-reveal`}
     >
       <div className="flex flex-col gap-5">
-        <p className="relative flex items-baseline gap-4 text-xs sm:text-sm font-medium tracking-super-wide uppercase text-slate-500 dark:text-slate-400">
+        <p className="relative flex items-baseline gap-4 text-xs sm:text-sm font-medium tracking-super-wide uppercase text-subtle dark:text-slate-400">
           <span ref={markerRef} aria-hidden="true" className={marker} />
           <span className="font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">{number}</span>
           {label}
