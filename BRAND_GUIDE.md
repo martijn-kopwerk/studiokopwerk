@@ -238,6 +238,7 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 * **Phones (under 640px):** the K is drawn cropped. Its stem continues the header logo's stem as one line, the arms run off the right edge, and the content stands left-aligned just right of the stem. A page gives the vertex a place with an empty, `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks (on the home page: between the mission line and the button); without one the vertex sits at 60% of the height. Pages that move the dot (`/werk`) put their markers on the stem line.
 * **The dot never sits on text:** only in a margin, on the stem, or in a gap left for it.
 * **The dot never crosses text either:** a page's dot positions all lie on one reading line (the left margin on wide screens, the stem on phones). Along that line the dot glides; to anywhere else (to or from the vertex) it fades out and reappears. While the footer is in view the dot rests in the margin beside it.
+* **The dot hands itself over:** while a component with its own dot is the block being read (the loop on Begin and Aanpak), the reading dot fades out (`useAmberDot(…, hide)`). One dot walking, amber at one or two points.
 * **The page's one moment:** a page may give the dot one moment that carries meaning (`useAmberDot(…, glide)`). On Begin it is the full stop of the promise: after landing on the vertex it flies slowly (1.4s) to the end of *Zien wat wérkt* and stays there; scrolling back up to the promise flies it back. On phones the way up crosses text, so there it fades and reappears instead. The `h1` keeps a real full stop for screen readers (`sr-only`), and before the script runs the full stop is drawn in amber.
 * **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
@@ -258,7 +259,8 @@ The card on `/werk` stays small. An opdracht with an image may add a short film 
 
 ### H. Het frame: navigatie en footer
 * **Navigation:** the current page in ink, underlined in amber (2px, under the label). The header scrolls away; scrolling back up below the first screen brings a compact glass bar (`<CompactNav>`): the K, the pages and an outlined "Vertel waar het knelt" (phones: the K and the button). Hidden, it is `inert`. Reduced motion: no slide.
-* **Footer:** "Vertel het in een mail" and the mail address in Syne, as wide as the column (`text-footer-mail`, a container size), rolling letter by letter on hover and focus. It opens the contact card; "Kopieer het mailadres" sits beside it and confirms in words. Below, quiet: the pages, the company details and Privacy. The dot rests beside the first line.
+* **One slot per page (design system: `Slot`):** every page ends in the footer with its own last line (the route's `slot.line`, else "Klein beginnen, snel iets maken dat werkt."), the capsule and, smaller, "Of mail zelf" with the address and "Kopieer". At most one quiet way on (`slot.next`). Pages have no closing section of their own. Below, quiet: the pages, the company details and Privacy. The dot rests beside the last line.
+* **The contact card (`ContactCard`):** the capsule opens the first conversation: the five frictions plus "Iets anders" as choices, "Vertel het in een mail" with the choice as the subject (`mailtoHref(knelt)`, "Waar het knelt: …"), and at the bottom the address with copy. Focus starts on the first choice.
 * **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`) draws the design system's Kopwerk line icons. No third-party icon set.
 * **Corners:** `rounded-2xl` and `rounded-full` only, also for focus areas of links (`rounded-full`).
 
@@ -267,6 +269,9 @@ The frictions from the positionering, word for word, as buttons (`<KnelpuntKieze
 
 ### J. De rondgang (werkwijze)
 "AI maakt, jij beslist" as a loop (`<Rondgang>`, design system `Loop`): three hollow nodes on a circle, amber where you decide, "En dan weer opnieuw, tot het werkt." in the middle. The dot walks the loop (quick past AI, slower at samen kijken) and waits at "Jij beslist wat blijft."; it only runs while in view, and rests there with reduced motion. The words are a real list; the drawing is `aria-hidden`. On Begin beside the `display` statement, on Aanpak in "Hoe we werken".
+
+### K. Deelbeelden (`public/og/`)
+What a chat, mail or LinkedIn shows for a link (design system: `ShareImage`): 1200×630, always dark, the drafting table's K lines, the page's own h1 with the amber dot as its full stop, the eyebrow above and the address below. One per page, listed in `src/lib/share-images.ts` and written by `npm run share-images` (headless Chrome or Edge); the PNGs are committed and a test checks every route has one. Change a page title, run the script again.
 ---
 
 ## 6. Copywriting Tone & Voice Guidelines
