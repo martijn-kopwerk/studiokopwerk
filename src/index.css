@@ -121,6 +121,9 @@
 }
 
 html {
+  /* The compact bar (CompactNav) is fixed at the top: whatever gets focus or is jumped to lands below it, never
+     under it (WCAG 2.4.11). */
+  scroll-padding-top: 6rem;
   background-color: #f8fafc;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
