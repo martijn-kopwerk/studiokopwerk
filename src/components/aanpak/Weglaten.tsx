@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Eraser, RotateCcw } from 'lucide-react';
+import { Icon } from '../ui/Icon';
 import { RollingText } from '../ui/RollingText';
 import { cn } from '../../lib/utils';
 import { hairline, row } from '../../lib/raster';
@@ -82,7 +82,7 @@ export function Weglaten({ items, rest }: { items: string[]; rest?: string }) {
           aria-hidden="true"
           className="flex size-7 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 transition-colors duration-300 ease-kopwerk group-hover:bg-amber-500 group-hover:text-slate-950 group-focus-visible:bg-amber-500 group-focus-visible:text-slate-950 motion-reduce:transition-none"
         >
-          {weg ? <RotateCcw className="size-3.5" /> : <Eraser className="size-3.5" />}
+          {weg ? <Icon name="restart" className="size-3.5" /> : <Icon name="eraser" className="size-3.5" />}
         </span>
         <RollingText accentClassName="text-amber-700 dark:text-amber-400">
           {weg ? 'Zet het terug' : 'Streep het door'}
@@ -97,7 +97,7 @@ export function Weglaten({ items, rest }: { items: string[]; rest?: string }) {
                 'line-through decoration-2 transition-[color,text-decoration-color] duration-500 ease-kopwerk motion-reduce:transition-none',
                 delays[index],
                 weg
-                  ? 'text-slate-500 dark:text-slate-400 decoration-slate-500 dark:decoration-slate-400'
+                  ? 'text-subtle dark:text-slate-400 decoration-slate-500 dark:decoration-slate-400'
                   : 'text-slate-900 dark:text-white decoration-transparent'
               )}
             >

@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from 'react';
-import { Play } from 'lucide-react';
 import type { Project } from '../../lib/projects';
 import { cn } from '../../lib/utils';
+import { Icon } from '../ui/Icon';
+import { Stat } from '../ui/Stat';
 import { ProjectFilm } from './ProjectFilm';
 
-const meta = 'text-xs font-semibold tracking-wide-xl uppercase text-slate-500 dark:text-slate-400';
+const meta = 'text-xs font-semibold tracking-wide-xl uppercase text-subtle dark:text-slate-400';
 
 /** The opdracht's image as a button that opens its film; the first scene loads as soon as the pointer or focus arrives. */
 function FilmTrigger({ project, children }: { project: Project; children: ReactNode }) {
@@ -24,7 +25,7 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
         <span className="block overflow-hidden rounded-2xl">{children}</span>
         <span className="absolute left-4 bottom-4 inline-flex items-center gap-3 rounded-full bg-kopwerk-dark/85 pl-2 pr-5 py-2 text-xs font-semibold tracking-wide-xl uppercase text-white shadow-xl shadow-kopwerk-dark/20 backdrop-blur-sm">
           <span className="flex size-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-400 group-focus-visible:bg-amber-400">
-            <Play aria-hidden="true" className="size-3.5 translate-x-px transition-colors duration-500 ease-kopwerk group-hover:text-slate-950 group-focus-visible:text-slate-950" />
+            <Icon name="play" className="size-3.5 translate-x-px transition-colors duration-500 ease-kopwerk group-hover:text-slate-950 group-focus-visible:text-slate-950" />
           </span>
           Bekijk hoe het werkt
         </span>
@@ -80,13 +81,25 @@ export function ProjectMedia({ project, still }: { project: Project; still?: { i
   );
 }
 
-/** What an opdracht says beyond its title: the image, quote or number, then its two or three sentences. */
+/** What an opdracht says beyond its title: the image, quote or number, then its two or three sentences and its saving. */
 export function ProjectBody({ project }: { project: Project }) {
   return (
     <div className="flex flex-col gap-6">
       <ProjectMedia project={project} />
       <ProjectText project={project} />
+      <ProjectStat project={project} className="mt-4" />
     </div>
+  );
+}
+
+/** The saving the film gives, as a number above its sentence (a scene's `begin:` with `getal:`). */
+export function ProjectStat({ project, className }: { project: Project; className?: string }) {
+  const begin = project.begin;
+  if (!begin?.figure) return null;
+  return (
+    <Stat value={begin.figure.value} unit={begin.figure.unit} className={className}>
+      {begin.line}
+    </Stat>
   );
 }
 

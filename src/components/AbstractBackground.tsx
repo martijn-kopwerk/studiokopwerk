@@ -15,6 +15,8 @@ interface AbstractBackgroundProps {
 const DOT_CLAMP = { top: 96, bottom: 48 };
 // How long the dot takes to fade out before it reappears somewhere off the reading line (matches duration-300).
 const DOT_FADE_MS = 300;
+// The page's one moment: the dot flies to its target slowly, on the brand curve.
+const DOT_FLIGHT_MS = 1400;
 
 // An element's centre in viewport coordinates, from its layout position: entrance animations
 // (transforms) are ignored, so the dot heads for where the element will come to rest.
@@ -150,8 +152,12 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
         jump({ x, y });
         return;
       }
-      // Along the reading line (same x: the margin, or the K's stem on phones) it glides.
-      if (Math.abs(fromX - x) <= 2) {
+      // Along the reading line (same x: the margin, or the K's stem on phones) it glides. A target asking for the
+      // page's one moment (the full stop of the promise on Begin) is flown to, slowly, wherever it is. Not on phones:
+      // there the way up crosses the lines of text right above the vertex, so it fades and reappears like elsewhere.
+      const flight = !layout.phone && targetRef.current?.glide && targetRef.current.element.isConnected;
+      if (flight || Math.abs(fromX - x) <= 2) {
+        dot.style.transitionDuration = flight ? `${DOT_FLIGHT_MS}ms` : '';
         dot.style.left = `${x}px`;
         dot.style.top = `${y}px`;
         return;

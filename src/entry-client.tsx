@@ -5,12 +5,13 @@ import '@fontsource-variable/syne';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
 import App from './App.tsx';
+import { aroundNav } from './lib/view-transition';
 import './index.css';
 
 const container = document.getElementById('root')!;
 const app = (
   <StrictMode>
-    <Router>
+    <Router aroundNav={aroundNav}>
       <App />
     </Router>
   </StrictMode>

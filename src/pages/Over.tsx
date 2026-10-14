@@ -1,12 +1,10 @@
 import { useRef, type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
-import { CapsuleButton } from '../components/ui/CapsuleButton';
-import { MagneticWrapper } from '../components/ui/MagneticWrapper';
+import { ContactButton } from '../components/ContactButton';
 import { NextLink } from '../components/ui/NextLink';
 import { Portret } from '../components/Portret';
 import { useAmberDot } from '../hooks/useAmberDot';
-import { useContact } from '../hooks/useContact';
 import { projects } from '../lib/projects';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
@@ -23,7 +21,6 @@ const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.
  * then rows with a conclusion on the left. Every fact here comes from Martijn; nothing is invented.
  */
 export function Over() {
-  const { openContact, preloadContact } = useContact();
   const intro = useRef<HTMLSpanElement | null>(null);
 
   // The dot rests in the margin beside the eyebrow; the footer takes it over at the end.
@@ -55,7 +52,7 @@ export function Over() {
       <section aria-label="Wie je spreekt" className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
         <div className="flex flex-col gap-4">
           <Portret className="max-w-sm" priority />
-          <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-slate-500 dark:text-slate-400 text-pretty">
+          <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-subtle dark:text-slate-400 text-pretty">
             Ik woon in Haren, net onder Groningen. Langskomen kan in heel Nederland.
           </p>
         </div>
@@ -124,11 +121,7 @@ export function Over() {
           Je mail komt bij mij binnen. Ik lees hem zelf.
         </Typography>
         <div className="flex flex-col items-start gap-6">
-          <MagneticWrapper>
-            <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-              Vertel waar het knelt
-            </CapsuleButton>
-          </MagneticWrapper>
+          <ContactButton />
           <NextLink href="/aanpak">Lees hoe we werken</NextLink>
         </div>
       </section>

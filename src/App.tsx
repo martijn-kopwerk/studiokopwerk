@@ -6,7 +6,7 @@ import { ContactContext } from './hooks/useContact';
 import { AmberDotContext, type DotTarget } from './hooks/useAmberDot';
 import { usePageChange } from './hooks/usePageChange';
 import { AbstractBackground } from './components/AbstractBackground';
-import { Header } from './components/layout/Header';
+import { CompactNav, Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { contactEmail, mailtoHref } from './lib/contact';
@@ -81,9 +81,10 @@ export default function App() {
             Naar de inhoud
           </a>
 
-          <Header onToggleTheme={toggleTheme} />
-
           <ContactContext.Provider value={contactActions}>
+            <Header onToggleTheme={toggleTheme} />
+            <CompactNav />
+
             <AmberDotContext.Provider value={setDotTarget}>
               {/* Keyed by path so each page plays its entrance again */}
               <route.Page key={route.meta.path} />

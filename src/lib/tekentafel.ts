@@ -19,7 +19,8 @@ const CONTENT_MAX_WIDTH = 1280;
 export const LINES = {
   guideWidth: 1,
   kWidth: 1.25,
-  light: { ink: '51, 65, 85', guide: 0.05, k: 0.11, phoneGuide: 0.07, phoneK: 0.15 },
+  // Light gets a step more than dark, so the table doesn't vanish on slate-50 (design system: "de tekentafel").
+  light: { ink: '51, 65, 85', guide: 0.075, k: 0.16, phoneGuide: 0.09, phoneK: 0.2 },
   dark: { ink: '226, 232, 240', guide: 0.055, k: 0.13, phoneGuide: 0.075, phoneK: 0.17 },
 };
 

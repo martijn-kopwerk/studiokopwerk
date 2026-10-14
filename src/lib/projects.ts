@@ -34,7 +34,8 @@ export interface Project {
   // Optional: a short film that opens from the image.
   film?: FilmScene[];
   // Optional: the film scene Begin shows instead of the image, with its own line (a scene's `begin:`).
-  begin?: { image: string; alt: string; line: string };
+  // `getal:` beside it sets the saving as a number above that line ("5 min"; design system: `Stat`).
+  begin?: { image: string; alt: string; line: string; figure?: { value: string; unit?: string } };
   // The two or three sentences below the fields.
   Text: ComponentType;
 }
@@ -136,6 +137,13 @@ export function parseProject(
           if (!field('begin')) problems.push(`${where}: "begin" moet één zin zijn, de regel bij dit beeld op Begin`);
           else if (begin) problems.push(`${where}: "begin" mag maar bij één scène staan`);
           else begin = { image: images[image] ?? '', alt: field('alt'), line: field('begin') };
+        }
+        if (fields.getal !== undefined) {
+          const getal = typeof fields.getal === 'number' ? String(fields.getal) : field('getal');
+          const [value, ...unit] = getal.split(/\s+/);
+          if (fields.begin === undefined) problems.push(`${where}: "getal" kan alleen naast "begin": het staat boven die zin`);
+          else if (!value || !/\d/.test(value)) problems.push(`${where}: "getal" moet met een getal beginnen, zoals "5 min"`);
+          else if (begin) begin.figure = { value, unit: unit.join(' ') || undefined };
         }
         return { image: images[image] ?? '', alt: field('alt'), text: field('tekst'), focus };
       });

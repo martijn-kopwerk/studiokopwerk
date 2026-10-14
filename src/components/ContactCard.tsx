@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Check, Copy, ArrowUpRight } from 'lucide-react';
+import { Icon } from './ui/Icon';
 import { RollingText } from './ui/RollingText';
 import { contactEmail, mailtoHref } from '../lib/contact';
 import {
@@ -76,7 +76,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
 
         {/* One heading that answers the button that opened the card, and one line on what to write */}
         <DialogHeader className="mb-12 relative z-10 gap-4">
-          <DialogTitle className="text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-wide-md leading-tight text-slate-900 dark:text-white" id="contact-heading">
+          <DialogTitle className="text-3xl sm:text-5xl font-display font-medium tracking-heading leading-tight text-slate-900 dark:text-white" id="contact-heading">
             Vertel waar het knelt.
           </DialogTitle>
           <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
@@ -91,10 +91,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({
             type="button"
             onClick={handleCopyEmail}
             aria-label={copied ? 'Mailadres gekopieerd naar het klembord' : `Kopieer het mailadres ${email}`}
-            className="group relative text-left flex flex-col w-full rounded-xl"
+            className="group relative text-left flex flex-col w-full rounded-2xl"
           >
             <span className={`text-xs font-semibold tracking-wide-xl uppercase mb-2 transition-colors duration-300 ease-kopwerk ${
-              copyState === 'idle' ? 'text-slate-500 dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400' : 'text-amber-700 dark:text-amber-400'
+              copyState === 'idle' ? 'text-subtle dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400' : 'text-amber-700 dark:text-amber-400'
             }`}>
               {copyLabels[copyState]}
             </span>
@@ -109,9 +109,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                   : 'bg-slate-50 dark:bg-slate-900 group-hover:bg-amber-50 dark:group-hover:bg-amber-500/10'
               }`}>
                 {copied ? (
-                  <Check className="w-5 h-5 text-slate-950" aria-hidden="true" />
+                  <Icon name="check" className="w-5 h-5 text-slate-950" aria-hidden="true" />
                 ) : (
-                  <Copy className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400" aria-hidden="true" />
+                  <Icon name="copy" className="w-5 h-5 text-subtle dark:text-slate-400 group-hover:text-amber-700 dark:group-hover:text-amber-400" aria-hidden="true" />
                 )}
               </span>
             </span>
@@ -124,12 +124,12 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <div className="w-full pt-4 flex flex-col items-start">
             <a
               href={mailtoHref(email)}
-              className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
+              className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-full"
             >
               <RollingText accentClassName="text-amber-700 dark:text-amber-400">
                 Vertel het in een mail
               </RollingText>
-              <ArrowUpRight className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
+              <Icon name="arrow-up-right" className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none" aria-hidden="true" />
             </a>
           </div>
 

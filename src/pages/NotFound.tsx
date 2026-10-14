@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { Icon } from '../components/ui/Icon';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { RollingText } from '../components/ui/RollingText';
@@ -19,9 +19,10 @@ export function NotFound() {
         <div data-tekentafel-vertex aria-hidden="true" className="h-12 sm:h-0 shrink-0" />
         <Link
           href="/"
-          className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-md"
+          className="group inline-flex items-center gap-3 text-lg font-medium text-slate-900 dark:text-white rounded-full"
         >
-          <ArrowLeft
+          <Icon
+            name="arrow-left"
             className="w-5 h-5 transition-transform duration-500 ease-kopwerk group-hover:-translate-x-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none"
             aria-hidden="true"
           />

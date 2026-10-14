@@ -80,6 +80,22 @@ describe('parseProject', () => {
     );
   });
 
+  it('sets the saving of the Begin scene as a number', () => {
+    const images = { './foto.webp': '/assets/foto.webp', './scene.webp': '/assets/scene.webp' };
+    const withImage = { ...base, beeld: './foto.webp', alt: 'Een scherm' };
+    const scene = { beeld: './scene.webp', alt: 'Een antwoord', tekst: 'AI schrijft mee.' };
+    const line = 'Dat scheelt zeker vijf minuten per mail.';
+    const project = parseProject('film', module({ ...withImage, film: [{ ...scene, begin: line, getal: '5 min' }] }), images);
+    expect(project.begin?.figure).toEqual({ value: '5', unit: 'min' });
+
+    expect(() => parseProject('film', module({ ...withImage, film: [{ ...scene, getal: '5 min' }] }), images)).toThrow(
+      /"getal" kan alleen naast "begin"/
+    );
+    expect(() =>
+      parseProject('film', module({ ...withImage, film: [{ ...scene, begin: line, getal: 'veel' }] }), images)
+    ).toThrow(/"getal" moet met een getal beginnen/);
+  });
+
   it('rejects folder names that would make an awkward name', () => {
     expect(() => parseProject('Mijn Opdracht', module(base), {})).toThrow(/mapnaam/);
   });

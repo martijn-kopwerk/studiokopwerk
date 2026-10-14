@@ -1,31 +1,34 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
-import { CapsuleButton } from '../components/ui/CapsuleButton';
-import { MagneticWrapper } from '../components/ui/MagneticWrapper';
-import { ProjectBody, ProjectMeta } from '../components/werk/ProjectCard';
+import { ContactButton } from '../components/ContactButton';
+import { ProjectBody, ProjectMedia, ProjectMeta, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
 import { useAmberDot } from '../hooks/useAmberDot';
-import { useContact } from '../hooks/useContact';
 import { cn } from '../lib/utils';
 
 const WIDE = '(min-width: 1024px)';
 
 /**
- * Opdrachten, one short card each. Wide screens: a list of titles with the chosen opdracht beside it (tabs);
+ * Opdrachten, one short card each. Wide screens with one opdracht: that card alone, wide, its image beside its text
+ * (a list to choose from with one choice feels empty). With more: a list of titles with the chosen opdracht beside it (tabs);
  * the amber dot marks the one under the cursor or keyboard focus. Phones: every card in full, one below the other, right of the K's stem;
  * the dot rides the stem and marks the card passing through the middle of the screen.
  */
 export function Werk() {
-  const { openContact, preloadContact } = useContact();
   const [active, setActive] = useState(0);
   const [wide, setWide] = useState(false);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const tabMarkers = useRef<(HTMLSpanElement | null)[]>([]);
   const cards = useRef<(HTMLLIElement | null)[]>([]);
   const cardMarkers = useRef<(HTMLSpanElement | null)[]>([]);
+  const singleMarker = useRef<HTMLSpanElement | null>(null);
   const current = projects[active] ?? projects[0];
+  const single = projects.length === 1 ? projects[0] : undefined;
 
-  useAmberDot(() => (wide ? tabMarkers : cardMarkers).current[active] ?? null, `${active}-${wide}`);
+  useAmberDot(
+    () => (wide && single ? singleMarker.current : ((wide ? tabMarkers : cardMarkers).current[active] ?? null)),
+    `${active}-${wide}`
+  );
 
   useEffect(() => {
     const query = window.matchMedia(WIDE);
@@ -78,8 +81,38 @@ export function Werk() {
         </Typography>
       </div>
 
+      {/* Wide screens, one opdracht: the card alone, its image (and film) beside the text and the saving */}
+      {single && (
+        <article
+          aria-labelledby={`opdracht-${single.slug}`}
+          className="relative hidden lg:grid mt-16 pt-12 pl-14 border-t border-slate-200 dark:border-slate-800 grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-x-16 items-center"
+        >
+          {/* The dot's place: in the margin beside the card, on the reading line of the page */}
+          <span ref={singleMarker} aria-hidden="true" className="absolute left-4 top-[3.35rem] size-3.5" />
+          <ProjectMedia project={single} />
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <h2
+                id={`opdracht-${single.slug}`}
+                className="font-display font-medium text-3xl leading-snug tracking-heading text-balance text-slate-900 dark:text-white"
+              >
+                {single.title}
+              </h2>
+              <ProjectMeta project={single} />
+            </div>
+            <ProjectText project={single} />
+            <ProjectStat project={single} className="mt-4" />
+          </div>
+        </article>
+      )}
+
       {/* Wide screens: titles on the left, the chosen opdracht beside them */}
-      <div className="hidden lg:grid mt-16 grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-x-16 items-start">
+      <div
+        className={cn(
+          'hidden mt-16 grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-x-16 items-start',
+          !single && 'lg:grid'
+        )}
+      >
         <div
           role="tablist"
           aria-orientation="vertical"
@@ -112,12 +145,12 @@ export function Werk() {
                   onPointerEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
                   onClick={() => setActive(index)}
-                  className="w-full flex items-baseline gap-8 py-8 pl-14 text-left border-t border-slate-200 dark:border-slate-800 rounded-md"
+                  className="w-full flex items-baseline gap-8 py-8 pl-14 text-left border-t border-slate-200 dark:border-slate-800 rounded-2xl"
                 >
                   <span
                     className={cn(
                       'shrink-0 font-display font-bold text-sm tracking-wide-lg transition-colors duration-500 ease-kopwerk',
-                      isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'
+                      isActive ? 'text-slate-900 dark:text-white' : 'text-subtle dark:text-slate-400'
                     )}
                   >
                     {project.number}
@@ -126,7 +159,7 @@ export function Werk() {
                     <span
                       className={cn(
                         'font-display font-medium text-2xl leading-snug text-balance transition-colors duration-500 ease-kopwerk',
-                        isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400'
+                        isActive ? 'text-slate-900 dark:text-white' : 'text-subtle dark:text-slate-400'
                       )}
                     >
                       {project.title}
@@ -145,7 +178,7 @@ export function Werk() {
             id="opdracht-detail"
             aria-labelledby={`opdracht-${current.slug}`}
             tabIndex={0}
-            className="sticky top-10 pt-8 rounded-md"
+            className="sticky top-10 pt-8 rounded-2xl"
           >
             <div key={current.slug} className="motion-safe:animate-rise [--rise-from:8px] [animation-duration:0.6s]">
               <ProjectBody project={current} />
@@ -195,11 +228,7 @@ export function Werk() {
           Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
         </Typography>
         {/* The same button as on home, magnetic too; Werk is the last stop, so there's no link on */}
-        <MagneticWrapper className="self-start sm:self-auto">
-          <CapsuleButton onClick={openContact} onPointerEnter={preloadContact} onFocus={preloadContact} className="w-auto">
-            Vertel waar het knelt
-          </CapsuleButton>
-        </MagneticWrapper>
+        <ContactButton className="self-start sm:self-auto" />
       </section>
     </main>
   );
