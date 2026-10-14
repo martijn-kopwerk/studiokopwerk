@@ -17,6 +17,7 @@ concept: true               # alleen zichtbaar in previews; haal weg om te publi
 #     tekst: "[Eén regel: wat het betekent]"
 #     focus: "50% 50%"      # optioneel: waar het beeld langzaam naartoe schuift
 #     begin: "[Eén zin]"    # optioneel, bij één scène: dit beeld en deze zin staan op Begin
+#     getal: "[5 min]"      # optioneel, naast begin: de besparing als groot getal boven die zin
 #
 # citaat: "[Eén zin van de klant]"
 # naam: "[Naam]"

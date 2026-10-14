@@ -15,8 +15,9 @@ describe('prerendering', () => {
 
   it('walks home past who you talk to, the work and where it pinches, each with a way on', () => {
     const { html } = render('/');
-    expect(html).toMatch(/<h1[^>]*>Zien wat <em[^>]*>wérkt<\/em>.<\/h1>/);
-    const ids = ['martijn', ...(projects.length > 0 ? ['werk'] : []), 'knelt'];
+    // The full stop is the amber dot, but a real one for screen readers and search
+    expect(html).toMatch(/<h1[^>]*>Zien wat <em[^>]*>wérkt<\/em><span[^>]*><span class="sr-only">.<\/span>/);
+    const ids = ['martijn', 'werkwijze', ...(projects.length > 0 ? ['werk'] : []), 'knelt'];
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
@@ -24,6 +25,10 @@ describe('prerendering', () => {
     expect(html).toContain('href="/aanpak"');
     if (projects.length > 0) expect(html).toContain('Bekijk hoe het werkt');
     expect(html.split('Vertel waar het knelt').length - 1).toBeGreaterThanOrEqual(2);
+    // The loop is a real list of the three steps; the frictions and their answers read without the script
+    expect(html).toContain('aria-label="Hoe we werken"');
+    expect(html).toContain('Jij beslist wat blijft.');
+    expect(html).toContain('Schermen die zonder uitleg werken.');
   });
 
   it('renders the 404 page for unknown paths and keeps it out of search results', () => {
@@ -73,7 +78,8 @@ describe('header and footer', () => {
 
   it('opens the contact card from the footer address and shows the company details', () => {
     const { html } = render('/');
-    expect(html).toContain('aria-label="Vertel waar het knelt: hallo@studiokopwerk.nl"');
+    expect(html).toContain('aria-label="Vertel het in een mail: hallo@studiokopwerk.nl"');
+    expect(html).toContain('Kopieer het mailadres');
     expect(html).toContain('KvK 42154955');
   });
 });

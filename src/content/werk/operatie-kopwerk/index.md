@@ -22,6 +22,7 @@ film:
     alt: "Een antwoord in concept aan Jeroen Bos, met eronder de aanwijzing: zeg ja, we starten maandag 2 november."
     tekst: "AI schrijft het antwoord, ik stuur bij. Dat scheelt zeker vijf minuten per mail."
     begin: "Dat scheelt zeker vijf minuten per mail."
+    getal: "5 min"
   - beeld: ./film-5-offerte.webp
     alt: "De voorkant van een offerte in de huisstijl: Automatische koppeling voor de planning."
     tekst: "AI schrijft de offerte in mijn stijl, ik beslis wat blijft. Dat scheelt minstens twee uur per offerte."
