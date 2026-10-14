@@ -34,7 +34,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Light Mode Core:** `slate-50` (`#f8fafc`).
 - **Text & Borders:** Use Tailwind's `slate` scale (`slate-900` for light mode text, `slate-400`/`500` for secondary text/eyebrows).
 - **Accents:** Tailwind's `amber` scale. `amber-500` (`#f59e0b`) for primary interaction, dots and fills. `amber-400` or `amber-600` for depth and glows. Success states use amber too; no green/emerald.
-- **Contrast (WCAG AA, 4.5:1 for text):** amber *text* on light backgrounds is `amber-700` (never `amber-500`/`600`); on dark it is `amber-400`. Small grey labels: `text-slate-500 dark:text-slate-400` (never `slate-400` on white or `slate-500` on `kopwerk-dark`).
+- **Contrast (WCAG AA, 4.5:1 for text):** amber *text* on light backgrounds is `amber-700` (never `amber-500`/`600`); on dark it is `amber-400`. Small grey labels: `text-subtle dark:text-slate-400` (the design system's `ink-subtle`, `#56657a` on light; never `slate-400` on white or `slate-500` on `kopwerk-dark`).
 
 ### Typography
 - **Headings (Display):** `Syne` via `font-display` (Architectural, geometric, confident). Weights 400–800; `font-normal` is the lightest. Never `font-light` on Syne.
@@ -48,14 +48,20 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
   - `tracking-super-wide` (0.4em) - For eyebrow text.
   - `tracking-ultra-wide` (0.5em) - For extreme micro-typography.
   - `tracking-heading` (-0.025em) - For H2 section titles (sentence case, set tight).
+  - `tracking-display` (-0.035em) - For the one `display` statement per page.
+- **Display and sublead:** `<Typography variant="display">` sets one line from the positionering large (`text-display`, fluid), at most once per page and never as a title. `variant="sublead"` is the second step under a hero lead. The project's tokens are registered in `cn()` (`src/lib/utils.ts`) so tailwind-merge doesn't mistake `text-display` for a colour; add new tokens there too.
 
 ## 4. Components & Interactions
 - **Logo:** `<KopwerkLogo>` (`src/components/ui/KopwerkLogo.tsx`), the K with its amber dot, in the header on every screen size.
 - **Buttons:** Avoid generic symmetric pills. Primary CTAs use `<CapsuleButton>` (`src/components/ui/CapsuleButton.tsx`): the bespoke asymmetric capsule with a distinct icon well and contrast inversion on hover. `<Button>` is only for quiet utility controls (ghost icon buttons).
-- **Micro-interactions:** Rolling-text on hover/focus via `<RollingText>` (`src/components/ui/RollingText.tsx`). Don't hand-roll the two-span pattern.
+- **Micro-interactions:** Rolling-text on hover/focus via `<RollingText>` (`src/components/ui/RollingText.tsx`), or `<RollingLetters>` for one large line. Don't hand-roll the two-span pattern.
+- **The call to action:** `<ContactButton>` (magnetic capsule, `aria-haspopup="dialog"`, opens the contact card). Don't rebuild it per page.
+- **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`), the design system's Kopwerk line icons. No `lucide-react` or other icon sets.
+- **Radius:** only `rounded-2xl` and `rounded-full`.
 - **Focus:** one rule for the whole site in `src/index.css`: a 2px solid outline, 2px offset, `amber-600` on light and `amber-400` on dark (the design system's `focus`). Don't add focus rings or `outline-none` to interactive elements; only headings that receive focus after navigation opt out.
 - **Easing:** Use the `ease-kopwerk` token (`cubic-bezier(0.19,1,0.22,1)`), usually with `duration-500`. In Motion, use `[0.19, 1, 0.22, 1]`. Never `ease-in-out` or `easeOut`.
-- **Entrance animations:** CSS via `motion-safe:animate-rise` (tune with `[--rise-from:…]` and `[animation-delay:…]`).
+- **Entrance animations:** CSS via `motion-safe:animate-rise` (tune with `[--rise-from:…]` and `[animation-delay:…]`). Blocks below the first screen get `kopwerk-reveal` (a CSS scroll timeline, no script). No bouncing, no parallax.
+- **Page transitions:** View Transitions through wouter's `aroundNav` (`src/lib/view-transition.ts`); `main h1` carries the `page-title` transition name, so keep one `h1` per page.
 - **Motion library:** Use `m.*` components (the app is wrapped in `LazyMotion` + `MotionConfig reducedMotion="user"`), never `motion.*`.
 - **Reduced motion:** Use `motion-safe:` / `motion-reduce:` variants for CSS, `useReducedMotion()` in React.
 
@@ -65,12 +71,12 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - Because pages are rendered without a browser first: never touch `window`, `document` or `localStorage` while rendering, only in effects or event handlers. Markup must not depend on client-only state such as the theme; use `dark:` variants instead.
 - Per-page `<title>`, description, canonical and og tags come from the route's `meta` (`src/lib/head.ts`), never from `index.html`.
 - Links between pages use `Link` from `wouter`. Each page's `<h1>` gets `tabIndex={-1}`: focus moves there after navigation.
-- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s; the dot ignores transforms so entrance animations don't throw it off. All of a page's targets sit on one reading line (the left margin on wider screens, the K's stem on phones): the dot glides only along that line, and fades out and back in when it has to go anywhere else (to or from the vertex), so it never slides across text or buttons. The footer takes the dot while it's in view and rests it in the margin beside its first line.
+- The drafting-table background is fixed to the viewport and stays mounted across pages. A page can send its amber dot to one of its own elements with `useAmberDot()` (`src/hooks/useAmberDot.ts`), as `/werk` does for the chosen opdracht. Put dot targets in a margin, never over text, and outside `<button>`s (the one exception is a page's one moment, `useAmberDot(…, glide)`: on Begin the dot is the full stop of the promise); the dot ignores transforms so entrance animations don't throw it off. All of a page's targets sit on one reading line (the left margin on wider screens, the K's stem on phones): the dot glides only along that line, and fades out and back in when it has to go anywhere else (to or from the vertex), so it never slides across text or buttons. The footer takes the dot while it's in view and rests it in the margin beside its first line.
 - On phones (under 640px) the K is drawn cropped, its stem continuing the header logo's stem (x ≈ 31px), and page content starts right of it (`pl-14 sm:px-…`). A page places the K's vertex with an empty `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks. Geometry and line values: `src/lib/tekentafel.ts`; rules: `BRAND_GUIDE.md` §5F.
 
 ### Opdrachten (`src/content/werk/`)
 - `/werk` is deliberately small: one short card per opdracht (title, client, two or three sentences, at most one image, quote or number). No pages per opdracht.
-- An opdracht with an image may add a short `film:` (scenes of `beeld`, `alt`, `tekst`, optional `focus`) that opens from that image in a dialog (`src/components/werk/ProjectFilm.tsx`). Scenes are stills from a demo with example data, never real client data. Rules: `BRAND_GUIDE.md` §5G. One scene may carry `begin:` (one sentence): Begin then shows that scene instead of the full image, with the sentence below the text.
+- An opdracht with an image may add a short `film:` (scenes of `beeld`, `alt`, `tekst`, optional `focus`) that opens from that image in a dialog (`src/components/werk/ProjectFilm.tsx`). Scenes are stills from a demo with example data, never real client data. Rules: `BRAND_GUIDE.md` §5G. One scene may carry `begin:` (one sentence): Begin then shows that scene instead of the full image, with the sentence below the text. Beside `begin:` a `getal:` ("5 min") sets the saving large above that sentence, on Begin and on `/werk`.
 - One folder per opdracht: `index.md` (plain Markdown, no components) plus its image. Folders starting with `_` are skipped; `_sjabloon/` is the template to copy, and a test keeps it valid.
 - The fields are validated by `parseProject` in `src/lib/projects.ts`; their names are Dutch (`titel`, `klant`, `datum`, `beeld`/`alt`, `citaat`/`naam`/`rol`, `getal`/`label`, `concept`).
 - New opdrachten start as `concept: true`: visible in `npm run dev` and PR previews, hidden on the live site. Publishing is removing that line.

@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        ghost: "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white",
+        ghost: "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800/60 text-subtle dark:text-slate-400 hover:text-slate-900 dark:hover:text-white",
       },
       size: {
         icon: "size-10 rounded-full",

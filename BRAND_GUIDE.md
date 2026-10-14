@@ -81,11 +81,11 @@ A standalone amber glowing indicator represents the pulse of Kopwerk. Used in he
 | **Slate Dark (Headings)** | `#0f172a` | `text-slate-900` | Primary light-mode typography & dark-mode card surfaces. |
 | **Slate White (Headings)** | `#ffffff` | `text-white` | Primary dark-mode typography & light-mode card surfaces. |
 | **Slate Muted (Body)** | `#475569` / `#cbd5e1` | `text-slate-600` / `text-slate-300` | Secondary body text, descriptions, table cells. |
-| **Slate Subtext (Eyebrows)** | `#64748b` / `#94a3b8` | `text-slate-500` / `text-slate-400` | Category tags, dates, metadata, section eyebrows. |
+| **Ink Subtle (Eyebrows)** | `#56657a` / `#94a3b8` | `text-subtle` / `text-slate-400` | Category tags, dates, metadata, section eyebrows (design system `ink-subtle`: 5.7:1 on light). |
 | **Subtle Borders** | `#e2e8f0` / `#1e293b` | `border-slate-200` / `dark:border-slate-800` | Hairline dividers, card outlines, table borders. |
 
 * **Selection Color:** `rgba(217, 119, 6, 0.25)` with inherited text color.
-* **Contrast:** all text meets WCAG AA (4.5:1). On light backgrounds that means `slate-500` or darker for small labels and `amber-700` for amber text. On `#07090e`, use `slate-400` or lighter and `amber-400`.
+* **Contrast:** all text meets WCAG AA (4.5:1). On light backgrounds that means `text-subtle` (`#56657a`) or darker for small labels and `amber-700` for amber text. On `#07090e`, use `slate-400` or lighter and `amber-400`.
 * **Ambient Glows:** Radial gradients with `rgba(245, 158, 11, 0.05)` to `rgba(245, 158, 11, 0)` for background atmosphere.
 
 ---
@@ -121,7 +121,7 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 ### Hierarchy Scale
 
 * **Eyebrow (`span`):**  
-  `font-sans text-xs sm:text-sm font-medium tracking-[0.4em] uppercase text-slate-500 dark:text-slate-400`
+  `font-sans text-xs sm:text-sm font-medium tracking-[0.4em] uppercase text-[#56657a] dark:text-slate-400`
 * **H1 / Document Title (`h1`):**  
   `font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-[0.1em] uppercase leading-none text-slate-900 dark:text-white`
 * **H2 / Section Title (`h2`):**  
@@ -132,10 +132,18 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 * **Body Text (`p`):**  
   `font-sans text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300`
 * **Metadata / Footnote (`small`):**  
-  `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400`
+  `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-[#56657a] dark:text-slate-400`
+* **Sublead (`p`), the second step under a hero lead:**  
+  `font-sans text-base sm:text-lg leading-relaxed tracking-[0.02em] text-[#56657a] dark:text-slate-400`
+* **Display (`p` or `h2`), one statement per page:**  
+  `font-display font-medium text-[clamp(3rem,9vw,8rem)] leading-[0.95] tracking-[-0.035em] text-slate-900 dark:text-white`  
+  *(A line from the positionering, sentence case, never a title. In code: `<Typography variant="display">`.)*
 
 ### Motion
-* **Easing:** `cubic-bezier(0.19, 1, 0.22, 1)` (Tailwind token `ease-kopwerk`), typically 500ms. Avoid `ease-in-out` and `easeOut`.
+* **Easing:** `cubic-bezier(0.19, 1, 0.22, 1)` (Tailwind token `ease-kopwerk`), typically 500ms. Avoid `ease-in-out` and `easeOut`. Durations: 300ms for colour and hover, 500ms for movement and page changes, 900ms for entrances.
+* **Entrances:** the rise (`motion-safe:animate-rise`). Blocks below the first screen rise 12px into place as they scroll into view (`.kopwerk-reveal`, a CSS scroll timeline, no script); where that isn't supported they simply stand there.
+* **Page changes:** View Transitions (`src/lib/view-transition.ts`): the page's `h1` glides to where the next page's `h1` stands, the old page fades, the new one rises in. The header and the drawing stay put.
+* **Not:** bouncing or overshoot, parallax, anything that loops by itself except the dot's pulse and the werkwijze loop.
 * **Rolling text:** on hover *and* keyboard focus the label rolls up and an amber copy rolls in (overflow hidden). The duplicate is `aria-hidden`. In code: `<RollingText>`.
 * **Reduced motion:** every animation (canvas, pulse, entrance, magnetic pull) stops or becomes a still state under `prefers-reduced-motion: reduce`.
 
@@ -221,14 +229,16 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 
   | | Ink | Guides | K | Guides (phone) | K (phone) |
   | :--- | :--- | :--- | :--- | :--- | :--- |
-  | Light | `rgb(51 65 85)` (slate-700) | 0.05 | 0.11 | 0.07 | 0.15 |
+  | Light | `rgb(51 65 85)` (slate-700) | 0.075 | 0.16 | 0.09 | 0.2 |
   | Dark | `rgb(226 232 240)` (slate-200) | 0.055 | 0.13 | 0.075 | 0.17 |
 
+* **Light gets a step more than dark,** so the table doesn't vanish on slate-50: light and dark are equal in quality.
 * **Layers, back to front:** the ambient amber glow, the drawing, the content, then the amber dot on the vertex (the only amber in the drawing).
 * **Wide screens (640px and up):** the K is about as tall as the screen, its stem at 10% of the width, left of centre, so it never competes with the wordmark.
 * **Phones (under 640px):** the K is drawn cropped. Its stem continues the header logo's stem as one line, the arms run off the right edge, and the content stands left-aligned just right of the stem. A page gives the vertex a place with an empty, `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks (on the home page: between the mission line and the button); without one the vertex sits at 60% of the height. Pages that move the dot (`/werk`) put their markers on the stem line.
 * **The dot never sits on text:** only in a margin, on the stem, or in a gap left for it.
 * **The dot never crosses text either:** a page's dot positions all lie on one reading line (the left margin on wide screens, the stem on phones). Along that line the dot glides; to anywhere else (to or from the vertex) it fades out and reappears. While the footer is in view the dot rests in the margin beside it.
+* **The page's one moment:** a page may give the dot one moment that carries meaning (`useAmberDot(…, glide)`). On Begin it is the full stop of the promise: after landing on the vertex it flies slowly (1.4s) to the end of *Zien wat wérkt* and stays there; scrolling back up to the promise flies it back. On phones the way up crosses text, so there it fades and reappears instead. The `h1` keeps a real full stop for screen readers (`sr-only`), and before the script runs the full stop is drawn in amber.
 * **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 
@@ -242,7 +252,21 @@ The card on `/werk` stays small. An opdracht with an image may add a short film 
 * **The viewer decides:** pause, previous, next, a bar per scene to jump to, arrow keys, Escape. With reduced motion there is no drift and nothing plays by itself; the viewer steps through.
 * **Captions are text,** in Syne, readable and selectable, and short: one or two sentences that say what the scene means for people, not what it shows (that is the image's `alt`). They follow the voice rules (`programma's`, not `apps`; no comma before *en*) and must be true of the image beside them.
 * **A saving reads as a saving:** "Dat scheelt minstens twee uur per offerte", never a bare "Minstens twee uur per offerte", which reads as what it costs.
+* **A saving as a number:** the scene with `begin:` may add `getal:` ("5 min"). The card on Begin and on `/werk` then shows it large (`<Stat>`, Syne bold) above the sentence. Only numbers the film itself says.
+* **One opdracht, one card:** while there is one opdracht, `/werk` shows it as one wide card (image left, text and saving right), without a list to choose from.
 
+
+### H. Het frame: navigatie en footer
+* **Navigation:** the current page in ink, underlined in amber (2px, under the label). The header scrolls away; scrolling back up below the first screen brings a compact glass bar (`<CompactNav>`): the K, the pages and an outlined "Vertel waar het knelt" (phones: the K and the button). Hidden, it is `inert`. Reduced motion: no slide.
+* **Footer:** "Vertel het in een mail" and the mail address in Syne, as wide as the column (`text-footer-mail`, a container size), rolling letter by letter on hover and focus. It opens the contact card; "Kopieer het mailadres" sits beside it and confirms in words. Below, quiet: the pages, the company details and Privacy. The dot rests beside the first line.
+* **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`) draws the design system's Kopwerk line icons. No third-party icon set.
+* **Corners:** `rounded-2xl` and `rounded-full` only, also for focus areas of links (`rounded-full`).
+
+### I. Kies waar het knelt (Begin)
+The frictions from the positionering, word for word, as buttons (`<KnelpuntKiezer>`): a hollow ring that fills amber when chosen, the answer below it (↳, Syne) and the capsule "Vertel het in een mail", which opens the mail with the friction in the subject ("Waar het knelt: …"). One open at a time. Before the script runs it is the plain list of pairs (`<Knelpunten>`).
+
+### J. De rondgang (werkwijze)
+"AI maakt, jij beslist" as a loop (`<Rondgang>`, design system `Loop`): three hollow nodes on a circle, amber where you decide, "En dan weer opnieuw, tot het werkt." in the middle. The dot walks the loop (quick past AI, slower at samen kijken) and waits at "Jij beslist wat blijft."; it only runs while in view, and rests there with reduced motion. The words are a real list; the drawing is `aria-hidden`. On Begin beside the `display` statement, on Aanpak in "Hoe we werken".
 ---
 
 ## 6. Copywriting Tone & Voice Guidelines

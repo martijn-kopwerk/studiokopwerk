@@ -106,7 +106,7 @@ export function Privacy() {
           Kom je er met mij niet uit, dan kun je een klacht indienen bij de{' '}
           <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
         </p>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-subtle dark:text-slate-400">
           Studio Kopwerk, Oosterweg 24, 9751 PH Haren Gn. Bijgewerkt op 8 oktober 2026.
         </p>
       </Part>
