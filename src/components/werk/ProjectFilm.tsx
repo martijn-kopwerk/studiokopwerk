@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties, type KeyboardEvent } from 'react';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
-import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
+import { Icon } from '../ui/Icon';
 import type { Project } from '../../lib/projects';
 import { useContact } from '../../hooks/useContact';
 import { cn } from '../../lib/utils';
@@ -125,7 +125,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                       onClick={replay}
                       className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-400 hover:text-white transition-colors duration-500 ease-kopwerk"
                     >
-                      <RotateCcw aria-hidden="true" className="size-4" />
+                      <Icon name="restart" className="size-4" />
                       Bekijk opnieuw
                     </button>
                   </div>
@@ -170,7 +170,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                     onClick={() => go(i)}
                     aria-label={`Scène ${i + 1}: ${item.text}`}
                     aria-current={i === index ? 'step' : undefined}
-                    className="group block w-full py-3 rounded-sm"
+                    className="group block w-full py-3 rounded-full"
                   >
                     <span className="block h-0.5 overflow-hidden rounded-full bg-white/15 transition-colors duration-500 ease-kopwerk group-hover:bg-white/30">
                       <span
@@ -188,7 +188,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
               ))}
             </ol>
             <Button aria-label="Vorige scène" disabled={index === 0} onClick={() => go(index - 1)} className="disabled:opacity-30">
-              <ChevronLeft aria-hidden="true" className="size-5" />
+              <Icon name="chevron-left" className="size-5" />
             </Button>
             <Button
               aria-label={playing ? 'Pauzeer' : 'Speel af'}
@@ -196,10 +196,10 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
               onClick={() => setPlaying(!playing)}
               className="disabled:opacity-30"
             >
-              {playing ? <Pause aria-hidden="true" className="size-5" /> : <Play aria-hidden="true" className="size-5" />}
+              {playing ? <Icon name="pause" className="size-5" /> : <Icon name="play" className="size-5" />}
             </Button>
             <Button aria-label="Volgende scène" disabled={ended} onClick={() => go(index + 1)} className="disabled:opacity-30">
-              <ChevronRight aria-hidden="true" className="size-5" />
+              <Icon name="chevron-right" className="size-5" />
             </Button>
           </div>
         </div>

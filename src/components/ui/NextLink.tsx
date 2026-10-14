@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { Icon } from './Icon';
 import { Link } from 'wouter';
 import { RollingText } from './RollingText';
 import { cn } from '../../lib/utils';
@@ -12,13 +12,13 @@ export function NextLink({ href, children, className }: { href: string; children
     <Link
       href={href}
       className={cn(
-        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-md text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300',
+        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300',
         className
       )}
     >
       <RollingText accentClassName="text-amber-700 dark:text-amber-400">{children}</RollingText>
-      <ArrowRight
-        aria-hidden="true"
+      <Icon
+        name="arrow-right"
         className="size-4 transition-transform duration-500 ease-kopwerk group-hover:translate-x-1 group-hover:text-amber-700 dark:group-hover:text-amber-400 motion-reduce:transition-none"
       />
     </Link>
