@@ -87,7 +87,7 @@ export function Footer({ onDotTarget }: { onDotTarget: (target: DotTarget | null
             onFocus={preloadContact}
             aria-haspopup="dialog"
             aria-label={`Vertel het in een mail: ${contactEmail}`}
-            className="group block max-w-full rounded-2xl text-left font-display font-medium text-footer-mail tracking-display text-slate-900 dark:text-white"
+            className="group block max-w-full -my-1 py-1 rounded-2xl text-left font-display font-medium text-footer-mail tracking-display text-slate-900 dark:text-white"
           >
             <RollingLetters text={contactEmail} accentClassName="text-amber-700 dark:text-amber-400" />
           </button>
