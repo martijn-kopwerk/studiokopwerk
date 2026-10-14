@@ -7,6 +7,7 @@ const icons = {
   'arrow-up-right': ['M7 17 L17 7', 'M8 7 H17 V16'],
   'arrow-right': ['M4 12 H20', 'M14 6 L20 12 L14 18'],
   'arrow-left': ['M20 12 H4', 'M10 6 L4 12 L10 18'],
+  'chevron-down': ['M6 9 L12 15 L18 9'],
   'chevron-left': ['M15 6 L9 12 L15 18'],
   'chevron-right': ['M9 6 L15 12 L9 18'],
   'corner-down-right': ['M6 4 V14 H19', 'M15 10 L19 14 L15 18'],

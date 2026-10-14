@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { CapsuleButton } from './ui/CapsuleButton';
 import { Icon } from './ui/Icon';
-import { contactEmail } from '../lib/contact';
+import { mailtoHref } from '../lib/contact';
 import { hairline } from '../lib/raster';
 import { cn } from '../lib/utils';
 
@@ -54,70 +54,85 @@ export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
   );
 }
 
-// The mail for a chosen friction: the friction itself is the subject, so the story has already begun.
-export function knelpuntMail(knelt: string) {
-  return `mailto:${contactEmail}?subject=${encodeURIComponent(`Waar het knelt: ${knelt.replace(/\.$/, '')}`)}`;
-}
-
 /**
  * The frictions to choose from (design system: "Wat we maken", on the website). Each friction is a button; choosing
  * one shows what we make for it and "Vertel het in een mail", which opens the mail with that friction in the subject.
  * No form, one choice. Before the script runs it is the plain list of pairs, so it reads the same without it.
+ * Phones show the first three and "Toon alle vijf", so the walk on Begin stays short.
  */
 export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   const [interactive, setInteractive] = useState(false);
   const [gekozen, setGekozen] = useState<number | null>(null);
+  const [alle, setAlle] = useState(false);
   const id = useId();
+  const kort = 3;
 
   useEffect(() => setInteractive(true), []);
 
   if (!interactive) return <Knelpunten items={items} />;
 
   return (
-    <ul className={`border-b ${hairline}`}>
-      {items.map(({ knelt, maken }, index) => {
-        const open = gekozen === index;
-        return (
-          <li key={knelt} className={cn('border-t', hairline)}>
-            <button
-              type="button"
-              aria-expanded={open}
-              aria-controls={`${id}-${index}`}
-              onClick={() => setGekozen(open ? null : index)}
-              className={cn(
-                'group w-full grid grid-cols-[1.25rem_minmax(0,1fr)] gap-3 py-5 text-left rounded-2xl text-sm sm:text-base leading-relaxed tracking-wide-sm text-pretty transition-colors duration-300 ease-kopwerk motion-reduce:transition-none',
-                open ? 'text-slate-900 dark:text-white' : 'text-subtle dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              )}
+    <div className="flex flex-col items-start gap-6">
+      <ul className={`w-full border-b ${hairline}`}>
+        {items.map(({ knelt, maken }, index) => {
+          const open = gekozen === index;
+          return (
+            <li
+              key={knelt}
+              className={cn('border-t', hairline, !alle && index >= kort && gekozen !== index && 'max-sm:hidden')}
             >
-              {/* A hollow ring that fills amber when chosen: the shape says it as well as the colour */}
-              <span
-                aria-hidden="true"
+              <button
+                type="button"
+                aria-expanded={open}
+                aria-controls={`${id}-${index}`}
+                onClick={() => setGekozen(open ? null : index)}
                 className={cn(
-                  'mt-[calc(0.5lh-0.4375rem)] size-3.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 ease-kopwerk motion-reduce:transition-none',
+                  'group w-full grid grid-cols-[1.25rem_minmax(0,1fr)] gap-3 py-5 text-left rounded-2xl text-sm sm:text-base leading-relaxed tracking-wide-sm text-pretty transition-colors duration-300 ease-kopwerk motion-reduce:transition-none',
                   open
-                    ? 'border-amber-500 bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]'
-                    : 'border-slate-500 dark:border-slate-400 group-hover:border-slate-900 dark:group-hover:border-white'
+                    ? 'text-slate-900 dark:text-white'
+                    : 'text-subtle dark:text-slate-400 hover:text-slate-900 dark:hover:text-white',
                 )}
-              />
-              {knelt}
-            </button>
-            <div id={`${id}-${index}`} hidden={!open} className="pl-8 pb-8">
-              <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
-                <p className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
-                  <Icon
-                    name="corner-down-right"
-                    className="absolute left-0 top-[calc(0.5lh-0.5rem)] size-4 text-slate-400 dark:text-slate-500"
-                  />
-                  {maken}
-                </p>
-                <CapsuleButton href={knelpuntMail(knelt)} className="w-auto">
-                  Vertel het in een mail
-                </CapsuleButton>
+              >
+                {/* A hollow ring that fills amber when chosen: the shape says it as well as the colour */}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'mt-[calc(0.5lh-0.4375rem)] size-3.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 ease-kopwerk motion-reduce:transition-none',
+                    open
+                      ? 'border-amber-500 bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]'
+                      : 'border-slate-500 dark:border-slate-400 group-hover:border-slate-900 dark:group-hover:border-white',
+                  )}
+                />
+                {knelt}
+              </button>
+              <div id={`${id}-${index}`} hidden={!open} className="pl-8 pb-8">
+                <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
+                  <p className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
+                    <Icon
+                      name="corner-down-right"
+                      className="absolute left-0 top-[calc(0.5lh-0.5rem)] size-4 text-slate-400 dark:text-slate-500"
+                    />
+                    {maken}
+                  </p>
+                  <CapsuleButton href={mailtoHref(knelt)} className="w-auto">
+                    Vertel het in een mail
+                  </CapsuleButton>
+                </div>
               </div>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
+            </li>
+          );
+        })}
+      </ul>
+      {!alle && items.length > kort && (
+        <button
+          type="button"
+          onClick={() => setAlle(true)}
+          className="sm:hidden group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300"
+        >
+          Toon alle {items.length === 5 ? 'vijf' : items.length}
+          <Icon name="chevron-down" className="size-4" />
+        </button>
+      )}
+    </div>
   );
 }

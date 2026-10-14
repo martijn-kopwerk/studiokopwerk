@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true }); fs.rmSync('dist-ssr', { recursive: true, force: true })\"",
     "lint": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "share-images": "node scripts/share-images.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

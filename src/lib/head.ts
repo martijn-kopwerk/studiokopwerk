@@ -1,11 +1,9 @@
+import { shareImageFor } from './share-images';
+
 export const siteUrl = 'https://www.studiokopwerk.nl';
 
-const defaultImage = {
-  path: '/og-image.png',
-  width: 1200,
-  height: 630,
-  alt: 'Studio Kopwerk. Zien wat wérkt.',
-};
+// Share images are 1200×630 (design system: ShareImage), one per page in public/og/.
+const imageSize = { width: 1200, height: 630 };
 
 export interface PageMeta {
   // Site-relative path without a trailing slash ('/' for home).
@@ -26,7 +24,8 @@ const escapeHtml = (value: string) =>
 export function renderHead(meta: PageMeta): string {
   const e = escapeHtml;
   const url = siteUrl + meta.path;
-  const image = siteUrl + defaultImage.path;
+  const share = shareImageFor(meta.path);
+  const image = `${siteUrl}/og/${share.name}.png`;
   const tags = [
     `<title>${e(meta.title)}</title>`,
     `<meta name="description" content="${e(meta.description)}" />`,
@@ -36,9 +35,9 @@ export function renderHead(meta: PageMeta): string {
     '<meta property="og:type" content="website" />',
     `<meta property="og:url" content="${e(url)}" />`,
     `<meta property="og:image" content="${e(image)}" />`,
-    `<meta property="og:image:width" content="${defaultImage.width}" />`,
-    `<meta property="og:image:height" content="${defaultImage.height}" />`,
-    `<meta property="og:image:alt" content="${e(defaultImage.alt)}" />`,
+    `<meta property="og:image:width" content="${imageSize.width}" />`,
+    `<meta property="og:image:height" content="${imageSize.height}" />`,
+    `<meta property="og:image:alt" content="${e(share.alt)}" />`,
     `<meta name="twitter:image" content="${e(image)}" />`,
   ];
   return tags.join('\n    ');

@@ -122,6 +122,8 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     // On phones the drawing is fixed and the page scrolls over it. Resting on the vertex, the dot is only shown while
     // the gap the page leaves for it (data-tekentafel-vertex) is still under it; once text scrolls there, it fades out.
     const restOpacity = () => {
+      // A component with its own dot is in view: there is only ever one dot walking.
+      if (targetRef.current?.hide && targetRef.current.element.isConnected) return '0';
       if (targetRef.current?.element.isConnected || !layout.phone) return '';
       const gap = document.querySelector<HTMLElement>('[data-tekentafel-vertex]')?.getBoundingClientRect();
       if (!gap) return '';

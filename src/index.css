@@ -153,7 +153,8 @@ html.dark {
   margin: -70vmax 0 0 -70vmax;
   border-radius: 50%;
   translate: 62vw 45vh;
-  background: radial-gradient(closest-side, rgb(217 119 6 / 0.08), rgb(217 119 6 / 0.03) 40%, transparent);
+  /* Light gets a stronger glow than dark (design system: amber-haze per theme), or slate-50 swallows it */
+  background: radial-gradient(closest-side, rgb(217 119 6 / 0.13), rgb(217 119 6 / 0.05) 40%, transparent);
 }
 
 .dark .kopwerk-glow {

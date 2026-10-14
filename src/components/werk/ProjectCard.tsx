@@ -81,11 +81,14 @@ export function ProjectMedia({ project, still }: { project: Project; still?: { i
   );
 }
 
-/** What an opdracht says beyond its title: the image, quote or number, then its two or three sentences and its saving. */
+/**
+ * What an opdracht says beyond its title: the image, quote or number, then its two or three sentences and its saving.
+ * With a film, the card shows the scene marked `begin:` (one detail) rather than a whole screen.
+ */
 export function ProjectBody({ project }: { project: Project }) {
   return (
     <div className="flex flex-col gap-6">
-      <ProjectMedia project={project} />
+      <ProjectMedia project={project} still={project.begin} />
       <ProjectText project={project} />
       <ProjectStat project={project} className="mt-4" />
     </div>
