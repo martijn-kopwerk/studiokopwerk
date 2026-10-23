@@ -102,7 +102,7 @@ export function Aanpak() {
         {/* In the order it happens: the talk, the proposal, the first version, then real data only if you want */}
         <p>
           Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
-          een vaste prijs.
+          een vaste prijs. De meeste opdrachten liggen tussen €500 en €5.000, exclusief btw.
         </p>
         <p>
           Dan maakt AI in korte tijd een eerste versie, met voorbeeldgegevens. Je hoeft er zelf geen verstand van te
