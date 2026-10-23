@@ -115,10 +115,9 @@ export function Over() {
 
       <Row id="verwachten" title="Je spreekt steeds met mij">
         <p>
-          Het eerste gesprek kan bij jou op de zaak. Ik praat over je werk, niet over techniek. Studio Kopwerk doe ik
-          naast mijn werk als productmanager. Daarom neem ik weinig opdrachten tegelijk aan: wie met mij werkt, krijgt
-          mijn aandacht.
+          Het eerste gesprek kan bij jou op de zaak. Ik praat over je werk, niet over techniek.
         </p>
+        <p>Ik neem weinig opdrachten tegelijk aan. Wie met mij werkt, krijgt mijn aandacht.</p>
       </Row>
 
       <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
