@@ -99,7 +99,7 @@ export function Aanpak() {
       >
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
-        {/* In the order it happens: the talk, the proposal, the first version, then real data only if you want */}
+        {/* In the order it happens: the talk, the proposal, the first version, real data only if you want, then what you have at the end */}
         <p>
           Het begint met een vrijblijvend gesprek, aan de telefoon of bij jou op de zaak. Daarna krijg je een voorstel met
           een vaste prijs.
@@ -115,6 +115,10 @@ export function Aanpak() {
             privacy
           </Link>
           .
+        </p>
+        <p>
+          Aan het eind heb je iets wat je elke dag gebruikt: een website, een programma of werk dat vanzelf gaat. Geen
+          rapport.
         </p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
@@ -153,7 +157,11 @@ export function Aanpak() {
           zien wat ertoe doet en de rest durven weglaten.
         </p>
         {/* First the story, then the reader does it: strike out what piles up and what matters is left */}
-        <Weglaten items={['Meer schermen.', 'Meer stappen.']} rest="Wat ertoe doet." />
+        <Weglaten
+          vraag="Probeer het zelf: wat blijft er over?"
+          items={['Meer schermen.', 'Meer stappen.']}
+          rest="Wat ertoe doet."
+        />
         <p>Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
       </Chapter>
 
