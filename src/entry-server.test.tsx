@@ -9,7 +9,7 @@ describe('prerendering', () => {
     const { html, head } = render('/');
     expect(html).toMatch(/<h1[^>]*id="hero-title"/);
     expect(html).toContain('Vertel waar het knelt');
-    expect(head).toContain('<title>Studio Kopwerk · Zien wat wérkt · AI voor ondernemers in Groningen</title>');
+    expect(head).toContain('<title>Studio Kopwerk · Zien wat wérkt · AI voor ondernemers in Nederland</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
 

@@ -22,7 +22,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  "Goed in je vak, maar vastgelopen in het digitale eromheen? Studio Kopwerk uit Haren bij Groningen maakt het eenvoudig met AI: werk dat steeds terugkomt, je website en je programma's.";
+  "Goed in je vak, maar vastgelopen in het digitale eromheen? Studio Kopwerk maakt het eenvoudig met AI, voor ondernemers in heel Nederland: werk dat steeds terugkomt, je website en je programma's.";
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
@@ -32,7 +32,7 @@ const siteDescription =
  */
 export function buildRoutes(shown: Project[]): PageRoute[] {
   const home: PageRoute = {
-    meta: { path: '/', title: 'Studio Kopwerk · Zien wat wérkt · AI voor ondernemers in Groningen', description: siteDescription },
+    meta: { path: '/', title: 'Studio Kopwerk · Zien wat wérkt · AI voor ondernemers in Nederland', description: siteDescription },
     Page: Home,
   };
   const aanpak: PageRoute = {
