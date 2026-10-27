@@ -64,11 +64,12 @@ export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
  * The frictions to choose from (design system: "Wat we maken", on the website). Each friction is a button; choosing
  * one shows what we make for it and "Vertel het in een mail", which opens the mail with that friction in the subject.
  * No form, one choice. Before the script runs it is the plain list of pairs, so it reads the same without it.
- * Phones show the first three and "Toon alle vijf", so the walk on Begin stays short.
+ * Phones show the first three and "Toon alle vijf", so the walk on Begin stays short. The first one starts open, so
+ * whoever doesn't click still sees that each friction has an answer.
  */
 export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   const [interactive, setInteractive] = useState(false);
-  const [gekozen, setGekozen] = useState<number | null>(null);
+  const [gekozen, setGekozen] = useState<number | null>(0);
   const [alle, setAlle] = useState(false);
   const id = useId();
   const kort = 3;

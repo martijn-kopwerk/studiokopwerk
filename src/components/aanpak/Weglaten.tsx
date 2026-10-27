@@ -14,14 +14,18 @@ const fade = 'transition-opacity duration-500 ease-kopwerk motion-reduce:transit
  * buttons. It comes after the story, so the reader does what they just read: one click leaves out everything but
  * what matters (a title, a few lines, one amber action), and can bring it back. The lines beneath say the same in
  * words, struck through, and `rest` (what is left) appears below them; screen readers hear it all through a status.
+ * `vraag` invites the click before there is one, so the button doesn't stand there without a reason.
  */
-export function Weglaten({ items, rest }: { items: string[]; rest?: string }) {
+export function Weglaten({ vraag, items, rest }: { vraag?: string; items: string[]; rest?: string }) {
   const [weg, setWeg] = useState(false);
   const extra = (delay = '') => cn(fade, weg && ['opacity-0', delay]);
   const toggle = () => setWeg((current) => !current);
 
   return (
     <figure className="flex flex-col gap-6">
+      {vraag && (
+        <figcaption className="text-sm tracking-wide-sm text-subtle dark:text-slate-400 text-pretty">{vraag}</figcaption>
+      )}
       {/* Decorative (the words below carry the meaning); a click on it does what the button does, for the mouse */}
       <svg
         viewBox="0 0 320 200"

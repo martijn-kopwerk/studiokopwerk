@@ -150,6 +150,7 @@ export function Home() {
           AI maakt in korte tijd een eerste versie. Je hoeft er zelf geen verstand van te hebben: je ziet het en zegt wat
           klopt.
         </p>
+        <p>Er gaat niets naar je klanten zonder dat jij het gezien hebt.</p>
         <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 
