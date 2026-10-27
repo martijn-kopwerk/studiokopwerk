@@ -161,6 +161,15 @@ html.dark {
   background: radial-gradient(closest-side, rgb(245 158 11 / 0.11), rgb(245 158 11 / 0.04) 40%, transparent);
 }
 
+/* A low sun (morning and evening, daglicht.ts): a deeper, warmer amber. */
+.kopwerk-glow[data-laag] {
+  background: radial-gradient(closest-side, rgb(180 83 9 / 0.14), rgb(180 83 9 / 0.05) 40%, transparent);
+}
+
+.dark .kopwerk-glow[data-laag] {
+  background: radial-gradient(closest-side, rgb(217 119 6 / 0.13), rgb(217 119 6 / 0.05) 40%, transparent);
+}
+
 /* Scroll reveal (design system, Motion): a block rises 12px into place as it scrolls into view, driven by the
    scroll itself, without JavaScript. Where scroll timelines aren't supported, or with reduced motion, nothing
    animates and the block simply stands where it ends up. */
@@ -207,4 +216,43 @@ main h1 {
 ::selection {
   background-color: rgba(217, 119, 6, 0.25);
   color: inherit;
+}
+
+/* De tekenvel of a knelpunt's sketch (KnelpuntSchets): white paper with a dot grid. */
+.tekenvel {
+  background-color: #ffffff;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .tekenvel {
+  background-color: #0f172a;
+  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+}
+
+/* The sketch draws itself once: each line from start to end, then the dot appears. */
+@media (prefers-reduced-motion: no-preference) {
+  .schets-lijn {
+    /* Longer than the longest outline in a sketch (the website's frame, 1280) */
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: kopwerk-schets-teken 1.4s var(--ease-kopwerk) forwards;
+  }
+
+  .schets-stip {
+    opacity: 0;
+    animation: kopwerk-schets-stip 0.5s var(--ease-kopwerk) 0.9s forwards;
+  }
+}
+
+@keyframes kopwerk-schets-teken {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes kopwerk-schets-stip {
+  to {
+    opacity: 1;
+  }
 }
