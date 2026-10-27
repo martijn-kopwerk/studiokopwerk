@@ -32,7 +32,7 @@ export const kleineDingen: KleinDing[] = [
     tekst:
       'Zie in één oogopslag hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
     beeld: zuipwijs,
-    alt: 'Zuipwijs: 3,5 van 7 glazen deze week, nog 3,5 glazen tot je grens. Met fictieve waarden.',
+    alt: 'Zuipwijs: een duel met Sanne om de meeste nuchtere dagen deze week. Jij 5, Sanne 4: je staat één nuchtere dag voor. Met fictieve waarden.',
     grond: 'donker',
   },
   {
