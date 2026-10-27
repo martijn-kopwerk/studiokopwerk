@@ -96,7 +96,8 @@ export function Over() {
 
       <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
-          Al tien jaar bepaal ik bij grote organisaties wat er gemaakt wordt en waarom. Steeds zag ik hetzelfde: schermen
+          Vanuit consultancy bepaal ik al tien jaar bij grote bedrijven in verschillende sectoren wat er gemaakt wordt en
+          waarom. Steeds zag ik hetzelfde: schermen
           die ingewikkelder waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij
           de mensen die het al druk hadden.
         </p>
@@ -107,6 +108,10 @@ export function Over() {
           Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht. Ik neem die
           ervaring mee, zonder de lange trajecten en vergaderingen. Maken kon ik altijd al, maar vaak waren er meerdere
           mensen voor nodig. Met AI doe ik het nu zelf, in korte tijd.
+        </p>
+        <p>
+          Daarom begon ik Studio Kopwerk. Ik heb inmiddels zoveel gezien dat een kleine ingreep vaak al genoeg is om je
+          verder te helpen.
         </p>
       </Row>
 
@@ -120,8 +125,9 @@ export function Over() {
 
       <Row id="tussendoor" title="Tussendoor maak ik dingen voor mezelf">
         <p>
-          Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak. Mate is een coach voor training en
-          voeding op de gegevens van je Garmin. Met Zuipwijs daag je vrienden uit voor een duel: wie haalt de meeste
+          Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak. Ik sport veel: voetbal, padel,
+          hardlopen en krachttraining. Om dat te combineren zonder blessures maakte ik Mate, een coach voor training en
+          voeding op de gegevens van een Garmin. Met Zuipwijs daag je vrienden uit voor een duel: wie haalt de meeste
           nuchtere dagen?
         </p>
         {/* Kleine dingen sit on /werk, which only exists while there's an opdracht to show */}
@@ -132,6 +138,10 @@ export function Over() {
             </Link>
           </p>
         )}
+      </Row>
+
+      <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
+        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven met wat AI kan.</p>
       </Row>
 
     </main>
