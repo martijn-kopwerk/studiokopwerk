@@ -76,10 +76,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
-        className="w-full sm:max-w-2xl md:max-w-3xl max-h-[calc(100dvh-2rem)] overflow-y-auto border-0 bg-white/95 dark:bg-kopwerk-dark/95 p-8 sm:p-12 shadow-2xl backdrop-blur-2xl text-slate-900 dark:text-slate-100"
+        className="w-full sm:max-w-2xl md:max-w-3xl max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden border-0 bg-white/95 dark:bg-kopwerk-dark/95 p-8 sm:p-12 shadow-2xl backdrop-blur-2xl text-slate-900 dark:text-slate-100"
         showCloseButton={true}
       >
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-amber-500/5 dark:bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
+        <div aria-hidden="true" className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-amber-500/5 dark:bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* One heading that answers the button that opened the card, and one line on what to do */}
         <DialogHeader className="mb-6 relative z-10 gap-3">
