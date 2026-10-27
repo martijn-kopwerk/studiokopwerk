@@ -75,27 +75,24 @@ export function Over() {
         Je mail komt bij mij binnen. Ik lees hem zelf.
       </p>
 
-      <section aria-label="Hoe het begon" className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
-        <div aria-hidden="true" className="hidden lg:block" />
-        <div className={cn("max-w-xl flex flex-col gap-6", prose)}>
-          <p>
-            Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
-            handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
-          </p>
-          <p>
-            Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{" "}
-            {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
-            {projects.length > 0 ? (
-              <Link href="/werk" className="underline underline-offset-4">
-                mijn eigen programma
-              </Link>
-            ) : (
-              "mijn eigen programma"
-            )}
-            . Outlook hoef ik niet meer te openen.
-          </p>
-        </div>
-      </section>
+      <Row id="begin" title="Het begon met een rapportage">
+        <p>
+          Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
+          handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
+        </p>
+        <p>
+          Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{" "}
+          {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
+          {projects.length > 0 ? (
+            <Link href="/werk" className="underline underline-offset-4">
+              mijn eigen programma
+            </Link>
+          ) : (
+            "mijn eigen programma"
+          )}
+          . Outlook hoef ik niet meer te openen. Lezen doe ik nog steeds zelf.
+        </p>
+      </Row>
 
       <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
@@ -121,8 +118,20 @@ export function Over() {
         </p>
       </Row>
 
-      <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
-        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven met wat AI kan.</p>
+      <Row id="tussendoor" title="Tussendoor maak ik dingen voor mezelf">
+        <p>
+          Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak. Mate is een coach voor training en
+          voeding op de gegevens van je Garmin. Met Zuipwijs daag je vrienden uit voor een duel: wie haalt de meeste
+          nuchtere dagen?
+        </p>
+        {/* Kleine dingen sit on /werk, which only exists while there's an opdracht to show */}
+        {projects.length > 0 && (
+          <p>
+            <Link href="/werk#kleine-dingen" className="underline underline-offset-4">
+              Bekijk wat ik tussendoor maak
+            </Link>
+          </p>
+        )}
       </Row>
 
     </main>

@@ -15,8 +15,9 @@ function setMeta(selector: string, create: () => HTMLElement, attribute: string,
 }
 
 /**
- * After a client-side navigation: update the title and the tags search engines read, scroll to the top,
- * and move keyboard focus to the new page's heading so screen readers announce it.
+ * After a client-side navigation: update the title and the tags search engines read, scroll to the top
+ * (or to the link's #anchor, as Over does for Kleine dingen on /werk), and move keyboard focus to the new page's
+ * heading so screen readers announce it.
  * The first render is skipped: the prerendered HTML is already correct.
  */
 export function usePageChange(meta: PageMeta, siteUrl: string) {
@@ -33,7 +34,9 @@ export function usePageChange(meta: PageMeta, siteUrl: string) {
     setMeta('link[rel="canonical"]', () => Object.assign(document.createElement('link'), { rel: 'canonical' }), 'href', meta.noindex ? null : siteUrl + meta.path);
     setMeta('meta[name="robots"]', () => Object.assign(document.createElement('meta'), { name: 'robots' }), 'content', meta.noindex ? 'noindex' : null);
 
-    window.scrollTo(0, 0);
+    const anchor = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
+    if (anchor) anchor.scrollIntoView();
+    else window.scrollTo(0, 0);
     document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true });
   }, [meta, siteUrl]);
 }
