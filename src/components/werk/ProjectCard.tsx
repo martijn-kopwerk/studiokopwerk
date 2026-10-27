@@ -1,23 +1,33 @@
-import { useState, type ReactNode } from 'react';
+import { Suspense, lazy, useState, type ReactNode } from 'react';
 import type { Project } from '../../lib/projects';
 import { cn } from '../../lib/utils';
+import { ErrorBoundary } from '../ErrorBoundary';
 import { Icon } from '../ui/Icon';
 import { Stat } from '../ui/Stat';
-import { ProjectFilm } from './ProjectFilm';
+
+// The film (and its dialog dependencies) is fetched on first intent, like the contact card: hover, focus or open.
+const loadFilm = () => import('./ProjectFilm');
+const ProjectFilm = lazy(() => loadFilm().then((m) => ({ default: m.ProjectFilm })));
 
 const meta = 'text-xs font-semibold tracking-wide-xl uppercase text-subtle dark:text-slate-400';
 
 /** The opdracht's image as a button that opens its film; the first scene loads as soon as the pointer or focus arrives. */
 function FilmTrigger({ project, children }: { project: Project; children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const preload = () => {
     if (project.film?.[0]) new Image().src = project.film[0].image;
+    // A failed preload is tried again when the film is opened.
+    loadFilm().catch(() => {});
   };
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setMounted(true);
+          setOpen(true);
+        }}
         onPointerEnter={preload}
         onFocus={preload}
         className="group relative block w-full text-left rounded-2xl"
@@ -30,7 +40,14 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
           Bekijk hoe het werkt
         </span>
       </button>
-      <ProjectFilm project={project} open={open} onOpenChange={setOpen} />
+      {/* If the film can't load (offline, or a stale tab after a deploy), the click does nothing rather than break the page */}
+      {mounted && (
+        <ErrorBoundary onError={() => setMounted(false)}>
+          <Suspense fallback={null}>
+            <ProjectFilm project={project} open={open} onOpenChange={setOpen} />
+          </Suspense>
+        </ErrorBoundary>
+      )}
     </>
   );
 }
