@@ -75,31 +75,29 @@ export function Over() {
         Je mail komt bij mij binnen. Ik lees hem zelf.
       </p>
 
-      <section aria-label="Hoe het begon" className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
-        <div aria-hidden="true" className="hidden lg:block" />
-        <div className={cn("max-w-xl flex flex-col gap-6", prose)}>
-          <p>
-            Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
-            handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
-          </p>
-          <p>
-            Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{" "}
-            {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
-            {projects.length > 0 ? (
-              <Link href="/werk" className="underline underline-offset-4">
-                mijn eigen programma
-              </Link>
-            ) : (
-              "mijn eigen programma"
-            )}
-            . Outlook hoef ik niet meer te openen.
-          </p>
-        </div>
-      </section>
+      <Row id="begin" title="Het begon met een rapportage">
+        <p>
+          Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
+          handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
+        </p>
+        <p>
+          Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{" "}
+          {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
+          {projects.length > 0 ? (
+            <Link href="/werk" className="underline underline-offset-4">
+              mijn eigen programma
+            </Link>
+          ) : (
+            "mijn eigen programma"
+          )}
+          . Outlook hoef ik niet meer te openen. Lezen doe ik nog steeds zelf.
+        </p>
+      </Row>
 
       <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
-          Al tien jaar bepaal ik bij grote organisaties wat er gemaakt wordt en waarom. Steeds zag ik hetzelfde: schermen
+          Vanuit consultancy bepaal ik al tien jaar bij grote bedrijven in verschillende sectoren wat er gemaakt wordt en
+          waarom. Steeds zag ik hetzelfde: schermen
           die ingewikkelder waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij
           de mensen die het al druk hadden.
         </p>
@@ -111,6 +109,10 @@ export function Over() {
           ervaring mee, zonder de lange trajecten en vergaderingen. Maken kon ik altijd al, maar vaak waren er meerdere
           mensen voor nodig. Met AI doe ik het nu zelf, in korte tijd.
         </p>
+        <p>
+          Daarom begon ik Studio Kopwerk. Ik heb inmiddels zoveel gezien dat een kleine ingreep vaak al genoeg is om je
+          verder te helpen.
+        </p>
       </Row>
 
       <Row id="verwachten" title="Je spreekt steeds met mij">
@@ -119,6 +121,23 @@ export function Over() {
           naast mijn werk als productmanager. Daarom neem ik weinig opdrachten tegelijk aan: wie met mij werkt, krijgt
           mijn aandacht.
         </p>
+      </Row>
+
+      <Row id="tussendoor" title="Tussendoor maak ik dingen voor mezelf">
+        <p>
+          Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak. Ik sport veel: voetbal, padel,
+          hardlopen en krachttraining. Om dat te combineren zonder blessures maakte ik Mate, een coach voor training en
+          voeding op de gegevens van een Garmin. Met Zuipwijs daag je vrienden uit voor een duel: wie haalt de meeste
+          nuchtere dagen?
+        </p>
+        {/* Kleine dingen sit on /werk, which only exists while there's an opdracht to show */}
+        {projects.length > 0 && (
+          <p>
+            <Link href="/werk#kleine-dingen" className="underline underline-offset-4">
+              Bekijk wat ik tussendoor maak
+            </Link>
+          </p>
+        )}
       </Row>
 
       <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
