@@ -6,6 +6,7 @@ import { KnelpuntKiezer } from '../components/Knelpunten';
 import { Portret } from '../components/Portret';
 import { Rondgang } from '../components/Rondgang';
 import { ProjectMedia, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { Rekenhulp } from '../components/werk/Rekenhulp';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
 import { projects } from '../lib/projects';
@@ -38,6 +39,8 @@ const WERKWIJZE = 1;
 export function Home() {
   const { active, markers, zone, stop } = useReadingStops();
   const werk = projects.find((project) => project.film) ?? projects[0];
+  // A saving in minutes (per mail) can be made personal: how many hours a year is that for you?
+  const minuten = werk?.begin?.figure?.unit === 'min' ? Number.parseInt(werk.begin.figure.value, 10) : NaN;
 
   const punt = useRef<HTMLSpanElement | null>(null);
   // Once the script runs, the full stop is left empty for the dot; it flies in once it has landed on the vertex.
@@ -162,6 +165,7 @@ export function Home() {
               </Typography>
             )
           )}
+          {minuten > 0 && <Rekenhulp minuten={minuten} />}
           <NextLink className="self-start" href="/werk">Bekijk het werk</NextLink>
         </Block>
       )}

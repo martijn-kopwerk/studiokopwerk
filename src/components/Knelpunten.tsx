@@ -1,6 +1,7 @@
 import { useEffect, useId, useState } from 'react';
 import { CapsuleButton } from './ui/CapsuleButton';
 import { Icon } from './ui/Icon';
+import { KnelpuntSchets, type SchetsNaam } from './KnelpuntSchets';
 import { mailtoHref } from '../lib/contact';
 import { hairline } from '../lib/raster';
 import { cn } from '../lib/utils';
@@ -8,6 +9,8 @@ import { cn } from '../lib/utils';
 export interface Knelpunt {
   knelt: string;
   maken: string;
+  // The sketch of what we make, shown when the friction is chosen.
+  schets?: SchetsNaam;
 }
 
 // What gets stuck, and what we make for it: what it does for people, never the kind of product. Word for word from
@@ -16,17 +19,20 @@ export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
     maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
+    schets: 'stroom',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je alles terugvindt.' },
+  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je alles terugvindt.', schets: 'plek' },
   {
     knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
     maken: 'Een website waarop klanten meteen zien wat je doet.',
+    schets: 'website',
   },
   {
     knelt: 'Werk dat elke week opnieuw met de hand gaat.',
     maken: 'AI die het werk doet dat steeds terugkomt. Jij beslist wat ermee gebeurt.',
+    schets: 'herhaling',
   },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.' },
+  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.', schets: 'scherm' },
 ];
 
 /**
@@ -74,7 +80,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   return (
     <div className="flex flex-col items-start gap-6">
       <ul className={`w-full border-b ${hairline}`}>
-        {items.map(({ knelt, maken }, index) => {
+        {items.map(({ knelt, maken, schets }, index) => {
           const open = gekozen === index;
           return (
             <li
@@ -107,6 +113,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
               </button>
               <div id={`${id}-${index}`} hidden={!open} className="pl-8 pb-8">
                 <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
+                  {schets && <KnelpuntSchets naam={schets} />}
                   <p className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
                     <Icon
                       name="corner-down-right"

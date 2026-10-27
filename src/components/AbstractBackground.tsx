@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { ResolvedTheme } from '../types';
 import type { DotTarget } from '../hooks/useAmberDot';
 import { ARM_SLOPE, LINES, computeLayout, ease } from '../lib/tekentafel';
+import { daglicht, uurVan } from '../lib/daglicht';
 
 interface AbstractBackgroundProps {
   theme: ResolvedTheme;
@@ -234,8 +235,11 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     let pending = false;
     let lastX = 0;
     let lastY = 0;
+    // Until the pointer moves, the light rests where the sun would be (daglicht.ts).
+    let followed = false;
     const handlePointerMove = (e: PointerEvent) => {
       if (e.pointerType === 'touch' || reducedMotion.matches) return;
+      followed = true;
       lastX = e.clientX;
       lastY = e.clientY;
       if (pending) return;
@@ -248,7 +252,20 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
     };
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
+    // The light follows the day: checked again every ten minutes, so a tab left open sees the evening come.
+    const followDay = () => {
+      const glow = glowRef.current;
+      if (!glow) return;
+      const licht = daglicht(uurVan(new Date()));
+      glow.style.opacity = String(licht.sterkte);
+      glow.toggleAttribute('data-laag', licht.laag);
+      if (!followed) glow.style.translate = `${licht.x}vw ${licht.y}vh`;
+    };
+    followDay();
+    const dayTimer = window.setInterval(followDay, 10 * 60 * 1000);
+
     return () => {
+      window.clearInterval(dayTimer);
       cancelAnimationFrame(frameId);
       window.clearTimeout(fadeTimer);
       redrawRef.current = () => {};
@@ -284,7 +301,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       >
         <div
           ref={glowRef}
-          className="kopwerk-glow absolute left-0 top-0 transition-[translate] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
+          className="kopwerk-glow absolute left-0 top-0 transition-[translate,opacity] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
         />
         <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
       </div>
