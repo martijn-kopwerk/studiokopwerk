@@ -102,7 +102,7 @@ export function Aanpak() {
         {/* In the order it happens: the talk, the proposal, the first version, real data only if you want, then what you have at the end */}
         <p>
           Het begint met een vrijblijvend gesprek, bij jou op de zaak. Daarna krijg je een voorstel met een vaste prijs.
-          Een eerste opdracht kost vanaf €&nbsp;500.
+          Een eerste opdracht kost vanaf €&nbsp;500, exclusief btw.
         </p>
         <p>
           Dan maakt AI in korte tijd een eerste versie, met voorbeeldgegevens. Je hoeft er zelf geen verstand van te
