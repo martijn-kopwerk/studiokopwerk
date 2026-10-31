@@ -13,11 +13,11 @@ describe('prerendering', () => {
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
 
-  it('walks home past who you talk to, the work and where it pinches, each with a way on', () => {
+  it('walks home past where it pinches, who you talk to and the work, each with a way on', () => {
     const { html } = render('/');
     // The full stop is the amber dot, but a real one for screen readers and search
     expect(html).toMatch(/<h1[^>]*>Zien wat <em[^>]*>wérkt<\/em><span[^>]*><span class="sr-only">.<\/span>/);
-    const ids = ['martijn', 'werkwijze', ...(projects.length > 0 ? ['werk'] : []), 'knelt'];
+    const ids = ['knelt', 'martijn', 'werkwijze', ...(projects.length > 0 ? ['werk'] : [])];
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
@@ -46,10 +46,13 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('walks in the reader\'s order, where it pinches, how we work and why, ending in one call to action', () => {
+  it('walks in the reader\'s order, how it goes, how we work, why and the questions, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
-    const ids = ['knelt', 'werkwijze', 'waarom'];
+    const ids = ['verloop', 'werkwijze', 'waarom', 'vragen'];
+    // Where it pinches is on Begin; Aanpak doesn't repeat it
+    expect(html).not.toContain('aria-labelledby="knelt"');
+    expect(html).toContain('vanaf €\u00a0500');
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
@@ -134,7 +137,10 @@ describe('werk', () => {
     for (const project of projects) {
       expect(html).toContain(`id="opdracht-${project.slug}"`);
     }
-    expect(html).toMatch(/role="tabpanel"[^>]*aria-labelledby="opdracht-/);
+    if (projects.length > 1) expect(html).toMatch(/role="tabpanel"[^>]*aria-labelledby="opdracht-/);
+    // Every id once, also with a single opdracht shown in more than one layout
+    const ids = [...html.matchAll(/ id="([^"]+)"/g)].map((match) => match[1]);
+    expect(ids.filter((id, index) => ids.indexOf(id) !== index)).toEqual([]);
     expect(head).toContain('<title>Wat ik maakte · Studio Kopwerk</title>');
   });
 

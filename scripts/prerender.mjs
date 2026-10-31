@@ -11,7 +11,11 @@ const ssrDir = path.join(root, 'dist-ssr');
 const { render, routes, notFoundRoute, siteUrl } = await import(
   pathToFileURL(path.join(ssrDir, 'entry-server.js')).href
 );
-const template = await fs.readFile(path.join(dist, 'index.html'), 'utf8');
+// Every page opens with a Syne title, but the browser only finds that font once the CSS is in. Preloading it lets the
+// title appear in its own letter straight away. The file name carries a hash, so look it up in the build.
+const syne = (await fs.readdir(path.join(dist, 'assets'))).find((file) => /^syne-latin-wght-normal-.*\.woff2$/.test(file));
+const preload = syne ? `<link rel="preload" href="/assets/${syne}" as="font" type="font/woff2" crossorigin />\n    ` : '';
+const template = (await fs.readFile(path.join(dist, 'index.html'), 'utf8')).replace('<!--app-head-->', `${preload}<!--app-head-->`);
 
 // The CSP allows no inline scripts (script-src 'self'); JSON-LD is data, not a script, so it may stay.
 function check(file, html) {

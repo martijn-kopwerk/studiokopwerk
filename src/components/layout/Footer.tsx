@@ -105,6 +105,7 @@ export function Footer({ slot, onDotTarget }: { slot?: PageSlot; onDotTarget: (t
                 <span className="sr-only"> het mailadres</span>
               </button>
             </div>
+            <span className="text-sm text-subtle dark:text-slate-400">Je hoort binnen twee werkdagen van me.</span>
             <span aria-live="polite" className="text-sm text-subtle dark:text-slate-400">
               {copy === 'copied' && 'Gekopieerd. Plak het in je mail.'}
               {copy === 'failed' && `Kopiëren lukte niet. Het adres is ${contactEmail}.`}

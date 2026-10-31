@@ -24,12 +24,12 @@ const markerRight = 'lg:left-[calc(-50cqw-4.5rem)]';
 // When the dot has landed on the K's vertex (animate-dot-land: 1.9s delay, 0.8s), it flies on to the full stop.
 const LANDED_MS = 2700;
 
-// The werkwijze block (the loop) is the second stop of the walk.
-const WERKWIJZE = 1;
+// The werkwijze block (the loop) is the third stop of the walk.
+const WERKWIJZE = 2;
 
 /**
- * Begin is the front door and a short walk: the promise, then who you talk to, how we work, what he made and where it
- * pinches, each a block of its own shape with one quiet way on to the page behind it, then the call to action again.
+ * Begin is the front door and a short walk: the promise, then where it pinches (recognition first), who you talk to,
+ * how we work and what he made, each a block of its own shape with one quiet way on to the page behind it, then the call to action again.
  *
  * The page's one moment (design system, "de tekentafel"): the amber dot lands on the K's vertex, then flies to the end
  * of "Zien wat wérkt" and stays there as its full stop. Screen readers hear a real full stop; before the script runs
@@ -106,10 +106,11 @@ export function Home() {
               variant="lead"
               className="max-w-2xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-balance text-slate-800 dark:text-slate-200"
             >
-              Voor ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen.
+              Voor ondernemers die goed zijn in hun vak, van installateur tot accountantskantoor, maar vastlopen in het
+              digitale eromheen.
             </Typography>
             <Typography variant="sublead" className="max-w-xl text-balance">
-              Wij maken het eenvoudig: van de eerste aanvraag tot de factuur, met je website en de programma's die daarbij
+              Wij maken het eenvoudig met AI: van de eerste aanvraag tot de factuur, met je website en de programma's die daarbij
               horen.
             </Typography>
           </div>
@@ -122,6 +123,20 @@ export function Home() {
           <ContactButton />
         </div>
       </section>
+
+      {/* Right after the promise: the reader recognises his own problem first, then meets who solves it */}
+      <Block
+        id="knelt"
+        title="Goed in je vak, vast in je systemen"
+        media={<KnelpuntKiezer />}
+        mediaSide="right"
+        mediaFirst={false}
+        align="start"
+        {...at()}
+      >
+        <p>Wat we maken, hangt af van waar het knelt.</p>
+        <p>Kies wat bij jou knelt. Dan zie je wat we ervoor maken.</p>
+      </Block>
 
       <Block
         id="martijn"
@@ -171,20 +186,6 @@ export function Home() {
         </Block>
       )}
 
-      <Block
-        id="knelt"
-        title="Goed in je vak, vast in je systemen"
-        media={<KnelpuntKiezer />}
-        mediaSide="right"
-        mediaFirst={false}
-        align="start"
-        {...at()}
-      >
-        <p>
-          Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
-        </p>
-        <p>Kies wat bij jou knelt. Dan zie je wat we ervoor maken.</p>
-      </Block>
 
     </main>
   );

@@ -106,13 +106,10 @@ export function Werk() {
         </article>
       )}
 
-      {/* Wide screens: titles on the left, the chosen opdracht beside them */}
-      <div
-        className={cn(
-          'hidden mt-16 grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-x-16 items-start',
-          !single && 'lg:grid'
-        )}
-      >
+      {/* Wide screens, more than one opdracht: titles on the left, the chosen opdracht beside them. Not rendered at all
+          for one, so its title and id are in the page once. */}
+      {!single && (
+      <div className="hidden lg:grid mt-16 grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-x-16 items-start">
         <div
           role="tablist"
           aria-orientation="vertical"
@@ -186,6 +183,7 @@ export function Werk() {
           </section>
         )}
       </div>
+      )}
 
       {/* Phones and tablets: every opdracht in full */}
       <ol className="lg:hidden mt-12 border-b border-slate-200 dark:border-slate-800">

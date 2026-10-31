@@ -87,7 +87,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
             Vertel waar het knelt.
           </DialogTitle>
           <DialogDescription className="text-lg text-slate-600 dark:text-slate-300">
-            Kies wat het meest op jouw situatie lijkt. Het eerste gesprek is vrijblijvend.
+            Kies wat het meest op jouw situatie lijkt. Het eerste gesprek is vrijblijvend. Een eerste opdracht kost vanaf € 500, exclusief btw.
           </DialogDescription>
         </DialogHeader>
 
@@ -122,6 +122,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
             <p aria-live="polite" className="text-sm text-subtle dark:text-slate-400">
               Onderwerp: {knelt ? `Waar het knelt: ${knelt.replace(/\.$/, '')}` : 'Waar het knelt'}
             </p>
+            <p className="text-sm text-subtle dark:text-slate-400">Je hoort binnen twee werkdagen van me.</p>
           </div>
 
           {/* For whoever prefers to write themselves: the address, and copy with a fallback to selecting it */}
