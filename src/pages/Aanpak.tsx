@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { Weglaten } from '../components/aanpak/Weglaten';
-import { Knelpunten } from '../components/Knelpunten';
 import { Rondgang } from '../components/Rondgang';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
@@ -13,7 +12,42 @@ import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { knelt: 0, werkwijze: 1, waarom: 2 } as const;
+const STOP = { verloop: 0, werkwijze: 1, waarom: 2, vragen: 3 } as const;
+
+// How an opdracht goes, in the order it happens.
+const stappen: [string, ReactNode][] = [
+  ['Een gesprek bij jou op de zaak', 'Vrijblijvend, over je werk en niet over techniek.'],
+  ['Een voorstel met een vaste prijs', 'Een eerste opdracht kost vanaf €\u00a0500, exclusief btw. Je weet vooraf waar je aan toe bent.'],
+  [
+    'Binnen twee weken een eerste versie',
+    'Met voorbeeldgegevens. Je ziet het en zegt wat klopt. Eén ronde aanpassen hoort erbij.',
+  ],
+  ['Iets wat je elke dag gebruikt', 'Een website, een programma of werk dat vanzelf gaat. Geen rapport.'],
+];
+
+// What a reader still wants to know before mailing, answered in a sentence or two each.
+const vragen: [string, ReactNode][] = [
+  [
+    'Moet ik verstand hebben van AI?',
+    'Nee. Je ziet wat er gemaakt is en zegt wat klopt. Over techniek hoeven we het niet te hebben.',
+  ],
+  [
+    'Wat gebeurt er met mijn gegevens?',
+    <>
+      Een eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die we
+      gebruiken, traint er niet mee. Meer daarover lees je bij{' '}
+      <Link href="/privacy" className="underline underline-offset-4">
+        privacy
+      </Link>
+      .
+    </>,
+  ],
+  ['Van wie is het?', 'Van jou, ook de code. Een ander kan het later dus ook overnemen.'],
+  [
+    'En als het eenmaal draait?',
+    'Wil je iets aanpassen of loopt er iets vast, dan vraag je het en krijg je vooraf een vaste prijs per klus. Een abonnement is niet nodig.',
+  ],
+];
 
 const PHONE = `(max-width: ${PHONE_MAX_WIDTH - 1}px)`;
 
@@ -24,8 +58,9 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
 
 /**
- * Hoe Studio Kopwerk werkt, as a short walk in the reader's order: where it pinches (the missie), how we work
- * (the werkwijze) and why (the visie). Each chapter is a row on the site's grid
+ * Hoe Studio Kopwerk werkt, as a short walk in the reader's order: how an opdracht goes, from the talk to what you use
+ * every day; how we work (the werkwijze); why (the visie); and the questions left before you mail. Where it pinches
+ * is on Begin, so it isn't repeated here. Each chapter is a row on the site's grid
  * (src/lib/raster.ts) with a hairline above, and every list uses the same row style. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
  * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
  */
@@ -76,17 +111,27 @@ export function Aanpak() {
       <div data-tekentafel-vertex aria-hidden="true" className="h-28 sm:h-12 shrink-0" />
 
       <Chapter
-        id="knelt"
+        id="verloop"
         number="01"
-        label="Waar het knelt"
-        title="Goed in je vak, vast in je systemen"
-        zoneRef={zone(STOP.knelt)}
-        markerRef={stop(STOP.knelt)}
+        label="Zo verloopt het"
+        title="Binnen twee weken iets wat je kunt gebruiken"
+        zoneRef={zone(STOP.verloop)}
+        markerRef={stop(STOP.verloop)}
       >
-        <p>
-          Je bent goed in je vak, maar loopt vast in het digitale eromheen. Wat we maken, hangt af van waar het knelt.
-        </p>
-        <Knelpunten />
+        {/* A real sequence, so a numbered list: the talk, the proposal, the first version, what you have at the end */}
+        <ol className="flex flex-col">
+          {stappen.map(([kop, tekst], index) => (
+            <li key={kop} className={`grid grid-cols-[2rem_minmax(0,1fr)] gap-x-4 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
+              <span className="font-display font-bold text-sm leading-relaxed tracking-wide-lg text-slate-900 dark:text-white">
+                {index + 1}
+              </span>
+              <span className="flex flex-col gap-1">
+                <span className="font-medium text-slate-900 dark:text-white">{kop}</span>
+                <span>{tekst}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
       </Chapter>
 
       <Chapter
@@ -99,26 +144,9 @@ export function Aanpak() {
       >
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
-        {/* In the order it happens: the talk, the proposal, the first version, real data only if you want, then what you have at the end */}
         <p>
-          Het begint met een vrijblijvend gesprek, bij jou op de zaak. Daarna krijg je een voorstel met een vaste prijs.
-          Een eerste opdracht kost vanaf €&nbsp;500, exclusief btw.
-        </p>
-        <p>
-          Dan maakt AI in korte tijd een eerste versie, met voorbeeldgegevens. Je hoeft er zelf geen verstand van te
-          hebben: je ziet het en zegt wat klopt.
-        </p>
-        <p>
-          Met echte gegevens werken we pas als jij dat wilt. De AI die we gebruiken, traint er niet mee. Meer daarover lees
-          je bij{' '}
-          <Link href="/privacy" className="underline underline-offset-4">
-            privacy
-          </Link>
-          .
-        </p>
-        <p>
-          Aan het eind heb je iets wat je elke dag gebruikt: een website, een programma of werk dat vanzelf gaat. Geen
-          rapport.
+          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt en jij beslist wat blijft. Er gaat niets naar
+          je klanten zonder dat jij het gezien hebt.
         </p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
@@ -163,6 +191,24 @@ export function Aanpak() {
           rest="Wat ertoe doet."
         />
         <p>Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
+      </Chapter>
+
+      <Chapter
+        id="vragen"
+        number="04"
+        label="Vragen"
+        title="Wat je wilt weten voor je mailt"
+        zoneRef={zone(STOP.vragen)}
+        markerRef={stop(STOP.vragen)}
+      >
+        <dl className="flex flex-col">
+          {vragen.map(([vraag, antwoord]) => (
+            <div key={vraag} className={`flex flex-col gap-1 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
+              <dt className="font-medium text-slate-900 dark:text-white">{vraag}</dt>
+              <dd>{antwoord}</dd>
+            </div>
+          ))}
+        </dl>
       </Chapter>
 
     </main>

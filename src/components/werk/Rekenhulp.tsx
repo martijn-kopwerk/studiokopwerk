@@ -60,7 +60,7 @@ export function Rekenhulp({ minuten }: { minuten: number }) {
             {uren}
           </span>
           <span className="text-lg sm:text-xl font-light tracking-wide-sm text-slate-700 dark:text-slate-300">
-            uur per jaar terug.
+            uur per jaar die je terug kunt krijgen.
           </span>
         </span>
         <span className="text-base text-slate-600 dark:text-slate-300 text-pretty">{vertaling(uren)}</span>

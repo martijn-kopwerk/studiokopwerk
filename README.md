@@ -9,11 +9,11 @@ Studio Kopwerk is een verfijnde, doordachte landingspagina met een rustige esthe
 ## 🚀 Tech Stack
 
 - **Framework:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool:** [Vite 6](https://vitejs.dev/)
+- **Build Tool:** [Vite 8](https://vitejs.dev/)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + Custom Design System (self-hosted `Syne` & `Plus Jakarta Sans` via Fontsource)
 - **Animations:** CSS for entrances, [Motion](https://motion.dev/) (`motion/react`, lazily loaded via `LazyMotion`) for layout and spring interactions
 - **Hosting:** [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/)
-- **UI Primitives & Icons:** [Base UI](https://base-ui.com/) (`@base-ui/react`) + [Lucide Icons](https://lucide.dev/)
+- **UI Primitives & Icons:** [Base UI](https://base-ui.com/) (`@base-ui/react`) + the design system's own Kopwerk line icons (`src/components/ui/Icon.tsx`)
 
 ---
 
@@ -91,14 +91,17 @@ studio-kopwerk/
 ├── src/
 │   ├── components/
 │   │   ├── layout/       # Header, Footer
-│   │   ├── ui/           # CapsuleButton, RollingText, Typography, Button, Dialog, MagneticWrapper
+│   │   ├── ui/           # CapsuleButton, RollingText, Typography, Button, Dialog, Icon, KopwerkLogo, MagneticWrapper
+│   │   ├── werk/         # ProjectCard, ProjectFilm, Rekenhulp, KleineDingen
 │   │   ├── AbstractBackground.tsx
 │   │   ├── ContactCard.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── hooks/            # Custom hooks (e.g. useTheme, useContact)
 │   ├── lib/              # Utility functions (cn), head tags, contact details, lazy Motion features
-│   ├── pages/            # One component per page (Home, Werk, NotFound)
+│   ├── pages/            # One component per page (Home, Aanpak, Werk, Over, Privacy, NotFound)
 │   ├── content/werk/     # The opdrachten on /werk, one folder each (see "Een opdracht toevoegen")
+│   ├── content/klein/    # Images for "Kleine dingen" on /werk
+│   ├── content/over/     # The portrait on Begin and /over
 │   ├── App.tsx           # The frame that stays put across pages
 │   ├── routes.tsx        # Every page: its path, head tags and component
 │   ├── entry-client.tsx  # Browser entry: hydrates the prerendered page
@@ -106,7 +109,8 @@ studio-kopwerk/
 │   ├── index.css         # Design system CSS variables & Tailwind imports
 │   └── types.ts          # TypeScript type definitions
 ├── scripts/
-│   └── prerender.mjs     # Writes one HTML file per page, 404.html and sitemap.xml
+│   ├── prerender.mjs     # Writes one HTML file per page, 404.html and sitemap.xml
+│   └── share-images.mjs  # Draws each page's share image in public/og/
 ├── public/
 │   ├── staticwebapp.config.json  # Azure SWA security headers, 404 page & routing
 │   └── theme-init.js     # Applies the theme before first paint

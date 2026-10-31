@@ -40,7 +40,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/aanpak',
       title: 'Aanpak · Studio Kopwerk',
       description:
-        'Hoe we werken: AI maakt snel een eerste versie, samen kijken we wat werkt en jij beslist wat blijft. Een vaste prijs, vanaf € 500 exclusief btw.',
+        'Hoe we werken: binnen twee weken een eerste versie, gemaakt met AI. Samen kijken we wat werkt en jij beslist wat blijft. Een vaste prijs, vanaf € 500 exclusief btw.',
     },
     Page: Aanpak,
     // The proof that it works, once /werk exists
