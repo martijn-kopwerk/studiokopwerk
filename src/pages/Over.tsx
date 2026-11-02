@@ -94,13 +94,25 @@ export function Over() {
         </p>
       </Row>
 
+      <Row id="mensen" title="Ik kijk eerst hoe mensen werken">
+        <p>
+          Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en
+          werken. Dat doe ik nog steeds, voordat ik iets maak.
+        </p>
+        <p>
+          Mijn eerste baan was bij een klantenservice. Ik was het eerste aanspreekpunt voor lastige vragen. Zo zag ik van
+          dichtbij waar mensen vastlopen.
+        </p>
+      </Row>
+
       <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
-          In tien jaar consultancy bij grote bedrijven in verschillende sectoren bepaalde ik wat er gemaakt werd en
-          waarom. Steeds zag ik hetzelfde: schermen
-          die ingewikkelder waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij
-          de mensen die het al druk hadden.
+          Daarna werkte ik ruim tien jaar bij grote bedrijven in verschillende sectoren, als consultant en als
+          productmanager. Ik bepaalde wat er gemaakt werd en waarom. Steeds zag ik hetzelfde: schermen die ingewikkelder
+          waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij de mensen die het
+          al druk hadden.
         </p>
+        <p>Het hoort andersom. Techniek moet mensen tijd, rust en werkplezier teruggeven.</p>
       </Row>
 
       <Row id="ervaring" title="Wat ik daar leerde, gun ik ook ondernemers">

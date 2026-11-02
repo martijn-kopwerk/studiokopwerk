@@ -51,7 +51,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/over',
       title: 'Over · Studio Kopwerk',
       description:
-        'Ik ben Martijn van Studio Kopwerk. Tien jaar ervaring bij grote bedrijven, nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
+        'Ik ben Martijn van Studio Kopwerk. Opgeleid als leraar, ruim tien jaar bij grote bedrijven, nu maak ik het digitale eenvoudig voor ondernemers, met AI.',
     },
     Page: Over,
     slot: { next: { href: '/aanpak', label: 'Lees hoe we werken' } },
