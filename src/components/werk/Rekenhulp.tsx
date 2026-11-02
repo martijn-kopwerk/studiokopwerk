@@ -3,13 +3,17 @@ import { useId, useState, type ChangeEvent } from 'react';
 // Working weeks in a year, after holidays.
 const WEKEN = 46;
 
+// Small numbers in running text are written as words, like everywhere else on the site.
+const woorden = ['nul', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf', 'twaalf'];
+const inWoorden = (n: number) => woorden[n] ?? String(n);
+
 /** What the hours come down to, in days or weeks you get back. */
 function vertaling(uren: number) {
   const weken = uren / 40;
-  if (weken >= 1.5) return `Dat zijn ruim ${Math.floor(weken)} werkweken die je aan je vak kunt besteden.`;
+  if (weken >= 1.5) return `Dat zijn ruim ${inWoorden(Math.floor(weken))} werkweken die je aan je vak kunt besteden.`;
   if (weken >= 0.75) return 'Dat is bijna een hele werkweek.';
   const dagen = Math.max(1, Math.round(uren / 8));
-  return dagen === 1 ? 'Dat is een werkdag die je terugkrijgt.' : `Dat zijn ${dagen} werkdagen die je terugkrijgt.`;
+  return dagen === 1 ? 'Dat is een werkdag die je terugkrijgt.' : `Dat zijn ${inWoorden(dagen)} werkdagen die je terugkrijgt.`;
 }
 
 /**

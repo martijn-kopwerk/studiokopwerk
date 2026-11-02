@@ -54,7 +54,7 @@ export function Over() {
             Martijn
           </h1>
           <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-            Ik help ondernemers die vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets wat je kunt{" "}
+            Ik help ondernemers die goed zijn in hun vak, maar vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets wat je kunt{" "}
             <em className="italic font-normal">gebruiken</em>.
           </Typography>
         </div>
@@ -90,13 +90,13 @@ export function Over() {
           ) : (
             "mijn eigen programma"
           )}
-          . Outlook hoef ik niet meer te openen. Lezen doe ik nog steeds zelf.
+          . Outlook hoef ik niet meer te openen.
         </p>
       </Row>
 
       <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
         <p>
-          Vanuit consultancy bepaal ik al tien jaar bij grote bedrijven in verschillende sectoren wat er gemaakt wordt en
+          In tien jaar consultancy bij grote bedrijven in verschillende sectoren bepaalde ik wat er gemaakt werd en
           waarom. Steeds zag ik hetzelfde: schermen
           die ingewikkelder waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij
           de mensen die het al druk hadden.
@@ -106,8 +106,8 @@ export function Over() {
       <Row id="ervaring" title="Wat ik daar leerde, gun ik ook ondernemers">
         <p>
           Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht. Ik neem die
-          ervaring mee, zonder de lange trajecten en vergaderingen. Maken kon ik altijd al, maar vaak waren er meerdere
-          mensen voor nodig. Met AI doe ik het nu zelf, in korte tijd.
+          ervaring mee, zonder de lange trajecten en vergaderingen. Maken kon ik altijd al, maar voor iets groters waren
+          vaak meerdere mensen nodig. Met AI doe ik het nu zelf, in korte tijd.
         </p>
         <p>
           Daarom begon ik Studio Kopwerk. Ik heb inmiddels zoveel gezien dat een kleine ingreep vaak al genoeg is om je
@@ -115,7 +115,7 @@ export function Over() {
         </p>
       </Row>
 
-      <Row id="verwachten" title="Je spreekt steeds met mij">
+      <Row id="verwachten" title="Je spreekt altijd met mij">
         <p>
           Het eerste gesprek kan bij jou op de zaak. Ik praat over je werk, niet over techniek.
         </p>

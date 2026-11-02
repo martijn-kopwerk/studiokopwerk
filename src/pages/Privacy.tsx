@@ -104,7 +104,7 @@ export function Privacy() {
       <Part id="rechten" title="Je gegevens blijven van jou">
         <p>
           Wil je weten wat ik van je heb, iets laten aanpassen of alles laten verwijderen? Mail naar{' '}
-          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Je hoort binnen een maand van mij.
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Je hoort binnen een maand van me.
         </p>
         <p>
           Kom je er met mij niet uit, dan kun je een klacht indienen bij de{' '}
