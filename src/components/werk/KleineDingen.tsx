@@ -12,7 +12,7 @@ export function KleineDingen() {
   return (
     <section
       aria-labelledby="kleine-dingen"
-      className="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-10 sm:gap-14 kopwerk-reveal"
+      className="pt-6 flex flex-col gap-8"
     >
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-x-16 lg:items-end">
         <div className="flex flex-col gap-4">
@@ -22,11 +22,11 @@ export function KleineDingen() {
           </Typography>
         </div>
         <Typography variant="lead" className="max-w-xl text-lg sm:text-lg md:text-xl lg:text-xl text-pretty">
-          Geen opdracht, wel echt werk. Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak.
+          Geen klantopdrachten, maar persoonlijke proeven. Hier probeer ik ideeën uit met AI.
         </Typography>
       </div>
 
-      <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid gap-6 md:grid-cols-2">
         {kleineDingen.map((ding) => (
           <li
             key={ding.titel}

@@ -28,9 +28,9 @@ export const shareImages: ShareImage[] = [
     name: 'aanpak',
     path: '/aanpak',
     eyebrow: 'Aanpak',
-    title: 'Wat ertoe doet',
+    title: 'Zo werken we samen',
     url: 'studiokopwerk.nl/aanpak',
-    alt: 'Aanpak van Studio Kopwerk: Wat ertoe doet.',
+    alt: 'Aanpak van Studio Kopwerk: Zo werken we samen.',
   },
   {
     name: 'werk',

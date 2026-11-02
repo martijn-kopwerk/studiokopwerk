@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
 import { ProjectBody, ProjectMedia, ProjectMeta, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
-import { KleineDingen } from '../components/werk/KleineDingen';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { cn } from '../lib/utils';
 
@@ -224,7 +223,7 @@ export function Werk() {
         ))}
       </ol>
 
-      <KleineDingen />
+
     </main>
   );
 }

@@ -13,11 +13,11 @@ describe('prerendering', () => {
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
 
-  it('walks home past where it pinches, who you talk to and the work, each with a way on', () => {
+  it('shows work before recognition, the maker and how to begin, with a way on from each', () => {
     const { html } = render('/');
     // The full stop is the amber dot, but a real one for screen readers and search
     expect(html).toMatch(/<h1[^>]*>Zien wat <em[^>]*>wérkt<\/em><span[^>]*><span class="sr-only">.<\/span>/);
-    const ids = ['knelt', 'martijn', 'werkwijze', ...(projects.length > 0 ? ['werk'] : [])];
+    const ids = [...(projects.length > 0 ? ['werk'] : []), 'knelt', 'martijn', 'werkwijze'];
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
@@ -28,7 +28,7 @@ describe('prerendering', () => {
     // The loop is a real list of the three steps; the frictions and their answers read without the script
     expect(html).toContain('aria-label="Hoe we werken"');
     expect(html).toContain('Jij beslist wat blijft.');
-    expect(html).toContain('Schermen die zonder uitleg werken.');
+    expect(html).toContain('Een voorbeeld dat je laat proberen hoe het eenvoudiger kan.');
   });
 
   it('renders the 404 page for unknown paths and keeps it out of search results', () => {
@@ -46,10 +46,10 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('walks in the reader\'s order, how it goes, how we work, why and the questions, ending in one call to action', () => {
+  it('answers practical questions before the method and philosophy, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
-    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Wat ertoe doet<\/h1>/i);
-    const ids = ['verloop', 'werkwijze', 'waarom', 'vragen'];
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Zo werken we samen<\/h1>/i);
+    const ids = ['verloop', 'vragen', 'werkwijze', 'waarom'];
     // Where it pinches is on Begin; Aanpak doesn't repeat it
     expect(html).not.toContain('aria-labelledby="knelt"');
     expect(html).toContain('vanaf €\u00a0500');
@@ -57,7 +57,8 @@ describe('aanpak', () => {
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
-    expect(html).toContain('aria-pressed="false"');
+    expect(html).toContain('Voor verder bouwen, online zetten en onderhouden maken we aparte afspraken.');
+    expect(html).toContain('Binnen twee weken na akkoord een eerste versie');
     expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
@@ -175,5 +176,13 @@ describe('over', () => {
     const over = buildRoutes([]).find((route) => route.meta.path === '/over');
     expect(over).toBeDefined();
     expect(over?.meta.noindex).toBeFalsy();
+  });
+
+  it('keeps personal experiments behind an optional disclosure, outside the business proof on Werk', () => {
+    const over = render('/over').html;
+    const werk = render('/werk').html;
+    expect(over).toMatch(/<details(?![^>]*\sopen)[^>]*>[\s\S]*Bekijk wat ik voor mezelf maak[\s\S]*Mate[\s\S]*Zuipwijs[\s\S]*<\/details>/);
+    expect(werk).not.toContain('Zuipwijs');
+    expect(werk).not.toContain('Wat ik tussendoor maak');
   });
 });

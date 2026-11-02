@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
-import { Weglaten } from '../components/aanpak/Weglaten';
 import { Rondgang } from '../components/Rondgang';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
@@ -12,24 +11,32 @@ import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { verloop: 0, werkwijze: 1, waarom: 2, vragen: 3 } as const;
+const STOP = { verloop: 0, vragen: 1, werkwijze: 2, waarom: 3 } as const;
 
 // How an opdracht goes, in the order it happens.
 const stappen: [string, ReactNode][] = [
-  ['Een gesprek bij jou op de zaak', 'Vrijblijvend, over je werk en niet over techniek.'],
-  ['Een voorstel met een vaste prijs', 'Een eerste opdracht kost vanaf €\u00a0500, exclusief btw. Je weet vooraf waar je aan toe bent.'],
+  ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak. Waar je ook onderneemt in Nederland. We praten over je werk.'],
+  ['Eén onderdeel kiezen', 'Je krijgt een voorstel met een vaste prijs vanaf €\u00a0500 exclusief btw. We spreken af wat je wilt proberen.'],
   [
-    'Binnen twee weken een eerste versie',
-    'Met voorbeeldgegevens. Je ziet het en zegt wat klopt. Eén ronde aanpassen hoort erbij.',
+    'Binnen twee weken na akkoord een eerste versie',
+    'Een werkend voorbeeld met voorbeeldgegevens. Je probeert het zelf en vertelt wat anders moet. Eén ronde aanpassen hoort erbij.',
   ],
-  ['Iets wat je echt gebruikt', 'Een website, een programma of werk dat vanzelf gaat. Geen rapport.'],
+  ['Daarmee kun je verder', 'Je houdt het voorbeeld en de bestanden waarmee het is gemaakt. Voor verder bouwen, online zetten en onderhouden maken we aparte afspraken.'],
 ];
 
 // What a reader still wants to know before mailing, answered in a sentence or two each.
 const vragen: [string, ReactNode][] = [
   [
+    'Wat krijg ik voor mijn geld?',
+    'Een prototype van één afgesproken onderdeel: een werkend voorbeeld om te proberen en van te leren. Bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal.',
+  ],
+  [
+    'Is het dan klaar voor mijn klanten of medewerkers?',
+    'Je krijgt eerst een voorbeeld om te proberen, met voorbeeldgegevens. Om het dagelijks te gebruiken is verdere uitwerking nodig. Soms kan ik daar ook bij helpen. Dat hangt af van de techniek en de afspraken met de ontwikkelaars die verder bouwen.',
+  ],
+  [
     'Moet ik verstand hebben van AI?',
-    'Nee. Je ziet wat er gemaakt is en zegt wat klopt. Over techniek hoeven we het niet te hebben.',
+    'Nee. We praten over jouw werk. Ik maak het voorbeeld en jij probeert of het duidelijker of gemakkelijker wordt.',
   ],
   [
     'Wat gebeurt er met mijn gegevens?',
@@ -42,10 +49,10 @@ const vragen: [string, ReactNode][] = [
       .
     </>,
   ],
-  ['Van wie is het?', 'Van jou, ook de code. Een ander kan het later dus ook overnemen.'],
+  ['Van wie is het?', 'Van jou. Je krijgt ook de bestanden waarmee het voorbeeld is gemaakt. Een ander kan er later dus op verder bouwen.'],
   [
-    'En als het eenmaal draait?',
-    'Wil je iets aanpassen of loopt er iets vast, dan vraag je het en krijg je vooraf een vaste prijs per klus. Een abonnement is niet nodig.',
+    'Wie zet het online en houdt het werkend?',
+    'Dat spreken we apart af: wat er nodig is, wie het oppakt en wat het kost. Verder bouwen, online zetten en onderhouden vallen buiten de prijs van het prototype. Afhankelijk van de techniek en de afspraken met ontwikkelaars kan ik daarbij helpen.',
   ],
 ];
 
@@ -99,22 +106,21 @@ export function Aanpak() {
           tabIndex={-1}
           className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
         >
-          Wat ertoe doet
+          Zo werken we samen
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Zien wat <em className="italic font-normal">wérkt</em>. Snel iets werkends in handen, in plaats van een plan
-          op papier.
+          Eerst een werkend voorbeeld. Je probeert het zelf en ontdekt wat je verder wilt laten bouwen.
         </Typography>
       </div>
 
       {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
-      <div data-tekentafel-vertex aria-hidden="true" className="h-28 sm:h-12 shrink-0" />
+      <div data-tekentafel-vertex aria-hidden="true" className="h-12 sm:h-12 shrink-0" />
 
       <Chapter
         id="verloop"
         number="01"
         label="Zo verloopt het"
-        title="Binnen twee weken iets wat je kunt gebruiken"
+        title="Van je vraag naar een werkend voorbeeld"
         zoneRef={zone(STOP.verloop)}
         markerRef={stop(STOP.verloop)}
       >
@@ -135,8 +141,26 @@ export function Aanpak() {
       </Chapter>
 
       <Chapter
-        id="werkwijze"
+        id="vragen"
         number="02"
+        label="Vragen"
+        title="Wat je wilt weten voor je mailt"
+        zoneRef={zone(STOP.vragen)}
+        markerRef={stop(STOP.vragen)}
+      >
+        <dl className="flex flex-col">
+          {vragen.map(([vraag, antwoord]) => (
+            <div key={vraag} className={`flex flex-col gap-1 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
+              <dt className="font-medium text-slate-900 dark:text-white">{vraag}</dt>
+              <dd>{antwoord}</dd>
+            </div>
+          ))}
+        </dl>
+      </Chapter>
+
+      <Chapter
+        id="werkwijze"
+        number="03"
         label="Hoe we werken"
         title="AI maakt, jij beslist"
         zoneRef={zone(STOP.werkwijze)}
@@ -145,9 +169,9 @@ export function Aanpak() {
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
         <p>
-          AI maakt in korte tijd een eerste versie. Samen kijken we wat werkt en jij beslist wat blijft. Er gaat niets naar
-          je klanten zonder dat jij het gezien hebt.
+          Ik kijk hoe je werk nu gaat en maak met AI een eerste versie. Samen proberen we of die doet wat je bedoelt. Jij beslist wat blijft.
         </p>
+        <p>Bij de afgesproken prijs hoort één ronde aanpassen. Wil je daarna meer proberen, dan spreken we dat apart af.</p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
           {projects.length > 0 ? (
@@ -166,52 +190,18 @@ export function Aanpak() {
 
       <Chapter
         id="waarom"
-        number="03"
+        number="04"
         label="Waarom zo"
         title="Techniek is pas goed als mensen er beter van worden"
         zoneRef={zone(STOP.waarom)}
         markerRef={stop(STOP.waarom)}
       >
         <p>
-          Iets maken is nog nooit zo makkelijk geweest. Een tekst, een programma, een eerste versie: met AI staat het er in
-          een middag.
+          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een voorbeeld dat je zelf kunt proberen.
         </p>
         <p>
-          Toch wordt het werk daar niet vanzelf beter van, zeker niet voor de mensen die ermee moeten werken. Er komen
-          meer schermen en meer stappen bij. Mensen passen zich aan de techniek aan.
+          Techniek moet het werk rustiger, duidelijker en fijner maken. Door eerst te proberen zie je wat helpt en wat je kunt weglaten.
         </p>
-        <p>
-          Volgens ons hoort het andersom: techniek moet het werk rustiger, duidelijker en fijner maken. Het echte werk is
-          zien wat ertoe doet en de rest durven weglaten.
-        </p>
-        {/* First the story, then the reader does it: strike out what piles up and what matters is left */}
-        <Weglaten
-          vraag="Probeer het zelf: wat blijft er over?"
-          items={['Meer schermen.', 'Meer stappen.']}
-          rest="Wat ertoe doet."
-        />
-        <p>
-          Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is. Daarom duurt een
-          eerste versie twee weken en geen middag.
-        </p>
-      </Chapter>
-
-      <Chapter
-        id="vragen"
-        number="04"
-        label="Vragen"
-        title="Wat je wilt weten voor je mailt"
-        zoneRef={zone(STOP.vragen)}
-        markerRef={stop(STOP.vragen)}
-      >
-        <dl className="flex flex-col">
-          {vragen.map(([vraag, antwoord]) => (
-            <div key={vraag} className={`flex flex-col gap-1 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
-              <dt className="font-medium text-slate-900 dark:text-white">{vraag}</dt>
-              <dd>{antwoord}</dd>
-            </div>
-          ))}
-        </dl>
       </Chapter>
 
     </main>
