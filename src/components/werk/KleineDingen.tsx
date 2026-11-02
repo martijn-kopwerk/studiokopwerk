@@ -1,10 +1,12 @@
 import { Typography } from '../ui/Typography';
 import { kleineDingen } from '../../lib/kleine-dingen';
 import { cn } from '../../lib/utils';
+import { KleinFilm } from './KleinFilm';
 
 /**
  * Kleine dingen, below the opdrachten on /werk: what Martijn makes in between. One short card each (the kind, the
- * name, two sentences and one detail as the image), quieter than an opdracht: no film, no number.
+ * name, two sentences and one detail as the image), quieter than an opdracht: no number, and at most a short silent
+ * loop in place of the image.
  */
 export function KleineDingen() {
   return (
@@ -36,13 +38,17 @@ export function KleineDingen() {
                 ding.grond === 'donker' ? 'bg-kopwerk-dark' : 'bg-white'
               )}
             >
-              <img
-                src={ding.beeld}
-                alt={ding.alt}
-                loading="lazy"
-                decoding="async"
-                className={cn('block size-full', ding.grond === 'donker' ? 'object-contain' : 'object-cover object-left-top')}
-              />
+              {ding.film ? (
+                <KleinFilm ding={{ ...ding, film: ding.film }} />
+              ) : (
+                <img
+                  src={ding.beeld}
+                  alt={ding.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className={cn('block size-full', ding.grond === 'donker' ? 'object-contain' : 'object-cover object-left-top')}
+                />
+              )}
             </div>
             <span className="text-xs font-semibold tracking-wide-xl uppercase text-amber-700 dark:text-amber-400">
               {ding.soort}

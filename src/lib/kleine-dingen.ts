@@ -1,5 +1,7 @@
 import mate from '../content/klein/mate.webp';
-import zuipwijs from '../content/klein/zuipwijs.webp';
+import zuipwijs from '../content/klein/zuipwijs-film.webp';
+import zuipwijsMp4 from '../content/klein/zuipwijs.mp4';
+import zuipwijsWebm from '../content/klein/zuipwijs.webm';
 import designSystem from '../content/klein/design-system.webp';
 
 /**
@@ -14,6 +16,8 @@ export interface KleinDing {
   alt: string;
   // The image's own background, so a detail with another ground sits well in its frame.
   grond: 'licht' | 'donker';
+  // Optional: a short silent loop that plays in place of the image (the image is its poster). Never with sound.
+  film?: { webm: string; mp4: string };
 }
 
 export const kleineDingen: KleinDing[] = [
@@ -32,8 +36,9 @@ export const kleineDingen: KleinDing[] = [
     tekst:
       'Zie in één oogopslag hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
     beeld: zuipwijs,
-    alt: 'Zuipwijs: een duel met Sanne om de meeste nuchtere dagen deze week. Jij 5, Sanne 4: je staat één nuchtere dag voor. Met fictieve waarden.',
+    alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je streak van 12 dagen, nooit je drankjes. Met fictieve waarden.',
     grond: 'donker',
+    film: { webm: zuipwijsWebm, mp4: zuipwijsMp4 },
   },
   {
     titel: 'Een huisstijl voor AI',
