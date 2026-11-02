@@ -22,7 +22,7 @@ const stappen: [string, ReactNode][] = [
     'Binnen twee weken een eerste versie',
     'Met voorbeeldgegevens. Je ziet het en zegt wat klopt. Eén ronde aanpassen hoort erbij.',
   ],
-  ['Iets wat je elke dag gebruikt', 'Een website, een programma of werk dat vanzelf gaat. Geen rapport.'],
+  ['Iets wat je echt gebruikt', 'Een website, een programma of werk dat vanzelf gaat. Geen rapport.'],
 ];
 
 // What a reader still wants to know before mailing, answered in a sentence or two each.
@@ -190,7 +190,10 @@ export function Aanpak() {
           items={['Meer schermen.', 'Meer stappen.']}
           rest="Wat ertoe doet."
         />
-        <p>Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is.</p>
+        <p>
+          Wat ertoe doet, zie je het snelst door het te maken, samen met de mensen voor wie het is. Daarom duurt een
+          eerste versie twee weken en geen middag.
+        </p>
       </Chapter>
 
       <Chapter

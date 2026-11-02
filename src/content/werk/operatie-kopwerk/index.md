@@ -19,7 +19,7 @@ film:
     alt: "Onder Kan weg een nieuwsbrief, met de knop Alles archiveren."
     tekst: "Wat weg kan, staat apart. Eén klik en het is opgeruimd."
   - beeld: ./film-4-antwoord.webp
-    alt: "Een antwoord in concept aan Jeroen Bos, met eronder de aanwijzing: zeg ja, we starten maandag 2 november."
+    alt: "Een antwoord in concept aan Jeroen Bos, met eronder de aanwijzing: zeg ja, we starten volgende week maandag."
     tekst: "AI schrijft het antwoord, ik stuur bij. Dat scheelt zo'n vijf minuten per mail."
     begin: "Bij mij scheelt het zo'n vijf minuten per mail."
     getal: "5 min"
@@ -31,4 +31,4 @@ film:
     tekst: "AI vertaalt de offerte. Opnieuw opmaken hoeft niet."
 ---
 
-Mijn eigen bedrijf was de eerste opdracht. Offertes, klanten, mail en facturen staan nu in één programma: Operatie Kopwerk. AI bouwde het en schrijft mee, ik beslis wat blijft.
+Mijn eigen bedrijf was de eerste opdracht. Offertes, klanten, mail en facturen zaten in losse programma's. Nu staan ze in één programma: Operatie Kopwerk. AI bouwde het en schrijft mee, ik beslis wat blijft.

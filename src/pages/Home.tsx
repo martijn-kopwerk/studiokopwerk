@@ -110,8 +110,8 @@ export function Home() {
               digitale eromheen.
             </Typography>
             <Typography variant="sublead" className="max-w-xl text-balance">
-              Wij maken het eenvoudig met AI: van de eerste aanvraag tot de factuur, met je website en de programma's die daarbij
-              horen.
+              Wij maken het eenvoudig met AI: je werk van de eerste aanvraag tot de factuur, je website en de programma's die
+              daarbij horen.
             </Typography>
           </div>
         </div>
@@ -134,13 +134,13 @@ export function Home() {
         align="start"
         {...at()}
       >
-        <p>Wat we maken, hangt af van waar het knelt.</p>
+        <p>Wat we maken hangt af van waar het knelt.</p>
         <p>Kies wat bij jou knelt. Dan zie je wat we ervoor maken.</p>
       </Block>
 
       <Block
         id="martijn"
-        title="Je spreekt steeds met mij"
+        title="Je spreekt altijd met mij"
         media={<Portret className="w-48 sm:w-64 lg:w-80 lg:self-center" />}
         {...at()}
       >

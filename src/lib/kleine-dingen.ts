@@ -36,12 +36,12 @@ export const kleineDingen: KleinDing[] = [
     grond: 'donker',
   },
   {
-    titel: 'Design system',
+    titel: 'Een huisstijl voor AI',
     soort: 'Huisstijl',
     tekst:
       'Een huisstijl die AI begrijpt: kleuren, letters, knoppen en toon op één plek. Zo komt elke offerte, presentatie en pagina in een paar minuten in je eigen merk.',
     beeld: designSystem,
-    alt: 'Het Kopwerk design system: de letters Syne en Plus Jakarta Sans, vijf kleuren en de knop Vertel waar het knelt.',
+    alt: 'De huisstijl van Kopwerk: de letters Syne en Plus Jakarta Sans, vijf kleuren en de knop Vertel waar het knelt.',
     grond: 'donker',
   },
 ];
