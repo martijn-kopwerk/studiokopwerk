@@ -78,7 +78,7 @@ export function Over() {
           Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en werken. Dat doe ik nog steeds, voordat ik iets maak.
         </p>
         <p>
-          Later werkte ik ruim tien jaar bij grote bedrijven, als consultant en productmanager. Ik bepaalde wat er gemaakt werd en waarom. Steeds zag ik hoe ingewikkelde schermen en werk met de hand mensen ophielden.
+          Al ruim vijftien jaar werk ik aan digitale dienstverlening: van rapportages en werkprocessen tot portalen voor medewerkers. Als adviseur en productmanager vertaal ik wat mensen nodig hebben naar duidelijke schermen en slimmere werkwijzen.
         </p>
       </Row>
 

@@ -163,7 +163,7 @@ export function Home() {
         {...at()}
       >
         <p>
-          Ik ben Martijn. Opgeleid als leraar en ruim tien jaar werkzaam bij grote bedrijven. Ik kijk eerst hoe mensen werken en maak dan een voorbeeld dat je zelf kunt proberen.
+          Ik ben Martijn. Al ruim vijftien jaar help ik organisaties hun digitale werk eenvoudiger te maken. Ik kijk eerst hoe mensen werken en maak dan een voorbeeld dat je zelf kunt proberen.
         </p>
         <p>Je mail komt bij mij binnen. Ik lees hem zelf.</p>
         <NextLink className="self-start" href="/over">Lees wie ik ben</NextLink>
