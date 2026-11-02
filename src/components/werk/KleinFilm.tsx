@@ -3,6 +3,7 @@ import { useReducedMotion } from 'motion/react';
 import { Icon } from '../ui/Icon';
 import { Button } from '../ui/button';
 import type { KleinDing } from '../../lib/kleine-dingen';
+import { cn } from '../../lib/utils';
 
 /**
  * A kleine ding's short loop, in place of its image: always silent (the files carry no sound at all), playing only
@@ -50,7 +51,7 @@ export function KleinFilm({ ding }: { ding: KleinDing & Required<Pick<KleinDing,
         <source src={ding.film.mp4} type="video/mp4" />
       </video>
       {/* Hidden by CSS rather than by the hook, so the prerendered page and the browser agree */}
-      <div className="dark absolute right-2 bottom-2 motion-reduce:hidden">
+      <div className={cn('absolute right-2 bottom-2 motion-reduce:hidden', ding.grond === 'donker' && 'dark')}>
         <Button aria-label={paused ? 'Speel af' : 'Pauzeer'} onClick={() => setPaused(!paused)}>
           {paused ? <Icon name="play" className="size-5" /> : <Icon name="pause" className="size-5" />}
         </Button>

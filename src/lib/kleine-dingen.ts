@@ -1,4 +1,6 @@
-import mate from '../content/klein/mate.webp';
+import mate from '../content/klein/mate-film.webp';
+import mateMp4 from '../content/klein/mate.mp4';
+import mateWebm from '../content/klein/mate.webm';
 import zuipwijs from '../content/klein/zuipwijs-film.webp';
 import zuipwijsMp4 from '../content/klein/zuipwijs.mp4';
 import zuipwijsWebm from '../content/klein/zuipwijs.webm';
@@ -27,8 +29,9 @@ export const kleineDingen: KleinDing[] = [
     tekst:
       'Een trainings- en voedingscoach op de gegevens van je Garmin. De code rekent, AI schrijft de woorden. Niets gaat naar je horloge zonder dat jij het goedkeurt.',
     beeld: mate,
-    alt: 'Mate zegt: Goed hersteld. Vandaag gaan de drempelintervallen gewoon door. Met fictieve waarden.',
+    alt: 'Mate zegt: Rustig aan vandaag. Je sliep kort, dus de snelle intervallen worden een rustige loop van 40 minuten. Jij tikt op Pas aan en het staat op je horloge. Daarna: Mate denkt mee. Mate rekent het na. Jij beslist. Met fictieve waarden.',
     grond: 'licht',
+    film: { webm: mateWebm, mp4: mateMp4 },
   },
   {
     titel: 'Zuipwijs',
