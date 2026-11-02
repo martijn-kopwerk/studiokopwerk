@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import { Icon } from '../ui/Icon';
 import type { Project } from '../../lib/projects';
@@ -13,6 +13,12 @@ const EASE = [0.19, 1, 0.22, 1] as const;
 // Stage and captions share one width: as wide as fits, but never so tall that the captions drop off the screen.
 // Phones get an upright stage.
 const WIDTH: CSSProperties = { maxWidth: 'min(72rem, calc((100dvh - 17rem) * 1.6))' };
+// A moving film carries its text in the picture, so its stage can take the captions' room too.
+const VIDEO_WIDTH: CSSProperties = { maxWidth: 'min(80rem, calc((100dvh - 11rem) * 16 / 9))' };
+// Under this width the dialog shows the upright film (4:5), above it the wide one (16:9); same as Tailwind's `sm`.
+const WIDE = '(min-width: 640px)';
+// Stepping through by hand shows each scene once it has settled: this long before the next scene starts.
+const SETTLED = 0.9;
 
 interface ProjectFilmProps {
   project: Project;
@@ -28,27 +34,76 @@ interface ProjectFilmProps {
  */
 export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
   const scenes = project.film ?? [];
+  const video = project.video;
   const reduceMotion = useReducedMotion();
   const { openContact, preloadContact } = useContact();
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [wide, setWide] = useState(true);
+  // How far the current scene of a moving film has played, 0 to 1 (drives its progress bar).
+  const [part, setPart] = useState(0);
+  // The video element mounts with the dialog, a moment after `open`; play once it is there and knows its length.
+  const [ready, setReady] = useState(false);
+  const player = useRef<HTMLVideoElement>(null);
   const scene = scenes[index];
   const ended = index >= scenes.length;
   const timing = { '--scene': `${SCENE_SECONDS}s`, animationPlayState: playing ? 'running' : 'paused' } as CSSProperties;
 
+  const startOf = (i: number) => scenes[i]?.from ?? 0;
+  const endOf = (i: number) => scenes[i + 1]?.from ?? player.current?.duration ?? startOf(i) + SCENE_SECONDS;
+
   useEffect(() => {
     if (!open) return;
     setIndex(0);
+    setPart(0);
     setPlaying(!reduceMotion);
+    setWide(window.matchMedia(WIDE).matches);
+    setReady(false);
   }, [open, reduceMotion]);
 
   // Fetch the next scene while this one plays.
   useEffect(() => {
     const next = scenes[index + 1];
-    if (open && next) new Image().src = next.image;
-  }, [open, index, scenes]);
+    if (open && next && !video) new Image().src = next.image;
+  }, [open, index, scenes, video]);
 
-  const go = (to: number) => setIndex(Math.max(0, Math.min(to, scenes.length)));
+  // The moving film: play or pause with the button, and follow its time to know the scene. Always muted.
+  useEffect(() => {
+    const el = player.current;
+    if (!video || !el || !ready) return;
+    el.muted = true;
+    if (playing && !ended) el.play().catch(() => setPlaying(false));
+    else el.pause();
+  }, [video, playing, ended, ready]);
+
+  // While it plays, ask for its time every frame, so the bar moves smoothly.
+  useEffect(() => {
+    if (!video || !playing || ended) return;
+    let frame = 0;
+    const follow = () => {
+      const el = player.current;
+      if (el && el.readyState > 0) {
+        const t = el.currentTime;
+        let i = 0;
+        while (i + 1 < scenes.length && t >= startOf(i + 1)) i++;
+        setIndex((now) => (now === scenes.length ? now : i));
+        setPart(Math.min(1, Math.max(0, (t - startOf(i)) / (endOf(i) - startOf(i)))));
+      }
+      frame = requestAnimationFrame(follow);
+    };
+    frame = requestAnimationFrame(follow);
+    return () => cancelAnimationFrame(frame);
+  }, [video, playing, ended, scenes]);
+
+  const go = (to: number) => {
+    const i = Math.max(0, Math.min(to, scenes.length));
+    setIndex(i);
+    const el = player.current;
+    if (!video || !el || i >= scenes.length) return;
+    // Playing, a scene starts from its beginning; stepping by hand, it shows once it has settled.
+    el.currentTime = playing ? startOf(i) : Math.max(startOf(i), endOf(i) - SETTLED);
+    setPart(playing ? 0 : 1);
+  };
 
   const handleKeys = (e: KeyboardEvent) => {
     const to = { ArrowRight: index + 1, ArrowLeft: index - 1 }[e.key];
@@ -59,7 +114,16 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
 
   const replay = () => {
     setIndex(0);
+    setPart(0);
+    if (player.current) player.current.currentTime = 0;
     setPlaying(true);
+  };
+
+  // Paused by hand at the start, a moving film shows its first scene settled rather than an empty frame.
+  const showFirst = () => {
+    const el = player.current;
+    if (el && !playing && el.currentTime === 0) el.currentTime = Math.max(0, endOf(0) - SETTLED);
+    setReady(true);
   };
 
   // Close the film first, so focus can go back before the contact card takes it.
@@ -84,11 +148,35 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
 
         <div className="flex-1 min-h-0 flex items-center justify-center">
           <div
-            style={WIDTH}
-            className="relative w-full aspect-[4/5] sm:aspect-[16/10] overflow-hidden bg-kopwerk-dark"
+            style={video ? VIDEO_WIDTH : WIDTH}
+            className={cn(
+              'relative w-full overflow-hidden bg-kopwerk-dark',
+              video ? 'aspect-[4/5] sm:aspect-video' : 'aspect-[4/5] sm:aspect-[16/10]'
+            )}
           >
+            {video && (
+              // The film itself has no sound at all; muted is only a promise to the browser.
+              <video
+                key={wide ? 'wide' : 'upright'}
+                ref={player}
+                muted
+                playsInline
+                disablePictureInPicture
+                preload="auto"
+                aria-hidden="true"
+                onLoadedMetadata={showFirst}
+                onEnded={() => {
+                  setIndex(scenes.length);
+                  setPlaying(false);
+                }}
+                className={cn('absolute inset-0 size-full object-contain transition-opacity duration-500 ease-kopwerk', ended && 'opacity-0')}
+              >
+                <source src={(wide ? video.wide : video.upright).webm} type="video/webm" />
+                <source src={(wide ? video.wide : video.upright).mp4} type="video/mp4" />
+              </video>
+            )}
             <AnimatePresence initial={false}>
-              {scene ? (
+              {video && scene ? null : scene ? (
                 <m.div
                   key={index}
                   className="absolute inset-0 p-4 sm:p-10"
@@ -137,7 +225,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
 
         <div style={WIDTH} className="mx-auto w-full flex flex-col gap-4">
           {/* Announced when the viewer steps through; while it plays by itself it stays quiet */}
-          <div aria-live={playing ? 'off' : 'polite'} className="min-h-[5.5rem] sm:min-h-[4.5rem]">
+          <div aria-live={playing ? 'off' : 'polite'} className={video ? 'sr-only' : 'min-h-[5.5rem] sm:min-h-[4.5rem]'}>
             <AnimatePresence mode="wait" initial={false}>
               <m.p
                 key={index}
@@ -177,10 +265,10 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                         key={i === index ? 'now' : 'other'}
                         className={cn(
                           'block h-full origin-left bg-amber-400',
-                          i === index ? 'animate-film-progress' : i < index ? 'scale-x-100' : 'scale-x-0'
+                          i === index && !video ? 'animate-film-progress' : i < index ? 'scale-x-100' : i > index && 'scale-x-0'
                         )}
-                        style={i === index ? timing : undefined}
-                        onAnimationEnd={i === index ? () => go(index + 1) : undefined}
+                        style={i === index ? (video ? { transform: `scaleX(${part})` } : timing) : undefined}
+                        onAnimationEnd={i === index && !video ? () => go(index + 1) : undefined}
                       />
                     </span>
                   </button>
