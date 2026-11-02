@@ -34,10 +34,10 @@
   /* Hero entrance: fade + rise. Pair with `motion-safe:` and an [animation-delay:…] */
   --animate-rise: kopwerk-rise 0.9s var(--ease-kopwerk) both;
   /* The signature amber dot's slow pulse */
-  --animate-pulse-ring: kopwerk-pulse-ring 3s ease-out infinite;
+  --animate-pulse-ring: kopwerk-pulse-ring 3s var(--ease-kopwerk) infinite;
   /* Background: the amber dot landing on the K's vertex, and the ambient light drifting on touch screens */
   --animate-dot-land: kopwerk-dot-land 0.8s var(--ease-kopwerk) 1.9s both;
-  --animate-glow-drift: kopwerk-glow-drift 28s ease-in-out infinite alternate;
+  --animate-glow-drift: kopwerk-glow-drift 28s var(--ease-kopwerk) infinite alternate;
   /* An opdracht's film: each scene drifts slowly towards its focus while its progress bar fills.
      Both run for --scene seconds and pause together (animation-play-state). */
   --animate-film-zoom: kopwerk-film-zoom var(--scene, 6s) var(--ease-kopwerk) both;

@@ -24,6 +24,7 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
     <>
       <button
         type="button"
+        aria-label={`Bekijk hoe het werkt: ${project.title}`}
         onClick={() => {
           setMounted(true);
           setOpen(true);
@@ -33,12 +34,12 @@ function FilmTrigger({ project, children }: { project: Project; children: ReactN
         className="group relative block w-full text-left rounded-2xl"
       >
         <span className="block overflow-hidden rounded-2xl">{children}</span>
-        {/* Top right, over the screen's own chrome rather than its text; on phones only the play disc */}
+        {/* The visible label explains that the image opens a demonstration, also on phones. */}
         <span className="absolute right-3 top-3 sm:right-4 sm:top-4 inline-flex items-center gap-3 rounded-full bg-kopwerk-dark/85 p-2 sm:pr-5 text-xs font-semibold tracking-wide-xl uppercase text-white shadow-xl shadow-kopwerk-dark/20 backdrop-blur-sm">
           <span className="flex size-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-400 group-focus-visible:bg-amber-400">
             <Icon name="play" className="size-3.5 translate-x-px transition-colors duration-500 ease-kopwerk group-hover:text-slate-950 group-focus-visible:text-slate-950" />
           </span>
-          <span className="sr-only sm:not-sr-only">Bekijk hoe het werkt</span>
+          <span className="pr-2 sm:pr-0">Bekijk hoe het werkt</span>
         </span>
       </button>
       {/* If the film can't load (offline, or a stale tab after a deploy), the click does nothing rather than break the page */}

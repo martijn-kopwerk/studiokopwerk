@@ -22,7 +22,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  "Goed in je vak, maar vastgelopen in het digitale eromheen? Studio Kopwerk maakt het eenvoudig met AI, voor ondernemers in heel Nederland: werk dat steeds terugkomt, je website en je programma's.";
+  'Probeer hoe je website, portaal of werk met AI eenvoudiger kan. Martijn maakt een werkend voorbeeld, vanaf € 500 exclusief btw. Je hoeft zelf niets van techniek te weten.';
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
@@ -40,7 +40,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/aanpak',
       title: 'Aanpak · Studio Kopwerk',
       description:
-        'Hoe we werken: binnen twee weken een eerste versie, gemaakt met AI. Samen kijken we wat werkt en jij beslist wat blijft. Een vaste prijs, vanaf € 500 exclusief btw.',
+        'Vanaf € 500 exclusief btw een werkend voorbeeld van één onderdeel. Binnen twee weken na akkoord een eerste versie. Voor verder bouwen maken we aparte afspraken.',
     },
     Page: Aanpak,
     // The proof that it works, once /werk exists

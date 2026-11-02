@@ -37,7 +37,7 @@ svg { position: absolute; inset: 0; }
 line { stroke: rgb(226 232 240); }
 .text { position: absolute; left: 324px; right: 72px; top: 50%; transform: translateY(-50%); display: grid; gap: 38px; }
 .eyebrow { font: 500 19px/1 Jakarta; letter-spacing: .5em; text-transform: uppercase; color: #94a3b8; }
-.title { font: 400 ${title.length > 12 ? 80 : 92}px/1 Syne; letter-spacing: .1em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.title { font: 400 ${title.replace(/<[^>]*>/g, '').length > 16 ? 60 : title.length > 12 ? 80 : 92}px/1 Syne; letter-spacing: .1em; text-transform: uppercase; color: #fff; white-space: nowrap; }
 .title em { font-style: italic; }
 .dot { display: inline-block; width: 17px; height: 17px; margin-left: 6px; border-radius: 50%; background: #f59e0b; box-shadow: 0 0 17px rgba(245,158,11,.6); }
 .url { position: absolute; left: 324px; bottom: 44px; font: 600 17px/1 Jakarta; letter-spacing: .2em; text-transform: uppercase; color: #94a3b8; }

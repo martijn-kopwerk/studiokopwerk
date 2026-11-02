@@ -8,6 +8,8 @@ import { cn } from '../lib/utils';
 
 export interface Knelpunt {
   knelt: string;
+  // Short website labels; the original positioning sentence remains the mail subject.
+  label?: string;
   maken: string;
   // The sketch of what we make, shown when the friction is chosen.
   schets?: SchetsNaam;
@@ -18,21 +20,24 @@ export interface Knelpunt {
 export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
-    maken: 'Werk dat logisch loopt, van aanvraag tot factuur.',
+    label: 'Er zitten te veel stappen in je werk.',
+    maken: 'Een werkend voorbeeld van een kortere weg, van aanvraag tot factuur.',
     schets: 'stroom',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", maken: 'Eén plek waar je alles terugvindt.', schets: 'plek' },
+  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's.", maken: 'Een werkend voorbeeld van één plek waar je alles terugvindt.', schets: 'plek' },
   {
     knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
-    maken: 'Een website waarop klanten meteen zien wat je doet.',
+    label: 'Je website legt niet goed uit wat je doet.',
+    maken: 'Een voorbeeldwebsite waarop je kunt proberen of klanten begrijpen wat je doet.',
     schets: 'website',
   },
   {
     knelt: 'Werk dat elke week opnieuw met de hand gaat.',
-    maken: 'AI die het werk doet dat steeds terugkomt. Jij beslist wat ermee gebeurt.',
+    label: 'Je doet elke week hetzelfde werk met de hand.',
+    maken: 'Een proef waarin AI een terugkerende taak overneemt. Jij kijkt of het klopt.',
     schets: 'herhaling',
   },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', maken: 'Schermen die zonder uitleg werken.', schets: 'scherm' },
+  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig.', maken: 'Een voorbeeld dat je laat proberen hoe het eenvoudiger kan.', schets: 'scherm' },
 ];
 
 /**
@@ -42,10 +47,10 @@ export const knelpunten: Knelpunt[] = [
 export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
   return (
     <dl className={`border-b ${hairline}`}>
-      {items.map(({ knelt, maken }) => (
+      {items.map(({ knelt, label, maken }) => (
         <div key={knelt} className={cn('flex flex-col gap-1.5 py-5 border-t', hairline)}>
           <dt className="text-sm sm:text-base leading-relaxed tracking-wide-sm text-subtle dark:text-slate-400 text-pretty">
-            {knelt}
+            {label ?? knelt}
           </dt>
           <dd className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
             <Icon
@@ -81,7 +86,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   return (
     <div className="flex flex-col items-start gap-6">
       <ul className={`w-full border-b ${hairline}`}>
-        {items.map(({ knelt, maken, schets }, index) => {
+        {items.map(({ knelt, label, maken, schets }, index) => {
           const open = gekozen === index;
           return (
             <li
@@ -110,7 +115,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                       : 'border-slate-500 dark:border-slate-400 group-hover:border-slate-900 dark:group-hover:border-white',
                   )}
                 />
-                {knelt}
+                {label ?? knelt}
               </button>
               <div id={`${id}-${index}`} hidden={!open} className="pl-8 pb-8">
                 <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
