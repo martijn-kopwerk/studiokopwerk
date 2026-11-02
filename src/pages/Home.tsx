@@ -24,12 +24,9 @@ const markerRight = 'lg:left-[calc(-50cqw-4.5rem)]';
 // When the dot has landed on the K's vertex (animate-dot-land: 1.9s delay, 0.8s), it flies on to the full stop.
 const LANDED_MS = 2700;
 
-// The werkwijze block (the loop) is the third stop of the walk.
-const WERKWIJZE = 2;
-
 /**
- * Begin is the front door and a short walk: the promise, then where it pinches (recognition first), who you talk to,
- * how we work and what he made, each a block of its own shape with one quiet way on to the page behind it, then the call to action again.
+ * Begin is the front door and a short walk: the promise, a concrete example, where it pinches, who you talk to
+ * and how to begin, each a block of its own shape with one quiet way on to the page behind it, then the call to action again.
  *
  * The page's one moment (design system, "de tekentafel"): the amber dot lands on the K's vertex, then flies to the end
  * of "Zien wat wérkt" and stays there as its full stop. Screen readers hear a real full stop; before the script runs
@@ -39,6 +36,7 @@ const WERKWIJZE = 2;
 export function Home() {
   const { active, markers, zone, stop } = useReadingStops();
   const werk = projects.find((project) => project.film) ?? projects[0];
+  const werkwijzeIndex = werk ? 3 : 2;
   // A saving in minutes (per mail) can be made personal: how many hours a year is that for you?
   const minuten = werk?.begin?.figure?.unit === 'min' ? Number.parseInt(werk.begin.figure.value, 10) : NaN;
 
@@ -61,7 +59,7 @@ export function Home() {
     !inHero,
     inHero,
     // The loop has its own dot: while it is the block being read, the reading dot steps aside (one dot walking)
-    active === WERKWIJZE
+    active === werkwijzeIndex
   );
 
   // The blocks in reading order; Werk only while there's an opdracht to show (see routes.tsx).
@@ -75,7 +73,7 @@ export function Home() {
     <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pb-8">
       <section
         aria-labelledby="hero-title"
-        className="min-h-[calc(100dvh-10rem)] sm:min-h-[calc(100dvh-14rem)] flex flex-col items-start sm:items-center justify-center text-left sm:text-center pb-12"
+        className="flex flex-col items-start sm:items-center justify-center text-left sm:text-center pt-8 sm:pt-16 pb-10 sm:pb-16"
       >
         <div className="w-full flex flex-col items-start sm:items-center gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:20px]">
           <Typography variant="eyebrow" as="p" className="motion-safe:animate-rise [--rise-from:-10px] [animation-delay:100ms]">
@@ -100,74 +98,28 @@ export function Home() {
               />
             </span>
           </h1>
-          {/* The hero line in two steps, word for word: who it is for, then what you get */}
+          {/* What you can ask for, with prototype explained before it is used as a term. */}
           <div className="flex flex-col items-start sm:items-center gap-3 sm:gap-4 motion-safe:animate-rise [--rise-from:10px] [animation-delay:250ms]">
             <Typography
               variant="lead"
               className="max-w-2xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-balance text-slate-800 dark:text-slate-200"
             >
-              Voor ondernemers die goed zijn in hun vak, van installateur tot accountantskantoor, maar vastlopen in het
-              digitale eromheen.
+              Een duidelijkere website of minder werk met de hand. Ik maak een werkend voorbeeld dat je zelf kunt proberen.
             </Typography>
             <Typography variant="sublead" className="max-w-xl text-balance">
-              Wij maken het eenvoudig met AI: je werk van de eerste aanvraag tot de factuur, je website en de programma's die
-              daarbij horen.
+              Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
             </Typography>
           </div>
         </div>
 
         {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
-        <div data-tekentafel-vertex aria-hidden="true" className="self-stretch h-16 sm:h-12 md:h-14 shrink-0" />
+        <div data-tekentafel-vertex aria-hidden="true" className="self-stretch h-10 sm:h-12 shrink-0" />
 
         <div className="motion-safe:animate-rise [--rise-from:15px] [animation-delay:400ms]">
           <ContactButton />
         </div>
+        <NextLink href="/aanpak" className="mt-6">Bekijk wat je krijgt</NextLink>
       </section>
-
-      {/* Right after the promise: the reader recognises his own problem first, then meets who solves it */}
-      <Block
-        id="knelt"
-        title="Goed in je vak, vast in je systemen"
-        media={<KnelpuntKiezer />}
-        mediaSide="right"
-        mediaFirst={false}
-        align="start"
-        {...at()}
-      >
-        <p>Wat we maken hangt af van waar het knelt.</p>
-        <p>Kies wat bij jou knelt. Dan zie je wat we ervoor maken.</p>
-      </Block>
-
-      <Block
-        id="martijn"
-        title="Je spreekt altijd met mij"
-        media={<Portret className="w-48 sm:w-64 lg:w-80 lg:self-center" />}
-        {...at()}
-      >
-        <p>
-          Ik ben Martijn. Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages
-          maken. Ik liet de computer het werk doen. Dat scheelde een dag per week.
-        </p>
-        <p>Je mail komt bij mij binnen. Ik lees hem zelf.</p>
-        <NextLink className="self-start" href="/over">Lees wie ik ben</NextLink>
-      </Block>
-
-      <Block
-        id="werkwijze"
-        title="AI maakt, jij beslist"
-        display
-        media={<Rondgang className="mx-auto lg:mx-0 lg:ml-auto" />}
-        mediaSide="right"
-        mediaFirst={false}
-        {...at()}
-      >
-        <p>
-          AI maakt in korte tijd een eerste versie. Je hoeft er zelf geen verstand van te hebben: je ziet het en zegt wat
-          klopt.
-        </p>
-        <p>Er gaat niets naar je klanten zonder dat jij het gezien hebt.</p>
-        <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
-      </Block>
 
       {werk && (
         <Block id="werk" title={werk.title} media={<ProjectMedia project={werk} still={werk.begin} />} {...at()}>
@@ -186,6 +138,53 @@ export function Home() {
         </Block>
       )}
 
+      {/* A concrete example first; then recognition, the maker and how to begin */}
+      <Block
+        id="knelt"
+        title="Wat wil je eenvoudiger maken?"
+        media={<KnelpuntKiezer />}
+        mediaSide="right"
+        mediaFirst={false}
+        align="start"
+        {...at()}
+      >
+        <p>Ik maak prototypes: werkende voorbeelden die je zelf kunt proberen. Wat we maken hangt af van waar het knelt.</p>
+        <dl className="flex flex-col gap-5">
+          <div><dt className="font-medium text-slate-900 dark:text-white">Een duidelijke website of een prettig portaal</dt><dd>Een portaal is een eigen plek voor je klanten of medewerkers. Probeer hoe zij hun weg vinden en een taak afmaken.</dd></div>
+          <div><dt className="font-medium text-slate-900 dark:text-white">Minder werk met de hand</dt><dd>Probeer hoe een terugkerende taak vanzelf kan gaan, zoals gegevens overnemen of een eerste offerte schrijven.</dd></div>
+          <div><dt className="font-medium text-slate-900 dark:text-white">AI een vaste plek in je werk geven</dt><dd>Begin met één taak en ontdek wat AI kan doen en waar jij blijft beslissen.</dd></div>
+        </dl>
+      </Block>
+
+      <Block
+        id="martijn"
+        title="Je spreekt altijd met mij"
+        media={<Portret className="w-48 sm:w-64 lg:w-80 lg:self-center" />}
+        {...at()}
+      >
+        <p>
+          Ik ben Martijn. Al ruim vijftien jaar help ik organisaties hun digitale werk eenvoudiger te maken. Ik kijk eerst hoe mensen werken en maak dan een voorbeeld dat je zelf kunt proberen.
+        </p>
+        <p>Je mail komt bij mij binnen. Ik lees hem zelf.</p>
+        <NextLink className="self-start" href="/over">Lees wie ik ben</NextLink>
+      </Block>
+
+      <Block
+        id="werkwijze"
+        title="AI maakt, jij beslist"
+        display
+        media={<Rondgang className="mx-auto lg:mx-0 lg:ml-auto" />}
+        mediaSide="right"
+        mediaFirst={false}
+        {...at()}
+      >
+        <p>
+          We kiezen samen één onderdeel. Ik werk je vraag uit en maak met AI een eerste versie. Jij probeert die en vertelt wat klopt en wat anders moet.
+        </p>
+        <p>Vanaf € 500 exclusief btw. Binnen twee weken na akkoord een eerste versie, met één ronde aanpassen.</p>
+        <p>Je krijgt een voorbeeld om te proberen. Wil je ermee verder? Dan spreken we apart af wat er nodig is en wie dat oppakt.</p>
+        <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
+      </Block>
 
     </main>
   );

@@ -1,5 +1,15 @@
 # Studio Kopwerk — Brand Identity, Design System & Agent Style Guide
 
+## Website-uitwerking, 2 november 2026
+
+Martijn heeft het aanbod voor deze website aangescherpt: werkende voorbeelden (prototypes) van websites en portalen, minder handmatig werk en een eerste stap om AI in het dagelijkse werk te gebruiken. Leg *prototype* uit voordat je de term gebruikt. Schrijf geen volledig opgeleverd of beheerd product toe aan een prototype-opdracht.
+
+Vanaf € 500 exclusief btw gaat het om één afgesproken onderdeel. Binnen twee weken na akkoord een eerste versie en één ronde aanpassen. Verdere uitwerking voor dagelijks gebruik, hosting en beheer vallen buiten die prijs. Daarover worden aparte afspraken gemaakt; soms kan Martijn daarbij helpen, afhankelijk van de techniek en afspraken met ontwikkelaars. Gebruik op de site gewone woorden: *verder bouwen, online zetten en onderhouden*.
+
+Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning; de bestaande positioneringszinnen blijven als mailonderwerp beschikbaar. Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
+
+Deze keuzes zijn met Martijn in de chat bevestigd. De externe design-systembron kon in deze sessie niet worden gelezen of aangepast. De wijzigingen die daar nog vastgelegd moeten worden staan in `docs/ux-review/2026-11-02-uitwerking.md`; dit is geen claim dat de externe bron al is bijgewerkt.
+
 > **Design system first.** The definitive source for the Studio Kopwerk brand is the design system: https://claude.ai/artifact/8m9zeziNGjkdFoJCX2w3Vi. This file is the website's translation of it into this codebase, plus what only the website has (de tekentafel, §5F). Where this file disagrees with the design system, the design system wins and this file should be corrected.
 
 ---

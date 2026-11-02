@@ -7,6 +7,7 @@ These instructions define the design system, copywriting voice, and UX philosoph
 Known places where the code still differs from the design system are listed in the newest `docs/ux-review/` file ("Repo wijkt af van design system"); align them when you touch that code.
 
 ## 1. Brand Identity & UX Philosophy
+- **Website-aanbod, bevestigd op 2 november 2026:** prototypes van websites en portalen, minder handmatig werk proberen en AI een vaste plek in het dagelijkse werk geven. Leg een prototype uit als een werkend voorbeeld dat je zelf kunt proberen. Vanaf € 500 exclusief btw voor één afgesproken onderdeel, binnen twee weken na akkoord een eerste versie en één ronde aanpassen. Verder bouwen, online zetten en onderhouden vallen buiten de prototypeprijs; soms kan Martijn daarbij helpen, afhankelijk van de techniek en de afspraken met ontwikkelaars. Spreek dat apart af. Een gesprek kan online of bij de ondernemer op de zaak, in heel Nederland. De reviewbare uitwerking en nog over te nemen externe DS-keuzes staan in `docs/ux-review/2026-11-02-uitwerking.md`.
 - **Identity:** Studio Kopwerk helpt ondernemers en bedrijven die goed zijn in hun vak, maar vastlopen in het digitale eromheen, hun werk eenvoudiger, mooier en fijner te maken. AI doet het maakwerk, jij beslist wat blijft. Toegankelijk, bescheiden, doordacht en zonder poeha.
 - **Vibe:** Rustig, minimalistisch, verfijnd en doordacht.
 - **Anti-Slop Design:** No generic SaaS templates. No standard 3-column grids with boring icons. Use extreme white space, high-contrast layouts, and bespoke micro-interactions.
@@ -57,7 +58,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Micro-interactions:** Rolling-text on hover/focus via `<RollingText>` (`src/components/ui/RollingText.tsx`), or `<RollingLetters>` for one large line. Don't hand-roll the two-span pattern.
 - **The call to action:** `<ContactButton>` (magnetic capsule, `aria-haspopup="dialog"`, opens the contact card). Don't rebuild it per page.
 - **How a page ends:** the footer carries the page's `Slot`: the route's `slot.line` and `slot.next` (`src/routes.tsx`), the capsule and "Of mail zelf" with the address. Pages don't add a closing section of their own.
-- **The contact card** (`src/components/ContactCard.tsx`) offers the frictions plus "Iets anders"; mail links go through `mailtoHref(knelt?)` (`src/lib/contact.ts`) so the subject is always "Waar het knelt" or "Waar het knelt: …".
+- **The contact card** (`src/components/ContactCard.tsx`) starts with the mail action and copyable address. The frictions plus "Iets anders" are optional help in a closed disclosure. Focus starts on the mail action; choosing a friction returns there. Mail links go through `mailtoHref(knelt?)` (`src/lib/contact.ts`) so the subject is always "Waar het knelt" or "Waar het knelt: …".
 - **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`), the design system's Kopwerk line icons. No `lucide-react` or other icon sets.
 - **Radius:** only `rounded-2xl` and `rounded-full`.
 - **Focus:** one rule for the whole site in `src/index.css`: a 2px solid outline, 2px offset, `amber-600` on light and `amber-400` on dark (the design system's `focus`). Don't add focus rings or `outline-none` to interactive elements; only headings that receive focus after navigation opt out.

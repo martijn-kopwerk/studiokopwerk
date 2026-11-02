@@ -11,7 +11,7 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 
 // Syne ships 400–800; 400 (font-normal) is its lightest weight.
 const baseStyles = {
-  // One statement per page, a line from the positionering (design system: `display`). Never a title.
+  // One statement per page: a positioning line or Martijn's core sentence for that page. Never a title.
   display: "font-display font-medium text-display tracking-display text-slate-900 dark:text-white text-balance",
   h1: "font-display font-normal text-[clamp(2.5rem,10vw,7.5rem)] tracking-wide-md sm:tracking-wide-lg uppercase leading-none text-slate-900 dark:text-white whitespace-nowrap",
   h2: "font-display font-medium text-2xl sm:text-4xl leading-8 sm:leading-10 tracking-heading text-slate-900 dark:text-white",

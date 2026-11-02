@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link } from 'wouter';
 import { Typography } from '../components/ui/Typography';
 import { Portret } from '../components/Portret';
 import { useAmberDot } from '../hooks/useAmberDot';
-import { projects } from '../lib/projects';
+import { KleineDingen } from '../components/werk/KleineDingen';
 import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
@@ -54,8 +53,7 @@ export function Over() {
             Martijn
           </h1>
           <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-            Ik help ondernemers die goed zijn in hun vak, maar vastlopen in het digitale eromheen. Met AI maak ik in korte tijd iets wat je kunt{" "}
-            <em className="italic font-normal">gebruiken</em>.
+            Ik ben Martijn. Ik help je uitzoeken hoe je website, portaal of dagelijkse werk eenvoudiger kan. Door een voorbeeld te maken dat je zelf kunt proberen.
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
@@ -69,91 +67,44 @@ export function Over() {
       {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
       <div data-tekentafel-vertex aria-hidden="true" className="h-16 sm:h-12 shrink-0" />
 
-      {/* The page's one statement (design system: display): the sentence that gives the most trust */}
-      <p className={`relative sm:ml-14 py-10 sm:py-16 border-t ${hairline} font-display font-medium text-display tracking-display text-slate-900 dark:text-white text-balance kopwerk-reveal`}>
+      {/* A personal assurance, kept compact so experience and practical expectations stay close */}
+      <p className={`relative sm:ml-14 py-10 sm:py-16 border-t ${hairline} font-display font-medium text-3xl sm:text-4xl leading-snug tracking-heading text-slate-900 dark:text-white text-balance kopwerk-reveal`}>
         <span ref={statement} aria-hidden="true" className={cn(marker, 'top-[calc(2.5rem+0.5lh-0.4375rem)] sm:top-[calc(4rem+0.5lh-0.4375rem)]')} />
         Je mail komt bij mij binnen. Ik lees hem zelf.
       </p>
 
-      <Row id="begin" title="Het begon met een rapportage">
-        <p>
-          Aan het begin van mijn loopbaan zag ik een collega elke week met de hand dezelfde rapportages maken. Dat kon
-          handiger, dacht ik. Ik leerde mezelf hoe en liet de computer het werk doen. Dat scheelde een dag werk per week.
-        </p>
-        <p>
-          Dat doe ik nog steeds, ook bij mijn eigen werk. Onlangs nog met mijn mail: die handel ik nu af met hulp van AI, in{" "}
-          {/* Operatie Kopwerk, the opdracht on /werk, which only exists while there's an opdracht to show */}
-          {projects.length > 0 ? (
-            <Link href="/werk" className="underline underline-offset-4">
-              mijn eigen programma
-            </Link>
-          ) : (
-            "mijn eigen programma"
-          )}
-          . Outlook hoef ik niet meer te openen.
-        </p>
-      </Row>
-
       <Row id="mensen" title="Ik kijk eerst hoe mensen werken">
         <p>
-          Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en
-          werken. Dat doe ik nog steeds, voordat ik iets maak.
+          Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en werken. Dat doe ik nog steeds, voordat ik iets maak.
         </p>
         <p>
-          Mijn eerste baan was bij een klantenservice. Ik was het eerste aanspreekpunt voor lastige vragen. Zo zag ik van
-          dichtbij waar mensen vastlopen.
+          Al ruim vijftien jaar werk ik aan digitale dienstverlening: van rapportages en werkprocessen tot portalen voor medewerkers. Als adviseur en productmanager vertaal ik wat mensen nodig hebben naar duidelijke schermen en slimmere werkwijzen.
         </p>
       </Row>
 
-      <Row id="gezien" title="Ik zag hoe techniek het werk zwaarder kan maken">
+      <Row id="ervaring" title="Je merkt pas wat helpt als je het probeert">
         <p>
-          Daarna werkte ik ruim tien jaar bij grote bedrijven in verschillende sectoren, als consultant en als
-          productmanager. Ik bepaalde wat er gemaakt werd en waarom. Steeds zag ik hetzelfde: schermen die ingewikkelder
-          waren dan nodig en stappen met de hand die het werk ophielden. Het extra werk kwam terecht bij de mensen die het
-          al druk hadden.
-        </p>
-        <p>Het hoort andersom. Techniek moet mensen tijd, rust en werkplezier teruggeven.</p>
-      </Row>
-
-      <Row id="ervaring" title="Wat ik daar leerde, gun ik ook ondernemers">
-        <p>
-          Een ondernemer heeft meestal niemand in huis die het digitale eromheen al eens heeft ingericht. Ik neem die
-          ervaring mee, zonder de lange trajecten en vergaderingen. Maken kon ik altijd al, maar voor iets groters waren
-          vaak meerdere mensen nodig. Met AI doe ik het nu zelf, in korte tijd.
+          Aan het begin van mijn loopbaan zag ik een collega elke week dezelfde rapportages maken. Ik liet de computer het werk doen. Dat scheelde een dag per week.
         </p>
         <p>
-          Daarom begon ik Studio Kopwerk. Ik heb inmiddels zoveel gezien dat een kleine ingreep vaak al genoeg is om je
-          verder te helpen.
+          Met Studio Kopwerk breng ik die manier van kijken naar ondernemers. We kiezen één onderdeel en ik maak met AI een werkend voorbeeld. Jij probeert of het duidelijker wordt en of het je werk gemakkelijker maakt.
         </p>
       </Row>
 
       <Row id="verwachten" title="Je spreekt altijd met mij">
         <p>
-          Het eerste gesprek kan bij jou op de zaak. Ik praat over je werk, niet over techniek.
+          Het eerste gesprek kan online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk. Je hoeft niets van techniek te weten of al een oplossing te hebben.
         </p>
         <p>Ik neem weinig opdrachten tegelijk aan. Wie met mij werkt, krijgt mijn aandacht.</p>
+        <p>Je krijgt een werkend voorbeeld om te proberen. Wil je verder bouwen, dan bespreken we wat er nodig is en wie dat oppakt. Soms kan ik daarbij helpen, afhankelijk van de techniek en de afspraken met ontwikkelaars.</p>
       </Row>
 
-      <Row id="tussendoor" title="Tussendoor maak ik dingen voor mezelf">
-        <p>
-          Kleine proeven met AI, om te zien wat werkt voordat ik het voor jou maak. Ik sport veel: voetbal, padel,
-          hardlopen en krachttraining. Om dat te combineren zonder blessures maakte ik Mate, een coach voor training en
-          voeding op de gegevens van een Garmin. Met Zuipwijs daag je vrienden uit voor een duel: wie haalt de meeste
-          nuchtere dagen?
-        </p>
-        {/* Kleine dingen sit on /werk, which only exists while there's an opdracht to show */}
-        {projects.length > 0 && (
-          <p>
-            <Link href="/werk#kleine-dingen" className="underline underline-offset-4">
-              Bekijk wat ik tussendoor maak
-            </Link>
-          </p>
-        )}
-      </Row>
-
-      <Row id="naam" title="Kopwerk staat voor denkwerk en voor op kop rijden">
-        <p>Kopwerk is het menselijke denkwerk, met je kop. En het is op kop rijden: voorop blijven met wat AI kan.</p>
-      </Row>
+      <details className={`sm:ml-14 py-8 border-t ${hairline}`}>
+        <summary className="cursor-pointer rounded-2xl py-3 font-display font-medium text-xl sm:text-2xl tracking-heading text-slate-900 dark:text-white">
+          Bekijk wat ik voor mezelf maak
+        </summary>
+        <KleineDingen />
+      </details>
 
     </main>
   );

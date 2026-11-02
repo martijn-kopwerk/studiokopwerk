@@ -27,7 +27,7 @@ export const kleineDingen: KleinDing[] = [
     titel: 'Mate',
     soort: 'Persoonlijke coach',
     tekst:
-      'Een trainings- en voedingscoach op de gegevens van je Garmin. De code rekent, AI schrijft de woorden. Niets gaat naar je horloge zonder dat jij het goedkeurt.',
+      'Een persoonlijke coach die gegevens van mijn sporthorloge gebruikt voor een trainingsvoorstel. AI schrijft de uitleg. Ik beslis wat er naar mijn horloge gaat.',
     beeld: mate,
     alt: 'Mate zegt: Rustig aan vandaag. Je sliep kort, dus de snelle intervallen worden een rustige loop van 40 minuten. Jij tikt op Pas aan en het staat op je horloge. Daarna: Mate denkt mee. Mate rekent het na. Jij beslist. Met fictieve waarden.',
     grond: 'licht',
@@ -39,7 +39,7 @@ export const kleineDingen: KleinDing[] = [
     tekst:
       'Zie in één oogopslag hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
     beeld: zuipwijs,
-    alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je streak van 12 dagen, nooit je drankjes. Met fictieve waarden.',
+    alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je reeks van 12 dagen, nooit je drankjes. Met fictieve waarden.',
     grond: 'donker',
     film: { webm: zuipwijsWebm, mp4: zuipwijsMp4 },
   },
