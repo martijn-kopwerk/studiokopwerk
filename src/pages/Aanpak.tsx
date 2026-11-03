@@ -16,32 +16,34 @@ const STOP = { verloop: 0, vragen: 1, werkwijze: 2, waarom: 3 } as const;
 // How an opdracht goes, in the order it happens.
 const stappen: [string, ReactNode][] = [
   ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak. Waar je ook onderneemt in Nederland. We praten over je werk.'],
-  ['Eén onderdeel kiezen', 'Je krijgt een voorstel met een vaste prijs vanaf €\u00a0500 exclusief btw. We spreken af wat je wilt proberen.'],
   [
-    'Binnen twee weken na akkoord een eerste versie',
-    'Een werkend voorbeeld met voorbeeldgegevens. Je probeert het zelf en vertelt wat anders moet. Eén ronde aanpassen hoort erbij.',
+    'Samen kiezen waar het knelt',
+    'We kiezen één ding dat je nu tijd of ergernis kost. Ik maak een proefversie van de oplossing, zodat je ziet of het werkt. Je krijgt vooraf een voorstel met een vaste prijs, vanaf €\u00a0500 exclusief btw.',
   ],
-  ['Daarmee kun je verder', 'Je houdt het voorbeeld en de bestanden waarmee het is gemaakt. Voor verder bouwen, online zetten en onderhouden maken we aparte afspraken.'],
+  [
+    'Binnen twee weken een proefversie',
+    'Binnen twee weken na akkoord maak ik de proefversie, met verzonnen gegevens. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan.',
+  ],
+  [
+    'Werkt het? Dan maken we het af',
+    'De proefversie is van jou, met alles waarmee hij gemaakt is. Voor dagelijks gebruik spreken we samen af wat nodig is en wat het kost.',
+  ],
 ];
 
 // What a reader still wants to know before mailing, answered in a sentence or two each.
 const vragen: [string, ReactNode][] = [
   [
-    'Wat krijg ik voor mijn geld?',
-    'Een prototype van één afgesproken onderdeel: een werkend voorbeeld om te proberen en van te leren. Bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal.',
-  ],
-  [
-    'Is het dan klaar voor mijn klanten of medewerkers?',
-    'Je krijgt eerst een voorbeeld om te proberen, met voorbeeldgegevens. Om het dagelijks te gebruiken is verdere uitwerking nodig. Soms kan ik daar ook bij helpen. Dat hangt af van de techniek en de afspraken met de ontwikkelaars die verder bouwen.',
+    'Wat heb ik na twee weken in handen?',
+    'Een proefversie van de oplossing die echt werkt, bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal. Je klikt erdoorheen, probeert het met je eigen werk in gedachten en laat het aan je team zien. Er staan nog verzonnen gegevens in. Zo weet je wat werkt, voordat je meer laat maken.',
   ],
   [
     'Moet ik verstand hebben van AI?',
-    'Nee. We praten over jouw werk. Ik maak het voorbeeld en jij probeert of het duidelijker of gemakkelijker wordt.',
+    'Nee. We praten over jouw werk. Ik maak de proefversie en jij probeert of je werk er duidelijker of gemakkelijker van wordt.',
   ],
   [
     'Wat gebeurt er met mijn gegevens?',
     <>
-      Een eerste versie maken we met voorbeeldgegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die we
+      Een proefversie maken we met verzonnen gegevens. Met echte gegevens werken we pas als jij dat wilt. De AI die we
       gebruiken, traint er niet mee. Meer daarover lees je bij{' '}
       <Link href="/privacy" className="underline underline-offset-4">
         privacy
@@ -49,10 +51,10 @@ const vragen: [string, ReactNode][] = [
       .
     </>,
   ],
-  ['Van wie is het?', 'Van jou. Je krijgt ook de bestanden waarmee het voorbeeld is gemaakt. Een ander kan er later dus op verder bouwen.'],
+  ['Van wie is het?', 'Van jou. Je krijgt ook de bestanden waarmee de proefversie is gemaakt. Een ander kan er later dus op verder bouwen.'],
   [
-    'Wie zet het online en houdt het werkend?',
-    'Dat spreken we apart af: wat er nodig is, wie het oppakt en wat het kost. Verder bouwen, online zetten en onderhouden vallen buiten de prijs van het prototype. Afhankelijk van de techniek en de afspraken met ontwikkelaars kan ik daarbij helpen.',
+    'En als ik het echt wil gebruiken?',
+    'Dan maken we het af voor elke dag: met je eigen gegevens, bereikbaar voor je klanten of medewerkers en met iemand die het bijhoudt. Wat dat vraagt en wat het kost, spreken we apart af. Werk je al met een ontwikkelaar? Dan bouwt die verder op de proefversie en ik help bij de overdracht. Zo niet, dan kijken we samen wat er nodig is.',
   ],
 ];
 
@@ -109,7 +111,7 @@ export function Aanpak() {
           Zo werken we samen
         </h1>
         <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-          Eerst een werkend voorbeeld. Je probeert het zelf en ontdekt wat je verder wilt laten bouwen.
+          Eerst proberen, dan beslissen. Je test zelf een werkende proefversie en ziet wat die je oplevert.
         </Typography>
       </div>
 
@@ -120,11 +122,11 @@ export function Aanpak() {
         id="verloop"
         number="01"
         label="Zo verloopt het"
-        title="Van je vraag naar een werkend voorbeeld"
+        title="Van knelpunt naar een proefversie die werkt"
         zoneRef={zone(STOP.verloop)}
         markerRef={stop(STOP.verloop)}
       >
-        {/* A real sequence, so a numbered list: the talk, the proposal, the first version, what you have at the end */}
+        {/* A real sequence, so a numbered list: the talk, choosing what pinches, the proefversie, finishing it */}
         <ol className="flex flex-col">
           {stappen.map(([kop, tekst], index) => (
             <li key={kop} className={`grid grid-cols-[2rem_minmax(0,1fr)] gap-x-4 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
@@ -169,9 +171,8 @@ export function Aanpak() {
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
         <p>
-          Ik kijk hoe je werk nu gaat en maak met AI een eerste versie. Samen proberen we of die doet wat je bedoelt. Jij beslist wat blijft.
+          Ik kijk hoe je werk nu gaat en maak met AI een proefversie. Samen kijken we of die doet wat je bedoelt. Jij zegt wat beter kan, ik pas het aan en jij beslist wat blijft.
         </p>
-        <p>Bij de afgesproken prijs hoort één ronde aanpassen. Wil je daarna meer proberen, dan spreken we dat apart af.</p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
           {projects.length > 0 ? (
@@ -197,7 +198,7 @@ export function Aanpak() {
         markerRef={stop(STOP.waarom)}
       >
         <p>
-          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een voorbeeld dat je zelf kunt proberen.
+          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een proefversie die je zelf kunt proberen.
         </p>
         <p>
           Techniek moet het werk rustiger, duidelijker en fijner maken. Door eerst te proberen zie je wat helpt en wat je kunt weglaten.

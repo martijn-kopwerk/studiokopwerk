@@ -1,10 +1,10 @@
 # Studio Kopwerk — Brand Identity, Design System & Agent Style Guide
 
-## Website-uitwerking, 2 november 2026
+## Website-uitwerking, 2 en 3 november 2026
 
-Martijn heeft het aanbod voor deze website aangescherpt: werkende voorbeelden (prototypes) van websites en portalen, minder handmatig werk en een eerste stap om AI in het dagelijkse werk te gebruiken. Leg *prototype* uit voordat je de term gebruikt. Schrijf geen volledig opgeleverd of beheerd product toe aan een prototype-opdracht.
+Wat Martijn maakt heet op de site een **proefversie**: een proefversie van de oplossing (nooit van het probleem), met **verzonnen gegevens**. Niet *prototype*, *werkend voorbeeld* of *voorbeeldgegevens* (bevestigd op 3 november; staat ook in het design system, `voice.md`). Schrijf geen volledig opgeleverd of beheerd product toe aan een proefversie.
 
-Vanaf € 500 exclusief btw gaat het om één afgesproken onderdeel. Binnen twee weken na akkoord een eerste versie en één ronde aanpassen. Verdere uitwerking voor dagelijks gebruik, hosting en beheer vallen buiten die prijs. Daarover worden aparte afspraken gemaakt; soms kan Martijn daarbij helpen, afhankelijk van de techniek en afspraken met ontwikkelaars. Gebruik op de site gewone woorden: *verder bouwen, online zetten en onderhouden*.
+Vanaf € 500 exclusief btw. Vertel het in de volgorde waarin het gebeurt: "Binnen twee weken maak ik de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan." Tel geen rondes. Daarna: "Werkt het? Dan maken we het af." Wie verder bouwt staat één keer, op Aanpak: "Werk je al met een ontwikkelaar? Dan bouwt die verder op de proefversie en ik help bij de overdracht. Zo niet, dan kijken we samen wat er nodig is." Geen *online zetten*; zeg *echt gebruiken, met je eigen gegevens en voor je klanten of medewerkers*. Geen "soms kan ik helpen, afhankelijk van…".
 
 Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning; de bestaande positioneringszinnen blijven als mailonderwerp beschikbaar. Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
 
@@ -255,7 +255,7 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 
 ### G. Een film bij een opdracht (`/werk`)
 
-The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). It never plays on the card itself.
+The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). With a silent video (`filmpje:`), the film plays in the card on `/werk` itself (`ProjectVideo`: silent, only in view, looping, pause button, a poster frame `film.webp` / `film-staand.webp` beside the video, nothing moves with reduced motion), with the capsule below it to open it large. Begin keeps a still from the film; on phones its capsule sits below the image, never over it.
 
 * **Scenes, not video:** each scene is a still image from a demo with example data (never real client data or company details) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About seven seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
 * **One detail per scene, never a whole screen:** crop each image to the one thing the caption is about (the menu, two mails, one draft, one cover) and show it whole and large on the dark stage, with room around it. A full screen of interface is a wall of text.

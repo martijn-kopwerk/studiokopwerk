@@ -24,10 +24,11 @@ export interface FilmScene {
 }
 
 // A moving film in place of the scenes' stills: one silent video per shape (wide for screens, upright for phones),
-// each as WebM with an MP4 of the same name beside it.
+// each as WebM with an MP4 of the same name beside it, and optionally a WebP of the same name as its poster (one frame
+// from the film, shown before it plays and to anyone who asked for less motion).
 export interface FilmVideo {
-  wide: { webm: string; mp4: string };
-  upright: { webm: string; mp4: string };
+  wide: { webm: string; mp4: string; poster?: string };
+  upright: { webm: string; mp4: string; poster?: string };
 }
 
 export interface Project {
@@ -184,7 +185,7 @@ export function parseProject(
       const mp4 = webm.replace(/\.webm$/, '.mp4');
       if (!webm.endsWith('.webm')) problems.push(`"filmpje": "${key}" moet een .webm-bestand zijn`);
       else if (!images[webm] || !images[mp4]) problems.push(`"filmpje": ${webm} en ${mp4} moeten allebei in de map van deze opdracht staan`);
-      return { webm: images[webm] ?? '', mp4: images[mp4] ?? '' };
+      return { webm: images[webm] ?? '', mp4: images[mp4] ?? '', poster: images[webm.replace(/\.webm$/, '.webp')] };
     };
     if (!film) problems.push('"filmpje" kan alleen naast "film": de scènes zeggen waar elk deel begint');
     video = { wide: pick('liggend'), upright: pick('staand') };

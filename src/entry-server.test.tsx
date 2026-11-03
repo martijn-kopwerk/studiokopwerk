@@ -28,7 +28,7 @@ describe('prerendering', () => {
     // The loop is a real list of the three steps; the frictions and their answers read without the script
     expect(html).toContain('aria-label="Hoe we werken"');
     expect(html).toContain('Jij beslist wat blijft.');
-    expect(html).toContain('Een voorbeeld dat je laat proberen hoe het eenvoudiger kan.');
+    expect(html).toContain('Een proefversie van schermen die zonder uitleg werken.');
   });
 
   it('renders the 404 page for unknown paths and keeps it out of search results', () => {
@@ -57,8 +57,10 @@ describe('aanpak', () => {
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
-    expect(html).toContain('Voor verder bouwen, online zetten en onderhouden maken we aparte afspraken.');
-    expect(html).toContain('Binnen twee weken na akkoord een eerste versie');
+    expect(html).toContain('Werkt het? Dan maken we het af');
+    expect(html).not.toContain('online zetten');
+    expect(html).not.toContain('prototype');
+    expect(html).toContain('Binnen twee weken na akkoord maak ik de proefversie');
     expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');
@@ -89,7 +91,8 @@ describe('header and footer', () => {
     // The hero, the slot and the compact bar (hidden until you scroll back up): nothing in between
     expect(html.split('aria-haspopup="dialog"').length - 1).toBe(3);
     if (projects.length > 0) expect(render('/werk').html).toContain('Hier is nog plek voor');
-    expect(render('/over').html).toContain('Je mail komt bij mij binnen. Ik lees hem zelf.');
+    expect(render('/over').html).toContain('Je mail komt bij mij binnen en ik lees hem zelf.');
+    if (projects.length > 0) expect(render('/werk').html).toContain('Op de tekentafel');
   });
 });
 

@@ -25,9 +25,9 @@ export interface KleinDing {
 export const kleineDingen: KleinDing[] = [
   {
     titel: 'Mate',
-    soort: 'Persoonlijke coach',
+    soort: 'Training en voeding',
     tekst:
-      'Een persoonlijke coach die gegevens van mijn sporthorloge gebruikt voor een trainingsvoorstel. AI schrijft de uitleg. Ik beslis wat er naar mijn horloge gaat.',
+      'Ik sport veel en wil dat blessurevrij doen. Daarom maakte ik een coach voor training en voeding, op de gegevens van je sporthorloge. AI schrijft de uitleg. Jij beslist wat je ermee doet.',
     beeld: mate,
     alt: 'Mate zegt: Rustig aan vandaag. Je sliep kort, dus de snelle intervallen worden een rustige loop van 40 minuten. Jij tikt op Pas aan en het staat op je horloge. Daarna: Mate denkt mee. Mate rekent het na. Jij beslist. Met fictieve waarden.',
     grond: 'licht',
