@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
-import { ProjectBody, ProjectMedia, ProjectMeta, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { ProjectBody, ProjectMeta, ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { Tekentafel } from '../components/werk/Tekentafel';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { cn } from '../lib/utils';
 
@@ -76,7 +77,7 @@ export function Werk() {
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">
-          Elke opdracht kort verteld: de vraag, wat ik maakte en wat het opleverde.
+          Wat ik maakte en wat het opleverde.
         </Typography>
       </div>
 
@@ -88,7 +89,7 @@ export function Werk() {
         >
           {/* The dot's place: in the margin beside the card, on the reading line of the page */}
           <span ref={singleMarker} aria-hidden="true" className="absolute left-4 top-[3.35rem] size-3.5" />
-          <ProjectMedia project={single} still={single.begin} />
+          <ProjectShow project={single} />
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <h2
@@ -185,7 +186,7 @@ export function Werk() {
       )}
 
       {/* Phones and tablets: every opdracht in full */}
-      <ol className="lg:hidden mt-12 border-b border-slate-200 dark:border-slate-800">
+      <ol className="lg:hidden mt-12">
         {projects.map((project, index) => (
           <li
             key={project.slug}
@@ -223,7 +224,25 @@ export function Werk() {
         ))}
       </ol>
 
-
+      {/* Work in progress, drawn as a sketch on the drafting table: honest that client work is coming, without
+          inventing any of it. Rendered once for every screen size. */}
+      <section
+        aria-labelledby="op-de-tekentafel"
+        className="mt-4 lg:mt-16 sm:ml-14 max-w-3xl flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8 p-6 sm:p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"
+      >
+        <Tekentafel className="w-full max-w-72 sm:w-64 shrink-0" />
+        <div className="flex flex-col gap-3">
+          <h2
+            id="op-de-tekentafel"
+            className="font-display font-medium text-xl sm:text-2xl leading-snug tracking-heading text-balance text-slate-900 dark:text-white"
+          >
+            Op de tekentafel
+          </h2>
+          <p className="text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
+            Ik werk nu aan opdrachten voor andere ondernemers. Zodra ze af zijn en de klant het goed vindt, staan ze hier.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }

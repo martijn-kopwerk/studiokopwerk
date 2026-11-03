@@ -4,7 +4,7 @@ import { cn } from '../../lib/utils';
 import { KleinFilm } from './KleinFilm';
 
 /**
- * Kleine dingen, below the opdrachten on /werk: what Martijn makes in between. One short card each (the kind, the
+ * Kleine dingen, in a closed disclosure on Over: what Martijn makes in between. One short card each (the kind, the
  * name, two sentences and one detail as the image), quieter than an opdracht: no number, and at most a short silent
  * loop in place of the image.
  */

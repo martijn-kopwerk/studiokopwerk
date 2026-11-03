@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type Ref } from 'react';
 import { Typography } from '../components/ui/Typography';
 import { Portret } from '../components/Portret';
 import { useAmberDot } from '../hooks/useAmberDot';
@@ -26,7 +26,7 @@ export function Over() {
 
   // The dot rests in the margin beside the eyebrow; the footer takes it over at the end.
   // Phones and tablets: beside the eyebrow, on the reading line. Wide screens put the eyebrow in the right column,
-  // beside the portrait, so there the dot rests in the margin beside the page's statement instead.
+  // beside the portrait, so there the dot rests in the margin beside the first row's heading instead.
   useAmberDot(() => (wide ? statement.current : intro.current), `over-${wide}`, true);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export function Over() {
             Martijn
           </h1>
           <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-            Ik ben Martijn. Ik help je uitzoeken hoe je website, portaal of dagelijkse werk eenvoudiger kan. Door een voorbeeld te maken dat je zelf kunt proberen.
+            Ik ben Martijn. Ik help je uitzoeken hoe je website, portaal of dagelijkse werk eenvoudiger kan, met een proefversie die je zelf kunt proberen.
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
@@ -61,19 +61,20 @@ export function Over() {
           <p className="max-w-sm text-sm leading-relaxed tracking-wide-sm text-subtle dark:text-slate-400 text-pretty">
             Ik woon in Haren, net onder Groningen. Langskomen kan in heel Nederland.
           </p>
+          <a
+            href="https://www.linkedin.com/in/martijnfieten/"
+            rel="me"
+            className="self-start text-sm font-medium tracking-wide-sm text-slate-900 dark:text-white underline underline-offset-4"
+          >
+            Bekijk mijn LinkedIn
+          </a>
         </div>
       </div>
 
       {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
       <div data-tekentafel-vertex aria-hidden="true" className="h-16 sm:h-12 shrink-0" />
 
-      {/* A personal assurance, kept compact so experience and practical expectations stay close */}
-      <p className={`relative sm:ml-14 py-10 sm:py-16 border-t ${hairline} font-display font-medium text-3xl sm:text-4xl leading-snug tracking-heading text-slate-900 dark:text-white text-balance kopwerk-reveal`}>
-        <span ref={statement} aria-hidden="true" className={cn(marker, 'top-[calc(2.5rem+0.5lh-0.4375rem)] sm:top-[calc(4rem+0.5lh-0.4375rem)]')} />
-        Je mail komt bij mij binnen. Ik lees hem zelf.
-      </p>
-
-      <Row id="mensen" title="Ik kijk eerst hoe mensen werken">
+      <Row id="mensen" title="Ik kijk eerst hoe mensen werken" markerRef={statement}>
         <p>
           Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en werken. Dat doe ik nog steeds, voordat ik iets maak.
         </p>
@@ -87,16 +88,16 @@ export function Over() {
           Aan het begin van mijn loopbaan zag ik een collega elke week dezelfde rapportages maken. Ik liet de computer het werk doen. Dat scheelde een dag per week.
         </p>
         <p>
-          Met Studio Kopwerk breng ik die manier van kijken naar ondernemers. We kiezen één onderdeel en ik maak met AI een werkend voorbeeld. Jij probeert of het duidelijker wordt en of het je werk gemakkelijker maakt.
+          Met Studio Kopwerk breng ik die manier van kijken naar ondernemers. We kiezen één ding dat je tijd of ergernis kost en ik maak met AI een proefversie van de oplossing. Jij probeert of het duidelijker wordt en of het je werk gemakkelijker maakt.
         </p>
       </Row>
 
-      <Row id="verwachten" title="Je spreekt altijd met mij">
+      <Row id="verwachten" title="Wie met mij werkt, krijgt mijn aandacht">
         <p>
           Het eerste gesprek kan online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk. Je hoeft niets van techniek te weten of al een oplossing te hebben.
         </p>
-        <p>Ik neem weinig opdrachten tegelijk aan. Wie met mij werkt, krijgt mijn aandacht.</p>
-        <p>Je krijgt een werkend voorbeeld om te proberen. Wil je verder bouwen, dan bespreken we wat er nodig is en wie dat oppakt. Soms kan ik daarbij helpen, afhankelijk van de techniek en de afspraken met ontwikkelaars.</p>
+        <p>Ik neem weinig opdrachten tegelijk aan. Je mail komt bij mij binnen en ik lees hem zelf.</p>
+        <p>Binnen twee weken maak ik de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan. Werkt het? Dan maken we het af. Wat daarvoor nodig is, spreken we samen af.</p>
       </Row>
 
       <details className={`sm:ml-14 py-8 border-t ${hairline}`}>
@@ -111,10 +112,21 @@ export function Over() {
 }
 
 // A row on the grid, as on Aanpak: the conclusion on the left, its explanation on the right, a hairline above.
-function Row({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+function Row({
+  id,
+  title,
+  markerRef,
+  children,
+}: {
+  id: string;
+  title: string;
+  markerRef?: Ref<HTMLSpanElement>;
+  children: ReactNode;
+}) {
   return (
     <section aria-labelledby={id} className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster}`}>
-      <Typography variant="h2" id={id} className="text-balance">
+      <Typography variant="h2" id={id} className="relative text-balance">
+        {markerRef && <span ref={markerRef} aria-hidden="true" className={marker} />}
         {title}
       </Typography>
       <div className={cn('max-w-xl flex flex-col gap-6', prose)}>{children}</div>

@@ -96,7 +96,7 @@ export function Privacy() {
           doe ik zelf.
         </p>
         <p>
-          Een eerste versie maak ik met voorbeeldgegevens. Met echte gegevens werk ik pas als jij dat wilt.
+          Een proefversie maak ik met verzonnen gegevens. Met echte gegevens werk ik pas als jij dat wilt.
         </p>
         <p>Ik verkoop je gegevens niet en deel ze alleen met de diensten op deze pagina.</p>
       </Part>
@@ -111,7 +111,7 @@ export function Privacy() {
           <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a>.
         </p>
         <p className="text-sm text-subtle dark:text-slate-400">
-          Studio Kopwerk, Oosterweg 24, 9751 PH Haren Gn. Bijgewerkt op 31 oktober 2026.
+          Studio Kopwerk, Oosterweg 24, 9751 PH Haren Gn. Bijgewerkt op 3 november 2026.
         </p>
       </Part>
     </main>

@@ -5,9 +5,9 @@ sector: "Eigen onderneming"
 datum: 2026-09-30
 
 beeld: ./overzicht.webp
-alt: "Het overzicht van Operatie Kopwerk, met voorbeeldgegevens: mails die op een antwoord wachten, openstaande facturen en een offerte in de maak."
+alt: "Het overzicht van Operatie Kopwerk, met verzonnen gegevens: mails die op een antwoord wachten, openstaande facturen en een offerte in de maak."
 
-# Een korte film die opent vanaf het beeld: een stil filmpje, met voorbeeldgegevens. Per scène staat erbij
+# Een korte film: een stil filmpje met verzonnen gegevens, dat op /werk in de kaart speelt en groot opent vanaf het beeld. Per scène staat erbij
 # waar die in het filmpje begint ("vanaf", in seconden); het beeld en de tekst blijven voor Begin en schermlezers.
 filmpje:
   liggend: ./film.webm
@@ -34,7 +34,7 @@ film:
   - beeld: ./film-5-offerte.webp
     vanaf: 27.5
     alt: "De voorkant van een offerte in de huisstijl: Automatische koppeling voor de planning."
-    tekst: "AI schrijft de offerte in mijn stijl, ik beslis wat blijft. Dat scheelt minstens twee uur per offerte."
+    tekst: "AI schrijft de offerte in mijn stijl, ik beslis wat blijft. Dat scheelt zo'n twee uur per offerte."
   - beeld: ./film-6-vertaald.webp
     vanaf: 35
     alt: "Dezelfde offerte in het Nederlands en in het Engels, schuin over elkaar, in dezelfde opmaak."

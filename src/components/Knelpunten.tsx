@@ -21,23 +21,23 @@ export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
     label: 'Er zitten te veel stappen in je werk.',
-    maken: 'Een werkend voorbeeld van een kortere weg, van aanvraag tot factuur.',
+    maken: 'Een proefversie van een kortere weg, van aanvraag tot factuur.',
     schets: 'stroom',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's.", maken: 'Een werkend voorbeeld van één plek waar je alles terugvindt.', schets: 'plek' },
+  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's.", maken: 'Een proefversie van één plek waar je alles terugvindt.', schets: 'plek' },
   {
     knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
     label: 'Je website legt niet goed uit wat je doet.',
-    maken: 'Een voorbeeldwebsite waarop je kunt proberen of klanten begrijpen wat je doet.',
+    maken: 'Een proefversie van je website, waarmee je ziet of klanten begrijpen wat je doet.',
     schets: 'website',
   },
   {
     knelt: 'Werk dat elke week opnieuw met de hand gaat.',
     label: 'Je doet elke week hetzelfde werk met de hand.',
-    maken: 'Een proef waarin AI een terugkerende taak overneemt. Jij kijkt of het klopt.',
+    maken: 'Een proefversie waarin AI een terugkerende taak overneemt. Jij kijkt of het klopt.',
     schets: 'herhaling',
   },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig.', maken: 'Een voorbeeld dat je laat proberen hoe het eenvoudiger kan.', schets: 'scherm' },
+  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig.', maken: 'Een proefversie van schermen die zonder uitleg werken.', schets: 'scherm' },
 ];
 
 /**

@@ -5,7 +5,7 @@ import { ContactButton } from '../components/ContactButton';
 import { KnelpuntKiezer } from '../components/Knelpunten';
 import { Portret } from '../components/Portret';
 import { Rondgang } from '../components/Rondgang';
-import { ProjectMedia, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
 import { Rekenhulp } from '../components/werk/Rekenhulp';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
@@ -98,13 +98,13 @@ export function Home() {
               />
             </span>
           </h1>
-          {/* What you can ask for, with prototype explained before it is used as a term. */}
+          {/* What you can ask for: the solution as a proefversie you try yourself, made with AI. */}
           <div className="flex flex-col items-start sm:items-center gap-3 sm:gap-4 motion-safe:animate-rise [--rise-from:10px] [animation-delay:250ms]">
             <Typography
               variant="lead"
               className="max-w-2xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-balance text-slate-800 dark:text-slate-200"
             >
-              Een duidelijkere website of minder werk met de hand. Ik maak een werkend voorbeeld dat je zelf kunt proberen.
+              Een duidelijkere website of minder werk met de hand. Ik maak met AI een proefversie van de oplossing, zodat je ziet of het werkt.
             </Typography>
             <Typography variant="sublead" className="max-w-xl text-balance">
               Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
@@ -122,7 +122,7 @@ export function Home() {
       </section>
 
       {werk && (
-        <Block id="werk" title={werk.title} media={<ProjectMedia project={werk} still={werk.begin} />} {...at()}>
+        <Block id="werk" title={werk.title} media={<ProjectShow project={werk} />} {...at()}>
           <ProjectText project={werk} />
           {werk.begin?.figure ? (
             <ProjectStat project={werk} />
@@ -148,12 +148,10 @@ export function Home() {
         align="start"
         {...at()}
       >
-        <p>Ik maak prototypes: werkende voorbeelden die je zelf kunt proberen. Wat we maken hangt af van waar het knelt.</p>
-        <dl className="flex flex-col gap-5">
-          <div><dt className="font-medium text-slate-900 dark:text-white">Een duidelijke website of een prettig portaal</dt><dd>Een portaal is een eigen plek voor je klanten of medewerkers. Probeer hoe zij hun weg vinden en een taak afmaken.</dd></div>
-          <div><dt className="font-medium text-slate-900 dark:text-white">Minder werk met de hand</dt><dd>Probeer hoe een terugkerende taak vanzelf kan gaan, zoals gegevens overnemen of een eerste offerte schrijven.</dd></div>
-          <div><dt className="font-medium text-slate-900 dark:text-white">AI een vaste plek in je werk geven</dt><dd>Begin met één taak en ontdek wat AI kan doen en waar jij blijft beslissen.</dd></div>
-        </dl>
+        <p>
+          Wat we maken hangt af van waar het knelt: een duidelijke website of een prettig portaal voor je klanten of
+          medewerkers, minder werk met de hand, of AI een vaste plek in je werk. Kies wat je herkent.
+        </p>
       </Block>
 
       <Block
@@ -163,7 +161,7 @@ export function Home() {
         {...at()}
       >
         <p>
-          Ik ben Martijn. Al ruim vijftien jaar help ik organisaties hun digitale werk eenvoudiger te maken. Ik kijk eerst hoe mensen werken en maak dan een voorbeeld dat je zelf kunt proberen.
+          Ik ben Martijn. Al ruim vijftien jaar help ik organisaties hun digitale werk eenvoudiger te maken. Ik kijk eerst hoe mensen werken en maak dan een proefversie die je zelf kunt proberen.
         </p>
         <p>Je mail komt bij mij binnen. Ik lees hem zelf.</p>
         <NextLink className="self-start" href="/over">Lees wie ik ben</NextLink>
@@ -179,10 +177,10 @@ export function Home() {
         {...at()}
       >
         <p>
-          We kiezen samen één onderdeel. Ik werk je vraag uit en maak met AI een eerste versie. Jij probeert die en vertelt wat klopt en wat anders moet.
+          We kiezen samen één ding dat je nu tijd of ergernis kost. Binnen twee weken maak ik met AI de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan.
         </p>
-        <p>Vanaf € 500 exclusief btw. Binnen twee weken na akkoord een eerste versie, met één ronde aanpassen.</p>
-        <p>Je krijgt een voorbeeld om te proberen. Wil je ermee verder? Dan spreken we apart af wat er nodig is en wie dat oppakt.</p>
+        <p>Vanaf € 500 exclusief btw.</p>
+        <p>Werkt het? Dan maken we het af. De proefversie is van jou. Voor dagelijks gebruik spreken we samen af wat nodig is en wat het kost.</p>
         <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 
