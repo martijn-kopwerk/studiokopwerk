@@ -18,6 +18,10 @@ concept: true               # alleen zichtbaar in previews; haal weg om te publi
 #     focus: "50% 50%"      # optioneel: waar het beeld langzaam naartoe schuift
 #     begin: "[Eén zin]"    # optioneel, bij één scène: dit beeld en deze zin staan op Begin
 #     getal: "[5 min]"      # optioneel, naast begin: de besparing als groot getal boven die zin
+#     vanaf: 0              # alleen met filmpje: de seconde waarop deze scène in het filmpje begint
+# filmpje:                  # optioneel, naast film: de film als één stil filmpje (zonder geluid), tekst in beeld
+#   liggend: ./film.webm    # 16:9, met film.mp4 ernaast
+#   staand: ./film-staand.webm  # 4:5 voor telefoons, met film-staand.mp4 ernaast
 #
 # citaat: "[Eén zin van de klant]"
 # naam: "[Naam]"

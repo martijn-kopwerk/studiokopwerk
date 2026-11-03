@@ -19,6 +19,15 @@ export interface FilmScene {
   alt: string;
   text: string;
   focus: string;
+  // With a moving film (`filmpje:`): the second the scene starts in it.
+  from?: number;
+}
+
+// A moving film in place of the scenes' stills: one silent video per shape (wide for screens, upright for phones),
+// each as WebM with an MP4 of the same name beside it.
+export interface FilmVideo {
+  wide: { webm: string; mp4: string };
+  upright: { webm: string; mp4: string };
 }
 
 export interface Project {
@@ -33,6 +42,8 @@ export interface Project {
   media?: ProjectMedia;
   // Optional: a short film that opens from the image.
   film?: FilmScene[];
+  // Optional, beside `film`: the film as one silent video; the scenes then mark where each part starts.
+  video?: FilmVideo;
   // Optional: the film scene Begin shows instead of the image, with its own line (a scene's `begin:`).
   // `getal:` beside it sets the saving as a number above that line ("5 min"; design system: `Stat`).
   begin?: { image: string; alt: string; line: string; figure?: { value: string; unit?: string } };
@@ -49,6 +60,11 @@ const modules = import.meta.glob<ProjectModule>(['../content/werk/*/index.md', '
   eager: true,
 });
 const imageFiles = import.meta.glob<string>('../content/werk/*/*.{png,jpg,jpeg,webp,avif,svg}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const videoFiles = import.meta.glob<string>('../content/werk/*/*.{webm,mp4}', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -145,9 +161,33 @@ export function parseProject(
           else if (!value || !/\d/.test(value)) problems.push(`${where}: "getal" moet met een getal beginnen, zoals "5 min"`);
           else if (begin) begin.figure = { value, unit: unit.join(' ') || undefined };
         }
-        return { image: images[image] ?? '', alt: field('alt'), text: field('tekst'), focus };
+        const from = fields.vanaf;
+        if (fm.filmpje !== undefined && (typeof from !== 'number' || from < 0)) {
+          problems.push(`${where}: "vanaf" moet de seconde zijn waarop deze scène in het filmpje begint`);
+        }
+        return {
+          image: images[image] ?? '',
+          alt: field('alt'),
+          text: field('tekst'),
+          focus,
+          ...(typeof from === 'number' ? { from } : {}),
+        };
       });
     }
+  }
+
+  let video: FilmVideo | undefined;
+  if (fm.filmpje !== undefined) {
+    const fields = ((typeof fm.filmpje === 'object' && fm.filmpje) || {}) as Record<string, unknown>;
+    const pick = (key: 'liggend' | 'staand') => {
+      const webm = typeof fields[key] === 'string' ? (fields[key] as string).trim() : '';
+      const mp4 = webm.replace(/\.webm$/, '.mp4');
+      if (!webm.endsWith('.webm')) problems.push(`"filmpje": "${key}" moet een .webm-bestand zijn`);
+      else if (!images[webm] || !images[mp4]) problems.push(`"filmpje": ${webm} en ${mp4} moeten allebei in de map van deze opdracht staan`);
+      return { webm: images[webm] ?? '', mp4: images[mp4] ?? '' };
+    };
+    if (!film) problems.push('"filmpje" kan alleen naast "film": de scènes zeggen waar elk deel begint');
+    video = { wide: pick('liggend'), upright: pick('staand') };
   }
 
   if (problems.length > 0) {
@@ -163,6 +203,7 @@ export function parseProject(
     draft: fm.concept === true,
     media,
     film,
+    video,
     begin,
     Text: module.default,
   };
@@ -182,7 +223,7 @@ export const showDrafts = import.meta.env.DEV || import.meta.env.VITE_TOON_CONCE
 function imagesFor(slug: string) {
   const prefix = `../content/werk/${slug}/`;
   return Object.fromEntries(
-    Object.entries(imageFiles)
+    Object.entries({ ...imageFiles, ...videoFiles })
       .filter(([file]) => file.startsWith(prefix))
       .map(([file, url]) => [`./${file.slice(prefix.length)}`, url])
   );

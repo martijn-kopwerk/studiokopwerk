@@ -65,6 +65,38 @@ describe('parseProject', () => {
     ).toThrow(/alleen naast een "beeld"/);
   });
 
+  it('plays the film as one silent video when there is a filmpje, each scene from its second', () => {
+    const images = {
+      './foto.webp': '/assets/foto.webp',
+      './scene.webp': '/assets/scene.webp',
+      './film.webm': '/assets/film.webm',
+      './film.mp4': '/assets/film.mp4',
+      './staand.webm': '/assets/staand.webm',
+      './staand.mp4': '/assets/staand.mp4',
+    };
+    const withImage = { ...base, beeld: './foto.webp', alt: 'Een scherm' };
+    const scene = { beeld: './scene.webp', alt: 'Een inbox', tekst: 'Wat om je vraagt staat bovenaan.' };
+    const filmpje = { liggend: './film.webm', staand: './staand.webm' };
+    const project = parseProject(
+      'film',
+      module({ ...withImage, filmpje, film: [{ ...scene, vanaf: 0 }, { ...scene, vanaf: 6.5 }] }),
+      images
+    );
+    expect(project.video).toEqual({
+      wide: { webm: '/assets/film.webm', mp4: '/assets/film.mp4' },
+      upright: { webm: '/assets/staand.webm', mp4: '/assets/staand.mp4' },
+    });
+    expect(project.film?.map((s) => s.from)).toEqual([0, 6.5]);
+
+    expect(() => parseProject('film', module({ ...withImage, filmpje, film: [scene] }), images)).toThrow(
+      /scène 1: "vanaf" moet de seconde zijn/
+    );
+    expect(() =>
+      parseProject('film', module({ ...withImage, filmpje: { liggend: './weg.webm', staand: './film.mp4' }, film: [{ ...scene, vanaf: 0 }] }), images)
+    ).toThrow(/weg\.webm en \.\/weg\.mp4 moeten allebei.*"staand" moet een \.webm-bestand zijn/);
+    expect(() => parseProject('film', module({ ...withImage, filmpje }), images)).toThrow(/alleen naast "film"/);
+  });
+
   it('lets one scene stand in for the image on Begin, with its own line', () => {
     const images = { './foto.webp': '/assets/foto.webp', './scene.webp': '/assets/scene.webp' };
     const withImage = { ...base, beeld: './foto.webp', alt: 'Een scherm' };
