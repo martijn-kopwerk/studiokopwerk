@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
 import { ProjectBody, ProjectMeta, ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { Tekentafel } from '../components/werk/Tekentafel';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { cn } from '../lib/utils';
 
@@ -227,17 +228,20 @@ export function Werk() {
           inventing any of it. Rendered once for every screen size. */}
       <section
         aria-labelledby="op-de-tekentafel"
-        className="mt-4 lg:mt-16 sm:ml-14 max-w-2xl flex flex-col gap-3 p-6 sm:p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"
+        className="mt-4 lg:mt-16 sm:ml-14 max-w-3xl flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8 p-6 sm:p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"
       >
-        <h2
-          id="op-de-tekentafel"
-          className="font-display font-medium text-xl sm:text-2xl leading-snug tracking-heading text-balance text-slate-900 dark:text-white"
-        >
-          Op de tekentafel
-        </h2>
-        <p className="text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
-          Ik werk nu aan opdrachten voor andere ondernemers. Zodra ze af zijn en de klant het goed vindt, staan ze hier.
-        </p>
+        <Tekentafel className="w-full max-w-72 sm:w-64 shrink-0" />
+        <div className="flex flex-col gap-3">
+          <h2
+            id="op-de-tekentafel"
+            className="font-display font-medium text-xl sm:text-2xl leading-snug tracking-heading text-balance text-slate-900 dark:text-white"
+          >
+            Op de tekentafel
+          </h2>
+          <p className="text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
+            Ik werk nu aan opdrachten voor andere ondernemers. Zodra ze af zijn en de klant het goed vindt, staan ze hier.
+          </p>
+        </div>
       </section>
     </main>
   );

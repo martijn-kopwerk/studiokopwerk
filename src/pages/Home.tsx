@@ -5,7 +5,7 @@ import { ContactButton } from '../components/ContactButton';
 import { KnelpuntKiezer } from '../components/Knelpunten';
 import { Portret } from '../components/Portret';
 import { Rondgang } from '../components/Rondgang';
-import { ProjectMedia, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
 import { Rekenhulp } from '../components/werk/Rekenhulp';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
@@ -122,7 +122,7 @@ export function Home() {
       </section>
 
       {werk && (
-        <Block id="werk" title={werk.title} media={<ProjectMedia project={werk} still={werk.begin} />} {...at()}>
+        <Block id="werk" title={werk.title} media={<ProjectShow project={werk} />} {...at()}>
           <ProjectText project={werk} />
           {werk.begin?.figure ? (
             <ProjectStat project={werk} />
