@@ -15,7 +15,7 @@ const STOP = { verloop: 0, vragen: 1, werkwijze: 2, waarom: 3 } as const;
 
 // How an opdracht goes, in the order it happens.
 const stappen: [string, ReactNode][] = [
-  ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak. Waar je ook onderneemt in Nederland. We praten over je werk.'],
+  ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk.'],
   [
     'Samen kiezen waar het knelt',
     'We kiezen één ding dat je nu tijd of ergernis kost. Ik maak een proefversie van de oplossing, zodat je ziet of het werkt. Je krijgt vooraf een voorstel met een vaste prijs, vanaf €\u00a0500 exclusief btw.',
@@ -34,7 +34,7 @@ const stappen: [string, ReactNode][] = [
 const vragen: [string, ReactNode][] = [
   [
     'Wat heb ik na twee weken in handen?',
-    'Een proefversie van de oplossing die echt werkt, bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal. Je klikt erdoorheen, probeert het met je eigen werk in gedachten en laat het aan je team zien. Er staan nog verzonnen gegevens in. Zo weet je wat werkt, voordat je meer laat maken.',
+    'Een werkende proefversie van de oplossing, bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal. Je klikt erdoorheen, probeert het met je eigen werk in gedachten en laat het aan je team zien. Er staan nog verzonnen gegevens in. Zo weet je wat werkt, voordat je meer laat maken.',
   ],
   [
     'Moet ik verstand hebben van AI?',
@@ -122,7 +122,7 @@ export function Aanpak() {
         id="verloop"
         number="01"
         label="Zo verloopt het"
-        title="Van knelpunt naar een proefversie die werkt"
+        title="Van eerste gesprek tot dagelijks gebruik"
         zoneRef={zone(STOP.verloop)}
         markerRef={stop(STOP.verloop)}
       >
@@ -170,21 +170,18 @@ export function Aanpak() {
       >
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
-        <p>
-          Ik kijk hoe je werk nu gaat en maak met AI een proefversie. Samen kijken we of die doet wat je bedoelt. Jij zegt wat beter kan, ik pas het aan en jij beslist wat blijft.
-        </p>
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
         <p>
           {projects.length > 0 ? (
             <>
-              Ook deze site is zo gemaakt, net als{' '}
+              Zo gaat elke opdracht. Ook deze site is zo gemaakt, net als{' '}
               <Link href="/werk" className="underline underline-offset-4">
                 het programma waarmee Studio Kopwerk zelf draait
               </Link>
               .
             </>
           ) : (
-            'Ook deze site is zo gemaakt.'
+            'Zo gaat elke opdracht. Ook deze site is zo gemaakt.'
           )}
         </p>
       </Chapter>
@@ -193,15 +190,12 @@ export function Aanpak() {
         id="waarom"
         number="04"
         label="Waarom zo"
-        title="Techniek is pas goed als mensen er beter van worden"
+        title="Meer techniek is niet vanzelf beter"
         zoneRef={zone(STOP.waarom)}
         markerRef={stop(STOP.waarom)}
       >
         <p>
-          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een proefversie die je zelf kunt proberen.
-        </p>
-        <p>
-          Techniek moet het werk rustiger, duidelijker en fijner maken. Door eerst te proberen zie je wat helpt en wat je kunt weglaten.
+          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een proefversie die je zelf kunt proberen. Zo zie je wat helpt en wat je kunt weglaten.
         </p>
       </Chapter>
 

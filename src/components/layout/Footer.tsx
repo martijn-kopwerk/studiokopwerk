@@ -81,7 +81,7 @@ export function Footer({ slot, onDotTarget }: { slot?: PageSlot; onDotTarget: (t
         <Typography variant="lead" className="relative text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty text-slate-900 dark:text-white">
           {/* Where the amber dot rests while the footer is in view: in the margin, on the K's stem on phones */}
           <span ref={marker} aria-hidden="true" className="absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5" />
-          {slot?.line ?? 'Klein beginnen, snel iets maken dat werkt.'}
+          {slot?.line ?? 'Begin met één ding dat knelt.'}
         </Typography>
 
         <div className="flex flex-col items-start gap-6">

@@ -9,7 +9,7 @@ import { Werk } from './pages/Werk';
 import { Privacy } from './pages/Privacy';
 
 // How a page ends (design system: Slot): its own last line and at most one quiet way on. Without one the page
-// ends with "Klein beginnen, snel iets maken dat werkt.".
+// ends with "Begin met één ding dat knelt.".
 export interface PageSlot {
   line?: ReactNode;
   next?: { href: string; label: string };
@@ -51,7 +51,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/over',
       title: 'Over · Studio Kopwerk',
       description:
-        'Ik ben Martijn van Studio Kopwerk. Ruim vijftien jaar ervaring met digitale dienstverlening. Die ervaring gebruik ik om het werk van ondernemers eenvoudiger te maken.',
+        'Ik ben Martijn van Studio Kopwerk. Ik werk al ruim vijftien jaar aan digitale dienstverlening en maak nu het werk van ondernemers eenvoudiger.',
     },
     Page: Over,
     slot: { next: { href: '/aanpak', label: 'Lees hoe we werken' } },

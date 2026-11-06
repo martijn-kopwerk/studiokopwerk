@@ -22,7 +22,7 @@ export function KleineDingen() {
           </Typography>
         </div>
         <Typography variant="lead" className="max-w-xl text-lg sm:text-lg md:text-xl lg:text-xl text-pretty">
-          Geen klantopdrachten, maar persoonlijke proeven. Hier probeer ik ideeën uit met AI.
+          Dit maak ik voor mezelf, om ideeën met AI uit te proberen.
         </Typography>
       </div>
 

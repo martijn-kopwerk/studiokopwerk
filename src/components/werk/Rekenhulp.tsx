@@ -24,7 +24,7 @@ export function Rekenhulp({ minuten }: { minuten: number }) {
       </summary>
       <div className="flex flex-col gap-4 pt-4">
         <p className="text-sm leading-relaxed text-subtle dark:text-slate-400">
-          Bij mij scheelt het ongeveer {minuten} minuten per mail. Hieronder zie je wat die besparing bij een ander aantal mails zou betekenen. Wat het bij jou scheelt hangt af van je werk.
+          Bij mij scheelt het ongeveer {minuten} minuten per mail. Reken hieronder uit wat dat is bij jouw aantal mails. Wat het bij jou scheelt hangt af van je werk.
         </p>
         <label htmlFor={id} className="text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Met hoeveel mails per week wil je rekenen?
