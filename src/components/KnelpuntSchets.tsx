@@ -7,7 +7,7 @@ export type SchetsNaam = 'stroom' | 'plek' | 'website' | 'herhaling' | 'scherm';
 // "built from the system itself: hairlines, dot grids, square blocks").
 const ink = 'text-slate-900 dark:text-white';
 const quiet = 'text-slate-400 dark:text-slate-600';
-const label = 'fill-subtle dark:fill-slate-400 font-sans text-[10px] font-semibold tracking-wide-xl';
+const label = 'fill-subtle dark:fill-slate-400 font-sans text-[12px] font-medium';
 
 function Stip({ cx, cy }: { cx: number; cy: number }) {
   return <circle className="schets-stip fill-amber-500" cx={cx} cy={cy} r="5" />;
@@ -26,10 +26,10 @@ const schetsen: Record<SchetsNaam, { beschrijving: string; tekening: ReactNode }
           <path className="schets-lijn" d="M112 160H164M236 160H288M360 160H412" />
         </g>
         <g className={label}>
-          <text x="40" y="216">AANVRAAG</text>
-          <text x="164" y="216">OFFERTE</text>
-          <text x="288" y="216">WERK</text>
-          <text x="412" y="216">FACTUUR</text>
+          <text x="40" y="216">Aanvraag</text>
+          <text x="164" y="216">Offerte</text>
+          <text x="288" y="216">Werk</text>
+          <text x="412" y="216">Factuur</text>
         </g>
         <Stip cx={496} cy={160} />
       </>

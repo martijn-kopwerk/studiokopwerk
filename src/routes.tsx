@@ -80,7 +80,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       slot: {
         line: (
           <>
-            Hier is nog plek voor <em className="italic font-normal">jouw</em> opdracht.
+            Hier is nog plek voor jouw opdracht.
           </>
         ),
       },

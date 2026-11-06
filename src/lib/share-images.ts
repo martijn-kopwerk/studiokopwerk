@@ -8,7 +8,7 @@ export interface ShareImage {
   // Site-relative path of the page it belongs to
   path: string;
   eyebrow: string;
-  // The page's h1, as HTML (the italic accent on wérkt)
+  // The page's h1, as HTML
   title: string;
   url: string;
   // What's in the image, for og:image:alt
@@ -20,7 +20,7 @@ export const shareImages: ShareImage[] = [
     name: 'begin',
     path: '/',
     eyebrow: 'Studio Kopwerk',
-    title: 'Zien wat <em>wérkt</em>',
+    title: 'Zien wat wérkt',
     url: 'studiokopwerk.nl',
     alt: 'Studio Kopwerk: Zien wat wérkt.',
   },

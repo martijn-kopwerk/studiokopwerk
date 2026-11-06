@@ -20,14 +20,14 @@ export function Stat({
     <figure className={cn('flex flex-col gap-3', className)}>
       <span
         aria-hidden="true"
-        className="font-display font-bold text-6xl sm:text-7xl leading-none tracking-wide-sm tabular-nums text-slate-900 dark:text-white"
+        className="font-display font-medium text-6xl sm:text-7xl leading-none tracking-heading tabular-nums text-slate-900 dark:text-white"
       >
         {value}
         {unit && (
-          <span className="ml-2 text-2xl sm:text-3xl font-semibold tracking-wide-lg text-subtle dark:text-slate-400">{unit}</span>
+          <span className="ml-2 text-2xl sm:text-3xl font-medium text-subtle dark:text-slate-400">{unit}</span>
         )}
       </span>
-      <figcaption className="text-lg sm:text-xl font-light leading-snug tracking-wide-sm text-pretty text-slate-700 dark:text-slate-300">
+      <figcaption className="text-lg sm:text-xl font-normal leading-snug text-pretty text-slate-700 dark:text-slate-300">
         {children}
       </figcaption>
     </figure>

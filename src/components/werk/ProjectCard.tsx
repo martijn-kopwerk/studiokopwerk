@@ -11,7 +11,7 @@ import { Stat } from '../ui/Stat';
 const loadFilm = () => import('./ProjectFilm');
 const ProjectFilm = lazy(() => loadFilm().then((m) => ({ default: m.ProjectFilm })));
 
-const meta = 'text-xs font-semibold tracking-wide-xl uppercase text-subtle dark:text-slate-400';
+const meta = 'text-sm font-medium text-subtle dark:text-slate-400';
 
 /** The film's dialog, mounted on first open; the first scene loads as soon as the pointer or focus arrives. */
 function useFilmDialog(project: Project) {
@@ -42,11 +42,11 @@ function FilmLabel({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-3 rounded-full bg-kopwerk-dark/85 p-2 pr-5 text-xs font-semibold tracking-wide-xl uppercase text-white shadow-xl shadow-kopwerk-dark/20 backdrop-blur-sm',
+        'inline-flex items-center gap-3 rounded-lg bg-kopwerk-dark/85 p-2 pr-5 text-sm font-medium text-white',
         className
       )}
     >
-      <span className="flex size-8 items-center justify-center rounded-full bg-white/15 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-400 group-focus-visible:bg-amber-400">
+      <span className="flex size-8 items-center justify-center rounded-md bg-white/15 transition-colors duration-500 ease-kopwerk group-hover:bg-amber-400 group-focus-visible:bg-amber-400">
         <Icon name="play" className="size-3.5 translate-x-px transition-colors duration-500 ease-kopwerk group-hover:text-slate-950 group-focus-visible:text-slate-950" />
       </span>
       Bekijk hoe het werkt
@@ -177,7 +177,7 @@ export function ProjectMedia({ project, still }: { project: Project; still?: { i
         decoding="async"
         className={cn(
           'block w-full aspect-[4/3] object-cover rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900',
-          project.film && 'transition-transform duration-500 ease-kopwerk group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100'
+          project.film && 'transition-colors duration-150 ease-kopwerk group-hover:border-slate-400 dark:group-hover:border-slate-600'
         )}
       />
     );
@@ -187,7 +187,7 @@ export function ProjectMedia({ project, still }: { project: Project; still?: { i
   if (media.kind === 'citaat') {
     return (
       <figure className="flex flex-col gap-4">
-        <blockquote className="text-2xl font-light leading-snug tracking-wide-sm text-slate-600 dark:text-slate-300 text-pretty">
+        <blockquote className="text-2xl font-normal leading-snug text-slate-600 dark:text-slate-300 text-pretty">
           “{media.quote}”
         </blockquote>
         <figcaption className={meta}>
@@ -200,7 +200,7 @@ export function ProjectMedia({ project, still }: { project: Project; still?: { i
 
   return (
     <div className="flex flex-col gap-3">
-      <span className="font-display font-bold text-6xl xl:text-7xl leading-none tracking-wide-lg text-slate-900 dark:text-white">
+      <span className="font-display font-medium text-6xl xl:text-7xl leading-none tracking-heading text-slate-900 dark:text-white">
         {media.value}
       </span>
       <span className={meta}>{media.label}</span>

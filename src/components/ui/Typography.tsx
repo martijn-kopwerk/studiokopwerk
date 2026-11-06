@@ -13,11 +13,11 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 const baseStyles = {
   // One statement per page: a positioning line or Martijn's core sentence for that page. Never a title.
   display: "font-display font-medium text-display tracking-display text-slate-900 dark:text-white text-balance",
-  h1: "font-display font-normal text-[clamp(2.5rem,10vw,7.5rem)] tracking-wide-md sm:tracking-wide-lg uppercase leading-none text-slate-900 dark:text-white whitespace-nowrap",
+  h1: "font-display font-normal text-[clamp(2.5rem,10vw,7.5rem)] tracking-display leading-[1.05] text-slate-900 dark:text-white whitespace-nowrap",
   h2: "font-display font-medium text-2xl sm:text-4xl leading-8 sm:leading-10 tracking-heading text-slate-900 dark:text-white",
   h3: "font-display text-2xl font-semibold tracking-wide-sm text-slate-900 dark:text-white",
-  eyebrow: "text-xs sm:text-sm font-medium tracking-super-wide sm:tracking-ultra-wide uppercase text-subtle dark:text-slate-400",
-  lead: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-wide-sm text-slate-600 dark:text-slate-300",
+  eyebrow: "text-sm font-medium text-subtle dark:text-slate-400",
+  lead: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal text-slate-600 dark:text-slate-300",
   // The second step under a hero lead: what you get, after who it is for (design system: `sublead`).
   sublead: "text-base sm:text-lg leading-relaxed tracking-sublead text-subtle dark:text-slate-400",
   body: "text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300",

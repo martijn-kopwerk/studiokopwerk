@@ -71,7 +71,7 @@ export function Werk() {
           <Typography variant="eyebrow">Werk</Typography>
           <h1
             tabIndex={-1}
-            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white outline-none"
+            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-display leading-[1.05] text-slate-900 dark:text-white outline-none"
           >
             Wat ik maakte
           </h1>
@@ -146,7 +146,7 @@ export function Werk() {
                 >
                   <span
                     className={cn(
-                      'shrink-0 font-display font-bold text-sm tracking-wide-lg transition-colors duration-500 ease-kopwerk',
+                      'shrink-0 font-display font-semibold text-sm transition-colors duration-500 ease-kopwerk',
                       isActive ? 'text-slate-900 dark:text-white' : 'text-subtle dark:text-slate-400'
                     )}
                   >
@@ -206,7 +206,7 @@ export function Werk() {
             <div className="flex items-baseline gap-5 sm:gap-8">
               {/* A number only means something in a list of more than one */}
               {!single && (
-                <span className="shrink-0 font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">
+                <span className="shrink-0 font-display font-semibold text-sm text-slate-900 dark:text-white">
                   {project.number}
                 </span>
               )}

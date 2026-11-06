@@ -32,7 +32,7 @@ export function Header({ onToggleTheme }: { onToggleTheme: () => void }) {
         <span
           aria-hidden="true"
           className={cn(
-            'hidden font-display font-bold text-sm tracking-wide-xl uppercase text-slate-900 dark:text-white',
+            'hidden font-display font-semibold text-base text-slate-900 dark:text-white',
             current !== '/' && 'sm:inline-flex'
           )}
         >
@@ -72,7 +72,7 @@ function NavLink({ path, label, current }: { path: string; label: string; curren
       href={path}
       aria-current={current ? 'page' : undefined}
       className={cn(
-        'group relative flex -mx-2 px-2 py-2 rounded-full text-xs font-semibold tracking-wide-xl uppercase transition-colors duration-500 ease-kopwerk',
+        'group relative flex -mx-2 px-2 py-2 rounded-full text-sm font-medium transition-colors duration-500 ease-kopwerk',
         current
           ? 'text-slate-900 dark:text-white after:absolute after:inset-x-2 after:bottom-0.5 after:h-0.5 after:rounded-full after:bg-amber-500'
           : 'text-subtle dark:text-slate-400'
@@ -133,7 +133,7 @@ export function CompactNav() {
     >
       <nav
         aria-label="Menu"
-        className="pointer-events-auto flex items-center gap-2 sm:gap-6 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-kopwerk-dark/90 backdrop-blur-xl shadow-xl shadow-slate-900/5 dark:shadow-kopwerk-dark/40 py-1.5 pl-4 pr-1.5"
+        className="pointer-events-auto flex items-center gap-2 sm:gap-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-kopwerk-dark/90 backdrop-blur-xl shadow-[0_8px_24px_rgba(15,23,42,0.06)] dark:shadow-none py-1.5 pl-4 pr-1.5"
       >
         <Link href="/" aria-label="Studio Kopwerk, naar het begin" className="flex rounded-full p-1">
           <KopwerkLogo className="size-5" />
@@ -153,7 +153,7 @@ export function CompactNav() {
           onPointerEnter={preloadContact}
           onFocus={preloadContact}
           aria-haspopup="dialog"
-          className="group inline-flex items-center gap-2 rounded-full border border-slate-500 dark:border-slate-400 px-4 py-2.5 text-xs font-semibold tracking-wide-xl uppercase text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
+          className="group inline-flex items-center gap-2 rounded-lg border border-slate-500 dark:border-slate-400 px-4 py-2.5 text-sm font-medium text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
         >
           <RollingText accentClassName="text-amber-700 dark:text-amber-400">Vertel waar het knelt</RollingText>
           <Icon name="arrow-up-right" className="size-4" />

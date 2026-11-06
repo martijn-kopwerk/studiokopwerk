@@ -20,24 +20,24 @@ export interface Knelpunt {
 export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
-    label: 'Er zitten te veel stappen in je werk.',
-    maken: 'Een proefversie van een kortere weg, van aanvraag tot factuur.',
+    label: 'Er zitten te veel stappen in je werk',
+    maken: 'Een proefversie van een kortere weg, van aanvraag tot factuur',
     schets: 'stroom',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's.", maken: 'Een proefversie van één plek waar je alles terugvindt.', schets: 'plek' },
+  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's", maken: 'Een proefversie van één plek waar je alles terugvindt', schets: 'plek' },
   {
     knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
-    label: 'Je website legt niet goed uit wat je doet.',
-    maken: 'Een proefversie van je website, waarmee je ziet of klanten begrijpen wat je doet.',
+    label: 'Je website legt niet goed uit wat je doet',
+    maken: 'Een proefversie van je website, waarmee je ziet of klanten begrijpen wat je doet',
     schets: 'website',
   },
   {
     knelt: 'Werk dat elke week opnieuw met de hand gaat.',
-    label: 'Je doet elke week hetzelfde werk met de hand.',
+    label: 'Je doet elke week hetzelfde werk met de hand',
     maken: 'Een proefversie waarin AI een terugkerende taak overneemt. Jij kijkt of het klopt.',
     schets: 'herhaling',
   },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig.', maken: 'Een proefversie van schermen die zonder uitleg werken.', schets: 'scherm' },
+  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig', maken: 'Een proefversie van schermen die zonder uitleg werken', schets: 'scherm' },
 ];
 
 /**
@@ -111,7 +111,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                   className={cn(
                     'mt-[calc(0.5lh-0.4375rem)] size-3.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-500 ease-kopwerk motion-reduce:transition-none',
                     open
-                      ? 'border-amber-500 bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]'
+                      ? 'border-amber-500 bg-amber-500'
                       : 'border-slate-500 dark:border-slate-400 group-hover:border-slate-900 dark:group-hover:border-white',
                   )}
                 />
@@ -140,7 +140,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
         <button
           type="button"
           onClick={() => setAlle(true)}
-          className="sm:hidden group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300"
+          className="sm:hidden group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300"
         >
           Toon alle {items.length === 5 ? 'vijf' : items.length}
           <Icon name="chevron-down" className="size-4" />

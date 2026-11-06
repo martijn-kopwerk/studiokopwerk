@@ -106,7 +106,7 @@ export function Aanpak() {
         </Typography>
         <h1
           tabIndex={-1}
-          className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
+          className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-display leading-[1.05] text-slate-900 dark:text-white text-balance outline-none"
         >
           Zo werken we samen
         </h1>
@@ -130,7 +130,7 @@ export function Aanpak() {
         <ol className="flex flex-col">
           {stappen.map(([kop, tekst], index) => (
             <li key={kop} className={`grid grid-cols-[2rem_minmax(0,1fr)] gap-x-4 py-5 border-t ${hairline} first:border-t-0 first:pt-0`}>
-              <span className="font-display font-bold text-sm leading-relaxed tracking-wide-lg text-slate-900 dark:text-white">
+              <span className="font-display font-semibold text-sm leading-relaxed text-slate-900 dark:text-white">
                 {index + 1}
               </span>
               <span className="flex flex-col gap-1">
@@ -229,9 +229,9 @@ function Chapter({
       className={`py-10 sm:py-16 sm:ml-14 border-t ${hairline} ${raster} kopwerk-reveal`}
     >
       <div className="flex flex-col gap-5">
-        <p className="relative flex items-baseline gap-4 text-xs sm:text-sm font-medium tracking-super-wide uppercase text-subtle dark:text-slate-400">
+        <p className="relative flex items-baseline gap-4 text-sm font-medium text-subtle dark:text-slate-400">
           <span ref={markerRef} aria-hidden="true" className={marker} />
-          <span className="font-display font-bold text-sm tracking-wide-lg text-slate-900 dark:text-white">{number}</span>
+          <span className="font-display font-semibold text-sm text-slate-900 dark:text-white">{number}</span>
           {label}
         </p>
         <Typography variant="h2" id={id} className="text-balance">

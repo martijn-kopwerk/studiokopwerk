@@ -56,12 +56,12 @@ export function Rekenhulp({ minuten }: { minuten: number }) {
             <span className="font-display font-medium text-5xl sm:text-6xl leading-none tracking-display tabular-nums text-slate-900 dark:text-white">
               {uren}
             </span>
-            <span className="text-lg sm:text-xl font-light tracking-wide-sm text-slate-700 dark:text-slate-300">
+            <span className="text-lg sm:text-xl font-normal text-slate-700 dark:text-slate-300">
               uur per jaar in dit rekenvoorbeeld.
             </span>
           </span>
         </output>
-        <span className="text-xs font-semibold tracking-wide-xl uppercase text-subtle dark:text-slate-400">
+        <span className="text-sm font-medium text-subtle dark:text-slate-400">
           {minuten} minuten per mail × {mails} mails × {WEKEN} werkweken
         </span>
       </div>

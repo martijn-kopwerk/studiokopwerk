@@ -30,7 +30,7 @@ export function Portret({ className, priority = false }: { className?: string; p
         aria-hidden="true"
         className={cn(
           frame,
-          'flex items-center justify-center text-xs font-semibold tracking-wide-xl uppercase text-slate-600 dark:text-slate-400',
+          'flex items-center justify-center text-sm font-medium text-slate-600 dark:text-slate-400',
           className
         )}
       >

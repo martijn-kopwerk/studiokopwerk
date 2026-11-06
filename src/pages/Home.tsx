@@ -71,68 +71,82 @@ export function Home() {
 
   return (
     <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pb-8">
+      {/* The promise on the left, the proefversie it promises on the right: the film of Operatie Kopwerk, playing */}
       <section
         aria-labelledby="hero-title"
-        className="flex flex-col items-start sm:items-center justify-center text-left sm:text-center pt-8 sm:pt-16 pb-10 sm:pb-16"
+        className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center pt-8 sm:pt-16 pb-10 sm:pb-16"
       >
-        <div className="w-full flex flex-col items-start sm:items-center gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:20px]">
-          <Typography variant="eyebrow" as="p" className="motion-safe:animate-rise [--rise-from:-10px] [animation-delay:100ms]">
-            Studio Kopwerk
-          </Typography>
-          <h1
-            id="hero-title"
-            tabIndex={-1}
-            className="font-display font-normal text-4xl sm:text-6xl lg:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
-          >
-            Zien wat <em className="italic font-normal">wérkt</em>
-            {/* The full stop is the amber dot. It stays in the text (selectable, read aloud) and is drawn by the dot. */}
-            <span className="whitespace-nowrap">
-              <span className="sr-only">.</span>
-              <span
-                ref={punt}
-                aria-hidden="true"
-                className={cn(
-                  'inline-block size-3.5 ml-[0.12em] rounded-full align-baseline transition-colors duration-300',
-                  leeg ? 'bg-transparent' : 'bg-amber-500'
-                )}
-              />
-            </span>
-          </h1>
-          {/* What you can ask for: the solution as a proefversie you try yourself, made with AI. */}
-          <div className="flex flex-col items-start sm:items-center gap-3 sm:gap-4 motion-safe:animate-rise [--rise-from:10px] [animation-delay:250ms]">
-            <Typography
-              variant="lead"
-              className="max-w-2xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-balance text-slate-800 dark:text-slate-200"
+        <div className="flex flex-col items-start text-left">
+          <div className="w-full flex flex-col items-start gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:12px]">
+            <Typography variant="eyebrow" as="p">
+              Studio Kopwerk
+            </Typography>
+            <h1
+              id="hero-title"
+              tabIndex={-1}
+              className="font-display font-normal text-5xl sm:text-6xl xl:text-7xl tracking-display leading-[1.05] text-slate-900 dark:text-white text-balance outline-none"
             >
-              Een duidelijkere website of minder werk met de hand. Ik maak met AI een proefversie van de oplossing, zodat je ziet of het werkt.
-            </Typography>
-            <Typography variant="sublead" className="max-w-xl text-balance">
-              Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
-            </Typography>
+              Zien wat wérkt
+              {/* The full stop is the amber dot. It stays in the text (selectable, read aloud) and is drawn by the dot. */}
+              <span className="whitespace-nowrap">
+                <span className="sr-only">.</span>
+                <span
+                  ref={punt}
+                  aria-hidden="true"
+                  className={cn(
+                    'inline-block size-3.5 ml-[0.08em] rounded-full align-baseline transition-colors duration-300',
+                    leeg ? 'bg-transparent' : 'bg-amber-500'
+                  )}
+                />
+              </span>
+            </h1>
+            {/* What you can ask for: the solution as a proefversie you try yourself, made with AI. */}
+            <div className="flex flex-col items-start gap-3 sm:gap-4">
+              <Typography
+                variant="lead"
+                className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-pretty text-slate-800 dark:text-slate-200"
+              >
+                Een duidelijkere website of minder werk met de hand. Ik maak met AI een proefversie van de oplossing, zodat je ziet of het werkt.
+              </Typography>
+              <Typography variant="sublead" className="max-w-lg text-pretty">
+                Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
+              </Typography>
+            </div>
+          </div>
+
+          {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
+          <div data-tekentafel-vertex aria-hidden="true" className="self-stretch h-8 sm:h-10 shrink-0" />
+
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-6">
+            <ContactButton />
+            <NextLink href="/aanpak">Bekijk wat je krijgt</NextLink>
           </div>
         </div>
-
-        {/* The gap where the background's K has its vertex on phones (read by AbstractBackground) */}
-        <div data-tekentafel-vertex aria-hidden="true" className="self-stretch h-10 sm:h-12 shrink-0" />
-
-        <div className="motion-safe:animate-rise [--rise-from:15px] [animation-delay:400ms]">
-          <ContactButton />
-        </div>
-        <NextLink href="/aanpak" className="mt-6">Bekijk wat je krijgt</NextLink>
+        {werk && (
+          <div className="flex flex-col motion-safe:animate-rise [--rise-from:12px] [animation-delay:120ms]">
+            <ProjectShow project={werk} />
+          </div>
+        )}
       </section>
 
       {werk && (
-        <Block id="werk" title={werk.title} media={<ProjectShow project={werk} />} {...at()}>
-          <ProjectText project={werk} />
-          {werk.begin?.figure ? (
-            <ProjectStat project={werk} />
-          ) : (
-            werk.begin && (
-              <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-                {werk.begin.line}
-              </Typography>
+        <Block
+          id="werk"
+          title={werk.title}
+          media={
+            werk.begin?.figure ? (
+              <ProjectStat project={werk} />
+            ) : (
+              werk.begin && (
+                <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
+                  {werk.begin.line}
+                </Typography>
+              )
             )
-          )}
+          }
+          {...at()}
+        >
+          <ProjectText project={werk} />
           {minuten > 0 && <Rekenhulp minuten={minuten} />}
           <NextLink className="self-start" href="/werk">Bekijk het werk</NextLink>
         </Block>
