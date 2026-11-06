@@ -53,7 +53,7 @@ export function Over() {
             Martijn
           </h1>
           <Typography variant="lead" className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-            Ik ben Martijn. Ik help je uitzoeken hoe je website, portaal of dagelijkse werk eenvoudiger kan, met een proefversie die je zelf kunt proberen.
+            Ik help je uitzoeken hoe je website, portaal of dagelijkse werk eenvoudiger kan, met een proefversie die je zelf kunt proberen.
           </Typography>
         </div>
         <div className="flex flex-col gap-4">
@@ -76,10 +76,10 @@ export function Over() {
 
       <Row id="mensen" title="Ik kijk eerst hoe mensen werken" markerRef={statement}>
         <p>
-          Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen denken, leren en werken. Dat doe ik nog steeds, voordat ik iets maak.
+          Ik ben opgeleid als leraar en studeerde daarna onderwijskunde. Daar leerde ik kijken hoe mensen leren en werken. Dat doe ik nog steeds, voordat ik iets maak.
         </p>
         <p>
-          Al ruim vijftien jaar werk ik aan digitale dienstverlening: van rapportages en werkprocessen tot portalen voor medewerkers. Als adviseur en productmanager vertaal ik wat mensen nodig hebben naar duidelijke schermen en slimmere werkwijzen.
+          Al ruim vijftien jaar werk ik aan digitale dienstverlening: van rapportages en werkprocessen tot portalen voor medewerkers. Als adviseur en productmanager zoek ik uit wat mensen nodig hebben en zorg ik dat schermen en werkstappen daarop aansluiten.
         </p>
       </Row>
 

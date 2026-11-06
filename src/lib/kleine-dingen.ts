@@ -27,9 +27,9 @@ export const kleineDingen: KleinDing[] = [
     titel: 'Mate',
     soort: 'Training en voeding',
     tekst:
-      'Ik sport veel en wil dat blessurevrij doen. Daarom maakte ik een coach voor training en voeding, op de gegevens van je sporthorloge. AI schrijft de uitleg. Jij beslist wat je ermee doet.',
+      'Ik sport veel en wil dat blessurevrij doen. Daarom maakte ik een coach voor training en voeding, op de gegevens van je sporthorloge. AI schrijft de uitleg erbij.',
     beeld: mate,
-    alt: 'Mate zegt: Rustig aan vandaag. Je sliep kort, dus de snelle intervallen worden een rustige loop van 40 minuten. Jij tikt op Pas aan en het staat op je horloge. Daarna: Mate denkt mee. Mate rekent het na. Jij beslist. Met fictieve waarden.',
+    alt: 'Mate zegt: Rustig aan vandaag. Je sliep kort, dus de snelle intervallen worden een rustige loop van 40 minuten. Jij tikt op Pas aan en het staat op je horloge. Daarna: Mate denkt mee. Mate rekent het na. Jij beslist. Met verzonnen gegevens.',
     grond: 'licht',
     film: { webm: mateWebm, mp4: mateMp4 },
   },
@@ -37,9 +37,9 @@ export const kleineDingen: KleinDing[] = [
     titel: 'Zuipwijs',
     soort: 'Gezondheid',
     tekst:
-      'Zie in één oogopslag hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
+      'Zie hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
     beeld: zuipwijs,
-    alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je reeks van 12 dagen, nooit je drankjes. Met fictieve waarden.',
+    alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je reeks van 12 dagen, nooit je drankjes. Met verzonnen gegevens.',
     grond: 'donker',
     film: { webm: zuipwijsWebm, mp4: zuipwijsMp4 },
   },

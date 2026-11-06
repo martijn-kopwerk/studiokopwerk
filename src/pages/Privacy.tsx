@@ -86,7 +86,7 @@ export function Privacy() {
         </p>
       </Part>
 
-      <Part id="ai" title="AI werkt mee, maar leert niet van jouw gegevens">
+      <Part id="ai" title="De AI die ik gebruik, traint niet met je gegevens">
         <p>
           Bij een opdracht gebruik ik AI van Anthropic (Claude), Google (Gemini) en Microsoft. Zij verwerken je gegevens
           alleen voor mij en trainen hun AI er niet mee.
@@ -101,7 +101,7 @@ export function Privacy() {
         <p>Ik verkoop je gegevens niet en deel ze alleen met de diensten op deze pagina.</p>
       </Part>
 
-      <Part id="rechten" title="Je gegevens blijven van jou">
+      <Part id="rechten" title="Inzien, aanpassen of verwijderen">
         <p>
           Wil je weten wat ik van je heb, iets laten aanpassen of alles laten verwijderen? Mail naar{' '}
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Je hoort binnen een maand van me.

@@ -84,7 +84,7 @@ describe('header and footer', () => {
 
   it('ends every page with one invitation: its own last line, the button and, smaller, the address', () => {
     const { html } = render('/');
-    expect(html).toContain('Klein beginnen, snel iets maken dat werkt.');
+    expect(html).toContain('Begin met één ding dat knelt.');
     expect(html).toContain('Of mail zelf');
     expect(html).toContain('href="mailto:hallo@studiokopwerk.nl?subject=Waar%20het%20knelt"');
     expect(html).toContain('KvK 42154955');

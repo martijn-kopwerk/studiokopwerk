@@ -34,7 +34,7 @@ film:
   - beeld: ./film-5-offerte.webp
     vanaf: 27.5
     alt: "De voorkant van een offerte in de huisstijl: Automatische koppeling voor de planning."
-    tekst: "AI schrijft de offerte in mijn stijl, ik beslis wat blijft. Dat scheelt zo'n twee uur per offerte."
+    tekst: "AI schrijft de offerte in mijn stijl, ik lees hem na. Dat scheelt zo'n twee uur per offerte."
   - beeld: ./film-6-vertaald.webp
     vanaf: 35
     alt: "Dezelfde offerte in het Nederlands en in het Engels, schuin over elkaar, in dezelfde opmaak."
