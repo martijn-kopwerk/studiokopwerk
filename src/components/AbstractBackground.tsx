@@ -230,36 +230,14 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       frameId = requestAnimationFrame(intro);
     }
 
-    // Ambient light: follows a mouse or pen with a long, soft lag (a CSS transition).
-    // Touch screens get a slow CSS drift instead; reduced motion keeps it still.
-    let pending = false;
-    let lastX = 0;
-    let lastY = 0;
-    // Until the pointer moves, the light rests where the sun would be (daglicht.ts).
-    let followed = false;
-    const handlePointerMove = (e: PointerEvent) => {
-      if (e.pointerType === 'touch' || reducedMotion.matches) return;
-      followed = true;
-      lastX = e.clientX;
-      lastY = e.clientY;
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(() => {
-        pending = false;
-        const glow = glowRef.current;
-        if (glow) glow.style.translate = `${lastX}px ${lastY}px`;
-      });
-    };
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-
-    // The light follows the day: checked again every ten minutes, so a tab left open sees the evening come.
+    // Ambient light: rests where the sun would be (daglicht.ts), it does not follow the pointer. It follows the day: checked again every ten minutes, so a tab left open sees the evening come.
     const followDay = () => {
       const glow = glowRef.current;
       if (!glow) return;
       const licht = daglicht(uurVan(new Date()));
       glow.style.opacity = String(licht.sterkte);
       glow.toggleAttribute('data-laag', licht.laag);
-      if (!followed) glow.style.translate = `${licht.x}vw ${licht.y}vh`;
+      glow.style.translate = `${licht.x}vw ${licht.y}vh`;
     };
     followDay();
     const dayTimer = window.setInterval(followDay, 10 * 60 * 1000);
@@ -272,7 +250,6 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       relayoutRef.current = () => {};
       placeDotRef.current = () => {};
       resizeObserver.disconnect();
-      window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -301,7 +278,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       >
         <div
           ref={glowRef}
-          className="kopwerk-glow absolute left-0 top-0 transition-[translate,opacity] duration-[1800ms] ease-kopwerk motion-reduce:transition-none pointer-coarse:motion-safe:animate-glow-drift"
+          className="kopwerk-glow absolute left-0 top-0 transition-[translate,opacity] duration-[1800ms] ease-kopwerk motion-reduce:transition-none"
         />
         <canvas ref={canvasRef} id="abstract-background-canvas" className="relative block w-full h-full" />
       </div>
@@ -314,7 +291,7 @@ export const AbstractBackground: React.FC<AbstractBackgroundProps> = React.memo(
       >
         <span ref={fadeRef} className="absolute inset-0 transition-opacity duration-300 ease-kopwerk motion-reduce:transition-none">
           <span className="absolute inset-0 rounded-full bg-amber-500/60 opacity-0 [--pulse-scale:2.8] motion-safe:animate-pulse-ring motion-safe:[animation-delay:2.7s]" />
-          <span className="absolute inset-0 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.5)]" />
+          <span className="absolute inset-0 rounded-full bg-amber-500" />
         </span>
       </span>
     </>

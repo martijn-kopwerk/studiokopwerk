@@ -48,7 +48,7 @@ export function Over() {
           </Typography>
           <h1
             tabIndex={-1}
-            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-wide-md uppercase leading-none text-slate-900 dark:text-white text-balance outline-none"
+            className="font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-display leading-[1.05] text-slate-900 dark:text-white text-balance outline-none"
           >
             Martijn
           </h1>

@@ -10,6 +10,22 @@ Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de o
 
 Deze keuzes zijn met Martijn in de chat bevestigd. De externe design-systembron kon in deze sessie niet worden gelezen of aangepast. De wijzigingen die daar nog vastgelegd moeten worden staan in `docs/ux-review/2026-11-02-uitwerking.md`; dit is geen claim dat de externe bron al is bijgewerkt.
 
+## Ontwerp zonder AI-look, 7 november 2026
+
+Op 7 november heeft Martijn een ontwerpronde naar de regels van heydamir/unslop goedgekeurd (PR #67). Waar een regel hieronder nog anders zegt, geldt dit:
+
+- **Zinsvorm, geen wijde spatiëring.** Labels, knoppen, menu, eyebrows en paginatitels staan in gewone zinsvorm. Geen `uppercase`, en geen `tracking-wide-md` tot `tracking-ultra-wide` op tekst. Grote titels krijgen `tracking-display`, kleine tekst geen extra spatiëring.
+- **Gewichten 400 tot 600.** Geen `font-bold` (700) of zwaarder en geen `font-light`. Hiërarchie komt uit grootte en kleur.
+- **Geen cursief voor nadruk.** Ook niet op *wérkt*: het accent doet de nadruk al.
+- **De amber stip is vlak.** Geen gloed (`shadow-[0_0_…amber…]`, `drop-shadow`) en geen eindeloze pulsring: de ring gaat één keer bij het laden.
+- **Het amber licht staat stil.** Het volgt het daglicht (`daglicht.ts`) maar niet de muis, en drijft niet op telefoons.
+- **Knoppen hebben hoeken.** De capsule is `rounded-xl` met een `rounded-lg` pijlvak, kleine knoppen `rounded-lg`. Niet alles is een pil. Geen magnetisch effect en geen `hover:scale`: hover is een kleur- of vlakwissel, klikken een kleine indruk (`active:scale-[0.98]`).
+- **Lichte schaduwen.** Op licht klein en zacht, op donker geen schaduw maar een dun lijntje.
+- **Tekst minimaal 12 px**, ook in schetsen en voorbeelden.
+- **Begin opent links**, met de film van de opdracht ernaast. Korte regels (labels, onderschriften, de rondgang) eindigen zonder punt.
+
+Het design system zelf is nog niet bijgewerkt; tot dat gebeurt, wint deze sectie voor de website.
+
 > **Design system first.** The definitive source for the Studio Kopwerk brand is the design system: https://claude.ai/artifact/8m9zeziNGjkdFoJCX2w3Vi. This file is the website's translation of it into this codebase, plus what only the website has (de tekentafel, §5F). Where this file disagrees with the design system, the design system wins and this file should be corrected.
 
 ---
@@ -66,15 +82,15 @@ When generating HTML, React, PDF, or SVG documents, embed this exact SVG:
 ```
 
 ### On the Website
-The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), with a slow pulse around its amber dot (off for reduced motion).
+The K mark sits top-left in the header on every screen size (`<KopwerkLogo>`), with one pulse around its amber dot on load (off for reduced motion), then still.
 
-**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex and keeps pulsing. After that intro the drawing is still. A soft amber ambient glow follows the cursor with a long lag (it drifts slowly on touch screens). Reduced motion shows the finished drawing and a still glow. On phones (under 640px) the K is drawn cropped: its stem continues the header logo's stem, the arms run off the right edge and the content stands left-aligned beside the stem. The full rules are in §5F.
+**Background, "de tekentafel":** on load, faint hairlines draw the construction geometry of the K across the page (its stem, vertex and arm angles), the K itself appears slightly stronger, and the amber dot lands on the vertex with one pulse. After that intro the drawing is still. A soft amber light rests where the sun would be at that hour (`daglicht.ts`); it does not follow the pointer. Reduced motion shows the finished drawing. On phones (under 640px) the K is drawn cropped: its stem continues the header logo's stem, the arms run off the right edge and the content stands left-aligned beside the stem. The full rules are in §5F.
 
 **Theme toggle:** one round button showing the theme you switch *to* (moon in light, sun in dark). Dark first, and the person decides (design system, Themes): a choice made with the toggle wins; otherwise a system setting for light wins; otherwise the site is dark. Toggling back to the system's own theme forgets the manual choice.
 
 ### The Signature "Amber Dot" Element
-A standalone amber glowing indicator represents the pulse of Kopwerk. Used in headers, live status indicators, timeline nodes, and key action items:
-* **HTML/Tailwind:** `<span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]"></span>`
+A standalone flat amber dot represents the pulse of Kopwerk, without a glow. Used in headers, live status indicators, timeline nodes, and key action items:
+* **HTML/Tailwind:** `<span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500"></span>`
 
 ---
 
@@ -96,7 +112,7 @@ A standalone amber glowing indicator represents the pulse of Kopwerk. Used in he
 
 * **Selection Color:** `rgba(217, 119, 6, 0.25)` with inherited text color.
 * **Contrast:** all text meets WCAG AA (4.5:1). On light backgrounds that means `text-subtle` (`#56657a`) or darker for small labels and `amber-700` for amber text. On `#07090e`, use `slate-400` or lighter and `amber-400`.
-* **Ambient Glows:** Radial gradients with `rgba(245, 158, 11, 0.05)` to `rgba(245, 158, 11, 0)` for background atmosphere.
+* **Ambient light:** only the one still daylight behind the drawing table. No other radial washes or blobs behind content.
 
 ---
 
@@ -115,7 +131,7 @@ The website self-hosts both fonts (`@fontsource-variable/syne`, `@fontsource-var
 2. **Body & UI / Numerals:** `Plus Jakarta Sans` (`sans-serif`, legible, modern, geometric).
 
 ### Strict Letter-Spacing (Tracking) Rules
-Studio Kopwerk relies on exaggerated, deliberate letter-spacing for premium micro-typography:
+Since 7 November 2026 the wide tokens are no longer used on text (see the section at the top). Large titles use `tracking-display`, H2 `tracking-heading`; small text has no extra tracking. The wide tokens below remain only for older documents:
 
 | Level | Tailwind token (website) | Value | Usage |
 | :--- | :--- | :--- | :--- |
@@ -131,18 +147,17 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 ### Hierarchy Scale
 
 * **Eyebrow (`span`):**  
-  `font-sans text-xs sm:text-sm font-medium tracking-[0.4em] uppercase text-[#56657a] dark:text-slate-400`
+  `font-sans text-sm font-medium text-[#56657a] dark:text-slate-400`
 * **H1 / Document Title (`h1`):**  
-  `font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-[0.1em] uppercase leading-none text-slate-900 dark:text-white`
+  `font-display font-normal text-4xl sm:text-6xl md:text-7xl tracking-[-0.035em] leading-[1.05] text-slate-900 dark:text-white`
 * **H2 / Section Title (`h2`):**  
   `font-display font-medium text-2xl sm:text-4xl tracking-[-0.025em] text-slate-900 dark:text-white`
 * **Lead / Tagline (`p`):**  
-  `font-sans text-xl sm:text-2xl font-light tracking-[0.04em] text-slate-600 dark:text-slate-300`  
-  *(Key words in lead text are often italicized, e.g. `Zien wat <em class="italic font-normal">wérkt</em>.`)*
+  `font-sans text-xl sm:text-2xl font-normal text-slate-600 dark:text-slate-300`
 * **Body Text (`p`):**  
   `font-sans text-base font-normal leading-relaxed text-slate-700 dark:text-slate-300`
 * **Metadata / Footnote (`small`):**  
-  `font-sans text-xs font-semibold tracking-[0.2em] uppercase text-[#56657a] dark:text-slate-400`
+  `font-sans text-sm font-medium text-[#56657a] dark:text-slate-400`
 * **Sublead (`p`), the second step under a hero lead:**  
   `font-sans text-base sm:text-lg leading-relaxed tracking-[0.02em] text-[#56657a] dark:text-slate-400`
 * **Display (`p` or `h2`), one statement per page:**  
@@ -153,9 +168,9 @@ In the website codebase, always use the token names (defined in `src/index.css`)
 * **Easing:** `cubic-bezier(0.19, 1, 0.22, 1)` (Tailwind token `ease-kopwerk`), typically 500ms. Avoid `ease-in-out` and `easeOut`. Durations: 300ms for colour and hover, 500ms for movement and page changes, 900ms for entrances.
 * **Entrances:** the rise (`motion-safe:animate-rise`). Blocks below the first screen rise 12px into place as they scroll into view (`.kopwerk-reveal`, a CSS scroll timeline, no script); where that isn't supported they simply stand there.
 * **Page changes:** View Transitions (`src/lib/view-transition.ts`): the page's `h1` glides to where the next page's `h1` stands, the old page fades, the new one rises in. The header and the drawing stay put.
-* **Not:** bouncing or overshoot, parallax, anything that loops by itself except the dot's pulse and the werkwijze loop.
+* **Not:** bouncing or overshoot, parallax, magnetic pull, hover zoom, anything that loops by itself except the werkwijze loop.
 * **Rolling text:** on hover *and* keyboard focus the label rolls up and an amber copy rolls in (overflow hidden). The duplicate is `aria-hidden`. In code: `<RollingText>`.
-* **Reduced motion:** every animation (canvas, pulse, entrance, magnetic pull) stops or becomes a still state under `prefers-reduced-motion: reduce`.
+* **Reduced motion:** every animation (canvas, pulse, entrance) stops or becomes a still state under `prefers-reduced-motion: reduce`.
 
 ---
 
@@ -221,11 +236,11 @@ When generating **Offertes (Proposals)**, **Project Roadmaps**, or **Executive S
 In the website codebase this is the `<CapsuleButton>` component. Don't rebuild it inline.
 
 ```html
-<a href="mailto:hallo@studiokopwerk.nl" class="group inline-flex items-center gap-6 rounded-full bg-slate-900 dark:bg-white pl-8 pr-2 py-2 text-white dark:text-slate-950 shadow-xl transition-all duration-300 hover:scale-[1.02]">
-  <span class="text-sm font-medium tracking-[0.1em] uppercase">
+<a href="mailto:hallo@studiokopwerk.nl" class="group inline-flex items-center gap-6 rounded-xl bg-slate-900 dark:bg-white pl-6 pr-2 py-2 text-white dark:text-slate-950 shadow-sm transition-transform duration-150 active:scale-[0.98]">
+  <span class="text-base font-medium">
     Vertel waar het knelt
   </span>
-  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 dark:bg-black/10 transition-colors duration-300 group-hover:bg-amber-500">
+  <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 dark:bg-black/10 transition-colors duration-300 group-hover:bg-amber-500">
     &nearr;
   </span>
 </a>
@@ -243,14 +258,14 @@ The signature backdrop: the construction drawing of the K, as if the page were s
   | Dark | `rgb(226 232 240)` (slate-200) | 0.055 | 0.13 | 0.075 | 0.17 |
 
 * **Light gets a step more than dark,** so the table doesn't vanish on slate-50: light and dark are equal in quality.
-* **Layers, back to front:** the ambient amber glow, the drawing, the content, then the amber dot on the vertex (the only amber in the drawing).
+* **Layers, back to front:** the still amber daylight, the drawing, the content, then the amber dot on the vertex (the only amber in the drawing).
 * **Wide screens (640px and up):** the K is about as tall as the screen, its stem at 10% of the width, left of centre, so it never competes with the wordmark.
 * **Phones (under 640px):** the K is drawn cropped. Its stem continues the header logo's stem as one line, the arms run off the right edge, and the content stands left-aligned just right of the stem. A page gives the vertex a place with an empty, `aria-hidden` element marked `data-tekentafel-vertex` in a gap between blocks (on the home page: between the mission line and the button); without one the vertex sits at 60% of the height. Pages that move the dot (`/werk`) put their markers on the stem line.
 * **The dot never sits on text:** only in a margin, on the stem, or in a gap left for it.
 * **The dot never crosses text either:** a page's dot positions all lie on one reading line (the left margin on wide screens, the stem on phones). Along that line the dot glides; to anywhere else (to or from the vertex) it fades out and reappears. While the footer is in view the dot rests in the margin beside it.
 * **The dot hands itself over:** while a component with its own dot is the block being read (the loop on Begin and Aanpak), the reading dot fades out (`useAmberDot(…, hide)`). One dot walking, amber at one or two points.
 * **The page's one moment:** a page may give the dot one moment that carries meaning (`useAmberDot(…, glide)`). On Begin it is the full stop of the promise: after landing on the vertex it flies slowly (1.4s) to the end of *Zien wat wérkt* and stays there; scrolling back up to the promise flies it back. On phones the way up crosses text, so there it fades and reappears instead. The `h1` keeps a real full stop for screen readers (`sr-only`), and before the script runs the full stop is drawn in amber.
-* **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands and keeps pulsing. Then the drawing is still. The glow follows a mouse or pen with a long lag and drifts slowly on touch screens. Reduced motion: the finished drawing, a still dot and a still glow.
+* **Motion:** on load the lines draw themselves once (about 2.6s, brand curve), the K follows, the dot lands with one pulse. Then the drawing is still. The light stays where the sun would be. Reduced motion: the finished drawing and a still dot.
 * **Elsewhere (slides, covers, social images):** use the same drawing static, with the same opacities and the dot on the vertex. Not behind running text in documents or offertes.
 
 ### G. Een film bij een opdracht (`/werk`)
@@ -272,7 +287,7 @@ The card on `/werk` stays small. An opdracht with an image may add a short film 
 * **One slot per page (design system: `Slot`):** every page ends in the footer with its own last line (the route's `slot.line`, else "Klein beginnen, snel iets maken dat werkt."), the capsule and, smaller, "Of mail zelf" with the address and "Kopieer". At most one quiet way on (`slot.next`). Pages have no closing section of their own. Below, quiet: the pages, the company details and Privacy. The dot rests beside the last line.
 * **The contact card (`ContactCard`):** the capsule opens the first conversation: the five frictions plus "Iets anders" as choices, "Vertel het in een mail" with the choice as the subject (`mailtoHref(knelt)`, "Waar het knelt: …"), and at the bottom the address with copy. Focus starts on the first choice.
 * **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`) draws the design system's Kopwerk line icons. No third-party icon set.
-* **Corners:** `rounded-2xl` and `rounded-full` only, also for focus areas of links (`rounded-full`).
+* **Corners:** by size. Cards and panels `rounded-2xl`, buttons `rounded-xl` or `rounded-lg`, small inner parts `rounded-md`; `rounded-full` only for dots, rings and the focus areas of text links.
 
 ### I. Kies waar het knelt (Begin)
 The frictions from the positionering, word for word, as buttons (`<KnelpuntKiezer>`): a hollow ring that fills amber when chosen, the answer below it (↳, Syne) and the capsule "Vertel het in een mail", which opens the mail with the friction in the subject ("Waar het knelt: …"). One open at a time. Before the script runs it is the plain list of pairs (`<Knelpunten>`).
@@ -304,8 +319,8 @@ When prompting an external LLM/Agent to generate an artifact for Studio Kopwerk,
 Generate this document strictly following the Studio Kopwerk Design System:
 - Palette: Dark mode #07090e (never #000000), Light mode #f8fafc (slate-50), Accent Amber #f59e0b.
 - Typography: Display font 'Syne' (geometric/bold) and Body font 'Plus Jakarta Sans'.
-- Letter-spacing: Ultra-wide (0.4em-0.5em) for uppercase eyebrows/labels; wide (0.1em) for headings.
-- Aesthetic: Minimalist, architectural, generous whitespace, frosted glass cards (backdrop-blur), glowing amber dots for status.
+- Type: sentence case everywhere, no uppercase labels, no wide letter-spacing, weights 400-600, no italic.
+- Aesthetic: Minimalist, architectural, generous whitespace, quiet surfaces with hairlines, one flat amber dot, no glows or pills.
 - Tone: Confident, action-oriented ("Zien wat wérkt", "Vertel waar het knelt"), zero corporate filler.
 - Logo URL: https://www.studiokopwerk.nl/favicon.svg
 - Contact: hallo@studiokopwerk.nl

@@ -12,7 +12,7 @@ import { hairline, raster } from '../../lib/raster';
 import { cn } from '../../lib/utils';
 import type { PageSlot } from '../../routes';
 
-const link = 'group inline-block -mx-1 px-1 py-1.5 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300';
+const link = 'group inline-block -mx-1 px-1 py-1.5 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300';
 
 const details = ['Oosterweg 24, 9751 PH Haren Gn', 'KvK 42154955', 'Btw NL004525964B92'];
 
@@ -87,7 +87,7 @@ export function Footer({ slot, onDotTarget }: { slot?: PageSlot; onDotTarget: (t
         <div className="flex flex-col items-start gap-6">
           <ContactButton />
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-semibold tracking-wide-xl uppercase text-subtle dark:text-slate-400">Of mail zelf</span>
+            <span className="text-sm font-medium text-subtle dark:text-slate-400">Of mail zelf</span>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
               <a
                 href={mailtoHref()}
@@ -98,7 +98,7 @@ export function Footer({ slot, onDotTarget }: { slot?: PageSlot; onDotTarget: (t
               <button
                 type="button"
                 onClick={copyAddress}
-                className="group inline-flex items-center gap-2 rounded-full border border-slate-500 dark:border-slate-400 pl-3 pr-4 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
+                className="group inline-flex items-center gap-2 rounded-lg border border-slate-500 dark:border-slate-400 pl-3 pr-4 py-2 text-sm font-medium text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
               >
                 <Icon name={copy === 'copied' ? 'check' : 'copy'} className="size-4" />
                 <RollingText accentClassName="text-amber-700 dark:text-amber-400">Kopieer</RollingText>

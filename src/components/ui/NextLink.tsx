@@ -4,7 +4,7 @@ import { RollingText } from './RollingText';
 import { cn } from '../../lib/utils';
 
 /**
- * The quiet way on to the next page: small uppercase words and an arrow, never a second button.
+ * The quiet way on to the next page: a few quiet words and an arrow, never a second button.
  * A page ends with one call to action and at most one of these.
  */
 export function NextLink({ href, children, className }: { href: string; children: string; className?: string }) {
@@ -12,7 +12,7 @@ export function NextLink({ href, children, className }: { href: string; children
     <Link
       href={href}
       className={cn(
-        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-xs font-semibold tracking-wide-xl uppercase text-slate-700 dark:text-slate-300',
+        'group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300',
         className
       )}
     >

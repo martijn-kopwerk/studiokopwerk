@@ -16,7 +16,7 @@ describe('prerendering', () => {
   it('shows work before recognition, the maker and how to begin, with a way on from each', () => {
     const { html } = render('/');
     // The full stop is the amber dot, but a real one for screen readers and search
-    expect(html).toMatch(/<h1[^>]*>Zien wat <em[^>]*>wérkt<\/em><span[^>]*><span class="sr-only">.<\/span>/);
+    expect(html).toMatch(/<h1[^>]*>Zien wat wérkt<span[^>]*><span class="sr-only">.<\/span>/);
     const ids = [...(projects.length > 0 ? ['werk'] : []), 'knelt', 'martijn', 'werkwijze'];
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
@@ -27,8 +27,8 @@ describe('prerendering', () => {
     expect(html.split('Vertel waar het knelt').length - 1).toBeGreaterThanOrEqual(2);
     // The loop is a real list of the three steps; the frictions and their answers read without the script
     expect(html).toContain('aria-label="Hoe we werken"');
-    expect(html).toContain('Jij beslist wat blijft.');
-    expect(html).toContain('Een proefversie van schermen die zonder uitleg werken.');
+    expect(html).toContain('Jij beslist wat blijft');
+    expect(html).toContain('Een proefversie van schermen die zonder uitleg werken');
   });
 
   it('renders the 404 page for unknown paths and keeps it out of search results', () => {

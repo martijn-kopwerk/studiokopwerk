@@ -30,7 +30,7 @@ export function KleineDingen() {
         {kleineDingen.map((ding) => (
           <li
             key={ding.titel}
-            className="flex flex-col gap-4 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-kopwerk-dark/80 shadow-xl shadow-slate-900/5"
+            className="flex flex-col gap-4 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-kopwerk-dark/80 shadow-sm shadow-slate-900/5 dark:shadow-none"
           >
             <div
               className={cn(
@@ -50,7 +50,7 @@ export function KleineDingen() {
                 />
               )}
             </div>
-            <span className="text-xs font-semibold tracking-wide-xl uppercase text-amber-700 dark:text-amber-400">
+            <span className="text-sm font-medium text-amber-700 dark:text-amber-400">
               {ding.soort}
             </span>
             <h3 className="font-display font-semibold text-2xl leading-snug text-slate-900 dark:text-white">

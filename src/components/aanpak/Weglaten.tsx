@@ -80,11 +80,11 @@ export function Weglaten({ vraag, items, rest }: { vraag?: string; items: string
         type="button"
         aria-pressed={weg}
         onClick={toggle}
-        className="group self-start inline-flex items-center gap-3 rounded-full border border-slate-500 dark:border-slate-400 pl-2 pr-5 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
+        className="group self-start inline-flex items-center gap-3 rounded-lg border border-slate-500 dark:border-slate-400 pl-2 pr-5 py-2 text-sm font-medium text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
       >
         <span
           aria-hidden="true"
-          className="flex size-7 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-950 transition-colors duration-300 ease-kopwerk group-hover:bg-amber-500 group-hover:text-slate-950 group-focus-visible:bg-amber-500 group-focus-visible:text-slate-950 motion-reduce:transition-none"
+          className="flex size-7 items-center justify-center rounded-md bg-slate-900 dark:bg-white text-white dark:text-slate-950 transition-colors duration-300 ease-kopwerk group-hover:bg-amber-500 group-hover:text-slate-950 group-focus-visible:bg-amber-500 group-focus-visible:text-slate-950 motion-reduce:transition-none"
         >
           {weg ? <Icon name="restart" className="size-3.5" /> : <Icon name="eraser" className="size-3.5" />}
         </span>

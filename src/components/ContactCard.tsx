@@ -79,10 +79,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         initialFocus={mailRef}
-        className="w-full sm:max-w-2xl md:max-w-3xl max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden border-0 bg-white/95 dark:bg-kopwerk-dark/95 p-8 sm:p-12 shadow-2xl backdrop-blur-2xl text-slate-900 dark:text-slate-100"
+        className="w-full sm:max-w-2xl md:max-w-3xl max-h-[calc(100dvh-2rem)] overflow-y-auto overflow-x-hidden border-0 bg-white/95 dark:bg-kopwerk-dark/95 p-8 sm:p-12 shadow-[0_8px_24px_rgba(15,23,42,0.08)] dark:shadow-none dark:ring-1 dark:ring-white/10 backdrop-blur-2xl text-slate-900 dark:text-slate-100"
         showCloseButton={true}
       >
-        <div aria-hidden="true" className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-amber-500/5 dark:bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* One heading that answers the button that opened the card, and one line on what to do */}
         <DialogHeader className="relative z-10 gap-3 pr-5">
@@ -113,7 +112,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="group inline-flex items-center gap-2 rounded-full border border-slate-500 dark:border-slate-400 px-3 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
+              className="group inline-flex items-center gap-2 rounded-lg border border-slate-500 dark:border-slate-400 px-3 py-2 text-sm font-medium text-slate-900 dark:text-white transition-colors duration-300 ease-kopwerk hover:border-amber-600 dark:hover:border-amber-400 motion-reduce:transition-none"
             >
               <Icon name={copied ? 'check' : 'copy'} className="size-4" />
               {copyLabels[copyState]}

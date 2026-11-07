@@ -141,7 +141,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
       >
         <div className="flex items-center gap-3 pr-12">
           <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-amber-500" />
-          <DialogTitle className="font-sans text-xs font-semibold tracking-wide-xl uppercase leading-normal text-slate-400">
+          <DialogTitle className="font-sans text-sm font-medium leading-normal text-slate-400">
             {project.title}
           </DialogTitle>
         </div>
@@ -211,7 +211,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
                     <button
                       type="button"
                       onClick={replay}
-                      className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-wide-xl uppercase text-slate-400 hover:text-white transition-colors duration-500 ease-kopwerk"
+                      className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors duration-500 ease-kopwerk"
                     >
                       <Icon name="restart" className="size-4" />
                       Bekijk opnieuw
@@ -237,7 +237,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
               >
                 {scene && (
                   <>
-                    <span className="shrink-0 font-display font-bold text-sm tracking-wide-lg text-amber-400">
+                    <span className="shrink-0 font-display font-semibold text-sm text-amber-400">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="font-display font-medium text-lg sm:text-2xl leading-snug text-white text-pretty">
