@@ -34,7 +34,7 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Dark Mode Core:** `--color-kopwerk-dark` (`#07090e`) - Use via `bg-kopwerk-dark`. Never use pure black (`#000000`), including for overlays and shadows (use `kopwerk-dark/…`).
 - **Light Mode Core:** `slate-50` (`#f8fafc`).
 - **Text & Borders:** Use Tailwind's `slate` scale (`slate-900` for light mode text, `slate-400`/`500` for secondary text/eyebrows).
-- **Accents:** Tailwind's `amber` scale. `amber-500` (`#f59e0b`) for primary interaction, dots and fills. `amber-400` or `amber-600` for depth and glows. Success states use amber too; no green/emerald.
+- **Accents:** Tailwind's `amber` scale. `amber-500` (`#f59e0b`) for primary interaction, dots and fills. `amber-400` or `amber-600` for depth. No glows: the amber dot is flat, without coloured shadows, and nothing pulses on a loop (the logo and the drawing's dot pulse once on load). Success states use amber too; no green/emerald.
 - **Contrast (WCAG AA, 4.5:1 for text):** amber *text* on light backgrounds is `amber-700` (never `amber-500`/`600`); on dark it is `amber-400`. Small grey labels: `text-subtle dark:text-slate-400` (the design system's `ink-subtle`, `#56657a` on light; never `slate-400` on white or `slate-500` on `kopwerk-dark`).
 
 ### Typography
@@ -42,25 +42,23 @@ All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's gene
 - **Body & UI (Sans):** `Plus Jakarta Sans` via `font-sans` (Clean, highly legible).
 - Both are self-hosted through `@fontsource-variable/*` (imported in `src/main.tsx`). Don't add Google Fonts links; the CSP blocks them.
 - **Tracking (Letter-spacing):** Use the custom tokens instead of hardcoded values or `tracking-tight`/`tracking-wide`:
-  - `tracking-wide-sm` (0.04em) - For lead/body text and mixed-case button labels.
-  - `tracking-wide-md` (0.1em) - For H1 titles and 14px capsule CTA labels.
-  - `tracking-wide-lg` (0.15em) - For large open titles.
-  - `tracking-wide-xl` (0.2em) - For uppercase buttons/labels.
-  - `tracking-super-wide` (0.4em) - For eyebrow text.
-  - `tracking-ultra-wide` (0.5em) - For extreme micro-typography.
-  - `tracking-heading` (-0.025em) - For H2 section titles (sentence case, set tight).
-  - `tracking-display` (-0.035em) - For the one `display` statement per page.
+  - `tracking-display` (-0.035em) - For H1 page titles and the one `display` statement per page.
+  - `tracking-heading` (-0.025em) - For H2 section titles and large figures.
+  - Small text (labels, buttons, menu, eyebrows, body) gets no extra tracking. `tracking-wide-sm` at most on running text.
+  - Since 7 November 2026 (PR #67, unslop): no `uppercase` and no `tracking-wide-md` to `tracking-ultra-wide` on text. Sentence case everywhere, page titles included.
+- **Weights and style:** 400 to 600 only (no `font-bold`, no `font-light`), and no italic for emphasis. Hierarchy comes from size and colour. Text is at least 12px, also inside sketches and previews.
 - **Display and sublead:** `<Typography variant="display">` sets the one sentence a page is about large (`text-display`, fluid): a line from the positionering or the core sentence Martijn wrote for that page. At most once per page and never as a title. `variant="sublead"` is the second step under a hero lead. The project's tokens are registered in `cn()` (`src/lib/utils.ts`) so tailwind-merge doesn't mistake `text-display` for a colour; add new tokens there too.
 
 ## 4. Components & Interactions
 - **Logo:** `<KopwerkLogo>` (`src/components/ui/KopwerkLogo.tsx`), the K with its amber dot, in the header on every screen size.
 - **Buttons:** Avoid generic symmetric pills. Primary CTAs use `<CapsuleButton>` (`src/components/ui/CapsuleButton.tsx`): the bespoke asymmetric capsule with a distinct icon well and contrast inversion on hover. `<Button>` is only for quiet utility controls (ghost icon buttons).
 - **Micro-interactions:** Rolling-text on hover/focus via `<RollingText>` (`src/components/ui/RollingText.tsx`), or `<RollingLetters>` for one large line. Don't hand-roll the two-span pattern.
-- **The call to action:** `<ContactButton>` (magnetic capsule, `aria-haspopup="dialog"`, opens the contact card). Don't rebuild it per page.
+- **The call to action:** `<ContactButton>` (the capsule, `aria-haspopup="dialog"`, opens the contact card; no magnetic pull, no hover zoom). Don't rebuild it per page.
 - **How a page ends:** the footer carries the page's `Slot`: the route's `slot.line` and `slot.next` (`src/routes.tsx`), the capsule and "Of mail zelf" with the address. Pages don't add a closing section of their own.
 - **The contact card** (`src/components/ContactCard.tsx`) starts with the mail action and copyable address. The frictions plus "Iets anders" are optional help in a closed disclosure. Focus starts on the mail action; choosing a friction returns there. Mail links go through `mailtoHref(knelt?)` (`src/lib/contact.ts`) so the subject is always "Waar het knelt" or "Waar het knelt: …".
 - **Icons:** `<Icon name="…">` (`src/components/ui/Icon.tsx`), the design system's Kopwerk line icons. No `lucide-react` or other icon sets.
-- **Radius:** only `rounded-2xl` and `rounded-full`.
+- **Radius:** by size. Cards and panels `rounded-2xl`, buttons `rounded-xl` (the capsule) or `rounded-lg`, small inner parts `rounded-md`; `rounded-full` only for dots, rings and the focus areas of text links. Not everything is a pill.
+- **Shadows:** light theme small and soft (`shadow-sm`, floating bars `0 8px 24px` at 6%); dark theme none, depth from hairlines.
 - **Focus:** one rule for the whole site in `src/index.css`: a 2px solid outline, 2px offset, `amber-600` on light and `amber-400` on dark (the design system's `focus`). Don't add focus rings or `outline-none` to interactive elements; only headings that receive focus after navigation opt out.
 - **Easing:** Use the `ease-kopwerk` token (`cubic-bezier(0.19,1,0.22,1)`), usually with `duration-500`. In Motion, use `[0.19, 1, 0.22, 1]`. Never `ease-in-out` or `easeOut`.
 - **Entrance animations:** CSS via `motion-safe:animate-rise` (tune with `[--rise-from:…]` and `[animation-delay:…]`). Blocks below the first screen get `kopwerk-reveal` (a CSS scroll timeline, no script). No bouncing, no parallax.
