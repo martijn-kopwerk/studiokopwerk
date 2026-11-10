@@ -7,6 +7,8 @@ import { Over } from './pages/Over';
 import { Aanpak } from './pages/Aanpak';
 import { Werk } from './pages/Werk';
 import { Privacy } from './pages/Privacy';
+import { Voorwaarden } from './pages/Voorwaarden';
+import { versies, type Voorwaarden as Versie } from './lib/voorwaarden';
 
 // How a page ends (design system: Slot): its own last line and at most one quiet way on. Without one the page
 // ends with "Begin met één ding dat knelt.".
@@ -64,11 +66,13 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Privacy,
   };
-  if (shown.length === 0) return [home, aanpak, privacy, over];
+  const voorwaarden = buildVoorwaarden(versies);
+  if (shown.length === 0) return [home, aanpak, privacy, ...voorwaarden, over];
   return [
     home,
     aanpak,
     privacy,
+    ...voorwaarden,
     {
       meta: {
         path: '/werk',
@@ -86,6 +90,31 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       },
     },
     over,
+  ];
+}
+
+/**
+ * De algemene voorwaarden: /voorwaarden toont de nieuwste versie, /voorwaarden/<datum> elke versie apart, zodat een
+ * offerte naar de afgesproken versie kan linken. De gedateerde kopie van de nieuwste staat niet in zoekmachines.
+ */
+export function buildVoorwaarden(list: Versie[]): PageRoute[] {
+  const [nieuwste] = list;
+  if (!nieuwste) return [];
+  const description = 'De algemene voorwaarden van Studio Kopwerk voor een proefversie, afmaken en een training.';
+  return [
+    {
+      meta: { path: '/voorwaarden', title: 'Algemene voorwaarden · Studio Kopwerk', description },
+      Page: () => <Voorwaarden versie={nieuwste} />,
+    },
+    ...list.map((versie) => ({
+      meta: {
+        path: versie.path,
+        title: `Algemene voorwaarden, versie ${versie.label} · Studio Kopwerk`,
+        description,
+        noindex: versie === nieuwste,
+      },
+      Page: () => <Voorwaarden versie={versie} />,
+    })),
   ];
 }
 

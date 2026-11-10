@@ -8,7 +8,9 @@ describe('share images', () => {
   it('gives every page its own image, and the image exists', () => {
     for (const route of routes) {
       const image = shareImageFor(route.meta.path);
-      expect(image.path, `${route.meta.path} heeft geen eigen deelbeeld`).toBe(route.meta.path);
+      // Every version of the voorwaarden shares the image of /voorwaarden.
+      const own = route.meta.path.startsWith('/voorwaarden/') ? '/voorwaarden' : route.meta.path;
+      expect(image.path, `${route.meta.path} heeft geen eigen deelbeeld`).toBe(own);
     }
     for (const image of shareImages) {
       expect(existsSync(`public/og/${image.name}.png`), `public/og/${image.name}.png ontbreekt: npm run share-images`).toBe(true);

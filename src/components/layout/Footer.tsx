@@ -21,7 +21,7 @@ type CopyState = 'idle' | 'copied' | 'failed';
 /**
  * How every page ends (design system: Slot and Footer): the page's own last line, the capsule "Vertel waar het
  * knelt" and, smaller, "Of mail zelf" with the address. One invitation per page: the capsule is the step, the address
- * is for whoever prefers to write themselves. Then the quiet meta row: the pages, the company details and Privacy.
+ * is for whoever prefers to write themselves. Then the quiet meta row: the pages, the company details, Privacy and Voorwaarden.
  * The amber dot rests in the margin beside the last line while the footer is in view. On phones it stands right of
  * the K's stem.
  */
@@ -143,8 +143,13 @@ export function Footer({ slot, onDotTarget }: { slot?: PageSlot; onDotTarget: (t
           <span suppressHydrationWarning className="after:content-['•'] after:ml-2">
             © {currentYear} Studio Kopwerk
           </span>
-          <Link href="/privacy" className="-my-1 py-1 underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
-            Privacy
+          <span className="after:content-['•'] after:ml-2">
+            <Link href="/privacy" className="-my-1 py-1 underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
+              Privacy
+            </Link>
+          </span>
+          <Link href="/voorwaarden" className="-my-1 py-1 underline underline-offset-4 hover:text-slate-900 dark:hover:text-white">
+            Voorwaarden
           </Link>
         </p>
       </div>

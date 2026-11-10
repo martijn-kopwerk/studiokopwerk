@@ -56,9 +56,19 @@ export const shareImages: ShareImage[] = [
     url: 'studiokopwerk.nl/privacy',
     alt: 'Privacy bij Studio Kopwerk: Wat ik bewaar.',
   },
+  {
+    name: 'voorwaarden',
+    path: '/voorwaarden',
+    eyebrow: 'Voorwaarden',
+    title: 'Algemene voorwaarden',
+    url: 'studiokopwerk.nl/voorwaarden',
+    alt: 'Studio Kopwerk: Algemene voorwaarden.',
+  },
 ];
 
 // The image for a page; pages without their own (the 404) share Begin's.
 export function shareImageFor(path: string): ShareImage {
-  return shareImages.find((image) => image.path === path) ?? shareImages[0]!;
+  // Every version of the voorwaarden (/voorwaarden/2026-11-09) shares the image of /voorwaarden.
+  const own = path.startsWith('/voorwaarden/') ? '/voorwaarden' : path;
+  return shareImages.find((image) => image.path === own) ?? shareImages[0]!;
 }

@@ -105,6 +105,19 @@ describe('privacy', () => {
   });
 });
 
+describe('voorwaarden', () => {
+  it('shows the newest version, each version at its own address, linked from the footer', () => {
+    const { html, head } = render('/voorwaarden');
+    expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Algemene voorwaarden<\/h1>/i);
+    expect(html).toContain('Versie van 9 november 2026.');
+    expect(html).toContain('id="artikel-12"');
+    expect(html).toContain('href="#deel-b"');
+    expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/voorwaarden" />');
+    expect(render('/voorwaarden/2026-11-09').html).toContain('Rechtbank Noord-Nederland');
+    expect(render('/').html).toMatch(/<a[^>]*href="\/voorwaarden"/);
+  });
+});
+
 describe('werk', () => {
   const opdracht = (draft: boolean): Project => ({
     slug: 'x',
