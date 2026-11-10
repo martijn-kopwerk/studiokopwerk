@@ -5,11 +5,21 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import {defineConfig} from 'vite';
 
+// The Markdown plugin, except for `?raw` imports: the voorwaarden read their own headings from the plain text.
+const markdown = mdx({format: 'md', remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]});
+const transformMarkdown = markdown.transform;
+
 export default defineConfig({
   plugins: [
     // Opdrachten (src/content/werk/*/index.md): the fields at the top become `export const frontmatter`,
     // the text below becomes a component. Plain Markdown, so nothing in it can run code.
-    {enforce: 'pre', ...mdx({format: 'md', remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter]})},
+    {
+      enforce: 'pre',
+      ...markdown,
+      transform(value: string, id: string) {
+        return /[?&]raw\b/.test(id) ? undefined : transformMarkdown.call(this, value, id);
+      },
+    },
     react({include: /\.(md|jsx|tsx)$/}),
     tailwindcss(),
   ],
