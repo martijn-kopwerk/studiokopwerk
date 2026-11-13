@@ -96,7 +96,8 @@ describe('header and footer', () => {
     expect(html).toContain('href="mailto:hallo@studiokopwerk.nl?subject=Waar%20het%20knelt"');
     expect(html).toContain('KvK 42154955');
     // The hero, the slot and the compact bar (hidden until you scroll back up): nothing in between
-    expect(html.split('aria-haspopup="dialog"').length - 1).toBe(3);
+    expect(html.split('aria-haspopup="dialog"').length - 1).toBe(4);
+    expect(html).toContain('Gaat er bij jou iets anders onnodig lastig?');
     if (projects.length > 0) expect(render('/werk').html).toContain('Hier is nog plek voor');
     expect(render('/over').html).toContain('Je mail komt bij mij binnen en ik lees hem zelf.');
     if (projects.length > 0) expect(render('/werk').html).toContain('Op de tekentafel');

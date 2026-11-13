@@ -5,6 +5,7 @@ import { KnelpuntSchets, type SchetsNaam } from './KnelpuntSchets';
 import { mailtoHref } from '../lib/contact';
 import { hairline } from '../lib/raster';
 import { cn } from '../lib/utils';
+import { OpenUitnodiging } from './OpenUitnodiging';
 
 export interface Knelpunt {
   knelt: string;
@@ -27,7 +28,7 @@ export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Elke offerte is maatwerk, maar het uitwerken kost veel tijd',
     maken: 'Een offerte speciaal voor jouw klant, met veel minder tijd voor het uitwerken.',
-    aanpak: 'We brengen in kaart hoe jij een offerte maakt. Ik maak een proefversie waarin AI de klantvraag uitwerkt op basis van jouw aanbod en afspraken. Jij controleert de inhoud en de prijs.',
+    aanpak: 'Ik breng je offertewerk in kaart en maak een proefversie waarin AI de klantvraag uitwerkt met jouw aanbod en afspraken. Jij controleert inhoud en prijs.',
     schets: 'offerte',
   },
   {
@@ -39,13 +40,13 @@ export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Je medewerkers houden eigen lijstjes naast het systeem bij',
     maken: 'Minder dubbel bijhouden. Samen zien wat nog moet, wat loopt en wat klaar is.',
-    aanpak: 'Ik kijk waarom de eigen lijstjes nodig zijn en ontwerp een overzicht dat past bij het werk. We proberen waar AI kan helpen om informatie te verwerken en dubbel invoeren te verminderen.',
+    aanpak: 'Ik onderzoek waarom de lijstjes nodig zijn en ontwerp een passend overzicht. We proberen waar AI helpt bij het verwerken van updates.',
     schets: 'werkoverzicht',
   },
   {
     knelt: 'Voor één klantvraag zoek je in drie verschillende programma’s',
     maken: 'Minder zoeken en schakelen voordat je een klant kunt helpen.',
-    aanpak: 'We bepalen welke informatie je nodig hebt en uit welke bronnen die komt. In een proefversie proberen we hoe AI die kan samenbrengen en een antwoord kan voorbereiden. Jij kijkt het na.',
+    aanpak: 'We kiezen welke bronnen nodig zijn. Ik maak een proefversie waarin AI de informatie samenbrengt en een antwoord voorbereidt. Jij kijkt het na.',
     schets: 'plek',
   },
 ];
@@ -89,7 +90,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
 
   useEffect(() => setInteractive(true), []);
 
-  if (!interactive) return <Knelpunten items={items} />;
+  if (!interactive) return <><Knelpunten items={items} /><OpenUitnodiging /></>;
 
   return (
     <div className="flex flex-col items-start gap-6">
@@ -135,16 +136,17 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                     {maken}
                   </p>
                   {aanpak && <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">{aanpak}</p>}
-                  {schets && <KnelpuntSchets naam={schets} />}
                   <CapsuleButton href={mailtoHref(label ?? knelt)} className="w-auto">
                     Vertel het in een mail
                   </CapsuleButton>
+                  {schets && <KnelpuntSchets naam={schets} />}
                 </div>
               </div>
             </li>
           );
         })}
       </ul>
+      <OpenUitnodiging />
 
     </div>
   );
