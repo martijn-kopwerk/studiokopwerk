@@ -77,7 +77,7 @@ export function Werk() {
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">
-          Bij elke opdracht staat wat het scheelt.
+          Bij elke opdracht een stil filmpje van hoe het werkt.
         </Typography>
       </div>
 

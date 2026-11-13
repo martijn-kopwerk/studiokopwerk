@@ -35,7 +35,8 @@ const LANDED_MS = 2700;
  */
 export function Home() {
   const { active, markers, zone, stop } = useReadingStops();
-  const werk = projects.find((project) => project.film) ?? projects[0];
+  // The opdracht with a scene marked for Begin (`begin:`), else the newest with a film
+  const werk = projects.find((project) => project.begin) ?? projects.find((project) => project.film) ?? projects[0];
   const werkwijzeIndex = werk ? 3 : 2;
   // A saving in minutes (per mail) can be made personal: how many hours a year is that for you?
   const minuten = werk?.begin?.figure?.unit === 'min' ? Number.parseInt(werk.begin.figure.value, 10) : NaN;
