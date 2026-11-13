@@ -15,29 +15,33 @@ export interface Knelpunt {
   schets?: SchetsNaam;
 }
 
-// What gets stuck, and what we make for it: what it does for people, never the kind of product. Word for word from
-// the positionering, in its order.
+// Five concrete work situations, chosen with Martijn. Labels also become the mail subject.
 export const knelpunten: Knelpunt[] = [
   {
-    knelt: 'Werk dat loopt zoals het ooit gegroeid is, met stappen die niemand meer kan uitleggen.',
-    label: 'Er zitten te veel stappen in je werk',
-    maken: 'Een proefversie van een kortere weg, van aanvraag tot factuur',
-    schets: 'stroom',
+    knelt: 'Je hebt goede data, maar mist het overzicht',
+    maken: 'Een proefversie van een scherm dat laat zien wat belangrijk is en waar je aandacht nodig is',
+    schets: 'data',
   },
-  { knelt: "Gegevens verspreid over losse programma's.", label: "Je zoekt steeds in losse programma's", maken: 'Een proefversie van één plek waar je alles terugvindt', schets: 'plek' },
   {
-    knelt: 'Klanten die op je website niet snappen wat je doet, terwijl je werk goed is.',
-    label: 'Je website legt niet goed uit wat je doet',
-    maken: 'Een proefversie van je website, waarmee je ziet of klanten begrijpen wat je doet',
+    knelt: 'Je maakt elke offerte opnieuw, terwijl veel hetzelfde blijft',
+    maken: 'Een proefversie die een eerste opzet maakt vanuit de klantvraag en je vaste aanbod. Jij controleert de inhoud en de prijs.',
+    schets: 'offerte',
+  },
+  {
+    knelt: 'Je werk is goed, maar je website maakt dat niet duidelijk',
+    maken: 'Een proefversie van een website waarop bezoekers begrijpen wat je doet en of je hen kunt helpen',
     schets: 'website',
   },
   {
-    knelt: 'Werk dat elke week opnieuw met de hand gaat.',
-    label: 'Je doet elke week hetzelfde werk met de hand',
-    maken: 'Een proefversie waarin AI een terugkerende taak overneemt. Jij kijkt of het klopt.',
-    schets: 'herhaling',
+    knelt: 'Je medewerkers houden eigen lijstjes naast het systeem bij',
+    maken: 'Een proefversie van een eenvoudig overzicht dat aansluit op hun dagelijkse werk',
+    schets: 'werkoverzicht',
   },
-  { knelt: 'Schermen waar je eerst uitleg bij nodig hebt.', label: 'Je schermen hebben steeds uitleg nodig', maken: 'Een proefversie van schermen die zonder uitleg werken', schets: 'scherm' },
+  {
+    knelt: 'Voor één klantvraag zoek je in drie verschillende programma’s',
+    maken: 'Een proefversie van één plek waar je de informatie vindt die je nodig hebt om verder te kunnen',
+    schets: 'plek',
+  },
 ];
 
 /**

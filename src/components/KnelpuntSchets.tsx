@@ -3,24 +3,23 @@ import { Tekentafel } from './werk/Tekentafel';
 import { Icon } from './ui/Icon';
 import { cn } from '../lib/utils';
 
-export type SchetsNaam = 'stroom' | 'plek' | 'website' | 'herhaling' | 'scherm';
+export type SchetsNaam = 'data' | 'offerte' | 'website' | 'werkoverzicht' | 'plek';
 
 // The same pen, paper and hand-drawn lines as Werk's "Op de tekentafel".
 // These are possibilities to explore, not finished screens or customer results.
 const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number]; uitleg: string }> = {
-  stroom: {
+  data: {
     lijnen: [
-      'M20 62 Q47 60 74 63 L73 111 Q46 113 21 110 Z',
-      'M32 77 L59 78 M32 89 L53 90 M32 100 L60 99',
-      'M79 86 Q95 84 110 86 M103 80 L110 86 L103 92',
-      'M118 62 Q143 60 168 63 L167 111 Q143 113 119 110 Z',
-      'M131 79 L155 80 M131 91 L151 90',
-      'M174 86 Q191 84 205 86 M198 80 L205 86 L198 92',
-      'M214 62 Q238 60 261 63 L260 111 Q237 113 215 110 Z',
-      'M226 86 L234 94 L250 76',
+      'M18 43 Q62 41 104 44 L103 138 L19 137 Z',
+      'M19 62 L103 63 M19 81 L103 82 M19 100 L103 101 M19 119 L103 120 M46 44 L45 137 M75 44 L74 138',
+      'M111 90 L138 90 M131 83 L138 90 L131 97',
+      'M149 32 Q205 30 261 33 L260 147 Q205 150 150 146 Z',
+      'M163 50 L213 51 M164 131 L164 81 M164 131 L245 132',
+      'M177 125 L177 107 L188 107 L188 125 M200 125 L200 92 L211 92 L211 125 M223 125 L223 71 L234 71 L234 125',
+      'M220 52 L228 60 L243 43',
     ],
-    eindpunt: [250, 76],
-    uitleg: 'Gegevens gaan mee van aanvraag naar offerte. Jij kijkt na voordat er iets uitgaat.',
+    eindpunt: [243, 43],
+    uitleg: 'Van een volle tabel naar een helder overzicht. Je ziet wat aandacht vraagt.',
   },
   plek: {
     lijnen: [
@@ -47,7 +46,7 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
     eindpunt: [226, 116],
     uitleg: 'Een helder aanbod en een duidelijke volgende stap. Je bezoeker weet waar hij kan beginnen.',
   },
-  herhaling: {
+  offerte: {
     lijnen: [
       'M23 34 Q53 32 82 35 L81 75 L24 74 Z M34 47 L69 48 M34 59 L61 60',
       'M23 100 Q53 98 82 101 L81 141 L24 140 Z M34 113 L69 114 M34 125 L61 126',
@@ -57,20 +56,20 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M204 122 L213 131 L236 108',
     ],
     eindpunt: [236, 108],
-    uitleg: 'AI maakt een eerste concept. Jij leest het na, stuurt bij en beslist wat je verstuurt.',
+    uitleg: 'Klantvraag en vast aanbod vormen de eerste opzet. Jij controleert de inhoud en de prijs.',
   },
-  scherm: {
+  werkoverzicht: {
     lijnen: [
-      'M65 21 Q140 18 215 22 L214 159 Q140 162 66 158 Z',
-      'M66 42 Q140 40 214 43',
-      'M84 62 Q125 60 166 63',
-      'M84 78 Q140 76 196 79 L195 103 Q140 105 85 102 Z',
-      'M96 91 L149 92',
-      'M84 129 Q84 119 94 119 L145 119 Q155 119 155 129 Q155 139 145 139 L94 139 Q84 139 84 129',
-      'M172 127 L180 135 L197 115',
+      'M27 35 Q140 32 253 36 L252 146 Q140 150 28 145 Z',
+      'M28 55 L252 56 M100 56 L99 146 M176 56 L175 147',
+      'M42 72 L84 73 M115 72 L160 73 M191 72 L235 73',
+      'M41 87 L86 88 L85 108 L42 107 Z M41 116 L86 117 L85 136 L42 135 Z',
+      'M113 87 L162 88 L161 108 L114 107 Z',
+      'M189 87 L238 88 L237 108 L190 107 Z',
+      'M201 96 L209 103 L225 85',
     ],
-    eindpunt: [197, 115],
-    uitleg: 'Eén begrijpelijke vraag tegelijk. Het scherm helpt je verder, zonder dat iemand het hoeft uit te leggen.',
+    eindpunt: [225, 85],
+    uitleg: 'Wat moet nog, wat loopt en wat is klaar? Een overzicht dat past bij de werkdag.',
   },
 };
 
