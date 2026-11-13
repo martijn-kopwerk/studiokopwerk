@@ -28,7 +28,7 @@ export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Elke offerte is maatwerk, maar het uitwerken kost veel tijd',
     maken: 'Een offerte speciaal voor jouw klant, met veel minder tijd voor het uitwerken.',
-    aanpak: 'Ik breng je offertewerk in kaart en maak een proefversie waarin AI de klantvraag uitwerkt met jouw aanbod en afspraken. Jij controleert inhoud en prijs.',
+    aanpak: 'Ik kijk hoe je offertes maakt. Ik maak een proefversie waarin AI de klantvraag uitwerkt met jouw aanbod en afspraken. Jij controleert inhoud en prijs.',
     schets: 'offerte',
   },
   {

@@ -57,7 +57,7 @@ export function OpenUitnodiging() {
     <section aria-labelledby="iets-anders" className="w-full pt-3 flex flex-col items-start gap-4">
       <KortereRoute />
       <h3 id="iets-anders" className="font-display font-medium text-xl sm:text-2xl leading-snug tracking-heading text-slate-900 dark:text-white">
-        Gaat er bij jou iets anders onnodig lastig?
+        Is er bij jou iets anders onnodig lastig?
       </h3>
       <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
         Vertel me hoe het nu gaat. Ik denk met je mee over wat eenvoudiger, mooier of sneller kan.

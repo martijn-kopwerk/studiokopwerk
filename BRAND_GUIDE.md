@@ -20,7 +20,7 @@ De herkenningsschetsen volgen de stijl van 'Op de tekentafel' op Werk (bijgestel
 
 De vijf werksituaties zijn op elk scherm direct als keuze zichtbaar en beginnen ingeklapt. Na openen komt eerst de mogelijke opbrengst, daarna de aanpak en de mailactie. De potloodschets volgt als ondersteuning, zonder dubbel onderschrift. Martijn onderzoekt het werk en ontwerpt de oplossing; AI versnelt het uitwerken. Benoem AI waar die een concrete rol heeft, zonder ieder voordeel aan AI toe te schrijven. Offertes zijn maatwerk voor de klant met veel minder uitwerktijd, geen generiek sjabloon. De ondernemer controleert inhoud en prijs. Geen onbewezen percentages of vaste tijdsgaranties.
 
-Onder de vijf situaties staat een open uitnodiging: "Gaat er bij jou iets anders onnodig lastig?" Een potloodlijn vindt één keer een kortere route; daarna rust. De knop gebruikt de bestaande contactkaart. Het is geen zesde categorie en de mailkeuze blijft optioneel. Ook de tekentafel op Werk en de rondgang komen na één cyclus tot rust. Bij verminderde beweging staan de eindbeelden direct stil. EMC volgt later, na afronding en toestemming.
+Onder de vijf situaties staat een open uitnodiging: "Is er bij jou iets anders onnodig lastig?" Een potloodlijn vindt één keer een kortere route; daarna rust. De knop gebruikt de bestaande contactkaart. Het is geen zesde categorie en de mailkeuze blijft optioneel. Ook de tekentafel op Werk en de rondgang komen na één cyclus tot rust. Bij verminderde beweging staan de eindbeelden direct stil. EMC volgt later, na afronding en toestemming.
 
 ## Ontwerp zonder AI-look, 7 november 2026
 
