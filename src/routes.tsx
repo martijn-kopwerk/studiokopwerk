@@ -73,7 +73,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       meta: {
         path: '/werk',
         title: 'Wat ik maakte · Studio Kopwerk',
-        description: 'Wat ik maakte en wat het opleverde, met een stil filmpje van Operatie Kopwerk.',
+        description: 'Wat ik maakte en wat het opleverde, met stille filmpjes van Operatie Kopwerk en Onze Elf.',
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,
