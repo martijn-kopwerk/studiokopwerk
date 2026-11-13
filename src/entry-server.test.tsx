@@ -57,10 +57,10 @@ describe('aanpak', () => {
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
-    expect(html).toContain('Werkt het? Dan maken we het af');
+    expect(html).toContain('Jij kiest of je verder wilt');
     expect(html).not.toContain('online zetten');
     expect(html).not.toContain('prototype');
-    expect(html).toContain('Binnen twee weken na akkoord maak ik de proefversie');
+    expect(html).toContain('In de offerte staat de planning');
     expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');

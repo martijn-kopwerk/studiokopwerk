@@ -18,22 +18,22 @@ const stappen: [string, ReactNode][] = [
   ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk.'],
   [
     'Samen kiezen waar het knelt',
-    'We kiezen één ding dat je nu tijd of ergernis kost. Ik maak een proefversie van de oplossing, zodat je ziet of het werkt. Je krijgt vooraf een voorstel met een vaste prijs, vanaf €\u00a0500 exclusief btw.',
+    'We kiezen één ding dat je wilt verbeteren. Je krijgt een offerte met een vaste prijs vanaf €\u00a0500 exclusief btw. Daarin staat wat ik maak, wanneer je het kunt proberen en wat je krijgt bij de overdracht.',
   ],
   [
-    'Binnen twee weken een proefversie',
-    'Binnen twee weken na akkoord maak ik de proefversie, met verzonnen gegevens. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan.',
+    'Zelf proberen en samen bijstellen',
+    'Ik maak met AI de proefversie, met verzonnen gegevens. Jij probeert hem en vertelt wat beter kan. Samen stellen we bij binnen de afspraken van de offerte.',
   ],
   [
-    'Werkt het? Dan maken we het af',
-    'De proefversie is van jou, met alles waarmee hij gemaakt is. Voor dagelijks gebruik spreken we samen af wat nodig is en wat het kost.',
+    'Jij kiest of je verder wilt',
+    'Wil je ermee verder? Dan spreken we af wat daarvoor nodig is, wie het oppakt en wat het kost. Een proefversie verplicht je niet om verder te bouwen.',
   ],
 ];
 
 // What a reader still wants to know before mailing, answered in a sentence or two each.
 const vragen: [string, ReactNode][] = [
   [
-    'Wat heb ik na twee weken in handen?',
+    'Wat kan ik proberen?',
     'Een werkende proefversie van de oplossing, bijvoorbeeld de weg van een aanvraag naar een offerte of een paar schermen van je nieuwe portaal. Je klikt erdoorheen, probeert het met je eigen werk in gedachten en laat het aan je team zien. Er staan nog verzonnen gegevens in. Zo weet je wat werkt, voordat je meer laat maken.',
   ],
   [
@@ -51,10 +51,17 @@ const vragen: [string, ReactNode][] = [
       .
     </>,
   ],
-  ['Van wie is het?', 'Van jou. Je krijgt ook de bestanden waarmee de proefversie is gemaakt. Een ander kan er later dus op verder bouwen.'],
+  [
+    'Wanneer kan ik de proefversie proberen?',
+    'Dat spreken we per opdracht af. In de offerte staat de planning, met een concrete datum voor de eerste proefversie.',
+  ],
+  [
+    'Wat krijg ik bij de overdracht?',
+    'Dat spreken we vooraf af en zetten we in de offerte. Daarin staat welke bestanden je krijgt, of de code erbij hoort en waarmee je daarna verder kunt.',
+  ],
   [
     'En als ik het echt wil gebruiken?',
-    'Dan maken we het af voor elke dag: met je eigen gegevens, bereikbaar voor je klanten of medewerkers en met iemand die het bijhoudt. Wat dat vraagt en wat het kost, spreken we apart af. Werk je al met een ontwikkelaar? Dan bouwt die verder op de proefversie en ik help bij de overdracht. Zo niet, dan kijken we samen wat er nodig is.',
+    'Een proefversie is bedoeld om te proberen. Voor dagelijks gebruik is verder werk nodig, bijvoorbeeld voor je eigen gegevens of toegang voor klanten en medewerkers. Als je verder wilt, spreken we apart af wie dat doet, wat het kost en wie het daarna bijhoudt. Je kunt ook kiezen voor een eigen ontwikkelaar; de overdracht stemmen we daarop af.',
   ],
 ];
 
@@ -122,7 +129,7 @@ export function Aanpak() {
         id="verloop"
         number="01"
         label="Zo verloopt het"
-        title="Van eerste gesprek tot dagelijks gebruik"
+        title="Van je vraag naar een proefversie"
         zoneRef={zone(STOP.verloop)}
         markerRef={stop(STOP.verloop)}
       >

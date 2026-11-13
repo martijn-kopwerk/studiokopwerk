@@ -97,7 +97,6 @@ export function Over() {
           Het eerste gesprek kan online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk. Je hoeft niets van techniek te weten of al een oplossing te hebben.
         </p>
         <p>Ik neem weinig opdrachten tegelijk aan. Je mail komt bij mij binnen en ik lees hem zelf.</p>
-        <p>Binnen twee weken maak ik de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan. Werkt het? Dan maken we het af. Wat daarvoor nodig is, spreken we samen af.</p>
       </Row>
 
       <details className={`sm:ml-14 py-8 border-t ${hairline}`}>
