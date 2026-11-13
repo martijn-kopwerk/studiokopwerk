@@ -46,10 +46,10 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('answers practical questions before the method and philosophy, ending in one call to action', () => {
+  it('answers practical questions before the method, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Zo werken we samen<\/h1>/i);
-    const ids = ['verloop', 'vragen', 'werkwijze', 'waarom'];
+    const ids = ['verloop', 'vragen', 'werkwijze'];
     // Where it pinches is on Begin; Aanpak doesn't repeat it
     expect(html).not.toContain('aria-labelledby="knelt"');
     expect(html).toContain('vanaf €\u00a0500');

@@ -11,7 +11,7 @@ import { hairline, raster } from '../lib/raster';
 import { cn } from '../lib/utils';
 
 // The stops the amber dot travels past while you read, in document order.
-const STOP = { verloop: 0, vragen: 1, werkwijze: 2, waarom: 3 } as const;
+const STOP = { verloop: 0, vragen: 1, werkwijze: 2 } as const;
 
 // How an opdracht goes, in the order it happens.
 const stappen: [string, ReactNode][] = [
@@ -74,8 +74,8 @@ const prose = 'text-base leading-relaxed tracking-wide-sm text-slate-700 dark:te
 const marker = 'absolute -left-8 sm:-left-10 top-[calc(0.5lh-0.4375rem)] size-3.5';
 
 /**
- * Hoe Studio Kopwerk werkt, as a short walk in the reader's order: how an opdracht goes, from the talk to what you use
- * every day; how we work (the werkwijze); why (the visie); and the questions left before you mail. Where it pinches
+ * Hoe Studio Kopwerk werkt, as a short walk in the reader's order: how an opdracht goes, the questions left before
+ * you mail and how we work (the werkwijze). Where it pinches
  * is on Begin, so it isn't repeated here. Each chapter is a row on the site's grid
  * (src/lib/raster.ts) with a hairline above, and every list uses the same row style. The amber dot keeps pace with the reader down the margin, from chapter to chapter,
  * ending beside the call to action. It never leaves that reading line here, and the page reads the same without it.
@@ -193,19 +193,6 @@ export function Aanpak() {
           ) : (
             'Zo gaat elke opdracht. Ook deze site is zo gemaakt.'
           )}
-        </p>
-      </Chapter>
-
-      <Chapter
-        id="waarom"
-        number="04"
-        label="Waarom zo"
-        title="Meer techniek is niet vanzelf beter"
-        zoneRef={zone(STOP.waarom)}
-        markerRef={stop(STOP.waarom)}
-      >
-        <p>
-          Een nieuw scherm of meer AI maakt je werk niet vanzelf beter. Daarom beginnen we met één vraag en een proefversie die je zelf kunt proberen. Zo zie je wat helpt en wat je kunt weglaten.
         </p>
       </Chapter>
 
