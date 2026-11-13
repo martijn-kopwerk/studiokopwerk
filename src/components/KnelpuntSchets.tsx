@@ -7,7 +7,7 @@ export type SchetsNaam = 'portaal' | 'offerte' | 'website' | 'werkoverzicht' | '
 
 // The same pen, paper and hand-drawn lines as Werk's "Op de tekentafel".
 // These are possibilities to explore, not finished screens or customer results.
-const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number]; uitleg: string }> = {
+const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number] }> = {
   portaal: {
     lijnen: [
       'M25 25 Q140 22 255 26 L254 154 Q140 158 26 153 Z',
@@ -19,7 +19,6 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M202 133 L211 141 L231 121',
     ],
     eindpunt: [231, 121],
-    uitleg: 'Een duidelijke indeling, leesbare informatie en een logische volgende stap.',
   },
   plek: {
     lijnen: [
@@ -32,7 +31,6 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M133 115 L140 122 L156 105',
     ],
     eindpunt: [156, 105],
-    uitleg: 'Mail, notities en werk bij elkaar. Je vindt wat je nodig hebt op één plek.',
   },
   website: {
     lijnen: [
@@ -44,7 +42,6 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M200 128 L208 136 L226 116',
     ],
     eindpunt: [226, 116],
-    uitleg: 'Een helder aanbod en een duidelijke volgende stap. Je bezoeker weet waar hij kan beginnen.',
   },
   offerte: {
     lijnen: [
@@ -56,7 +53,6 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M204 122 L213 131 L236 108',
     ],
     eindpunt: [236, 108],
-    uitleg: 'Jouw aanbod en de vraag van deze klant komen samen in een offerte die je zelf nakijkt.',
   },
   werkoverzicht: {
     lijnen: [
@@ -69,7 +65,6 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M201 96 L209 103 L225 85',
     ],
     eindpunt: [225, 85],
-    uitleg: 'Wat moet nog, wat loopt en wat is klaar? Een overzicht dat past bij de werkdag.',
   },
 };
 
@@ -79,9 +74,6 @@ export function KnelpuntSchets({ naam, className }: { naam: SchetsNaam; classNam
   return (
     <figure className={cn('w-full max-w-md rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-5 sm:p-6', className)}>
       <Tekentafel key={ronde} strokes={schets.lijnen} eindpunt={schets.eindpunt} loop={false} className="w-full" />
-      <figcaption className="mt-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-        {schets.uitleg}
-      </figcaption>
       <button type="button" onClick={() => setRonde(ronde + 1)} className="mt-3 inline-flex items-center gap-2 rounded-lg py-2 text-sm text-subtle dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
         <Icon name="restart" className="size-4" />
         Teken opnieuw

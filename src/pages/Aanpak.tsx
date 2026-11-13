@@ -186,7 +186,7 @@ export function Aanpak() {
             <>
               Zo gaat elke opdracht. Ook deze site is zo gemaakt, net als{' '}
               <Link href="/werk" className="underline underline-offset-4">
-                het programma waarmee Studio Kopwerk zelf draait
+                de opdrachten op Werk
               </Link>
               .
             </>

@@ -54,6 +54,7 @@ export function Rondgang({ className }: { className?: string }) {
     let frame = 0;
     let start = 0;
     let waiting = true;
+    let klaar = false;
     const zet = (hoek: number) => {
       const { x, y } = punt(hoek);
       dot.setAttribute('cx', x.toFixed(1));
@@ -61,7 +62,13 @@ export function Rondgang({ className }: { className?: string }) {
     };
     const tick = (now: number) => {
       if (!start) start = now;
-      let t = (now - start) % DUUR;
+      if (now - start >= DUUR) {
+        zet(HOEKEN[BESLIST]!);
+        setWacht(true);
+        klaar = true;
+        return;
+      }
+      let t = now - start;
       let hoek = HOEKEN[BESLIST]!;
       let nu = false;
       for (const [van, naar, ms] of RONDE) {
@@ -82,7 +89,7 @@ export function Rondgang({ className }: { className?: string }) {
     // Only while the loop is on screen; it starts its round from the top each time it comes into view.
     const observer = new IntersectionObserver(([entry]) => {
       cancelAnimationFrame(frame);
-      if (entry?.isIntersecting) {
+      if (entry?.isIntersecting && !klaar) {
         start = 0;
         frame = requestAnimationFrame(tick);
       } else {

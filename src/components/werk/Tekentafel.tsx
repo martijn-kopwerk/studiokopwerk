@@ -2,7 +2,7 @@ import { useEffect, useId, useRef } from 'react';
 
 /**
  * A screen being sketched on the drafting table: one pen line draws a page (frame, bar, heading, text, button, picture),
- * the amber dot is the pen tip, and a check mark closes it. Then it rests, fades and starts over.
+ * the amber dot is the pen tip, and a check mark closes it. By default the finished sketch stays still.
  * Prerendered and under reduced motion: the finished sketch, still, with the dot resting on the check mark.
  * Plays only while in view. One path per stroke: a dash pattern starts over at every subpath.
  */
@@ -22,7 +22,7 @@ const DRAW = 7000;
 const REST = 2200;
 const FADE = 600;
 
-export function Tekentafel({ className, strokes = SKETCH, loop = true, eindpunt = [226, 116] }: {
+export function Tekentafel({ className, strokes = SKETCH, loop = false, eindpunt = [226, 116] }: {
   className?: string;
   strokes?: readonly string[];
   loop?: boolean;

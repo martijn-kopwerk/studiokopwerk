@@ -45,7 +45,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
     },
     Page: Aanpak,
     // The proof that it works, once /werk exists
-    slot: shown.length > 0 ? { next: { href: '/werk', label: 'Bekijk het werk' } } : undefined,
+    slot: shown.length > 0 ? { next: { href: '/werk', label: 'Bekijk wat ik maakte' } } : undefined,
   };
   const over: PageRoute = {
     meta: {
