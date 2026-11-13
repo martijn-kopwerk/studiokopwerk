@@ -59,7 +59,8 @@ describe('aanpak', () => {
     const ids = ['verloop', 'vragen', 'werkwijze'];
     // Where it pinches is on Begin; Aanpak doesn't repeat it
     expect(html).not.toContain('aria-labelledby="knelt"');
-    expect(html).toContain('vanaf €\u00a0500');
+    expect(html).toContain('We spreken vooraf af wat ik maak en wat het kost.');
+    expect(html).not.toContain('500 exclusief btw');
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);

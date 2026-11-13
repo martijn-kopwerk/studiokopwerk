@@ -18,7 +18,7 @@ const stappen: [string, ReactNode][] = [
   ['Een gesprek zoals het jou uitkomt', 'Vrijblijvend, online of bij jou op de zaak, waar je ook onderneemt in Nederland. We praten over je werk.'],
   [
     'Samen kiezen waar het knelt',
-    'We kiezen één ding dat je wilt verbeteren. Je krijgt een offerte met een vaste prijs vanaf €\u00a0500 exclusief btw. Daarin staat wat ik maak, wanneer je het kunt proberen en wat je krijgt bij de overdracht.',
+    'We kiezen één ding dat je wilt verbeteren. We spreken vooraf af wat ik maak en wat het kost. In de offerte staat ook wanneer je het kunt proberen en wat je krijgt bij de overdracht.',
   ],
   [
     'Zelf proberen en samen bijstellen',
