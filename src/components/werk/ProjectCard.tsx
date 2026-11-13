@@ -92,9 +92,17 @@ export function ProjectVideo({ project }: { project: Project & { video: NonNulla
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [phone, setPhone] = useState(false);
+  const [sceneIndex, setSceneIndex] = useState(0);
   const { preload, show, dialog } = useFilmDialog(project);
   const shape = phone ? project.video.upright : project.video.wide;
   const alt = project.begin?.alt ?? (project.media?.kind === 'beeld' ? project.media.alt : project.title);
+  const scenes = project.film ?? [];
+  const scene = scenes[sceneIndex];
+  const followScene = (time: number) => {
+    let index = 0;
+    while (index + 1 < scenes.length && time >= (scenes[index + 1].from ?? 0)) index++;
+    setSceneIndex(index);
+  };
 
   useEffect(() => {
     const query = window.matchMedia(PHONE);
@@ -129,12 +137,14 @@ export function ProjectVideo({ project }: { project: Project & { video: NonNulla
           key={phone ? 'staand' : 'liggend'}
           ref={ref}
           poster={shape.poster}
-          aria-label={`${alt} Een stil filmpje met verzonnen gegevens.`}
+          aria-label={`${scene?.alt ?? alt} Een stil filmpje met verzonnen gegevens.`}
           muted
           loop
           playsInline
           disablePictureInPicture
           preload="none"
+          onTimeUpdate={(event) => followScene(event.currentTarget.currentTime)}
+          onLoadedMetadata={(event) => followScene(event.currentTarget.currentTime)}
           className="block size-full object-cover"
         >
           <source src={shape.webm} type="video/webm" />
@@ -147,6 +157,11 @@ export function ProjectVideo({ project }: { project: Project & { video: NonNulla
           </Button>
         </div>
       </div>
+      {scene && (
+        <p aria-live="off" className="sm:hidden min-h-[5.5rem] text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          {scene.text}
+        </p>
+      )}
       <button
         type="button"
         aria-label={`Bekijk hoe het werkt: ${project.title}`}

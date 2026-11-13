@@ -106,7 +106,7 @@ export function Home() {
                 variant="lead"
                 className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-pretty text-slate-800 dark:text-slate-200"
               >
-                Een duidelijkere website of minder werk met de hand. Ik maak met AI een proefversie van de oplossing, zodat je ziet of het werkt.
+                Een duidelijkere website, een prettiger portaal of minder werk met de hand. Ik maak met AI een proefversie die je zelf kunt proberen.
               </Typography>
               <Typography variant="sublead" className="max-w-lg text-pretty">
                 Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
@@ -163,8 +163,7 @@ export function Home() {
         {...at()}
       >
         <p>
-          Wat we maken hangt af van waar het knelt: een duidelijke website of een prettig portaal voor je klanten of
-          medewerkers, minder werk met de hand, of AI een vaste plek in je werk. Kies wat je herkent.
+          Waar loop je in je werk tegenaan? Kies wat je herkent en bekijk wat we kunnen proberen.
         </p>
       </Block>
 
@@ -191,10 +190,10 @@ export function Home() {
         {...at()}
       >
         <p>
-          We kiezen samen één ding dat je nu tijd of ergernis kost. Binnen twee weken maak ik met AI de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan.
+          We kiezen samen één ding dat je wilt verbeteren. Vooraf spreken we af wat ik maak, wat het kost en wanneer je het kunt proberen.
         </p>
-        <p>Vanaf € 500 exclusief btw.</p>
-        <p>Werkt het? Dan maken we het af. De proefversie is van jou. Voor dagelijks gebruik spreken we samen af wat nodig is en wat het kost.</p>
+        <p>Jij probeert de proefversie. We kijken samen wat werkt en wat anders moet. Daarna beslis je of je verder wilt.</p>
+        <p>AI helpt bij het maken. Ik bewaak de kwaliteit.</p>
         <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 

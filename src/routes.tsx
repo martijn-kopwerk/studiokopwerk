@@ -22,7 +22,7 @@ export interface PageRoute {
 }
 
 const siteDescription =
-  'Een duidelijkere website of minder werk met de hand. Martijn maakt met AI een proefversie van de oplossing, vanaf € 500 exclusief btw. Je hoeft zelf niets van techniek te weten.';
+  'Een duidelijkere website, een prettiger portaal of minder werk met de hand. Martijn maakt met AI een proefversie die je zelf kunt proberen.';
 
 /**
  * Every page is a concrete path, so the build can prerender each one to its own HTML file.
@@ -40,7 +40,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/aanpak',
       title: 'Aanpak · Studio Kopwerk',
       description:
-        'Eerst proberen, dan beslissen. Binnen twee weken een proefversie van de oplossing, vanaf € 500 exclusief btw. Werkt het? Dan maken we het af.',
+        'Een proefversie vanaf € 500 exclusief btw. Vooraf spreken we af wat je krijgt en wanneer. Verder bouwen is een aparte keuze.',
     },
     Page: Aanpak,
     // The proof that it works, once /werk exists

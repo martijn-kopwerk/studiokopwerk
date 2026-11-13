@@ -25,10 +25,9 @@ const copyLabels: Record<CopyState, string> = {
   selected: 'Geselecteerd, kopieer met Ctrl+C of ⌘C',
 };
 
-// The canonical frictions still supply the mail subject; choosing one is optional.
+// The visible choice also supplies the mail subject; choosing one is optional.
 const ANDERS = 'Iets anders';
-const keuzes = [...knelpunten.map(({ knelt }) => knelt), ANDERS];
-const labels = [...knelpunten.map(({ label, knelt }) => label ?? knelt), ANDERS];
+const keuzes = [...knelpunten.map(({ label, knelt }) => label ?? knelt), ANDERS];
 
 /**
  * What "Vertel waar het knelt" opens (design system: ContactCard): the first conversation, not another copy of the
@@ -101,7 +100,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
             <p className="text-sm text-subtle dark:text-slate-400">
               Het eerste gesprek is vrijblijvend. Een proefversie kost vanaf €&nbsp;500 exclusief btw. Je hoort binnen twee werkdagen van me.
             </p>
-            {gekozen !== null && <p aria-live="polite" className="text-sm text-subtle dark:text-slate-400">Over: {labels[gekozen]}</p>}
+            {gekozen !== null && <p aria-live="polite" className="text-sm text-subtle dark:text-slate-400">Over: {keuzes[gekozen]}</p>}
           </div>
 
           {/* The address stays above the optional choices, including for people who use webmail. */}
@@ -148,7 +147,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
                           : 'border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-900 dark:hover:border-white'
                       )}
                     >
-                      {labels[index]}
+                      {keuzes[index]}
                     </button>
                   </li>
                 );
