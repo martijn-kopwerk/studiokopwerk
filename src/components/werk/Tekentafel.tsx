@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 
 /**
  * A screen being sketched on the drafting table: one pen line draws a page (frame, bar, heading, text, button, picture),
@@ -22,7 +22,13 @@ const DRAW = 7000;
 const REST = 2200;
 const FADE = 600;
 
-export function Tekentafel({ className }: { className?: string }) {
+export function Tekentafel({ className, strokes = SKETCH, loop = true, eindpunt = [226, 116] }: {
+  className?: string;
+  strokes?: readonly string[];
+  loop?: boolean;
+  eindpunt?: readonly [number, number];
+}) {
+  const rasterId = useId();
   const svg = useRef<SVGSVGElement>(null);
   const lines = useRef<(SVGPathElement | null)[]>([]);
   const pen = useRef<SVGGElement>(null);
@@ -31,17 +37,18 @@ export function Tekentafel({ className }: { className?: string }) {
     const el = svg.current;
     const paths = lines.current.filter((path): path is SVGPathElement => path !== null);
     const tip = pen.current;
-    if (!el || !tip || paths.length !== SKETCH.length) return;
+    if (!el || !tip || paths.length !== strokes.length) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const lengths = paths.map((path) => path.getTotalLength());
     const total = lengths.reduce((sum, length) => sum + length, 0);
     let frame = 0;
-    let start = 0;
+    let start = performance.now();
     let offset = 0;
 
     const paint = (now: number) => {
-      const t = (now - start) % (DRAW + REST + FADE);
+      const elapsed = now - start;
+      const t = loop ? elapsed % (DRAW + REST + FADE) : Math.min(elapsed, DRAW);
       const drawn = Math.min(t / DRAW, 1);
       const eased = drawn < 1 ? drawn - Math.sin(drawn * Math.PI * 2 * 9) / (Math.PI * 2 * 9 * 1.6) : 1;
       let left = eased * total;
@@ -57,7 +64,7 @@ export function Tekentafel({ className }: { className?: string }) {
         left -= length;
       });
       el.style.opacity = t > DRAW + REST ? `${1 - (t - DRAW - REST) / FADE}` : '1';
-      frame = requestAnimationFrame(paint);
+      if (loop || elapsed < DRAW) frame = requestAnimationFrame(paint);
     };
 
     const watch = new IntersectionObserver(([entry]) => {
@@ -66,7 +73,7 @@ export function Tekentafel({ className }: { className?: string }) {
         start = performance.now() - offset;
         frame = requestAnimationFrame(paint);
       } else {
-        offset = (performance.now() - start) % (DRAW + REST + FADE);
+        offset = loop ? (performance.now() - start) % (DRAW + REST + FADE) : Math.min(performance.now() - start, DRAW);
       }
     });
     watch.observe(el);
@@ -74,18 +81,18 @@ export function Tekentafel({ className }: { className?: string }) {
       watch.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [strokes, loop]);
 
   return (
     <svg ref={svg} viewBox="0 0 280 180" aria-hidden="true" className={className}>
       <defs>
-        <pattern id="tekentafel-raster" width="14" height="14" patternUnits="userSpaceOnUse">
+        <pattern id={rasterId} width="14" height="14" patternUnits="userSpaceOnUse">
           <circle cx="1" cy="1" r="0.8" className="fill-slate-300 dark:fill-slate-700" />
         </pattern>
       </defs>
-      <rect x="1" y="1" width="278" height="178" rx="14" fill="url(#tekentafel-raster)" />
+      <rect x="1" y="1" width="278" height="178" rx="14" fill={`url(#${rasterId})`} />
       <g fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-slate-500 dark:stroke-slate-400">
-        {SKETCH.map((d, i) => (
+        {strokes.map((d, i) => (
           <path
             key={d}
             ref={(path) => {
@@ -95,7 +102,7 @@ export function Tekentafel({ className }: { className?: string }) {
           />
         ))}
       </g>
-      <g ref={pen} transform="translate(226 116)">
+      <g ref={pen} transform={`translate(${eindpunt[0]} ${eindpunt[1]})`}>
         <circle r="9" className="fill-amber-500/25" />
         <circle r="4" className="fill-amber-500" />
       </g>

@@ -34,6 +34,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
   const home: PageRoute = {
     meta: { path: '/', title: 'Studio Kopwerk · Zien wat wérkt · AI voor ondernemers in Nederland', description: siteDescription },
     Page: Home,
+    slot: shown.length > 0 ? { next: { href: '/werk', label: 'Bekijk wat ik maakte' } } : undefined,
   };
   const aanpak: PageRoute = {
     meta: {

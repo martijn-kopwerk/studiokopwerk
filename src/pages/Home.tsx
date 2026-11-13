@@ -5,11 +5,8 @@ import { ContactButton } from '../components/ContactButton';
 import { KnelpuntKiezer } from '../components/Knelpunten';
 import { Portret } from '../components/Portret';
 import { Rondgang } from '../components/Rondgang';
-import { ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
-import { Rekenhulp } from '../components/werk/Rekenhulp';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { useReadingStops } from '../hooks/useReadingStops';
-import { projects } from '../lib/projects';
 import { cn } from '../lib/utils';
 
 // Running text.
@@ -23,9 +20,10 @@ const markerRight = 'lg:left-[calc(-50cqw-4.5rem)]';
 
 // When the dot has landed on the K's vertex (animate-dot-land: 1.9s delay, 0.8s), it flies on to the full stop.
 const LANDED_MS = 2700;
+const STOP = { knelt: 0, martijn: 1, werkwijze: 2 } as const;
 
 /**
- * Begin is the front door and a short walk: the promise, a concrete example, where it pinches, who you talk to
+ * Begin is the front door and a short walk: the promise, the visitor's work, who you talk to
  * and how to begin, each a block of its own shape with one quiet way on to the page behind it, then the call to action again.
  *
  * The page's one moment (design system, "de tekentafel"): the amber dot lands on the K's vertex, then flies to the end
@@ -35,11 +33,6 @@ const LANDED_MS = 2700;
  */
 export function Home() {
   const { active, markers, zone, stop } = useReadingStops();
-  // The opdracht with a scene marked for Begin (`begin:`), else the newest with a film
-  const werk = projects.find((project) => project.begin) ?? projects.find((project) => project.film) ?? projects[0];
-  const werkwijzeIndex = werk ? 3 : 2;
-  // A saving in minutes (per mail) can be made personal: how many hours a year is that for you?
-  const minuten = werk?.begin?.figure?.unit === 'min' ? Number.parseInt(werk.begin.figure.value, 10) : NaN;
 
   const punt = useRef<HTMLSpanElement | null>(null);
   // Once the script runs, the full stop is left empty for the dot; it flies in once it has landed on the vertex.
@@ -60,32 +53,25 @@ export function Home() {
     !inHero,
     inHero,
     // The loop has its own dot: while it is the block being read, the reading dot steps aside (one dot walking)
-    active === werkwijzeIndex
+    active === STOP.werkwijze
   );
-
-  // The blocks in reading order; Werk only while there's an opdracht to show (see routes.tsx).
-  let next = 0;
-  const at = () => {
-    const index = next++;
-    return { zoneRef: zone(index), markerRef: stop(index) };
-  };
 
   return (
     <main id="inhoud" className="relative z-10 w-full max-w-7xl mx-auto pl-14 pr-6 sm:px-10 flex-1 pb-8">
-      {/* The promise on the left, the proefversie it promises on the right: the film of Operatie Kopwerk, playing */}
+      {/* The visitor's question leads. Projects have their own page and are never selected here automatically. */}
       <section
         aria-labelledby="hero-title"
-        className="grid gap-10 lg:grid-cols-2 lg:gap-16 lg:items-center pt-8 sm:pt-16 pb-10 sm:pb-16"
+        className="sm:pl-14 pt-8 sm:pt-16 lg:pt-20 pb-12 sm:pb-20"
       >
         <div className="flex flex-col items-start text-left">
-          <div className="w-full flex flex-col items-start gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:12px]">
+          <div className="w-full max-w-4xl flex flex-col items-start gap-5 sm:gap-6 motion-safe:animate-rise [--rise-from:12px]">
             <Typography variant="eyebrow" as="p">
               Studio Kopwerk
             </Typography>
             <h1
               id="hero-title"
               tabIndex={-1}
-              className="font-display font-normal text-5xl sm:text-6xl xl:text-7xl tracking-display leading-[1.05] text-slate-900 dark:text-white text-balance outline-none"
+              className="font-display font-normal text-5xl sm:text-7xl xl:text-8xl tracking-display leading-[1.05] text-slate-900 dark:text-white text-balance outline-none"
             >
               Zien wat wérkt
               {/* The full stop is the amber dot. It stays in the text (selectable, read aloud) and is drawn by the dot. */}
@@ -105,11 +91,11 @@ export function Home() {
             <div className="flex flex-col items-start gap-3 sm:gap-4">
               <Typography
                 variant="lead"
-                className="max-w-xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-pretty text-slate-800 dark:text-slate-200"
+                className="max-w-2xl text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-snug text-pretty text-slate-800 dark:text-slate-200"
               >
                 Een duidelijkere website, een prettiger portaal of minder werk met de hand. Ik maak met AI een proefversie die je zelf kunt proberen.
               </Typography>
-              <Typography variant="sublead" className="max-w-lg text-pretty">
+              <Typography variant="sublead" className="max-w-2xl text-pretty">
                 Voor ondernemers die goed zijn in hun vak en het digitale eromheen eenvoudiger willen maken. Je hoeft zelf niets van techniek te weten.
               </Typography>
             </div>
@@ -123,37 +109,9 @@ export function Home() {
             <NextLink href="/aanpak">Bekijk wat je krijgt</NextLink>
           </div>
         </div>
-        {werk && (
-          <div className="flex flex-col motion-safe:animate-rise [--rise-from:12px] [animation-delay:120ms]">
-            <ProjectShow project={werk} />
-          </div>
-        )}
       </section>
 
-      {werk && (
-        <Block
-          id="werk"
-          title={werk.title}
-          media={
-            werk.begin?.figure ? (
-              <ProjectStat project={werk} />
-            ) : (
-              werk.begin && (
-                <Typography variant="lead" className="text-xl sm:text-2xl md:text-2xl lg:text-2xl text-pretty">
-                  {werk.begin.line}
-                </Typography>
-              )
-            )
-          }
-          {...at()}
-        >
-          <ProjectText project={werk} />
-          {minuten > 0 && <Rekenhulp minuten={minuten} />}
-          <NextLink className="self-start" href="/werk">Bekijk het werk</NextLink>
-        </Block>
-      )}
-
-      {/* A concrete example first; then recognition, the maker and how to begin */}
+      {/* Recognition and an explorable possibility first; then the maker and how to begin. */}
       <Block
         id="knelt"
         title="Wat wil je eenvoudiger maken?"
@@ -161,10 +119,11 @@ export function Home() {
         mediaSide="right"
         mediaFirst={false}
         align="start"
-        {...at()}
+        zoneRef={zone(STOP.knelt)}
+        markerRef={stop(STOP.knelt)}
       >
         <p>
-          Waar loop je in je werk tegenaan? Kies wat je herkent en bekijk wat we kunnen proberen.
+          Waar gaat tijd verloren of lopen mensen vast? Ik kijk hoe je werkt en bedenk wat eenvoudiger kan. Met AI maak ik een proefversie waarmee je kunt ervaren of die aanpak helpt.
         </p>
       </Block>
 
@@ -172,7 +131,8 @@ export function Home() {
         id="martijn"
         title="Je spreekt altijd met mij"
         media={<Portret className="w-48 sm:w-64 lg:w-80 lg:self-center" />}
-        {...at()}
+        zoneRef={zone(STOP.martijn)}
+        markerRef={stop(STOP.martijn)}
       >
         <p>
           Ik ben Martijn. Al ruim vijftien jaar werk ik aan digitale dienstverlening bij grote bedrijven, als adviseur en productmanager. Ik kijk eerst hoe mensen werken en maak dan een proefversie die je zelf kunt proberen.
@@ -188,7 +148,8 @@ export function Home() {
         media={<Rondgang className="mx-auto lg:mx-0 lg:ml-auto" />}
         mediaSide="right"
         mediaFirst={false}
-        {...at()}
+        zoneRef={zone(STOP.werkwijze)}
+        markerRef={stop(STOP.werkwijze)}
       >
         <p>
           We kiezen samen één ding dat je wilt verbeteren. Vooraf spreken we af wat ik maak, wat het kost en wanneer je het kunt proberen.
