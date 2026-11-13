@@ -41,7 +41,7 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       path: '/aanpak',
       title: 'Aanpak · Studio Kopwerk',
       description:
-        'Een proefversie vanaf € 500 exclusief btw. Vooraf spreken we af wat je krijgt en wanneer. Verder bouwen is een aparte keuze.',
+        'Vooraf spreken we af wat ik maak, wat het kost en wanneer je het kunt proberen. Verder bouwen is een aparte keuze.',
     },
     Page: Aanpak,
     // The proof that it works, once /werk exists

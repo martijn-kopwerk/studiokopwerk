@@ -98,7 +98,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({ isOpen, onClose }) => 
               Vertel het in een mail
             </CapsuleButton>
             <p className="text-sm text-subtle dark:text-slate-400">
-              Het eerste gesprek is vrijblijvend. Een proefversie kost vanaf €&nbsp;500 exclusief btw. Je hoort binnen twee werkdagen van me.
+              Het eerste gesprek is vrijblijvend. Wat ik maak en wat het kost spreken we vooraf af. Je hoort binnen twee werkdagen van me.
             </p>
             {gekozen !== null && <p aria-live="polite" className="text-sm text-subtle dark:text-slate-400">Over: {keuzes[gekozen]}</p>}
           </div>
