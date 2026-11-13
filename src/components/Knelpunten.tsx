@@ -18,9 +18,9 @@ export interface Knelpunt {
 // Five concrete work situations, chosen with Martijn. Labels also become the mail subject.
 export const knelpunten: Knelpunt[] = [
   {
-    knelt: 'Je hebt goede data, maar mist het overzicht',
-    maken: 'Een proefversie van een scherm dat laat zien wat belangrijk is en waar je aandacht nodig is',
-    schets: 'data',
+    knelt: 'Je portaal bevat goede informatie, maar is lastig te gebruiken',
+    maken: 'Een proefversie van een portaal waarin mensen vinden wat ze nodig hebben en begrijpen hoe ze verder kunnen',
+    schets: 'portaal',
   },
   {
     knelt: 'Je maakt elke offerte opnieuw, terwijl veel hetzelfde blijft',

@@ -34,7 +34,7 @@ describe('prerendering', () => {
     // The loop is a real list of the three steps; the frictions and their answers read without the script
     expect(html).toContain('aria-label="Hoe we werken"');
     expect(html).toContain('Jij beslist wat blijft');
-    expect(html).toContain('Je hebt goede data, maar mist het overzicht');
+    expect(html).toContain('Je portaal bevat goede informatie, maar is lastig te gebruiken');
     expect(html).toContain('Voor één klantvraag zoek je in drie verschillende programma’s');
   });
 

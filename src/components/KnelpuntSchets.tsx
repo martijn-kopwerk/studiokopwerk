@@ -3,23 +3,23 @@ import { Tekentafel } from './werk/Tekentafel';
 import { Icon } from './ui/Icon';
 import { cn } from '../lib/utils';
 
-export type SchetsNaam = 'data' | 'offerte' | 'website' | 'werkoverzicht' | 'plek';
+export type SchetsNaam = 'portaal' | 'offerte' | 'website' | 'werkoverzicht' | 'plek';
 
 // The same pen, paper and hand-drawn lines as Werk's "Op de tekentafel".
 // These are possibilities to explore, not finished screens or customer results.
 const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number]; uitleg: string }> = {
-  data: {
+  portaal: {
     lijnen: [
-      'M18 43 Q62 41 104 44 L103 138 L19 137 Z',
-      'M19 62 L103 63 M19 81 L103 82 M19 100 L103 101 M19 119 L103 120 M46 44 L45 137 M75 44 L74 138',
-      'M111 90 L138 90 M131 83 L138 90 L131 97',
-      'M149 32 Q205 30 261 33 L260 147 Q205 150 150 146 Z',
-      'M163 50 L213 51 M164 131 L164 81 M164 131 L245 132',
-      'M177 125 L177 107 L188 107 L188 125 M200 125 L200 92 L211 92 L211 125 M223 125 L223 71 L234 71 L234 125',
-      'M220 52 L228 60 L243 43',
+      'M25 25 Q140 22 255 26 L254 154 Q140 158 26 153 Z',
+      'M26 46 Q140 44 254 47 M82 47 L81 154',
+      'M39 64 L67 65 M39 83 L67 84 M39 102 L62 103',
+      'M98 63 L172 64 M98 76 L213 77',
+      'M98 91 Q167 89 237 92 L236 115 L99 114 Z M110 103 L183 104',
+      'M98 135 Q98 125 108 125 L169 125 Q179 125 179 135 Q179 144 169 144 L108 144 Q98 144 98 135',
+      'M202 133 L211 141 L231 121',
     ],
-    eindpunt: [243, 43],
-    uitleg: 'Van een volle tabel naar een helder overzicht. Je ziet wat aandacht vraagt.',
+    eindpunt: [231, 121],
+    uitleg: 'Een duidelijke indeling, leesbare informatie en een logische volgende stap.',
   },
   plek: {
     lijnen: [
