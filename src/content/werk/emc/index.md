@@ -1,7 +1,7 @@
 ---
 titel: "Een nieuw ontwerp voor het EMC, eerst als klikbare proefversie"
 klant: "XLABS"
-datum: 2026-11-09
+datum: 2026-11-12
 # Alleen in de preview tot XLABS akkoord geeft op de casefilm (zie Notion, EMC).
 concept: true
 
