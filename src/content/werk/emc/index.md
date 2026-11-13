@@ -19,7 +19,7 @@ film:
     tekst: "De vraag: scores die iedereen begrijpt, ook zonder technische kennis."
   - beeld: ./film-2-ontwerp.webp
     vanaf: 18
-    alt: "De bouwstenen van het ontwerp: vier kleuren, een letter, knoppen en labels, en een licht en een donker thema."
+    alt: "De bouwstenen van het ontwerp: vier kleuren, een letter, knoppen en labels. Ernaast een licht en een donker thema."
     tekst: "Eerst de bouwstenen, volgens de huisstijl van XLABS."
   - beeld: ./film-3-proefversie.webp
     vanaf: 26
