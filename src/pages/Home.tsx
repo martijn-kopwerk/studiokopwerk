@@ -123,7 +123,7 @@ export function Home() {
         markerRef={stop(STOP.knelt)}
       >
         <p>
-          Kies wat je herkent. In de schets kun je proberen hoe het anders kan. Zo begint een proefversie: met iets uit jouw werk.
+          Kies wat je herkent. Ik schets wat we kunnen proberen. Zo begint een proefversie: met iets uit jouw werk.
         </p>
       </Block>
 

@@ -16,7 +16,7 @@ Op telefoon staat onder de film een echte, selecteerbare uitlegzin die meewissel
 
 Deze richting vervangt de eerdere keuze om de eigen opdracht op Begin te tonen. De opening noemt het brede aanbod. Daarna volgen herkenbare werksituaties, Martijn en de werkwijze. Geen opdrachtfilm of caseblok op Begin en geen besparingsgetal of rekenhulp. Die staan bij de opdracht op Werk, bereikbaar via één rustige verwijzing in het paginaslot. Ook een toekomstige klantcase verschijnt niet automatisch op Begin.
 
-De herkenningsschetsen zijn kleine voorbeelden die je kunt proberen. Een bewuste klik verandert een omslachtige situatie in een mogelijke aanpak. De stappen krijgen een rustigere volgorde; amber markeert het moment waarop de ondernemer zelf beoordeelt of kiest. Alle woorden zijn echte, selecteerbare tekst. Geen timer of eindeloze animatie en geen beweging bij `prefers-reduced-motion`. De voorbeelden stellen mogelijkheden voor, geen verzonnen klanten of gegarandeerde resultaten.
+De herkenningsschetsen volgen de stijl van 'Op de tekentafel' op Werk (bijgesteld op 13 november na beoordeling van de eerste preview): een transparant vlak met gestippelde rand, een fijn puntenraster en licht onregelmatige potloodlijnen. De amberkleurige punt tekent één keer een mogelijke aanpak. Daarna blijft de tekening staan; opnieuw tekenen is een bewuste keuze. Geen stappenkaarten of voor/na-schakelaar. De betekenis staat eronder als echte selecteerbare tekst. Bij `prefers-reduced-motion` staat de voltooide schets direct stil. De voorbeelden stellen mogelijkheden voor, geen verzonnen klanten of gegarandeerde resultaten.
 
 ## Ontwerp zonder AI-look, 7 november 2026
 
