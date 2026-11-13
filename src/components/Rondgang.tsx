@@ -3,7 +3,7 @@ import { cn } from '../lib/utils';
 
 // "AI maakt, jij beslist" in three steps, word for word from the positionering. They go round, not in order.
 export const stappen = ['AI doet het maakwerk', 'Samen kijken we wat werkt', 'Jij beslist wat blijft'];
-const opnieuw = 'En dan weer opnieuw, tot het werkt';
+const opnieuw = 'Samen bijstellen, binnen de afspraken';
 
 // The loop in a 400×400 box: the circle, and each step's node on it (top, lower right, lower left).
 const C = { x: 200, y: 200, r: 130 };
@@ -36,8 +36,7 @@ const labels = [
 
 /**
  * The werkwijze as a loop (design system: `Loop`): three hollow nodes on a circle, amber where a person decides.
- * The amber dot walks the loop and waits at "Jij beslist wat blijft"; in the middle "En dan weer opnieuw, tot het
- * werkt." The words are a real list, the drawing is decoration. With reduced motion, before the script runs and
+ * The amber dot walks the loop and waits at "Jij beslist wat blijft"; in the middle "Samen bijstellen, binnen de afspraken." The words are a real list, the drawing is decoration. With reduced motion, before the script runs and
  * while the loop is out of view, the dot rests where you decide.
  */
 export function Rondgang({ className }: { className?: string }) {
