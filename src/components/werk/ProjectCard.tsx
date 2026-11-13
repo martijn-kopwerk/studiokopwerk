@@ -6,6 +6,7 @@ import { ErrorBoundary } from '../ErrorBoundary';
 import { Icon } from '../ui/Icon';
 import { Button } from '../ui/button';
 import { Stat } from '../ui/Stat';
+import { Rekenhulp } from './Rekenhulp';
 
 // The film (and its dialog dependencies) is fetched on first intent, like the contact card: hover, focus or open.
 const loadFilm = () => import('./ProjectFilm');
@@ -238,6 +239,7 @@ export function ProjectBody({ project }: { project: Project }) {
       <ProjectShow project={project} />
       <ProjectText project={project} />
       <ProjectStat project={project} className="mt-4" />
+      <ProjectRekenhulp project={project} />
     </div>
   );
 }
@@ -251,6 +253,13 @@ export function ProjectStat({ project, className }: { project: Project; classNam
       {begin.line}
     </Stat>
   );
+}
+
+/** The optional mail example belongs to Operatie Kopwerk, never to the visitor's general offer. */
+export function ProjectRekenhulp({ project }: { project: Project }) {
+  const figure = project.begin?.figure;
+  const minuten = figure?.unit === 'min' ? Number(figure.value) : NaN;
+  return project.slug === 'operatie-kopwerk' && minuten > 0 ? <Rekenhulp minuten={minuten} /> : null;
 }
 
 /** The opdracht's two or three sentences. */

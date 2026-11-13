@@ -13,17 +13,23 @@ describe('prerendering', () => {
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/" />');
   });
 
-  it('shows work before recognition, the maker and how to begin, with a way on from each', () => {
+  it('starts with the visitor’s work, then the maker and method, with projects on their own page', () => {
     const { html } = render('/');
     // The full stop is the amber dot, but a real one for screen readers and search
     expect(html).toMatch(/<h1[^>]*>Zien wat wérkt<span[^>]*><span class="sr-only">.<\/span>/);
-    const ids = [...(projects.length > 0 ? ['werk'] : []), 'knelt', 'martijn', 'werkwijze'];
+    const ids = ['knelt', 'martijn', 'werkwijze'];
     const positions = ids.map((id) => html.indexOf(`aria-labelledby="${id}"`));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).toContain('href="/over"');
     expect(html).toContain('href="/aanpak"');
-    if (projects.length > 0) expect(html).toContain('Bekijk hoe het werkt');
+    if (projects.length > 0) expect(html).toContain('Bekijk wat ik maakte');
+    expect(html).not.toContain('<video');
+    expect(html).not.toContain('Operatie Kopwerk');
+    expect(html).not.toContain('Reken met mijn voorbeeld');
+    if (projects.some((project) => project.slug === 'operatie-kopwerk')) {
+      expect(render('/werk').html).toContain('Reken met mijn voorbeeld');
+    }
     expect(html.split('Vertel waar het knelt').length - 1).toBeGreaterThanOrEqual(2);
     // The loop is a real list of the three steps; the frictions and their answers read without the script
     expect(html).toContain('aria-label="Hoe we werken"');

@@ -6,11 +6,17 @@ Wat Martijn maakt heet op de site een **proefversie**: een proefversie van de op
 
 Het brede aanbod blijft: een duidelijkere website, een prettiger portaal of minder handmatig werk. De vanafprijs van € 500 exclusief btw staat alleen op Aanpak en in de contactkaart, niet op Begin of in algemene metadata. Vooraf spreken we af wat Martijn maakt, wat het kost en wanneer je het kunt proberen. De offerte bevat per opdracht een concrete datum en zegt welke bestanden je krijgt en of code erbij hoort. Geen vaste belofte van twee weken en geen standaardbelofte van alle bestanden. Tel geen rondes. Verder bouwen is vrijwillig en apart afgesproken: "Wil je ermee verder? Dan spreken we af wat daarvoor nodig is, wie het oppakt en wat het kost." Deze keuzes zijn op 13 november door Martijn bevestigd en vervangen de betreffende aanbodafspraken van 2 en 3 november. Geen *online zetten*; zeg *echt gebruiken, met je eigen gegevens en voor je klanten of medewerkers*.
 
-Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning en komen letterlijk terug in het mailonderwerp, zowel op Begin als in de contactkaart (bevestigd op 13 november). Zonder keuze en bij "Iets anders" blijft het onderwerp "Waar het knelt". De film op Begin blijft automatisch zonder geluid afspelen (ook bevestigd op 13 november). Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
+Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning en komen letterlijk terug in het mailonderwerp, zowel op Begin als in de contactkaart (bevestigd op 13 november). Zonder keuze en bij "Iets anders" blijft het onderwerp "Waar het knelt". Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
 
 Deze keuzes zijn met Martijn in de chat bevestigd. De externe design-systembron kon in deze sessie niet worden gelezen of aangepast. De wijzigingen die daar nog vastgelegd moeten worden staan in `docs/ux-review/2026-11-02-uitwerking.md`; dit is geen claim dat de externe bron al is bijgewerkt.
 
-Op telefoon staat onder de film een echte, selecteerbare uitlegzin die meewisselt met de scène, zowel in de kaart op Begin en Werk als in het grote filmvenster (bevestigd op 13 november). Automatisch afspelen blijft stil voor schermlezers; met de hand door scènes stappen mag de uitleg aankondigen. De beschikbare hoogte houdt ruimte voor de uitleg en bediening.
+Op telefoon staat onder de film een echte, selecteerbare uitlegzin die meewisselt met de scène, zowel in de kaart op Werk als in het grote filmvenster (bevestigd op 13 november). Automatisch afspelen blijft stil voor schermlezers; met de hand door scènes stappen mag de uitleg aankondigen. De beschikbare hoogte houdt ruimte voor de uitleg en bediening.
+
+## Begin vanuit het werk van de bezoeker, 13 november 2026
+
+Deze richting vervangt de eerdere keuze om de eigen opdracht op Begin te tonen. De opening noemt het brede aanbod. Daarna volgen herkenbare werksituaties, Martijn en de werkwijze. Geen opdrachtfilm of caseblok op Begin en geen besparingsgetal of rekenhulp. Die staan bij de opdracht op Werk, bereikbaar via één rustige verwijzing in het paginaslot. Ook een toekomstige klantcase verschijnt niet automatisch op Begin.
+
+De herkenningsschetsen zijn kleine voorbeelden die je kunt proberen. Een bewuste klik verandert een omslachtige situatie in een mogelijke aanpak. De stappen krijgen een rustigere volgorde; amber markeert het moment waarop de ondernemer zelf beoordeelt of kiest. Alle woorden zijn echte, selecteerbare tekst. Geen timer of eindeloze animatie en geen beweging bij `prefers-reduced-motion`. De voorbeelden stellen mogelijkheden voor, geen verzonnen klanten of gegarandeerde resultaten.
 
 ## Ontwerp zonder AI-look, 7 november 2026
 
@@ -24,7 +30,7 @@ Op 7 november heeft Martijn een ontwerpronde naar de regels van heydamir/unslop 
 - **Knoppen hebben hoeken.** De capsule is `rounded-xl` met een `rounded-lg` pijlvak, kleine knoppen `rounded-lg`. Niet alles is een pil. Geen magnetisch effect en geen `hover:scale`: hover is een kleur- of vlakwissel, klikken een kleine indruk (`active:scale-[0.98]`).
 - **Lichte schaduwen.** Op licht klein en zacht, op donker geen schaduw maar een dun lijntje.
 - **Tekst minimaal 12 px**, ook in schetsen en voorbeelden.
-- **Begin opent links**, met de film van de opdracht ernaast. Korte regels (labels, onderschriften, de rondgang) eindigen zonder punt.
+- **Begin opent links**, met het aanbod en de bezoeker als hoofdzaak. De eerdere film naast de opening vervalt volgens de keuze van 13 november hierboven. Korte regels (labels, onderschriften, de rondgang) eindigen zonder punt.
 
 Het design system zelf is nog niet bijgewerkt; tot dat gebeurt, wint deze sectie voor de website.
 
@@ -272,7 +278,7 @@ The signature backdrop: the construction drawing of the K, as if the page were s
 
 ### G. Een film bij een opdracht (`/werk`)
 
-The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). With a silent video (`filmpje:`), the film plays in the card on `/werk` itself (`ProjectVideo`: silent, only in view, looping, pause button, a poster frame `film.webp` / `film-staand.webp` beside the video, nothing moves with reduced motion), with the capsule below it to open it large. Begin keeps a still from the film; on phones its capsule sits below the image, never over it.
+The card on `/werk` stays small. An opdracht with an image may add a short film behind it: a few real screens with one line each, opened by a deliberate click on the image ("Bekijk hoe het werkt"). With a silent video (`filmpje:`), the film plays in the card on `/werk` itself (`ProjectVideo`: silent, only in view, looping, pause button, a poster frame `film.webp` / `film-staand.webp` beside the video, nothing moves with reduced motion), with the capsule below it to open it large. Begin shows no project film or still; on phones the capsule on Werk sits below the image, never over it.
 
 * **Scenes, not video:** each scene is a still image from a demo with example data (never real client data or company details) that drifts slowly towards its focus (8%, brand curve) while a thin amber bar fills. About seven seconds a scene, five to seven scenes, then a closing frame with the line *"AI doet het maakwerk, jij beslist wat blijft."* and the capsule button *Vertel waar het knelt*, which opens the contact card.
 * **One detail per scene, never a whole screen:** crop each image to the one thing the caption is about (the menu, two mails, one draft, one cover) and show it whole and large on the dark stage, with room around it. A full screen of interface is a wall of text.
@@ -280,7 +286,7 @@ The card on `/werk` stays small. An opdracht with an image may add a short film 
 * **The viewer decides:** pause, previous, next, a bar per scene to jump to, arrow keys, Escape. With reduced motion there is no drift and nothing plays by itself; the viewer steps through.
 * **Captions are text,** in Syne, readable and selectable, and short: one or two sentences that say what the scene means for people, not what it shows (that is the image's `alt`). They follow the voice rules (`programma's`, not `apps`; no comma before *en*) and must be true of the image beside them.
 * **A saving reads as a saving:** "Dat scheelt minstens twee uur per offerte", never a bare "Minstens twee uur per offerte", which reads as what it costs.
-* **A saving as a number:** the scene with `begin:` may add `getal:` ("5 min"). The card on Begin and on `/werk` then shows it large (`<Stat>`, Syne bold) above the sentence. Only numbers the film itself says.
+* **A saving as a number:** the scene with `begin:` may add `getal:` ("5 min"). The card on `/werk` then shows it large (`<Stat>`, Syne bold) above the sentence. Only numbers the film itself says.
 * **One opdracht, one card:** while there is one opdracht, `/werk` shows it as one wide card (image left, text and saving right), without a list to choose from.
 
 

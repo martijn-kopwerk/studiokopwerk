@@ -1,138 +1,101 @@
-import type { ReactNode } from 'react';
+import { useState } from 'react';
+import { m, useReducedMotion } from 'motion/react';
+import { Icon } from './ui/Icon';
 import { cn } from '../lib/utils';
 
 export type SchetsNaam = 'stroom' | 'plek' | 'website' | 'herhaling' | 'scherm';
 
-// Hairlines in the ink colour, quieter lines in grey; the amber dot is the one point of focus (design system, Imagery:
-// "built from the system itself: hairlines, dot grids, square blocks").
-const ink = 'text-slate-900 dark:text-white';
-const quiet = 'text-slate-400 dark:text-slate-600';
-const label = 'fill-subtle dark:fill-slate-400 font-sans text-[12px] font-medium';
-
-function Stip({ cx, cy }: { cx: number; cy: number }) {
-  return <circle className="schets-stip fill-amber-500" cx={cx} cy={cy} r="5" />;
-}
-
-const schetsen: Record<SchetsNaam, { beschrijving: string; tekening: ReactNode }> = {
+// Illustrations of a possible change, not finished products or measured customer results.
+const schetsen: Record<SchetsNaam, {
+  nu: string[];
+  straks: string[];
+  proberen: string;
+  uitlegNu: string;
+  uitlegStraks: string;
+}> = {
   stroom: {
-    beschrijving: 'Vier blokken op één lijn: aanvraag, offerte, werk, factuur.',
-    tekening: (
-      <>
-        <g className={ink} fill="none" stroke="currentColor" strokeWidth="1.25">
-          <rect className="schets-lijn" x="40" y="130" width="72" height="60" />
-          <rect className="schets-lijn [animation-delay:150ms]" x="164" y="130" width="72" height="60" />
-          <rect className="schets-lijn [animation-delay:300ms]" x="288" y="130" width="72" height="60" />
-          <rect className="schets-lijn [animation-delay:450ms]" x="412" y="130" width="72" height="60" />
-          <path className="schets-lijn" d="M112 160H164M236 160H288M360 160H412" />
-        </g>
-        <g className={label}>
-          <text x="40" y="216">Aanvraag</text>
-          <text x="164" y="216">Offerte</text>
-          <text x="288" y="216">Werk</text>
-          <text x="412" y="216">Factuur</text>
-        </g>
-        <Stip cx={496} cy={160} />
-      </>
-    ),
+    nu: ['Een aanvraag komt binnen', 'Gegevens opnieuw overtypen', 'Ontbrekende informatie zoeken', 'De offerte maken'],
+    straks: ['Een aanvraag komt binnen', 'De gegevens gaan mee', 'Jij kijkt de offerte na'],
+    proberen: 'Probeer een kortere route',
+    uitlegNu: 'Tussen de aanvraag en de offerte zit veel overnemen en zoeken.',
+    uitlegStraks: 'Gegevens gaan mee naar de volgende stap. Jij houdt de controle.',
   },
   plek: {
-    beschrijving: 'Losse kleine blokken met lijnen naar één groter blok.',
-    tekening: (
-      <>
-        <g className={quiet} fill="none" stroke="currentColor" strokeWidth="1">
-          <rect className="schets-lijn" x="60" y="40" width="36" height="28" />
-          <rect className="schets-lijn" x="80" y="250" width="36" height="28" />
-          <rect className="schets-lijn" x="420" y="36" width="36" height="28" />
-          <rect className="schets-lijn" x="430" y="256" width="36" height="28" />
-          <rect className="schets-lijn" x="40" y="146" width="36" height="28" />
-          <path
-            className="schets-lijn [animation-delay:150ms]"
-            d="M96 54L220 130M116 264L220 190M420 50L300 130M430 270L300 190M76 160H220"
-          />
-        </g>
-        <rect
-          className={cn(ink, 'schets-lijn [animation-delay:300ms]')}
-          x="220"
-          y="120"
-          width="80"
-          height="80"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.25"
-        />
-        <Stip cx={260} cy={160} />
-      </>
-    ),
+    nu: ['Een mail openen', 'Het overzicht erbij zoeken', 'De notities terugvinden', 'Weer terug naar de mail'],
+    straks: ['Een klant openen', 'Mail, notities en werk bij elkaar', 'Verder met de vraag'],
+    proberen: 'Breng het bij elkaar',
+    uitlegNu: 'Om één vraag te beantwoorden moet je op verschillende plekken kijken.',
+    uitlegStraks: 'Wat bij de klant hoort staat bij elkaar. Je kunt verder met het werk.',
   },
   website: {
-    beschrijving: 'Een webpagina met één grote kop en één knop.',
-    tekening: (
-      <>
-        <g className={ink} fill="none" stroke="currentColor" strokeWidth="1.25">
-          <rect className="schets-lijn" x="70" y="30" width="380" height="260" />
-          <path className="schets-lijn [animation-delay:150ms]" d="M70 58H450" />
-          <path className="schets-lijn [animation-delay:300ms]" d="M110 120H370M110 150H300" strokeWidth="6" />
-          <rect className="schets-lijn [animation-delay:450ms]" x="110" y="200" width="120" height="32" rx="16" />
-        </g>
-        <Stip cx={314} cy={152} />
-      </>
-    ),
+    nu: ['Wat doet dit bedrijf?', 'Is dit ook voor mij?', 'Waar moet ik beginnen?'],
+    straks: ['Dit doet het bedrijf', 'Dit past bij mijn vraag', 'Dit is mijn volgende stap'],
+    proberen: 'Maak de route duidelijker',
+    uitlegNu: 'Een bezoeker moet zelf uitzoeken wat je doet en waar hij verder kan.',
+    uitlegStraks: 'Je aanbod, voor wie het is en de volgende stap volgen elkaar op.',
   },
   herhaling: {
-    beschrijving: 'Zeven gestippelde blokken die steeds terugkomen, en één blok waar jij beslist.',
-    tekening: (
-      <>
-        <g className={quiet} fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4">
-          <rect x="40" y="90" width="40" height="40" />
-          <rect x="92" y="90" width="40" height="40" />
-          <rect x="144" y="90" width="40" height="40" />
-          <rect x="196" y="90" width="40" height="40" />
-          <rect x="40" y="142" width="40" height="40" />
-          <rect x="92" y="142" width="40" height="40" />
-          <rect x="144" y="142" width="40" height="40" />
-        </g>
-        <g className={ink} fill="none" stroke="currentColor" strokeWidth="1.25">
-          <path className="schets-lijn" d="M260 136H340" />
-          <path className="schets-lijn [animation-delay:150ms]" d="M330 128L340 136L330 144" />
-          <rect className="schets-lijn [animation-delay:300ms]" x="360" y="96" width="80" height="80" />
-        </g>
-        <text className={label} x="360" y="202">
-          JIJ BESLIST
-        </text>
-        <Stip cx={400} cy={136} />
-      </>
-    ),
+    nu: ['Dezelfde gegevens verzamelen', 'Weer een antwoord schrijven', 'Alles overnemen', 'De volgende keer opnieuw'],
+    straks: ['AI maakt een concept', 'Jij leest het na en stuurt bij', 'Klaar om zelf te versturen'],
+    proberen: 'Laat AI het voorwerk doen',
+    uitlegNu: 'Hetzelfde voorwerk komt steeds terug. Jij begint telkens opnieuw.',
+    uitlegStraks: 'Je begint met een concept. Het oordeel en het versturen blijven bij jou.',
   },
   scherm: {
-    beschrijving: 'Een scherm met één veld en één knop, zonder uitleg.',
-    tekening: (
-      <>
-        <g className={ink} fill="none" stroke="currentColor" strokeWidth="1.25">
-          <rect className="schets-lijn" x="150" y="40" width="220" height="240" rx="16" />
-          <path className="schets-lijn [animation-delay:150ms]" d="M180 140H340" />
-          <rect className="schets-lijn [animation-delay:300ms]" x="180" y="190" width="160" height="36" rx="18" />
-        </g>
-        <text className={label} x="180" y="120">
-          ÉÉN VRAAG
-        </text>
-        <Stip cx={322} cy={208} />
-      </>
-    ),
+    nu: ['Waar moet ik klikken?', 'Wat moet ik hier invullen?', 'Even iemand om uitleg vragen'],
+    straks: ['Eén duidelijke vraag', 'Een begrijpelijke keuze', 'Weten hoe je verdergaat'],
+    proberen: 'Probeer een eenvoudiger scherm',
+    uitlegNu: 'Mensen moeten uitleg vragen voordat ze met het scherm kunnen werken.',
+    uitlegStraks: 'Het scherm helpt bij de keuze die op dat moment nodig is.',
   },
 };
 
-/**
- * What we make for a friction, drawn on the drafting table: a few hairlines on dotted paper, with the amber dot as the
- * one point that matters. The lines draw themselves once when the friction is chosen; with reduced motion they are
- * simply there.
- */
+/** A visitor can rearrange a familiar situation into a possible approach. No timer or automatic loop. */
 export function KnelpuntSchets({ naam, className }: { naam: SchetsNaam; className?: string }) {
-  const { beschrijving, tekening } = schetsen[naam];
+  const [anders, setAnders] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const schets = schetsen[naam];
+  const stappen = anders ? schets.straks : schets.nu;
+  const uitleg = anders ? schets.uitlegStraks : schets.uitlegNu;
+
   return (
-    <div className={cn('tekenvel w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800', className)}>
-      <svg role="img" aria-label={beschrijving} viewBox="0 0 520 320" className="block w-full h-auto">
-        {tekening}
-      </svg>
-    </div>
+    <figure className={cn('tekenvel w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6', className)}>
+      <figcaption className="flex flex-wrap items-baseline justify-between gap-2 text-sm text-subtle dark:text-slate-400">
+        <span>Schets van je werk</span>
+        <span className="font-medium text-slate-900 dark:text-white">{anders ? 'Een mogelijke aanpak' : 'Herkenbaar?'}</span>
+      </figcaption>
+
+      <ol aria-label={anders ? 'Een mogelijke aanpak' : 'De beginsituatie'} className="min-h-64 flex flex-col justify-center gap-3 py-6">
+        {stappen.map((stap, index) => (
+          <m.li
+            key={index}
+            layout={!reduceMotion}
+            initial={false}
+            animate={{ marginLeft: anders ? 0 : index % 2 === 0 ? 0 : 20, marginRight: anders ? 0 : index % 2 === 0 ? 20 : 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.19, 1, 0.22, 1] }}
+            className="relative flex items-center gap-3"
+          >
+            {index < stappen.length - 1 && <span aria-hidden="true" className="absolute left-1.5 top-5 -bottom-5 border-l border-slate-300 dark:border-slate-700" />}
+            <span aria-hidden="true" className={cn('relative z-10 size-3 shrink-0 rounded-full border transition-colors duration-500 ease-kopwerk motion-reduce:transition-none', anders && index === stappen.length - 1 ? 'bg-amber-500 border-amber-500' : 'bg-slate-50 dark:bg-kopwerk-dark border-slate-400 dark:border-slate-500')} />
+            <span className="flex-1 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/90 dark:bg-kopwerk-dark/90 px-4 py-3 text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+              {stap}
+            </span>
+          </m.li>
+        ))}
+      </ol>
+
+      <p aria-live="polite" aria-atomic="true" className="min-h-20 text-sm leading-relaxed text-subtle dark:text-slate-400">
+        {uitleg}
+      </p>
+      <button
+        type="button"
+        aria-pressed={anders}
+        onClick={() => setAnders(!anders)}
+        className="group inline-flex items-center gap-3 rounded-lg py-2 text-left text-sm font-medium text-slate-900 dark:text-white"
+      >
+        <Icon name={anders ? 'restart' : 'arrow-right'} className="size-4 shrink-0 text-amber-700 dark:text-amber-400" />
+        <span className="underline underline-offset-4">{anders ? 'Bekijk de beginsituatie' : schets.proberen}</span>
+      </button>
+    </figure>
   );
 }

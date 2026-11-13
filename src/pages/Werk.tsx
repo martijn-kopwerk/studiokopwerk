@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { projects } from '../lib/projects';
 import { Typography } from '../components/ui/Typography';
-import { ProjectBody, ProjectMeta, ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
+import { ProjectBody, ProjectMeta, ProjectRekenhulp, ProjectShow, ProjectStat, ProjectText } from '../components/werk/ProjectCard';
 import { Tekentafel } from '../components/werk/Tekentafel';
 import { useAmberDot } from '../hooks/useAmberDot';
 import { cn } from '../lib/utils';
@@ -102,6 +102,7 @@ export function Werk() {
             </div>
             <ProjectText project={single} />
             <ProjectStat project={single} className="mt-4" />
+            <ProjectRekenhulp project={single} />
           </div>
         </article>
       )}

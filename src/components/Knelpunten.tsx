@@ -11,7 +11,7 @@ export interface Knelpunt {
   // The same short wording is shown on the website and used in the mail subject.
   label?: string;
   maken: string;
-  // The sketch of what we make, shown when the friction is chosen.
+  // An explorable sketch of a possible approach, shown when the friction is chosen.
   schets?: SchetsNaam;
 }
 
@@ -117,7 +117,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                 />
                 {label ?? knelt}
               </button>
-              <div id={`${id}-${index}`} hidden={!open} className="pl-8 pb-8">
+              <div id={`${id}-${index}`} hidden={!open} className="sm:pl-8 pb-8">
                 <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
                   {schets && <KnelpuntSchets naam={schets} />}
                   <p className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
