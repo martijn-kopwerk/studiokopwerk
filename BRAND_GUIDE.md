@@ -10,6 +10,8 @@ Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de o
 
 Deze keuzes zijn met Martijn in de chat bevestigd. De externe design-systembron kon in deze sessie niet worden gelezen of aangepast. De wijzigingen die daar nog vastgelegd moeten worden staan in `docs/ux-review/2026-11-02-uitwerking.md`; dit is geen claim dat de externe bron al is bijgewerkt.
 
+Op telefoon staat onder de film een echte, selecteerbare uitlegzin die meewisselt met de scène, zowel in de kaart op Begin en Werk als in het grote filmvenster (bevestigd op 13 november). Automatisch afspelen blijft stil voor schermlezers; met de hand door scènes stappen mag de uitleg aankondigen. De beschikbare hoogte houdt ruimte voor de uitleg en bediening.
+
 ## Ontwerp zonder AI-look, 7 november 2026
 
 Op 7 november heeft Martijn een ontwerpronde naar de regels van heydamir/unslop goedgekeurd (PR #67). Waar een regel hieronder nog anders zegt, geldt dit:

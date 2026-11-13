@@ -13,8 +13,9 @@ const EASE = [0.19, 1, 0.22, 1] as const;
 // Stage and captions share one width: as wide as fits, but never so tall that the captions drop off the screen.
 // Phones get an upright stage.
 const WIDTH: CSSProperties = { maxWidth: 'min(72rem, calc((100dvh - 17rem) * 1.6))' };
-// A moving film carries its text in the picture, so its stage can take the captions' room too.
+// Desktop keeps the text inside the moving film. Phones reserve room for a readable caption below it.
 const VIDEO_WIDTH: CSSProperties = { maxWidth: 'min(80rem, calc((100dvh - 11rem) * 16 / 9))' };
+const PHONE_VIDEO_WIDTH: CSSProperties = { maxWidth: 'min(80rem, calc((100dvh - 19rem) * 4 / 5))' };
 // Under this width the dialog shows the upright film (4:5), above it the wide one (16:9); same as Tailwind's `sm`.
 const WIDE = '(min-width: 640px)';
 // Stepping through by hand shows each scene once it has settled: this long before the next scene starts.
@@ -148,7 +149,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
 
         <div className="flex-1 min-h-0 flex items-center justify-center">
           <div
-            style={video ? VIDEO_WIDTH : WIDTH}
+            style={video ? (wide ? VIDEO_WIDTH : PHONE_VIDEO_WIDTH) : WIDTH}
             className={cn(
               'relative w-full overflow-hidden bg-kopwerk-dark',
               video ? 'aspect-[4/5] sm:aspect-video' : 'aspect-[4/5] sm:aspect-[16/10]'
@@ -225,7 +226,7 @@ export function ProjectFilm({ project, open, onOpenChange }: ProjectFilmProps) {
 
         <div style={WIDTH} className="mx-auto w-full flex flex-col gap-4">
           {/* Announced when the viewer steps through; while it plays by itself it stays quiet */}
-          <div aria-live={playing ? 'off' : 'polite'} className={video ? 'sr-only' : 'min-h-[5.5rem] sm:min-h-[4.5rem]'}>
+          <div aria-live={playing ? 'off' : 'polite'} className={video ? 'min-h-[5.5rem] sm:sr-only' : 'min-h-[5.5rem] sm:min-h-[4.5rem]'}>
             <AnimatePresence mode="wait" initial={false}>
               <m.p
                 key={index}
