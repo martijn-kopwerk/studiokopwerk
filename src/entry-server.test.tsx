@@ -46,10 +46,10 @@ describe('prerendering', () => {
 });
 
 describe('aanpak', () => {
-  it('answers practical questions before the method and philosophy, ending in one call to action', () => {
+  it('answers practical questions before the method, ending in one call to action', () => {
     const { html, head } = render('/aanpak');
     expect(html).toMatch(/<h1[^>]*tabindex="-1"[^>]*>Zo werken we samen<\/h1>/i);
-    const ids = ['verloop', 'vragen', 'werkwijze', 'waarom'];
+    const ids = ['verloop', 'vragen', 'werkwijze'];
     // Where it pinches is on Begin; Aanpak doesn't repeat it
     expect(html).not.toContain('aria-labelledby="knelt"');
     expect(html).toContain('vanaf €\u00a0500');
@@ -57,10 +57,10 @@ describe('aanpak', () => {
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
     expect(html).not.toContain('aria-labelledby="principes"');
-    expect(html).toContain('Werkt het? Dan maken we het af');
+    expect(html).toContain('Jij kiest of je verder wilt');
     expect(html).not.toContain('online zetten');
     expect(html).not.toContain('prototype');
-    expect(html).toContain('Binnen twee weken na akkoord maak ik de proefversie');
+    expect(html).toContain('In de offerte staat de planning');
     expect(html).toContain('Vertel waar het knelt');
     expect(head).toContain('<title>Aanpak · Studio Kopwerk</title>');
     expect(head).toContain('<link rel="canonical" href="https://www.studiokopwerk.nl/aanpak" />');

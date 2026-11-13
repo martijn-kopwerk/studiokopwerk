@@ -8,7 +8,7 @@ import { cn } from '../lib/utils';
 
 export interface Knelpunt {
   knelt: string;
-  // Short website labels; the original positioning sentence remains the mail subject.
+  // The same short wording is shown on the website and used in the mail subject.
   label?: string;
   maken: string;
   // The sketch of what we make, shown when the friction is chosen.
@@ -127,7 +127,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                     />
                     {maken}
                   </p>
-                  <CapsuleButton href={mailtoHref(knelt)} className="w-auto">
+                  <CapsuleButton href={mailtoHref(label ?? knelt)} className="w-auto">
                     Vertel het in een mail
                   </CapsuleButton>
                 </div>

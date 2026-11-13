@@ -1,14 +1,16 @@
 # Studio Kopwerk — Brand Identity, Design System & Agent Style Guide
 
-## Website-uitwerking, 2 en 3 november 2026
+## Website-uitwerking, bijgewerkt op 13 november 2026
 
 Wat Martijn maakt heet op de site een **proefversie**: een proefversie van de oplossing (nooit van het probleem), met **verzonnen gegevens**. Niet *prototype*, *werkend voorbeeld* of *voorbeeldgegevens* (bevestigd op 3 november; staat ook in het design system, `voice.md`). Schrijf geen volledig opgeleverd of beheerd product toe aan een proefversie.
 
-Vanaf € 500 exclusief btw. Vertel het in de volgorde waarin het gebeurt: "Binnen twee weken maak ik de proefversie. We kijken er samen naar, jij zegt wat beter kan en ik pas het aan." Tel geen rondes. Daarna: "Werkt het? Dan maken we het af." Wie verder bouwt staat één keer, op Aanpak: "Werk je al met een ontwikkelaar? Dan bouwt die verder op de proefversie en ik help bij de overdracht. Zo niet, dan kijken we samen wat er nodig is." Geen *online zetten*; zeg *echt gebruiken, met je eigen gegevens en voor je klanten of medewerkers*. Geen "soms kan ik helpen, afhankelijk van…".
+Het brede aanbod blijft: een duidelijkere website, een prettiger portaal of minder handmatig werk. De vanafprijs van € 500 exclusief btw staat alleen op Aanpak en in de contactkaart, niet op Begin of in algemene metadata. Vooraf spreken we af wat Martijn maakt, wat het kost en wanneer je het kunt proberen. De offerte bevat per opdracht een concrete datum en zegt welke bestanden je krijgt en of code erbij hoort. Geen vaste belofte van twee weken en geen standaardbelofte van alle bestanden. Tel geen rondes. Verder bouwen is vrijwillig en apart afgesproken: "Wil je ermee verder? Dan spreken we af wat daarvoor nodig is, wie het oppakt en wat het kost." Deze keuzes zijn op 13 november door Martijn bevestigd en vervangen de betreffende aanbodafspraken van 2 en 3 november. Geen *online zetten*; zeg *echt gebruiken, met je eigen gegevens en voor je klanten of medewerkers*.
 
-Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning; de bestaande positioneringszinnen blijven als mailonderwerp beschikbaar. Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
+Voor deze reviewbare website-uitwerking wijkt de contactkaart bewust af van de oudere volgorde in §5H: eerst de mailactie en het kopieerbare adres, daarna optionele voorbeelden in een gesloten uitklapdeel. De korte knelpuntlabels helpen bij herkenning en komen letterlijk terug in het mailonderwerp, zowel op Begin als in de contactkaart (bevestigd op 13 november). Zonder keuze en bij "Iets anders" blijft het onderwerp "Waar het knelt". De film op Begin blijft automatisch zonder geluid afspelen (ook bevestigd op 13 november). Persoonlijke proeven staan ingeklapt op Over, buiten de zakelijke bewijsroute op Werk.
 
 Deze keuzes zijn met Martijn in de chat bevestigd. De externe design-systembron kon in deze sessie niet worden gelezen of aangepast. De wijzigingen die daar nog vastgelegd moeten worden staan in `docs/ux-review/2026-11-02-uitwerking.md`; dit is geen claim dat de externe bron al is bijgewerkt.
+
+Op telefoon staat onder de film een echte, selecteerbare uitlegzin die meewisselt met de scène, zowel in de kaart op Begin en Werk als in het grote filmvenster (bevestigd op 13 november). Automatisch afspelen blijft stil voor schermlezers; met de hand door scènes stappen mag de uitleg aankondigen. De beschikbare hoogte houdt ruimte voor de uitleg en bediening.
 
 ## Ontwerp zonder AI-look, 7 november 2026
 
