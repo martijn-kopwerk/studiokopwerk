@@ -175,6 +175,9 @@ export function Aanpak() {
         zoneRef={zone(STOP.werkwijze)}
         markerRef={stop(STOP.werkwijze)}
       >
+        <p>
+          Ik beoordeel wat AI maakt. Met mijn kennis en ervaring bewaak ik de kwaliteit en controleer ik of het werk past bij wat we hebben afgesproken.
+        </p>
         {/* The werkwijze as the design system's Loop: three steps that go round, amber where you decide */}
         <Rondgang className="my-4" />
         {/* The proof that it works, linked once /werk exists (see routes.tsx) */}
