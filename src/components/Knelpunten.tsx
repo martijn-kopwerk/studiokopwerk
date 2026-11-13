@@ -11,6 +11,7 @@ export interface Knelpunt {
   // The same short wording is shown on the website and used in the mail subject.
   label?: string;
   maken: string;
+  aanpak?: string;
   // An explorable sketch of a possible approach, shown when the friction is chosen.
   schets?: SchetsNaam;
 }
@@ -19,27 +20,32 @@ export interface Knelpunt {
 export const knelpunten: Knelpunt[] = [
   {
     knelt: 'Je portaal bevat goede informatie, maar is lastig te gebruiken',
-    maken: 'Een proefversie van een portaal waarin mensen vinden wat ze nodig hebben en begrijpen hoe ze verder kunnen',
+    maken: 'Mensen vinden sneller wat ze nodig hebben en kunnen verder zonder steeds uitleg te vragen.',
+    aanpak: 'Ik kijk waar gebruikers vastlopen en ontwerp een duidelijkere indeling. Met AI werk ik die uit tot een proefversie die je zelf kunt proberen.',
     schets: 'portaal',
   },
   {
-    knelt: 'Je maakt elke offerte opnieuw, terwijl veel hetzelfde blijft',
-    maken: 'Een proefversie die een eerste opzet maakt vanuit de klantvraag en je vaste aanbod. Jij controleert de inhoud en de prijs.',
+    knelt: 'Elke offerte is maatwerk, maar het uitwerken kost veel tijd',
+    maken: 'Een offerte speciaal voor jouw klant, met veel minder tijd voor het uitwerken.',
+    aanpak: 'We brengen in kaart hoe jij een offerte maakt. Ik maak een proefversie waarin AI de klantvraag uitwerkt op basis van jouw aanbod en afspraken. Jij controleert de inhoud en de prijs.',
     schets: 'offerte',
   },
   {
     knelt: 'Je werk is goed, maar je website maakt dat niet duidelijk',
-    maken: 'Een proefversie van een website waarop bezoekers begrijpen wat je doet en of je hen kunt helpen',
+    maken: 'Bezoekers begrijpen wat je doet, of je hen kunt helpen en hoe ze je kunnen bereiken.',
+    aanpak: 'Ik verdiep me in je bedrijf en de vragen van je klanten. Met AI werk ik het verhaal en ontwerp uit tot een website die je kunt proberen.',
     schets: 'website',
   },
   {
     knelt: 'Je medewerkers houden eigen lijstjes naast het systeem bij',
-    maken: 'Een proefversie van een eenvoudig overzicht dat aansluit op hun dagelijkse werk',
+    maken: 'Minder dubbel bijhouden. Samen zien wat nog moet, wat loopt en wat klaar is.',
+    aanpak: 'Ik kijk waarom de eigen lijstjes nodig zijn en ontwerp een overzicht dat past bij het werk. We proberen waar AI kan helpen om informatie te verwerken en dubbel invoeren te verminderen.',
     schets: 'werkoverzicht',
   },
   {
     knelt: 'Voor één klantvraag zoek je in drie verschillende programma’s',
-    maken: 'Een proefversie van één plek waar je de informatie vindt die je nodig hebt om verder te kunnen',
+    maken: 'Minder zoeken en schakelen voordat je een klant kunt helpen.',
+    aanpak: 'We bepalen welke informatie je nodig hebt en uit welke bronnen die komt. In een proefversie proberen we hoe AI die kan samenbrengen en een antwoord kan voorbereiden. Jij kijkt het na.',
     schets: 'plek',
   },
 ];
@@ -51,7 +57,7 @@ export const knelpunten: Knelpunt[] = [
 export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
   return (
     <dl className={`border-b ${hairline}`}>
-      {items.map(({ knelt, label, maken }) => (
+      {items.map(({ knelt, label, maken, aanpak }) => (
         <div key={knelt} className={cn('flex flex-col gap-1.5 py-5 border-t', hairline)}>
           <dt className="text-sm sm:text-base leading-relaxed tracking-wide-sm text-subtle dark:text-slate-400 text-pretty">
             {label ?? knelt}
@@ -62,6 +68,7 @@ export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
               className="absolute left-0 top-[calc(0.5lh-0.5rem)] size-4 text-slate-400 dark:text-slate-500"
             />
             {maken}
+            {aanpak && <p className="mt-3 font-sans font-normal text-sm leading-relaxed text-slate-700 dark:text-slate-300">{aanpak}</p>}
           </dd>
         </div>
       ))}
@@ -73,15 +80,12 @@ export function Knelpunten({ items = knelpunten }: { items?: Knelpunt[] }) {
  * The frictions to choose from (design system: "Wat we maken", on the website). Each friction is a button; choosing
  * one shows what we make for it and "Vertel het in een mail", which opens the mail with that friction in the subject.
  * No form, one choice. Before the script runs it is the plain list of pairs, so it reads the same without it.
- * Phones show the first three and "Toon alle vijf", so the walk on Begin stays short. The first one starts open, so
- * whoever doesn't click still sees that each friction has an answer.
+ * All five situations start closed, so visitors can scan the complete choice before opening an example.
  */
 export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   const [interactive, setInteractive] = useState(false);
-  const [gekozen, setGekozen] = useState<number | null>(0);
-  const [alle, setAlle] = useState(false);
+  const [gekozen, setGekozen] = useState<number | null>(null);
   const id = useId();
-  const kort = 3;
 
   useEffect(() => setInteractive(true), []);
 
@@ -90,12 +94,12 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
   return (
     <div className="flex flex-col items-start gap-6">
       <ul className={`w-full border-b ${hairline}`}>
-        {items.map(({ knelt, label, maken, schets }, index) => {
+        {items.map(({ knelt, label, maken, aanpak, schets }, index) => {
           const open = gekozen === index;
           return (
             <li
               key={knelt}
-              className={cn('border-t', hairline, !alle && index >= kort && gekozen !== index && 'max-sm:hidden')}
+              className={cn('border-t', hairline)}
             >
               <button
                 type="button"
@@ -123,7 +127,6 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
               </button>
               <div id={`${id}-${index}`} hidden={!open} className="sm:pl-8 pb-8">
                 <div className="flex flex-col items-start gap-6 motion-safe:animate-rise [--rise-from:10px] [animation-duration:0.6s]">
-                  {schets && <KnelpuntSchets naam={schets} />}
                   <p className="relative pl-7 font-display font-medium text-lg sm:text-xl leading-snug text-pretty text-slate-900 dark:text-white">
                     <Icon
                       name="corner-down-right"
@@ -131,6 +134,8 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
                     />
                     {maken}
                   </p>
+                  {aanpak && <p className="text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">{aanpak}</p>}
+                  {schets && <KnelpuntSchets naam={schets} />}
                   <CapsuleButton href={mailtoHref(label ?? knelt)} className="w-auto">
                     Vertel het in een mail
                   </CapsuleButton>
@@ -140,16 +145,7 @@ export function KnelpuntKiezer({ items = knelpunten }: { items?: Knelpunt[] }) {
           );
         })}
       </ul>
-      {!alle && items.length > kort && (
-        <button
-          type="button"
-          onClick={() => setAlle(true)}
-          className="sm:hidden group inline-flex items-center gap-3 -mx-1 px-1 py-1 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300"
-        >
-          Toon alle {items.length === 5 ? 'vijf' : items.length}
-          <Icon name="chevron-down" className="size-4" />
-        </button>
-      )}
+
     </div>
   );
 }

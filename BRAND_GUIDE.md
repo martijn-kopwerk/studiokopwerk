@@ -18,6 +18,8 @@ Deze richting vervangt de eerdere keuze om de eigen opdracht op Begin te tonen. 
 
 De herkenningsschetsen volgen de stijl van 'Op de tekentafel' op Werk (bijgesteld op 13 november na beoordeling van de eerste preview): een transparant vlak met gestippelde rand, een fijn puntenraster en licht onregelmatige potloodlijnen. De amberkleurige punt tekent één keer een mogelijke aanpak. Daarna blijft de tekening staan; opnieuw tekenen is een bewuste keuze. Geen stappenkaarten of voor/na-schakelaar. De betekenis staat eronder als echte selecteerbare tekst. Bij `prefers-reduced-motion` staat de voltooide schets direct stil. De voorbeelden stellen mogelijkheden voor, geen verzonnen klanten of gegarandeerde resultaten.
 
+De vijf werksituaties zijn op elk scherm direct als keuze zichtbaar en beginnen ingeklapt. Na openen komt eerst de mogelijke opbrengst, daarna de aanpak en de potloodschets. Martijn onderzoekt het werk en ontwerpt de oplossing; AI versnelt het uitwerken. Benoem AI waar die een concrete rol heeft, zonder ieder voordeel aan AI toe te schrijven. Offertes zijn maatwerk voor de klant met veel minder uitwerktijd, geen generiek sjabloon. De ondernemer controleert inhoud en prijs. Geen onbewezen percentages of vaste tijdsgaranties.
+
 ## Ontwerp zonder AI-look, 7 november 2026
 
 Op 7 november heeft Martijn een ontwerpronde naar de regels van heydamir/unslop goedgekeurd (PR #67). Waar een regel hieronder nog anders zegt, geldt dit:

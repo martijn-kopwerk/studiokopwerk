@@ -56,7 +56,7 @@ const schetsen: Record<SchetsNaam, { lijnen: string[]; eindpunt: [number, number
       'M204 122 L213 131 L236 108',
     ],
     eindpunt: [236, 108],
-    uitleg: 'Klantvraag en vast aanbod vormen de eerste opzet. Jij controleert de inhoud en de prijs.',
+    uitleg: 'Jouw aanbod en de vraag van deze klant komen samen in een offerte die je zelf nakijkt.',
   },
   werkoverzicht: {
     lijnen: [

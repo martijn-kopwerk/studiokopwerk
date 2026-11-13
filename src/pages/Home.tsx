@@ -123,7 +123,7 @@ export function Home() {
         markerRef={stop(STOP.knelt)}
       >
         <p>
-          Kies wat je herkent. Ik schets wat we kunnen proberen. Zo begint een proefversie: met iets uit jouw werk.
+          Waar gaat tijd verloren of lopen mensen vast? Ik kijk hoe je werkt en bedenk wat eenvoudiger kan. Met AI maak ik een proefversie waarmee je kunt ervaren of die aanpak helpt.
         </p>
       </Block>
 
