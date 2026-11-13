@@ -193,6 +193,7 @@ export function Home() {
           We kiezen samen één ding dat je wilt verbeteren. Vooraf spreken we af wat ik maak, wat het kost en wanneer je het kunt proberen.
         </p>
         <p>Jij probeert de proefversie. We kijken samen wat werkt en wat anders moet. Daarna beslis je of je verder wilt.</p>
+        <p>AI helpt bij het maken. Ik bewaak de kwaliteit.</p>
         <NextLink className="self-start" href="/aanpak">Lees hoe we werken</NextLink>
       </Block>
 
