@@ -31,4 +31,4 @@ film:
     tekst: "Getest op groot en klein scherm, licht en donker."
 ---
 
-Het EMC van XLABS laat in één score zien hoe mensen hun digitale werkplek ervaren. Ik maakte in vier weken een nieuw ontwerp en een klikbare proefversie met verzonnen gegevens. Zo kon XLABS het laten zien en testen voordat er gebouwd werd.
+XLABS levert het EMC aan zijn klanten: een applicatie die laat zien hoe medewerkers hun werk en hun digitale werkplek ervaren. Dat meet het EMC met XLA's, afspraken over die ervaring in plaats van alleen over techniek. Ik maakte in vier weken een nieuw ontwerp en een klikbare proefversie met verzonnen gegevens. Zo kon XLABS het laten zien en testen voordat er gebouwd werd.
