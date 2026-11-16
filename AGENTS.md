@@ -23,6 +23,8 @@ Known places where the code still differs from the design system are listed in t
   - Use "Vertel waar het knelt" (Tell us where it pinches) instead of "Daag ons uit", "Start een gesprek", "Neem contact op" or "Contact us". It is the one call to action, on every page: it starts from the reader's situation and needs no "ons" or "me".
   - Use "Vertel het in een mail" instead of "Deel je plannen" or "Open e-mailapplicatie": the way to the mail after "Vertel waar het knelt" asks for the same story.
 
+**Geen redactionele vultekst (16 november 2026):** bezoekerstekst vertelt over de vraag, de aanpak of het werk. Geen uitleg over de paginavorm zoals "Bij elke opdracht een stil filmpje van hoe het werkt" en geen lege beloften over inhoud die later volgt. Functionele bediening, toegankelijke beeldbeschrijvingen en eerlijke teststatus blijven wel nodig. De inhoudscheck beoordeelt betekenis; een geslaagde woordentest bewijst geen goede tekst.
+
 ## 3. Design System & CSS Variables (Tailwind)
 
 All tokens live in `src/index.css` (`@theme`). Use tokens, never Tailwind's generic equivalents or arbitrary values.

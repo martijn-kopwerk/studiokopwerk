@@ -77,7 +77,7 @@ export function Werk() {
           </h1>
         </div>
         <Typography variant="body" className="max-w-md tracking-wide-sm text-pretty">
-          Bij elke opdracht een stil filmpje van hoe het werkt.
+          Een duidelijker portaalontwerp voor XLABS, een opstelling voor mijn voetbalclub en minder losse programma’s voor mijn eigen bedrijf.
         </Typography>
       </div>
 
@@ -240,7 +240,7 @@ export function Werk() {
             Op de tekentafel
           </h2>
           <p className="text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
-            Ik werk nu aan opdrachten voor andere ondernemers. Zodra ze af zijn en de klant het goed vindt, staan ze hier.
+            Ik begin met de vraag: wat moet er voor de gebruiker eenvoudiger worden? Daarna maak ik een proefversie om dat samen te proberen.
           </p>
         </div>
       </section>
