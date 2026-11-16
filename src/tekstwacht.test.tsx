@@ -61,6 +61,14 @@ describe('tekstwacht', () => {
     });
   }
 
+  it('houdt afgekeurde redactionele vultekst uit de bezoekerstekst en metadata', () => {
+    for (const route of routes) {
+      const { html, head } = render(route.meta.path);
+      expect(leesbareTekst(html + head)).not.toContain('Bij elke opdracht een stil filmpje van hoe het werkt');
+      expect(leesbareTekst(html + head)).not.toContain('Zodra ze af zijn en de klant het goed vindt, staan ze hier');
+    }
+  });
+
   // De film opent pas na een klik, dus zijn tekst staat niet in de gerenderde pagina.
   it('de films volgen de woordkeuze', () => {
     const tekst = projects.flatMap((project) => (project.film ?? []).flatMap((scene) => [scene.alt, scene.text]));

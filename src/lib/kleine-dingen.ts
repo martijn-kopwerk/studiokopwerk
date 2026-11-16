@@ -37,7 +37,7 @@ export const kleineDingen: KleinDing[] = [
     titel: 'Zuipwijs',
     soort: 'Gezondheid',
     tekst:
-      'Zie hoe je week ervoor staat. Daag je vrienden uit voor een duel: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje. Winnen voelt goed.',
+      'Met Zuipwijs houd je bij op welke dagen je niet drinkt. Je kunt vrienden uitdagen: wie haalt de meeste nuchtere dagen? Elke nuchtere dag is een streepje.',
     beeld: zuipwijs,
     alt: 'Zuipwijs in drie beelden: elke nuchtere dag een streepje op je viltje. Een duel met Sanne en Daan om een droog weekend. Vrienden zien je reeks van 12 dagen, nooit je drankjes. Met verzonnen gegevens.',
     grond: 'donker',
@@ -47,7 +47,7 @@ export const kleineDingen: KleinDing[] = [
     titel: 'Een huisstijl voor AI',
     soort: 'Huisstijl',
     tekst:
-      'Een huisstijl die AI begrijpt: kleuren, letters, knoppen en toon op één plek. Zo komt elke offerte, presentatie en pagina in een paar minuten in je eigen merk.',
+      'Ik legde kleuren, letters, knoppen en toon vast in een huisstijl die AI kan gebruiken bij het maken van offertes, presentaties en pagina’s.',
     beeld: designSystem,
     alt: 'De huisstijl van Kopwerk: de letters Syne en Plus Jakarta Sans, vijf kleuren en de knop Vertel waar het knelt.',
     grond: 'donker',

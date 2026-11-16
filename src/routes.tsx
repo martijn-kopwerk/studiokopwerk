@@ -74,14 +74,14 @@ export function buildRoutes(shown: Project[]): PageRoute[] {
       meta: {
         path: '/werk',
         title: 'Wat ik maakte · Studio Kopwerk',
-        description: 'Wat ik maakte en wat het opleverde, met stille filmpjes van het EMC, Onze Elf en Operatie Kopwerk.',
+        description: 'Een duidelijker portaalontwerp voor XLABS, de opstelling voor mijn voetbalclub en één plek voor mijn eigen bedrijfswerk.',
         noindex: shown.every((project) => project.draft),
       },
       Page: Werk,
       slot: {
         line: (
           <>
-            Hier is nog plek voor jouw opdracht.
+            Wat zou jouw werk eenvoudiger maken?
           </>
         ),
       },
