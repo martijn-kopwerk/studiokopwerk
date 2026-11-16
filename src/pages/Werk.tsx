@@ -225,8 +225,7 @@ export function Werk() {
         ))}
       </ol>
 
-      {/* Work in progress, drawn as a sketch on the drafting table: honest that client work is coming, without
-          inventing any of it. Rendered once for every screen size. */}
+      {/* Current work and an invitation for new assignments, as confirmed by Martijn. */}
       <section
         aria-labelledby="op-de-tekentafel"
         className="mt-4 lg:mt-16 sm:ml-14 max-w-3xl flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8 p-6 sm:p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700"
@@ -240,7 +239,7 @@ export function Werk() {
             Op de tekentafel
           </h2>
           <p className="text-base leading-relaxed tracking-wide-sm text-slate-700 dark:text-slate-300 text-pretty">
-            Ik begin met de vraag: wat moet er voor de gebruiker eenvoudiger worden? Daarna maak ik een proefversie om dat samen te proberen.
+            Ik werk op dit moment aan nieuwe opdrachten en sta open voor leuke nieuwe klussen. Heb je iets dat eenvoudiger, mooier of sneller kan? Vertel me wat je wilt aanpakken.
           </p>
         </div>
       </section>
